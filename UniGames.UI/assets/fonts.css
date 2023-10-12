@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Unidays-Book';
+    src: url('fonts/P22UndergroundPro-Book.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Unidays-Heavy';
+    src: url('fonts/P22UndergroundPro-Heavy.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

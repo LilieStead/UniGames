@@ -1,0 +1,227 @@
+
+/* used for all elements*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* holds iteams in a dive or form next to each other */
+.flexcontainer{
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+/* centers items held within a div  */
+.centercontents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*HEADER */
+
+header{
+    min-width: 100vw;
+    background-color: #FFFFFF;
+    padding: 0.5rem 0;
+}
+
+header h1{
+    color: #000000;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 3rem;
+}
+
+/* END OF HEADER  */
+
+/* NAV */
+nav{
+    min-width: 100vw;
+    background-color: #000000;
+    height: 2rem;
+}
+nav a p{
+    font-size: 1.3rem;
+    font-family: Unidays-Heavy, sans-serif;
+    transition: 0.3s;
+}
+
+nav a{
+    text-decoration: none;
+    width: 15%;
+    text-align: center;
+    color: #FFFFFF;
+}
+@media screen and (max-width: 515px) {
+    nav a{
+      min-width: 15%;
+    }
+  }
+
+nav a p:hover{
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+/* END OF NAV */
+
+/* FOOTER */
+
+footer{
+    min-width: 100vw;
+    margin-top: auto;
+}
+
+#topfooter{
+    min-width: 100vw;
+    background-color: #000000;
+}
+
+#topfooter h2{
+    color: #FFFFFF;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.3rem;
+    padding: 0.5rem 0;
+}
+
+#bottomfooter p{
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1rem;
+    
+}
+
+#bottomfooter{
+    padding: 0.5rem 0;
+    background-color: #FFFFFF;
+    min-width: 100vw;
+}
+
+/* END OF FOOTER */
+
+/* CONTENT MAIN */
+#container{
+min-height: 110vh;
+min-width: 100vw;
+display: flex;
+justify-content: center; /* Center horizontally */
+align-items: center;
+
+}
+
+#main{
+    justify-content: space-around;
+    min-width: 55%;
+    background-color: #FFFFFF;
+}
+#mainsize{
+    height: 105vh;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 1050px) {
+    #mainsize{
+      min-width: 90vw;
+    }
+  }
+
+/* END OF MAIN CONTENT */
+
+
+/* BODY/BACKGROUND */
+body{
+    min-height: 100vh;
+    min-width: 100vw;
+    background:radial-gradient(#1DD577 5%, #7D53F8 25%,#1DD577 40%, #7D53F8 90%);
+    background-size: 400% 400% ;
+    animation: Featurebackground linear 30s infinite;
+    overflow-x: hidden;
+}
+
+@keyframes Featurebackground {
+    0% {background-position: 0% 0%;}
+    50% {background-position: 80% 100%;}
+    100% {background-position: 0% 0%;}
+ }
+
+/* END OF BODY/BACKGROUND */
+
+/* CONTENT TITLE */
+
+#contenttitle{
+    min-width: 100%;
+    padding-top: 3rem;
+    text-align: center;
+}
+#contenttitle h1{
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 2rem;
+}
+
+/* END OF CONTENT TITLE */
+
+/* INDEX TABLE*/
+
+* table {
+    max-width: 70vw;
+    border-collapse: collapse;
+    margin: 20px auto;
+    min-width: 75%;
+} 
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+table tr:nth-child(odd) {
+    background-color: white;
+} 
+th{
+    font-family: Unidays-Book, sans-serif;
+}
+tr{
+    font-family:Unidays-Book, sans-serif ;
+}
+
+td a{
+    text-decoration: none;
+    color: #000000;
+    transition: 0.3s;
+}
+
+td a:hover{
+    color: #1DD577;
+    transition: 0.2s;
+    
+}
+
+/* END OF INDEX TABLE */
+
+/* SCROLL BAR SETTINGS */
+
+ /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #dddddd;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3c3f44;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+/* END OF SCROLL BAR SETTINGS */

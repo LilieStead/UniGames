@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\UniGames.Api.props" />
+</Project>
