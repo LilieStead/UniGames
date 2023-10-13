@@ -13,6 +13,7 @@ namespace UniGames.Api.Mappings
         {
             // This is how to create a map
             CreateMap<Game, GameDTO>().ReverseMap();
+            CreateMap<Platform, PlatformDTO>().ReverseMap();
             // Other maps go here
             
         }

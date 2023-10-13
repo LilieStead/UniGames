@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +14,20 @@ namespace UniGames.Data.Repositories
     public class SQLGameRepository : IGameRepository
     {
         private readonly GameDbContext dbContext;
+        private readonly IMapper mapper;
 
-        public SQLGameRepository(GameDbContext dbContext)
+        public SQLGameRepository(GameDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
+
         }
 
         public List<Game> GetAllGames()
         {
-            return dbContext.Games.ToList();
+            var games = dbContext.Games.Include(x => x.PlatformName).ToList();
+
+            return games.ToList();
         }
     }
 }

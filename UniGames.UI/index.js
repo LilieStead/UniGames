@@ -28,7 +28,8 @@ fetch('http://localhost:5116/game')
       row.appendChild(titleCell);
   
       const platformCell = document.createElement('td');
-      platformCell.textContent = game.platform;
+        // Tells the frontend to look in the game table then look in platforms and then get the platform name from the foreign key.
+      platformCell.textContent = game.platformName.platformName;
       row.appendChild(platformCell);
   
       const scoreCell = document.createElement('td');
@@ -43,6 +44,3 @@ fetch('http://localhost:5116/game')
   
       return row;
   }
-  ``
-  
-  
