@@ -4,6 +4,9 @@ using UniGames.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using UniGames.Data.Repositories;
 using UniGames.Api.Models;
+using Microsoft.Extensions.FileProviders;
+using System.Diagnostics;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,4 +50,13 @@ app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
 
+string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+string relativeFilePath = @"Documents\(UniGames - New)\UniGames\UniGames.UI\index.html";
+string htmlFilePath = System.IO.Path.Combine(userProfileFolder, relativeFilePath);
+string chromeCommand = $"--new-tab \"{htmlFilePath}\"";
+Process.Start(new ProcessStartInfo("chrome.exe", chromeCommand) { UseShellExecute = true });
 app.Run();
+
+
+

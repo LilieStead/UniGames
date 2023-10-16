@@ -417,3 +417,4 @@ C:\Users\lilie\source\repos\UniGames\UniGames\UniGames.Api\obj\Debug\net6.0\refi
 C:\Users\lilie\source\repos\UniGames\UniGames\UniGames.Api\obj\Debug\net6.0\UniGames.Api.pdb
 C:\Users\lilie\source\repos\UniGames\UniGames\UniGames.Api\obj\Debug\net6.0\UniGames.Api.genruntimeconfig.cache
 C:\Users\lilie\source\repos\UniGames\UniGames\UniGames.Api\obj\Debug\net6.0\ref\UniGames.Api.dll
+C:\Users\kiero\Documents\(UniGames - New)\UniGames\UniGames.Api\bin\Debug\net6.0\libman.json
