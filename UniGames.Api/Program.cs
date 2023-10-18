@@ -52,7 +52,7 @@ app.MapControllers();
 
 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-string relativeFilePath = @"Documents\(UniGames - New)\UniGames\UniGames.UI\index.html";
+string relativeFilePath = @"source\repos\UniGames\UniGames.UI\index.html";
 string htmlFilePath = System.IO.Path.Combine(userProfileFolder, relativeFilePath);
 string chromeCommand = $"--new-tab \"{htmlFilePath}\"";
 Process.Start(new ProcessStartInfo("chrome.exe", chromeCommand) { UseShellExecute = true });
