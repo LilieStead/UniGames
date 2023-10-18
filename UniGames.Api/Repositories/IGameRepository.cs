@@ -10,5 +10,7 @@ namespace UniGames.Data.Repositories
     public interface IGameRepository
     {
         List<Game> GetAllGames();
+        Game GetGameById(int id);
+        List<Game> GetGamesByTitle(string title);
     }
 }
