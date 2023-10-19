@@ -43,11 +43,9 @@ namespace UniGames.Api.Controllers
         [Route("{title}")]
         public IActionResult GetGamesByTitle([FromRoute] string title) 
         {
-            //var gameDM = gameRepository.GetGamesByTitle(title);
-            //var gameDM = gameRepository.GetAllGames().Contains( ==title );
-            var gameDM = gameRepository.GetAllGames().Where(x => x.Title.Contains(title)).ToList();
-            //var gameDM = gameRepository.GetAllGames();
 
+            var gameDM = gameRepository.GetAllGames().Where(x => x.Title.Contains(title)).ToList();
+            
             
             
             if (gameDM == null)
@@ -55,7 +53,7 @@ namespace UniGames.Api.Controllers
                 return NotFound();
             }
             var gameDTO = mapper.Map<List<GameDTO>>(gameDM);
-            
+
             return Ok(gameDTO);
         }
 

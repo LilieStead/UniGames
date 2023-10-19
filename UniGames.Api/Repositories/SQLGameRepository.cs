@@ -38,9 +38,9 @@ namespace UniGames.Data.Repositories
         }
 
         public List<Game> GetGamesByTitle(string title)
-        {
-            //var games = 
-            return dbContext.Games.Where(x => x.Title == title).Include(x => x.PlatformName).ToList();
+        { 
+            var games =  dbContext.Games.Where(x => x.Title == title).Include(x => x.PlatformName).ToList();
+            return games;
         }
     }
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -28,12 +29,27 @@
                 <div id="contenttitle">
                     <h1>Search for games</h1>
                 </div>
-                <div class="centercontents">
-                    <form action="assets/js/" class="form">
+                <div>
+                    <form id="searchform" class="form" method="get">
                         <label for="Title">Game Title</label>
-                        <input type="Title" name="Title">
+                        <input  id="Title" type="text" name="Title" placeholder="Please enter a game" maxlength="50">
+                        <p class="formerror" id="titleerror"></p>
                         <input type="submit">
                     </form>
+                </div>
+                <div id="tablecontainer">
+                    <table id="gameTable">
+                        <thead>
+                        <tr>
+                            <th>Game Title</th>
+                            <th>Platform</th>
+                            <th>UNiGAMES Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Dynamic content will be added here -->
+                        </tbody>
+                    </table>
                 </div>
                 
             </div>
@@ -52,3 +68,19 @@
 </footer>
 <!-- END OF FOOTER -->
 </html>
+
+<script>
+const titlevalidation = document.getElementById('Title');
+
+const titleerror = document.getElementById('titleerror');
+
+searchform.addEventListener('submit', (e) => {
+    if (titlevalidation.value == '' || titlevalidation.value == null) {
+        e.preventDefault();
+        titleerror.innerText = ('A game title is required')
+    } else {
+        titleerror.innerText = (null)
+        searchgame(titlevalidation.value);
+    }
+})
+</script>
