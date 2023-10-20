@@ -29,5 +29,15 @@ namespace UniGames.Data.Repositories
 
             return games.ToList();
         }
+        public Game GetGameById(int id)
+        {
+            return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == id);
+        }
+        public Game CreateGame(Game game)
+        {
+            dbContext.Games.Add(game);
+            dbContext.SaveChanges();
+            return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == game.GameID);
+        }
     }
 }

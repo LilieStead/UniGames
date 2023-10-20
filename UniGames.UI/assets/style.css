@@ -225,3 +225,20 @@ td a:hover{
 
 
 /* END OF SCROLL BAR SETTINGS */
+
+/* Create Games Settings */
+#formcontainer{
+    align-items:center;
+    justify-content: center;
+}
+#GameName{
+    
+}
+
+#Platform{
+    
+}
+
+#Releasedate{
+    
+}
