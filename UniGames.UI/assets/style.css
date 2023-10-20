@@ -1,6 +1,4 @@
-
 /* used for all elements*/
-
 * {
     margin: 0;
     padding: 0;
@@ -280,4 +278,3 @@ form .formerror{
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
 }
-  
