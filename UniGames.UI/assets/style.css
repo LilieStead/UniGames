@@ -225,6 +225,23 @@ td a:hover{
 /* END OF SCROLL BAR SETTINGS */
 
 
+/* Create Games Settings */
+#formcontainer{
+    align-items:center;
+    justify-content: center;
+}
+#GameName{
+    
+}
+
+#Platform{
+    
+}
+
+#Releasedate{
+    
+}
+
 
 /* FORM STYLES */
 
@@ -277,4 +294,7 @@ label {
 form .formerror{
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
+
 }
+
+ 
