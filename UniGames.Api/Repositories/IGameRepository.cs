@@ -11,7 +11,11 @@ namespace UniGames.Data.Repositories
     {
         List<Game> GetAllGames();
         Game GetGameById(int id);
+
         Game CreateGame(Game game);
+
+        List<Game> GetGamesByTitle(string title);
+
     }
 }
 
