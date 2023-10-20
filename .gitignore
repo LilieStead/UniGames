@@ -383,6 +383,7 @@ FodyWeavers.xsd
 *.cache
 *.dll
 *.bin
+.vs/UniGames/v17/.suo
 *.bin
 *.v2
 .vs/UniGames/v17/.suo
@@ -391,3 +392,4 @@ FodyWeavers.xsd
 *.cache
 UniGames.Api/obj/Debug/net6.0/UniGames.Api.csproj.FileListAbsolute.txt
 *.editorconfig
+
