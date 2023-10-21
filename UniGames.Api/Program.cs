@@ -7,6 +7,7 @@ using UniGames.Api.Models;
 using Microsoft.Extensions.FileProviders;
 using System.Diagnostics;
 using System;
+using UniGames.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddDbContext<GameDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("UniGamesConnectionString")));
 // Connects the SQL repository to the I repository
 builder.Services.AddScoped<IGameRepository, SQLGameRepository>();
+builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
+builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 
 
 builder.Services.AddCors(options =>

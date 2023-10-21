@@ -142,7 +142,6 @@ body{
     0% {background-position: 0% 0%;}
     50% {background-position: 80% 100%;}
     100% {background-position: 0% 0%;}
-
  }
 
 /* END OF BODY/BACKGROUND */
@@ -226,3 +225,89 @@ td a:hover{
 
 
 /* END OF SCROLL BAR SETTINGS */
+
+
+
+/* FORM STYLES */
+
+.form {
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+}
+
+label {
+    font-family:Unidays-Book, sans-serif ;
+}
+
+    input[type=text]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+  }
+  
+  input[type=submit], button[type=submit] {
+    max-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    background-color: #1DD577;
+  }
+
+
+form .formerror{
+    color: #FF0000;
+    font-family:Unidays-Book, sans-serif;
+}
+
+#reviewbtn{
+    max-width: 40% !important;
+    min-width: 40% !important;
+    min-height: 10%;
+    text-align: center;
+}
+
+  
+
+/* Create Review Form */
+
+#createreview input[type=text]{
+    min-width: 100%;
+}
+
+#rdesc{
+    min-width: 100%;
+    min-height: 10rem;
+    resize: none;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1.1rem;
+}
+#createreview input[type=number]{
+    max-width: 25%;
+    min-height: 50%;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 8px 0;
+    padding: 12px 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+  

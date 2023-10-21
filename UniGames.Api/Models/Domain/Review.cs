@@ -7,7 +7,10 @@
         public string ReviewDescription { get; set;}
         public short Score { get; set;}
         public int UserID { get; set; }
+        public int GameID { get; set; }
+        public User Users { get; set; }
+        public Game Games { get; set;}
         
-        public Game Game { get; set;}
+         
     }
 }

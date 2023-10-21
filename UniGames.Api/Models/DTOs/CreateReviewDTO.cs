@@ -7,6 +7,7 @@ namespace UniGames.Api.Models.DTOs
         public string ReviewTitle { get; set; }
         public string ReviewDescription { get; set; }
         public short Score { get; set; }
-        public Game Game { get; set; }
+        public int UserID { get; set; }
+        public int GameID { get; set; }
     }
 }

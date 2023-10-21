@@ -4,6 +4,9 @@ namespace UniGames.Api.Repositories
 {
     public interface IReviewRepository
     {
-        Review CreateReview();
+        List<Review> GetReviews();
+        Review GetReviewByID(int id);
+        Review CreateReview(Review review);
+        
     }
 }
