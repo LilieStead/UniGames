@@ -25,22 +25,22 @@ namespace UniGames.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUsersDTO)
+        public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUserDTO)
         {
             var UsersDM = new Users
             {
-                Userfname = CreateUsersDTO.Userfname,
-                Userlname = CreateUsersDTO.Userlname,
-                Useremail = CreateUsersDTO.Useremail,
-                Username = CreateUsersDTO.Username,
-                Userphone = CreateUsersDTO.Userphone,
-                Userdob = CreateUsersDTO.Userdob,
-                Userpassword = CreateUsersDTO.Userpassword,
-            }
+                Userfname = CreateUserDTO.Userfname,
+                Userlname = CreateUserDTO.Userlname,
+                Useremail = CreateUserDTO.Useremail,
+                Username = CreateUserDTO.Username,
+                Userphone = CreateUserDTO.Userphone,
+                Userdob = CreateUserDTO.Userdob,
+                Userpassword = CreateUserDTO.Userpassword,
+            };
 
             dbContext.Users.Add(UsersDM);
             dbContext.SaveChanges();
-            
+
             var CreateUsersDTO = new CreateUsersDTO
             {
                 UserId = UsersDM.UserId,
@@ -51,7 +51,7 @@ namespace UniGames.Api.Controllers
                 Userphone = UsersDM.Userphone,
                 Userdob = UsersDM.Userdob,
                 Userpassword = UsersDM.Userpassword,
-            }
+            };
 
             return CreatedAtAction("GetUsersByID", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
         }

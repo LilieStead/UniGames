@@ -2,6 +2,7 @@
 {
     public class CreateUsersDTO
     {
+        public int UserId { get; set; }
         public string Userfname { get; set; }
         public string Userlname { get; set; }
         public string Useremail { get; set; }
