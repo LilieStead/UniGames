@@ -13,6 +13,11 @@ namespace UniGames.Api.Data
         public DbSet<Game> Games {  get; set; }
         public DbSet<Platform> Platforms { get; set; }
         public DbSet<Users> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Users>()
+                .HasKey(e => e.UserId);
+        }
 
     }
 }
