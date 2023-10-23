@@ -24,3 +24,6 @@ C:\Users\kiero\Documents\(UniGames)\UniGames-AgileDevelopment\UniGames.Data\bin\
 C:\Users\kiero\Documents\(UniGames)\UniGames-AgileDevelopment\UniGames.Data\bin\Debug\net6.0\UniGames.Data.pdb
 C:\Users\kiero\Documents\(UniGames)\UniGames-AgileDevelopment\UniGames.Data\obj\Debug\net6.0\UniGames.Data.genruntimeconfig.cache
 C:\Users\kiero\Documents\(UniGames)\UniGames-AgileDevelopment\UniGames.Data\obj\Debug\net6.0\ref\UniGames.Data.dll
+C:\Users\Benja\OneDrive\Documents\GitHub\UniGames\UniGames.Data\obj\Debug\net6.0\UniGames.Data.dll
+C:\Users\Benja\OneDrive\Documents\GitHub\UniGames\UniGames.Data\obj\Debug\net6.0\refint\UniGames.Data.dll
+C:\Users\Benja\OneDrive\Documents\GitHub\UniGames\UniGames.Data\obj\Debug\net6.0\UniGames.Data.pdb

@@ -3378,19 +3378,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lilie\\.nuget\\packages\\": {}
+    "C:\\Users\\Benja\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lilie\\source\\repos\\UniGames\\UniGames\\UniGames.Api\\UniGames.Api.csproj",
+      "projectUniqueName": "C:\\Users\\Benja\\OneDrive\\Documents\\GitHub\\UniGames\\UniGames.Api\\UniGames.Api.csproj",
       "projectName": "UniGames.Api",
-      "projectPath": "C:\\Users\\lilie\\source\\repos\\UniGames\\UniGames\\UniGames.Api\\UniGames.Api.csproj",
-      "packagesPath": "C:\\Users\\lilie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lilie\\source\\repos\\UniGames\\UniGames\\UniGames.Api\\obj\\",
+      "projectPath": "C:\\Users\\Benja\\OneDrive\\Documents\\GitHub\\UniGames\\UniGames.Api\\UniGames.Api.csproj",
+      "packagesPath": "C:\\Users\\Benja\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Benja\\OneDrive\\Documents\\GitHub\\UniGames\\UniGames.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lilie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Benja\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
