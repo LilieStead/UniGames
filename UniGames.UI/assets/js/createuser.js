@@ -22,7 +22,7 @@ function CreateUsers(event){
     };
 
 
-    fetch('http://localhost:5116/api/CreateUsers', {
+    fetch('http://localhost:5116/CreateUsers', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
