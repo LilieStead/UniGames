@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
 
 namespace UniGames.Api.Controllers
