@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/index.js"></script>
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -19,7 +19,6 @@
         <a href="index.html"><p>Home</p></a>
         <a href="search.html"><p>Search Games</p></a>
         <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
         <a href="#"><p>TEST</p></a>
     </nav>
     <!-- END OF NAV -->
@@ -28,9 +27,16 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Search for games</h1>
                 </div>
-                <!--  GAME TABLE -->
+                <div>
+                    <form id="searchform" class="form" method="get">
+                        <label for="Title">Game Title</label>
+                        <input  id="Title" type="text" name="Title" placeholder="Please enter a game" maxlength="50">
+                        <p class="formerror" id="titleerror"></p>
+                        <input type="submit">
+                    </form>
+                </div>
                 <div id="tablecontainer">
                     <table id="gameTable">
                         <thead>
@@ -45,7 +51,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- END OF GAME TABLE -->
+                
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
@@ -62,3 +68,18 @@
 </footer>
 <!-- END OF FOOTER -->
 </html>
+
+<script>
+const titlevalidation = document.getElementById('Title');
+
+const titleerror = document.getElementById('titleerror');
+
+searchform.addEventListener('submit', (e) => {
+    if (titlevalidation.value == '' || titlevalidation.value == null) {
+        e.preventDefault();
+        titleerror.innerText = ('A game title is required')
+    } else {
+        titleerror.innerText = (null)
+    }
+})
+</script>
