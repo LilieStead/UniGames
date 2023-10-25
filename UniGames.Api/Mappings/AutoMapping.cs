@@ -16,7 +16,8 @@ namespace UniGames.Api.Mappings
             CreateMap<Platform, PlatformDTO>().ReverseMap();
             // Other maps go here
             CreateMap<Users, CreateUsersDTO>().ReverseMap();
-            
+            CreateMap<Game, CreateGameDTO>().ReverseMap();
+
         }
     }
 }

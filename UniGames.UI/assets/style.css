@@ -282,6 +282,9 @@ input[type=password] {
 
   input[type=submit] {
     max-width: 30%;
+  
+  input[type=submit] {
+    max-width: 15%;
     background-color: #4CAF50;
     color: #FFFFFF;
     padding: 14px 20px;
@@ -313,6 +316,7 @@ input[type=reset] {
     background-color: #bd0000;
 }
 
+
   input[type=submit]:hover {
     padding: 1rem;
     transition: 0.3s;
@@ -323,5 +327,10 @@ input[type=reset]:hover {
     transition: 0.3s;
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
+
+form .formerror{
+    color: #FF0000;
+    font-family:Unidays-Book, sans-serif;
+
 }
 
