@@ -40,7 +40,7 @@ namespace UniGames.Api.Controllers
             dbContext.Users.Add(UsersDM);
             dbContext.SaveChanges();
 
-            var CreateUsersDTO = new CreateUsersDTO
+            var CreateUsersDTO = new UsersDTO
             {
                 UserId = UsersDM.UserId,
                 Userfname = UsersDM.Userfname,

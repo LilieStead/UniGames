@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Api.Data
 {
