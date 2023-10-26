@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileProviders;
 using System.Diagnostics;
 using System;
 using UniGames.Api.Repositories;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,11 @@ builder.Services.AddDbContext<GameDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("UniGamesConnectionString")));
 // Connects the SQL repository to the I repository
 builder.Services.AddScoped<IGameRepository, SQLGameRepository>();
+
 builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
+builder.Services.AddScoped<IGameDetailRepository, SQLGameDetailRepository>();
+
 
 
 builder.Services.AddCors(options =>
@@ -53,13 +57,23 @@ app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
 
+
+string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+
+//This Code below opens the UI as you run the API
 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
 string relativeFilePath = @"source\repos\UniGames\UniGames.UI\index.html";
 string htmlFilePath = System.IO.Path.Combine(userProfileFolder, relativeFilePath);
 string chromeCommand = $"--new-tab \"{htmlFilePath}\"";
 Process.Start(new ProcessStartInfo("chrome.exe", chromeCommand) { UseShellExecute = true });
+
 app.Run();
 
 
+
+
+
+app.Run();
 

@@ -1,4 +1,4 @@
-﻿using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.Domain;
 
 namespace UniGames.Api.Repositories
 {
@@ -7,6 +7,8 @@ namespace UniGames.Api.Repositories
         List<Review> GetReviews();
         Review GetReviewByID(int id);
         Review CreateReview(Review review);
-        
+        public List<Review> GetScoreByGameID(int id);
     }
 }
+
+

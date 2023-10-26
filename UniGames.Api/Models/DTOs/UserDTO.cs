@@ -1,4 +1,4 @@
-﻿using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.Domain;
 
 namespace UniGames.Api.Models.DTOs
 {

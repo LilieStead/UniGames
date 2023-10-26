@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
@@ -13,6 +13,7 @@ namespace UniGames.Api.Repositories
         {
             this.dbContext = dbContext;
         }
+        
         public List<Review> GetReviews()
         {
             var games = dbContext.Review.ToList();
@@ -36,5 +37,18 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Include(x => x.Users).Include(x => x.Games).ThenInclude(g => g.PlatformName).FirstOrDefault(x => x.ReviewID == review.ReviewID);
 
         }
+        
+        
+        public List<Review> GetScoreByGameID(int id)
+        {
+        return dbcontext.Review
+            .Where(r => r.GameID == id)
+            .Include(r=> r.UserName)
+            .OrderByDescending(r => r.Score)
+            .Take(5)
+            .ToList();
+        }
     }
 }
+
+
