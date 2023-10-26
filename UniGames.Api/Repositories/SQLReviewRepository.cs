@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Api.Repositories
 {
@@ -20,8 +21,9 @@ namespace UniGames.Api.Repositories
 
         public Review GetReviewByID(int id)
         {
-            //return dbContext.Review.Include(x => x.Users).Include(x => x.Games).FirstOrDefault(x => x.ReviewID == id);
-            return dbContext.Review.FirstOrDefault(x => x.ReviewID == id);
+            // Returns the review details where the ID is only the ID for this new game, and includes all details such as User details, Games and the Platform for the game
+            // .ThenInclude() includes everything from the include before, the Games in this case (looks in the Game class in Game.cs)
+            return dbContext.Review.Include(x => x.Users).Include(x => x.Games).ThenInclude(g => g.PlatformName).FirstOrDefault(x => x.ReviewID == id);
         }
 
         public Review CreateReview(Review review)
@@ -29,7 +31,9 @@ namespace UniGames.Api.Repositories
 
             dbContext.Review.Add(review);
             dbContext.SaveChanges();
-            return dbContext.Review.FirstOrDefault(x => x.ReviewID == review.ReviewID);
+            // Returns the review details where the ID is only the ID for this new game, and includes all details such as User details, Games and the Platform for the game
+            // .ThenInclude() includes everything from the include before, the Games in this case (looks in the Game class in Game.cs)
+            return dbContext.Review.Include(x => x.Users).Include(x => x.Games).ThenInclude(g => g.PlatformName).FirstOrDefault(x => x.ReviewID == review.ReviewID);
 
         }
     }

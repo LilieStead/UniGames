@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Data;
+using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
 
@@ -11,15 +13,30 @@ namespace UniGames.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly GameDbContext DbContext;
+        private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
 
         public UserController(GameDbContext dbContext,IMapper mapper, IUserRepository userRepository)
         {
-            DbContext = dbContext;
+            this.dbContext = dbContext;
             this.mapper = mapper;
             this.userRepository = userRepository;
+        }
+
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult GetUserById([FromRoute] int id)
+        {
+            var userDM = userRepository.GetUserById(id);
+            if (userDM == null)
+            {
+                return NotFound();
+            }
+
+            var userDTO = mapper.Map<UserDTO>(userDM);
+            return Ok(userDTO);
         }
 
         [HttpGet]

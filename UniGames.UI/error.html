@@ -13,7 +13,7 @@
     <h1>UNiGames</h1>
 </header>
 <!-- END OF HEADER -->
-<body>
+<body id="error-page">
     <!-- NAV -->
     <nav class="centercontents">
         <a href="index.html"><p>Home</p></a>
@@ -29,10 +29,8 @@
                 <div id="contenttitle">
                     <h1>Error</h1>
                 </div>
-                <div class="flexcontainer">
-                    <p id="error-message"></p>
-                    <button onclick="history.back()">Go Back</button>
-                </div>
+                <p id="error-message"></p>
+                <button id="backbut" onclick="history.back()">Go Back</button>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->

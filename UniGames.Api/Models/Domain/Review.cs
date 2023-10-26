@@ -10,7 +10,6 @@
         public int GameID { get; set; }
         public User Users { get; set; }
         public Game Games { get; set;}
-        
          
     }
 }

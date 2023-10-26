@@ -15,5 +15,6 @@ namespace UniGames.Api.Data
         public DbSet<Review> Review { get; set; }
         public DbSet<User> User { get; set; }
 
+        
     }
 }

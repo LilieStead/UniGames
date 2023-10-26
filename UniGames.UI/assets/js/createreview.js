@@ -36,14 +36,12 @@ function createReview(event){
         })
         .then(data => {
             const userID = data.userId;
-            const userpass = data.userpassword;
-        
+            
             data.ReviewTitle = reviewTitle;
             data.ReviewDescription = reviewDesc;
             data.Score = score;
             data.UserID = userID;
             data.GameID = gameID;
-            data.Userpassword = userpass;
 
             fetch('http://localhost:5116/review', {
                 method: "POST",
