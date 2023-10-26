@@ -78,7 +78,7 @@ namespace UniGames.Api.Controllers
                 Userpassword = CreateUserDTO.Userpassword,
             };
 
-            dbContext.Users.Add(UsersDM);
+            dbContext.User.Add(UsersDM);
             dbContext.SaveChanges();
 
             var CreateUsersDTO = new UserDTO
