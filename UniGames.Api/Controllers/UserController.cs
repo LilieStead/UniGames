@@ -26,7 +26,7 @@ namespace UniGames.Api.Controllers
         [HttpPost]
         public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUserDTO)
         {
-            var UsersDM = new Users
+            var UsersDM = new User
             {
                 Userfname = CreateUserDTO.Userfname,
                 Userlname = CreateUserDTO.Userlname,
@@ -40,7 +40,7 @@ namespace UniGames.Api.Controllers
             dbContext.Users.Add(UsersDM);
             dbContext.SaveChanges();
 
-            var CreateUsersDTO = new UsersDTO
+            var CreateUsersDTO = new UserDTO
             {
                 UserId = UsersDM.UserId,
                 Userfname = UsersDM.Userfname,

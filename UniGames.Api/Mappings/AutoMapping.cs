@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using UniGames.Api.Controllers;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
@@ -15,8 +16,9 @@ namespace UniGames.Api.Mappings
             CreateMap<Game, GameDTO>().ReverseMap();
             CreateMap<Platform, PlatformDTO>().ReverseMap();
             // Other maps go here
-            CreateMap<Users, CreateUsersDTO>().ReverseMap();
+            CreateMap<User, CreateUsersDTO>().ReverseMap();
             CreateMap<Game, CreateGameDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
 
         }
     }
