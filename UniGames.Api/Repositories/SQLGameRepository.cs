@@ -28,8 +28,7 @@ namespace UniGames.Data.Repositories
         public List<Game> GetAllGames()
         {
             var games = dbContext.Games.Include(x => x.PlatformName).ToList();
-
-            return games.ToList();
+            return games;
         }
 
         public Game GetGameById(int id)

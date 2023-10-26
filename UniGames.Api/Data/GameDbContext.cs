@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
@@ -24,14 +24,6 @@ namespace UniGames.Api.Data
             modelBuilder.Entity<User>().HasKey(gd => gd.UserId);
 
             modelBuilder.Entity<GameDetail>().HasKey(gd => gd.DetailID); // Defines the GameDetailID as the primary key
-        }
-
-        public DbSet<User> Users { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>()
-                .HasKey(e => e.UserId);
-        }
-
+        }      
     }
 }
