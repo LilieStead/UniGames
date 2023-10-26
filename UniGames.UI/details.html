@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="index.js"></script>
+
+
+    <script async defer type="text/javascript" src="details.js"></script>
+    <script async defer type="text/javascript" src="review.js"></script>
+
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -14,6 +18,7 @@
 </header>
 <!-- END OF HEADER -->
 <body>
+
     <!-- NAV -->
     <nav class="centercontents">
         <a href="index.html"><p>Home</p></a>
@@ -27,27 +32,44 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Game Details</h1>
                 </div>
                 <!--  GAME TABLE -->
+                <a id="cReview" href="createreview.html">Create Review</a>
+                <a id="cReview" href="createreview.html">Create Review</a>
                 <div id="tablecontainer">
                     <table id="gameTable">
                         <thead>
-                        <tr>
-                            <th>Game Title</th>
-                            <th>Platform</th>
-                            <th>UNiGAMES Score</th>
-                        </tr>
+                            <tr>
+                                <th>GameID</th>
+                                <th>Description</th>
+                                <th>Age Rating</th>
+                                <th>Developer</th>
+                                <th>Genre</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <!-- Dynamic content will be added here -->
+                            <!-- Dynamic content will be added here -->
+                        </tbody>
+                    </table>
+                    <table id="reviewTable">
+                        <thead>
+                            <tr>
+                                <th>Review Title</th>
+                                <th>Review Description</th>
+                                <th>Score</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewtbody">
+                            <!-- Dynamic content will be added here -->
                         </tbody>
                     </table>
                 </div>
                 <!-- END OF GAME TABLE -->
             </div>
         </div>
-    <!-- END OF MAIN CONTENT -->
+        <!-- END OF MAIN CONTENT -->
     </div>
 </body>
 <!-- FOOTER -->
