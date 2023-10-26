@@ -1,6 +1,4 @@
-
 /* used for all elements*/
-
 * {
     margin: 0;
     padding: 0;
@@ -225,3 +223,114 @@ td a:hover{
 
 
 /* END OF SCROLL BAR SETTINGS */
+
+
+/* Create Games Settings */
+#formcontainer{
+    align-items:center;
+    justify-content: center;
+}
+#GameName{
+    
+}
+
+#Platform{
+    
+}
+
+#Releasedate{
+    
+}
+
+
+/* FORM STYLES */
+
+.form {
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+}
+
+label {
+    font-family:Unidays-Book, sans-serif ;
+}
+
+    input[type=text]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+  }
+
+input[type=password] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+  input[type=submit] {
+    max-width: 30%;
+  
+  input[type=submit] {
+    max-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    transition: 0.3s;
+    background-color: #1DD577;
+  }
+
+input[type=reset] {
+    max-width: 30%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family: Unidays-Book, sans-serif;
+    font-size: 1rem;
+    transition: 0.3s;
+    background-color: #bd0000;
+}
+
+
+  input[type=submit]:hover {
+    padding: 1rem;
+    transition: 0.3s;
+  }
+
+input[type=reset]:hover {
+    padding: 1rem;
+    transition: 0.3s;
+    color: #FF0000;
+    font-family:Unidays-Book, sans-serif;
+
+form .formerror{
+    color: #FF0000;
+    font-family:Unidays-Book, sans-serif;
+
+}
+
