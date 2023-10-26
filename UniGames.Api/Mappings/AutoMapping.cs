@@ -15,7 +15,11 @@ namespace UniGames.Api.Mappings
             // This is how to create a map
             CreateMap<Game, GameDTO>().ReverseMap();
             CreateMap<Platform, PlatformDTO>().ReverseMap();
+            CreateMap<GameDetail, GameDetailDTO>().ReverseMap();
+            CreateMap<Review, ReviewDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
             // Other maps go here
+
             CreateMap<User, CreateUsersDTO>().ReverseMap();
             CreateMap<Game, CreateGameDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();

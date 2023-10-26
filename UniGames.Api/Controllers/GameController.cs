@@ -14,7 +14,7 @@ namespace UniGames.Api.Controllers
     [Route("[controller]")]
     public class GameController : ControllerBase
     {
-        
+
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IGameRepository gameRepository;
@@ -31,8 +31,6 @@ namespace UniGames.Api.Controllers
         {
             // Uses the game repository and the selected method inside
             var gamesDM = gameRepository.GetAllGames();
-
-            // Map DM to DTO
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
 
             return Ok(gamesDTO.Take(20));
