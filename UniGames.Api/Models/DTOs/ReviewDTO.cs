@@ -12,6 +12,7 @@ namespace UniGames.Api.Models.DTOs
         public int UserID { get; set; }
         public int GameID { get; set; }
         public User UserName { get; set; }
+        public Game Games { get; set; }
 
     }
 }

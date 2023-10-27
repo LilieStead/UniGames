@@ -57,10 +57,6 @@ app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
 
-
-string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-
 //This Code below opens the UI as you run the API
 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 

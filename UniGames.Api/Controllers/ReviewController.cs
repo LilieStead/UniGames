@@ -10,9 +10,8 @@ using UniGames.Api.Repositories;
 
 namespace UniGames.Api.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
-
+    [ApiController]
     public class ReviewController : ControllerBase
     {
         private readonly GameDbContext dbContext;
@@ -28,20 +27,21 @@ namespace UniGames.Api.Controllers
 
 
 
+
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("/reviewid/{id:int}")]
         public IActionResult GetReviewByID([FromRoute] int id)
         {
-          var reviewDM = reviewRepository.GetReviewByID(id);
-          if (reviewDM == null)
-          {
-              return NotFound();
-          }
+            var reviewDM = reviewRepository.GetReviewByID(id);
+            if (reviewDM == null)
+            {
+                return NotFound();
+            }
 
-          var reviewDTO = mapper.Map<ReviewDTO>(reviewDM);
-          return Ok(reviewDTO);
+            var reviewDTO = mapper.Map<ReviewDTO>(reviewDM);
+            return Ok(reviewDTO);
         }
-        
+
 
         [HttpGet]
         [Route("{id:int}")]
@@ -59,6 +59,8 @@ namespace UniGames.Api.Controllers
             return Ok(reviewDTO);
         }
 
+      
+
 
         [HttpPost]
         public IActionResult CreateReview([FromBody] CreateReviewDTO createReviewDTO)
@@ -72,12 +74,7 @@ namespace UniGames.Api.Controllers
             var reviewDTO = mapper.Map<ReviewDTO>(crreview);
             // Uses the GetReviewByID to match the new review's ID and pull it and all review details through the output
             return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
-        
-    
 
-
-            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
-            return Ok(reviewDTO);
         }
     }
 }
