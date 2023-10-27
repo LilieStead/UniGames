@@ -3,6 +3,10 @@ var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 console.log(gameid);
 
+var link = document.getElementById('cReview');
+link.href = 'createreview.html?id=' + gameid;
+
+
 // Fetch game data from the server using the extracted 'gameid'
 fetch(`http://localhost:5116/gamedetail/${gameid}`)
     .then(response => response.json())

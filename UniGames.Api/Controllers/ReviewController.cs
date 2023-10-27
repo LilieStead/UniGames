@@ -29,7 +29,7 @@ namespace UniGames.Api.Controllers
 
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("/reviewid/{id:int}")]
         public IActionResult GetReviewByID([FromRoute] int id)
         {
           var reviewDM = reviewRepository.GetReviewByID(id);
@@ -74,10 +74,6 @@ namespace UniGames.Api.Controllers
             return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
         
     
-
-
-            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
-            return Ok(reviewDTO);
         }
     }
 }
