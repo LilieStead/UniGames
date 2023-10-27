@@ -16,7 +16,7 @@ namespace UniGames.Api.Models.DTOs
         public DateTime ReleaseDate { get; set; }
 
         public Platform PlatformName { get; set; }
-
+        
 
     }
 }

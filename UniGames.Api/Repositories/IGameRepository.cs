@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,8 @@ namespace UniGames.Data.Repositories
     public interface IGameRepository
     {
         List<Game> GetAllGames();
+  
+
         Game GetGameById(int id);
 
         Game CreateGame(Game game);
