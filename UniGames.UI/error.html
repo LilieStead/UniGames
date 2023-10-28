@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames</title>
+    <title>Error</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/index.js"></script>
+    <script type="text/javascript" src="assets/js/error.js"></script>
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -13,7 +13,7 @@
     <h1>UNiGames</h1>
 </header>
 <!-- END OF HEADER -->
-<body>
+<body id="error-page">
     <!-- NAV -->
     <nav class="centercontents">
         <a href="index.html"><p>Home</p></a>
@@ -27,24 +27,10 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Error</h1>
                 </div>
-                <!--  GAME TABLE -->
-                <div id="tablecontainer">
-                    <table id="gameTable">
-                        <thead>
-                        <tr>
-                            <th>Game Title</th>
-                            <th>Platform</th>
-                            <th>UNiGAMES Score</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- Dynamic content will be added here -->
-                        </tbody>
-                    </table>
-                </div>
-                <!-- END OF GAME TABLE -->
+                <p id="error-message"></p>
+                <button id="backbut" onclick="history.back()">Go Back</button>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->

@@ -28,11 +28,9 @@ namespace UniGames.Data.Repositories
         public List<Game> GetAllGames()
         {
             var games = dbContext.Games.Include(x => x.PlatformName).ToList();
-
-            return games.ToList();
+            return games;
         }
-        
-        main
+
         public Game GetGameById(int id)
         {
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == id);
@@ -43,8 +41,8 @@ namespace UniGames.Data.Repositories
             dbContext.Games.Add(game);
             dbContext.SaveChanges();
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == game.GameID);
-            
 
+        }
         public List<Game> GetGamesByTitle(string title)
         { 
             var games =  dbContext.Games.Where(x => x.Title == title).Include(x => x.PlatformName).ToList();
@@ -53,3 +51,4 @@ namespace UniGames.Data.Repositories
         }
     }
 }
+

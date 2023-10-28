@@ -43,4 +43,4 @@ fetch('http://localhost:5116/game')
       });
   
       return row;
-  }
+    }
