@@ -23,5 +23,12 @@ namespace UniGames.Api.Repositories
             return dbContext.User.FirstOrDefault(u => u.Username == username);
         }
 
+
+        public User DeleteUser(User user)
+        {
+            dbContext.User.Remove(user);
+            dbContext.SaveChanges();
+            return user;
+        }
     }
 }

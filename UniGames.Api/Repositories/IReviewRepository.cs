@@ -7,7 +7,10 @@ namespace UniGames.Api.Repositories
         List<Review> GetReviews();
         Review GetReviewByID(int id);
         Review CreateReview(Review review);
-        public List<Review> GetScoreByGameID(int id);
+
+        List<Review> GetReviewByUser(int userId);
+        List<Review> GetScoreByGameID(int id);
+
     }
 }
 

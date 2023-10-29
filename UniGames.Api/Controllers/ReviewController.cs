@@ -18,6 +18,7 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IReviewRepository reviewRepository;
 
+
         public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository)
         {
             this.dbContext = dbContext;
@@ -27,18 +28,24 @@ namespace UniGames.Api.Controllers
 
 
 
-
+        // Uses the HttpGet method
         [HttpGet]
+        // Defines the Route
         [Route("/reviewid/{id:int}")]
+        // Public Method
         public IActionResult GetReviewByID([FromRoute] int id)
         {
+            // Uses the GetReviewByID in the reviewRepository 
             var reviewDM = reviewRepository.GetReviewByID(id);
+            // If there is no valid Review ID then
             if (reviewDM == null)
             {
+                // Return that no review with that ID was found
                 return NotFound();
             }
-
+            // Maps the DM to the DTO
             var reviewDTO = mapper.Map<ReviewDTO>(reviewDM);
+            // Returns the results
             return Ok(reviewDTO);
         }
 
@@ -59,10 +66,11 @@ namespace UniGames.Api.Controllers
             return Ok(reviewDTO);
         }
 
-      
 
 
+        // Uses the HttpPost method
         [HttpPost]
+        // Public Method
         public IActionResult CreateReview([FromBody] CreateReviewDTO createReviewDTO)
         {
             // Map DTO to DM
@@ -76,6 +84,7 @@ namespace UniGames.Api.Controllers
             return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
 
         }
+
     }
 }
 

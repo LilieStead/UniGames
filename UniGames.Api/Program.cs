@@ -3,12 +3,9 @@ using AutoMapper;
 using UniGames.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using UniGames.Data.Repositories;
-using UniGames.Api.Models;
-using Microsoft.Extensions.FileProviders;
 using System.Diagnostics;
-using System;
 using UniGames.Api.Repositories;
-using System.Diagnostics;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +18,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<GameDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("UniGamesConnectionString")));
-// Connects the SQL repository to the I repository
+// Connects the SQL repository to the I repository -- For Each
 builder.Services.AddScoped<IGameRepository, SQLGameRepository>();
-
 builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IGameDetailRepository, SQLGameDetailRepository>();
@@ -58,18 +54,16 @@ app.UseCors();
 app.MapControllers();
 
 //This Code below opens the UI as you run the API
+// Gains special access to the User folder (the name of the current computer user)
 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
+// Defines the path for the HTML file
 string relativeFilePath = @"source\repos\UniGames\UniGames.UI\index.html";
+// Combines both paths together
 string htmlFilePath = System.IO.Path.Combine(userProfileFolder, relativeFilePath);
+// Forces Google Chrome to open the HTML file in a new tab
 string chromeCommand = $"--new-tab \"{htmlFilePath}\"";
+// Starts the Chrome process using the chromeCommand
 Process.Start(new ProcessStartInfo("chrome.exe", chromeCommand) { UseShellExecute = true });
-
-app.Run();
-
-
-
-
 
 app.Run();
 
