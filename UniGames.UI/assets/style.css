@@ -447,4 +447,36 @@ form .formerror{
 }
 
 
+
 /* END OF MAKE USER */
+
+
+/* Delete User */
+.delwarn{
+    color: red;
+    margin: 3em 0 3em 0;
+    font-size: 1.3em;
+    font-family: Unidays-Book, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#deleteuser input[type=text]{
+    min-width: 100%;
+}
+
+#rdesc{
+    min-width: 100%;
+    min-height: 10rem;
+    resize: none;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1.1rem;
+}
+#deleteuser input[type=number]{
+    max-width: 25%;
+    min-height: 50%;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 8px 0;
+    padding: 12px 20px;
+}
+/* End of Delete User */
+

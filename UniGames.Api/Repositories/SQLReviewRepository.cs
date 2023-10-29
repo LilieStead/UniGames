@@ -9,6 +9,7 @@ namespace UniGames.Api.Repositories
     {
         private readonly GameDbContext dbContext;
 
+        // Constructor to use imported entities (such as the private readonly lines) throughout the file
         public SQLReviewRepository(GameDbContext dbContext)
         {
             this.dbContext = dbContext;
@@ -27,6 +28,11 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Include(x => x.UserName).Include(x => x.Games).ThenInclude(g => g.PlatformName).FirstOrDefault(x => x.ReviewID == id);
         }
 
+        public List<Review> GetReviewByUser(int userId)
+        {
+            return dbContext.Review.Where(review => review.UserID == userId).Include(x => x.UserName).ToList();
+        }
+
         public Review CreateReview(Review review)
         {
 
@@ -37,7 +43,7 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Include(x => x.UserName).Include(x => x.Games).ThenInclude(g => g.PlatformName).FirstOrDefault(x => x.ReviewID == review.ReviewID);
 
         }
-        
+
         
         public List<Review> GetScoreByGameID(int id)
         {
@@ -48,6 +54,7 @@ namespace UniGames.Api.Repositories
             .Take(5)
             .ToList();
         }
+
     }
 }
 

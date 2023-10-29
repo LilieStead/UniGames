@@ -9,6 +9,7 @@ using UniGames.Data.Repositories;
 using UniGames.Api.Repositories;
 using System.Diagnostics.Metrics;
 
+
 namespace UniGames.Api.Controllers
 {
     [ApiController]
@@ -20,7 +21,7 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IGameRepository gameRepository;
         private readonly IReviewRepository reviewRepository;
-        
+
 
         public GameController(GameDbContext dbContext, IMapper mapper, IGameRepository gameRepository, IReviewRepository reviewRepository)
         {
@@ -36,6 +37,7 @@ namespace UniGames.Api.Controllers
             // Uses the game repository and the selected method inside
             var gamesDM = gameRepository.GetAllGames();
             
+            // Maps the DM to DTO
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
 
             return Ok(gamesDTO.Take(20));
@@ -82,6 +84,7 @@ namespace UniGames.Api.Controllers
             //var gamesDTO = mapper.Map<List<GameDTO>>(gamesWithAvgScore);
             // Returns it into the API interface
             return Ok(gamesWithAvgScore);
+
         }
     }
 
