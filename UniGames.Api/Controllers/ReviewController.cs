@@ -18,12 +18,13 @@ namespace UniGames.Api.Controllers
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IReviewRepository reviewRepository;
-
-        public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository)
+        private readonly IUserRepository userRepository;
+        public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository, IUserRepository userRepository)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.reviewRepository = reviewRepository;
+            this.userRepository = userRepository;
         }
 
 
@@ -74,6 +75,16 @@ namespace UniGames.Api.Controllers
             return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
         
     
+        }
+        [HttpGet]
+        [Route("/userreview/{username}")]
+        public IActionResult GetReviewByUsername([FromRoute] string username) {
+            var reviewDM = reviewRepository.GetReviewByUsername(username);
+            if (reviewDM == null){ 
+                return NotFound();
+            }
+            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
+            return Ok(reviewDTO);
         }
     }
 }

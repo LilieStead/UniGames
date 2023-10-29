@@ -48,6 +48,10 @@ namespace UniGames.Api.Repositories
             .Take(5)
             .ToList();
         }
+        public List<Review> GetReviewByUsername(string username)
+        {
+            return dbContext.Review.Where(review =>  review.UserName.Username == username).Include(x => x.UserName).ToList();
+        }
     }
 }
 
