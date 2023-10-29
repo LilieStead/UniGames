@@ -35,11 +35,8 @@ namespace UniGames.Api.Controllers
         {
             // Uses the game repository and the selected method inside
             var gamesDM = gameRepository.GetAllGames();
+            
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
-            foreach (var games in gamesDM)
-            {
-
-            }
 
             return Ok(gamesDTO.Take(20));
         }
