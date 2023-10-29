@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
+    <script async defer type="text/javascript" src="assets/js/userreviewsearch.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -29,23 +29,25 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Search for games</h1>
+                    <h1>Search for user reviews</h1>
                 </div>
                 <div>
-                    <form id="searchform" class="form" method="get">
-                        <label for="Title">Game Title</label>
-                        <input  id="Title" type="text" name="Title" placeholder="Please enter a game" maxlength="50">
+                    <form id="searchreviewform" class="form" method="get">
+                        <label for="Review">User Reviews</label>
+                        <input  id="Review" type="text" name="Username" placeholder="Please enter a user" maxlength="50">
                         <p class="formerror" id="titleerror"></p>
                         <input type="submit">
                     </form>
                 </div>
                 <div id="tablecontainer">
-                    <table id="gameTable">
+                    <table id="UserreviewTable">
                         <thead>
                         <tr>
-                            <th>Game Title</th>
-                            <th>Platform</th>
-                            <th>Average Score</th>
+                            <th>Review Title</th>
+                            <th>Review Description</th>
+                            <th>UNiGAMES Score</th>
+                            <th>Username</th>
+                            <th>Game</th>
                         </tr>
                         </thead>
                         <tbody>

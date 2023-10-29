@@ -7,6 +7,7 @@ namespace UniGames.Api.Models.Domain
         public int GameID { get; set; }
         public string Title { get; set; }
         public int PlatformID { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         // Navigation Properties
