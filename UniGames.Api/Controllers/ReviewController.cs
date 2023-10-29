@@ -18,7 +18,6 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IReviewRepository reviewRepository;
         private readonly IUserRepository userRepository;
-        public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository, IUserRepository userRepository)
 
 
         public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository)
