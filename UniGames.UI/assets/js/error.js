@@ -12,6 +12,10 @@ function errorPages(){
         case "2":
             errorMessage = "Error: Your username is incorrect, please try again";
             break;
+        case "3":
+            errorMessage = "Error: You have previously created reviews for games, <br> \
+            please delete your current reviews and try again.";
+            break;
         default:
             errorMessage = "An unknown error occurred";
     }
