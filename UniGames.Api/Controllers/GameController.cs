@@ -7,6 +7,8 @@ using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
 using UniGames.Api.Repositories;
+using System.Diagnostics.Metrics;
+
 
 namespace UniGames.Api.Controllers
 {
@@ -19,6 +21,7 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IGameRepository gameRepository;
         private readonly IReviewRepository reviewRepository;
+
 
         public GameController(GameDbContext dbContext, IMapper mapper, IGameRepository gameRepository, IReviewRepository reviewRepository)
         {
@@ -33,7 +36,7 @@ namespace UniGames.Api.Controllers
         {
             // Uses the game repository and the selected method inside
             var gamesDM = gameRepository.GetAllGames();
-
+            
             // Maps the DM to DTO
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
 
@@ -72,16 +75,18 @@ namespace UniGames.Api.Controllers
         public IActionResult GetGamesByTitle([FromRoute] string title)
         {
             // Looks in the IGameRepository file for the GetGamesByTitle method
-            var gamesDM = gameRepository.GetGamesByTitle(title);
-            if (gamesDM == null)
+            var gamesWithAvgScore = gameRepository.GetGamesByTitle(title);
+            if (gamesWithAvgScore == null)
             {
                 return NotFound();
             }
 
-            var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
+            //var gamesDTO = mapper.Map<List<GameDTO>>(gamesWithAvgScore);
             // Returns it into the API interface
-            return Ok(gamesDTO);
-        }
+            return Ok(gamesWithAvgScore);
 
+        }
     }
+
+
 }

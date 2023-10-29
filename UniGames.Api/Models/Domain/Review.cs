@@ -13,6 +13,7 @@ namespace UniGames.Api.Models.Domain
         public User UserName { get; set; }
         public Game Games { get; set;}
 
+
     }
 }
 

@@ -53,6 +53,7 @@ app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
 
+
 //This Code below opens the UI as you run the API
 // Gains special access to the User folder (the name of the current computer user)
 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);

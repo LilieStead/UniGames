@@ -127,6 +127,7 @@ namespace UniGames.Api.Controllers
             var userDTO = mapper.Map<UserDTO>(delUser);
             // Returns the results
             return Ok(userDTO);
+
         }
     }
 }   

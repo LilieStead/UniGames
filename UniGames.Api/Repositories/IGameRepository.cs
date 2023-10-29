@@ -12,14 +12,13 @@ namespace UniGames.Data.Repositories
     public interface IGameRepository
     {
         // For Each Line -- Publicly Accessible Method Through The Interface
-        List<Game> GetAllGames();
+        List<GameDTO> GetAllGames();
   
-
         Game GetGameById(int id);
 
         Game CreateGame(Game game);
 
-        List<Game> GetGamesByTitle(string title);
+        List<GameDTO> GetGamesByTitle(string title);
 
 
     }
