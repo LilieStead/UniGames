@@ -12,10 +12,11 @@ namespace UniGames.Api.Models.DTOs
         public int GameID {  get; set; }
         public string Title { get; set; }
         
-        public short Score { get; set; }
         public DateTime ReleaseDate { get; set; }
 
         public Platform PlatformName { get; set; }
+
+        public double AverageScore { get; set; }
         
 
     }

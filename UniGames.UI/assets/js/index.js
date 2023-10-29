@@ -33,7 +33,7 @@ fetch('http://localhost:5116/game')
       row.appendChild(platformCell);
   
       const scoreCell = document.createElement('td');
-      scoreCell.textContent = game.score;
+      scoreCell.textContent = game.averageScore;
       row.appendChild(scoreCell);
   
       // Attach click event listener to the link
