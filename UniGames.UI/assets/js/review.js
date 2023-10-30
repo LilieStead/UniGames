@@ -49,6 +49,7 @@ function createTableRow(review) {
     const reviewdescriptionCell = document.createElement('td');
     reviewdescriptionCell.textContent = review.reviewDescription;
     rrow.appendChild(reviewdescriptionCell);
+    
 
     // Score for the game review
     const scoreCell = document.createElement('td');
@@ -59,6 +60,11 @@ function createTableRow(review) {
     const useridCell = document.createElement('td');
     useridCell.textContent = review.userName.username;
     rrow.appendChild(useridCell);
+
+    const descdel = document.createElement('a');
+    descdel.href = "deletereview.html?id=" + review.reviewID;
+    descdel.textContent = "Delete review";
+    rrow.appendChild(descdel);
 
     reviewtitleLink.addEventListener('click', function (event) {
         // Handle the click event if needed
