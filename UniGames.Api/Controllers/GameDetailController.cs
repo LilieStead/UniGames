@@ -23,7 +23,6 @@ namespace UniGames.Api.Controllers
         }
 
         [HttpGet]
-
         [Route("{id:int}")]
         public IActionResult GetDetailByID([FromRoute] int id) {
             var gamesdetailDM=gamedetailRepository.GetDetailByID(id);

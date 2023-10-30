@@ -6,6 +6,8 @@ using UniGames.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
+using UniGames.Api.Repositories;
+using System.Diagnostics.Metrics;
 
 
 namespace UniGames.Api.Controllers
@@ -18,12 +20,15 @@ namespace UniGames.Api.Controllers
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IGameRepository gameRepository;
+        private readonly IReviewRepository reviewRepository;
 
-        public GameController(GameDbContext dbContext, IMapper mapper, IGameRepository gameRepository)
+
+        public GameController(GameDbContext dbContext, IMapper mapper, IGameRepository gameRepository, IReviewRepository reviewRepository)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.gameRepository = gameRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         [HttpGet(Name = "GetGames")]
@@ -31,6 +36,8 @@ namespace UniGames.Api.Controllers
         {
             // Uses the game repository and the selected method inside
             var gamesDM = gameRepository.GetAllGames();
+            
+            // Maps the DM to DTO
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
 
             return Ok(gamesDTO.Take(20));
@@ -65,23 +72,21 @@ namespace UniGames.Api.Controllers
 
         [HttpGet]
         [Route("{title}")]
-        public IActionResult GetGamesByTitle([FromRoute] string title) 
+        public IActionResult GetGamesByTitle([FromRoute] string title)
         {
-
-            var gameDM = gameRepository.GetAllGames().Where(x => x.Title.Contains(title)).ToList();
-            
-            
-            
-            if (gameDM == null)
+            // Looks in the IGameRepository file for the GetGamesByTitle method
+            var gamesWithAvgScore = gameRepository.GetGamesByTitle(title);
+            if (gamesWithAvgScore == null)
             {
                 return NotFound();
             }
-            var gameDTO = mapper.Map<List<GameDTO>>(gameDM);
 
-            return Ok(gameDTO);
+            //var gamesDTO = mapper.Map<List<GameDTO>>(gamesWithAvgScore);
+            // Returns it into the API interface
+            return Ok(gamesWithAvgScore);
+
         }
-
-
-
     }
+
+
 }

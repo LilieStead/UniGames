@@ -1,11 +1,9 @@
-﻿using Microsoft.Identity.Client;
-
 namespace UniGames.Api.Models.Domain
 {
     public class Review
     {
-        public int gameID;
-
+        // For each line -- Defines what is gathered from the database (each variable name needs to match the name of
+        // column names in the database)
         public int ReviewID { get; set; }
         public string ReviewTitle { get; set; }
         public string ReviewDescription { get; set;}
@@ -13,6 +11,9 @@ namespace UniGames.Api.Models.Domain
         public int UserID { get; set;}
         public int GameID { get; set;}
         public User UserName { get; set; }
+        public Game Games { get; set;}
+
 
     }
 }
+

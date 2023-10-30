@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGames - Create Review</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script async defer type="text/javascript" src="assets/js/createreview.js"></script>
+    <link rel="stylesheet" href="assets/fonts.css">
+</head>
+<!-- HEADER -->
+<header class="centercontents">
+    <h1>UNiGames</h1>
+</header>
+<!-- END OF HEADER -->
+<body>
+    <!-- NAV -->
+    <nav class="centercontents">
+        <a href="index.html"><p>Home</p></a>
+        <a href="search.html"><p>Search Games</p></a>
+        <a href="create.html"><p>Create Game</p></a>
+        <a href="createuser.html"><p>Sign Up</p></a>
+        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
+    </nav>
+    <!-- END OF NAV -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Make A Review</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="createreview" action="">
+                    <div>
+                        <label for="rtitle">Review Title: </label>
+                        <input type="text" name="ReviewTitle" id="rtitle" placeholder="Enter your review title...">
+                        <p class="formerror" id="titleerror"></p>
+                    </div>
+                    <div>
+                        <label for="rdesc">Review Description: </label>
+                        <textarea name="ReviewDescription" id="rdesc" placeholder="Enter your description here..."></textarea>
+                        <p class="formerror" id="descriptionerror"></p>
+                    </div>
+                    <div>
+                        <label for="score">Score: </label>
+                        <input type="number" name="Score" id="score">
+                        <p class="formerror" id="scoreerror"></p>
+                    </div>
+                    <div>
+                        <label for="username">Username: </label>
+                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">Your Password: </label>
+                        <input type="text" name="Userpassword" id="password" placeholder="Enter your password here...">
+                        <p class="formerror" id="passworderror"></p>
+                    </div>
+                    <div class="flexcontainer">
+                        <input id="reviewbtn"type="submit" value="submit">
+                    </div>
+                </form>
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+</body>
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>
+
+<script>
+const vtitle = document.getElementById('rtitle');
+const vdescription = document.getElementById('rdesc');
+const vscore = document.getElementById('score');
+const vusername = document.getElementById('user');
+const vpassword = document.getElementById('password');
+
+const titleerror = document.getElementById('titleerror');
+const descriptionerror = document.getElementById('descriptionerror');
+const scoreerror = document.getElementById('scoreerror');
+const usernameerror = document.getElementById('usernameerror');
+const passworderror = document.getElementById('passworderror');
+
+const createreview = document.getElementById('createreview');
+
+createreview.addEventListener('submit', (e) => {
+    const numberValue = parseFloat(vscore.value);
+    // Reset error messages before validation
+    titleerror.innerHTML = '';
+    descriptionerror.innerHTML = '';
+    scoreerror.innerHTML = '';
+    usernameerror.innerHTML = '';
+    passworderror.innerHTML = '';
+
+    // Checks to see if the title contains no text
+    if (vtitle.value === '' || vtitle.value === null) {
+        e.preventDefault();
+        titleerror.innerHTML = 'Your review needs a title';
+    }
+    // Checks to see if the description contains no text
+    if (vdescription.value === '' || vdescription.value === null) {
+        e.preventDefault();
+        descriptionerror.innerHTML = 'You need to provide a description';
+        // Checks if the length of the description is less than 20 or higher than 500
+    } else if (vdescription.value.length < 20 || vdescription.value.length > 500) {
+        e.preventDefault();
+        descriptionerror.innerHTML = 'A description needs to be between 20 - 500 characters';
+    }
+    // Checks to see if the number is valid or less than 0 or bigger than 100
+    if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
+        e.preventDefault();
+        scoreerror.innerHTML = 'Your score needs to be between 0 and 100';
+    }else{
+        scoreerror.innerHTML = (null);
+    }
+    // Checks to see if the username is contains no text
+    if (vusername.value === '' || vusername.value === null) {
+        e.preventDefault();
+        usernameerror.innerHTML = 'You must enter your username';
+    }
+    // Checks to see if the password contains no text
+    if (vpassword.value === '' || vpassword.value === null){
+        e.preventDefault();
+        passworderror.innerHTML = 'You must enter your account\'s password';
+    }
+});
+</script>

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UniGames.Api.Models.Domain;
 
-namespace UniGames.Data.Repositories
+namespace UniGames.Api.Repositories
 {
     public interface IReviewRepository
     {
+        List<Review> GetReviews();
+        Review GetReviewByID(int id);
+        Review CreateReview(Review review);
+      
         public List<Review> GetScoreByGameID(int id);
+        public List<Review> GetReviewByUsername(string username);
+
+        List<Review> GetReviewByUser(int userId);
     }
 }
 

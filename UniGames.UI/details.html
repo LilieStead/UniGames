@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/style.css">
+    <Script src="assets/js/handleid.js"></Script>
 
 
-    <script async defer type="text/javascript" src="details.js"></script>
-    <script async defer type="text/javascript" src="review.js"></script>
+    <script async defer type="text/javascript" src="assets/js/details.js"></script>
+    <script async defer type="text/javascript" src="assets/js/review.js"></script>
 
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -22,9 +23,11 @@
     <!-- NAV -->
     <nav class="centercontents">
         <a href="index.html"><p>Home</p></a>
-        <a href="details.html"><p>Game Details</p></a>
-        <a href="#"><p>TEST</p></a>
-        <a href="#"><p>TEST</p></a>
+        <a href="search.html"><p>Search Game</p></a>
+        <a href="create.html"><p>Create Game</p></a>
+        <a href="createuser.html"><p>Sign Up</p></a>
+        <a href="deleteuser.html"><p>Delete Your Account</p></a>
+        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
     </nav>
     <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
@@ -36,7 +39,7 @@
                 </div>
                 <!--  GAME TABLE -->
                 <a id="cReview" href="createreview.html">Create Review</a>
-                <a id="cReview" href="createreview.html">Create Review</a>
+                <!-- <a id="cReview" href="createreview.html">Create Review</a> -->
                 <div id="tablecontainer">
                     <table id="gameTable">
                         <thead>
@@ -55,10 +58,11 @@
                     <table id="reviewTable">
                         <thead>
                             <tr>
+                                <!--<th>ReviewID</th>-->
                                 <th>Review Title</th>
                                 <th>Review Description</th>
                                 <th>Score</th>
-                                <th>Username</th>
+                                <th>UserID</th>
                             </tr>
                         </thead>
                         <tbody id="reviewtbody">

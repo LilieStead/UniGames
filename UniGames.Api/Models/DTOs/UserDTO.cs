@@ -1,4 +1,6 @@
-﻿namespace UniGames.Api.Controllers
+using UniGames.Api.Models.Domain;
+
+namespace UniGames.Api.Models.DTOs
 {
     public class UserDTO
     {
@@ -8,7 +10,7 @@
         public string Useremail { get; set; }
         public string? Userphone { get; set; }
         public string Userpassword { get; set; }
-        public DateTime Userdob { get; set; }
+        public DateTime Userdob {  get; set; }
         public string Username { get; set; }
     }
 }

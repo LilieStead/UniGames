@@ -225,6 +225,7 @@ td a:hover{
 /* END OF SCROLL BAR SETTINGS */
 
 
+
 /* Create Games Settings */
 #formcontainer{
     align-items:center;
@@ -241,6 +242,7 @@ td a:hover{
 #Releasedate{
     
 }
+
 
 
 /* FORM STYLES */
@@ -268,8 +270,11 @@ label {
     font-size: 1rem;
   }
 
+  
+
+
 input[type=password] {
-    width: 50%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -281,9 +286,7 @@ input[type=password] {
 }
 
   input[type=submit] {
-    max-width: 30%;
-  
-  input[type=submit] {
+
     max-width: 15%;
     background-color: #4CAF50;
     color: #FFFFFF;
@@ -296,9 +299,122 @@ input[type=password] {
     font-family:Unidays-Book, sans-serif;
     font-size: 1rem;
     size: 1rem;
-    transition: 0.3s;
     background-color: #1DD577;
   }
+
+
+form .formerror{
+    color: #FF0000;
+    font-family:Unidays-Book, sans-serif;
+}
+
+#reviewbtn{
+    max-width: 40% !important;
+    min-width: 40% !important;
+    min-height: 10%;
+    text-align: center;
+}
+
+  
+
+/* Create Review Form */
+
+#createreview input[type=text]{
+    min-width: 100%;
+}
+
+#rdesc{
+    min-width: 100%;
+    min-height: 10rem;
+    resize: none;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1.1rem;
+}
+#createreview input[type=number]{
+    max-width: 25%;
+    min-height: 50%;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 8px 0;
+    padding: 12px 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+  
+
+/* Error Page */
+#error-message{
+    margin: auto;
+    text-align: center;
+    font-size: 1.7em;
+    font-family: Unidays-Book;
+    margin-top: 1.7em;
+    color: red;
+}
+
+
+
+#error-page button {
+    margin: auto;
+    margin-top: 4em;
+    display: block;
+    max-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 7%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    background-color: #1DD577;
+  }
+
+
+/*  Success Page(s)  */
+.success h1{
+    color: green;
+    font-family: Unidays=Book;
+    font-size: 3em !important;
+}
+
+
+.success p{
+    margin: auto;
+
+    margin-top: 4em;
+    margin-bottom: 3em;
+    font-size: 2em;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.success a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+#retsucc{
+    margin-bottom: 13em;
+    max-width: 40%;
+    margin-top: 1em;
+    background-color: #1DD577;
+    height: 2em;
+    padding-top: 0.5em;
+}
+
+
+
+
+/* MAKE USER */
+
+#SignUp input[type=submit]{
+    min-width: 30% !important;
+}
 
 input[type=reset] {
     max-width: 30%;
@@ -317,20 +433,50 @@ input[type=reset] {
 }
 
 
-  input[type=submit]:hover {
-    padding: 1rem;
-    transition: 0.3s;
-  }
-
 input[type=reset]:hover {
     padding: 1rem;
     transition: 0.3s;
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
+}
 
 form .formerror{
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
 
 }
+
+
+
+/* END OF MAKE USER */
+
+
+/* Delete User */
+.delwarn{
+    color: red;
+    margin: 3em 0 3em 0;
+    font-size: 1.3em;
+    font-family: Unidays-Book, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#deleteuser input[type=text]{
+    min-width: 100%;
+}
+
+#rdesc{
+    min-width: 100%;
+    min-height: 10rem;
+    resize: none;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1.1rem;
+}
+#deleteuser input[type=number]{
+    max-width: 25%;
+    min-height: 50%;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 8px 0;
+    padding: 12px 20px;
+}
+/* End of Delete User */
 
