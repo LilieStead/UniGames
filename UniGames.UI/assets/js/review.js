@@ -40,7 +40,7 @@ function createTableRow(review) {
     const reviewtitleLink = document.createElement('a');
 
     //reviewdetails is a placeholder for now 
-    reviewtitleLink.href = 'reviewdetails.html?id=' + review.reviewID;
+    reviewtitleLink.href = 'deletereview.html?id=' + review.reviewID;
     reviewtitleLink.textContent = review.reviewTitle;
     reviewtitleCell.appendChild(reviewtitleLink);
     rrow.appendChild(reviewtitleCell);

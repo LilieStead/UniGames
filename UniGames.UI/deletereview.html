@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGames - Create Review</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script async defer type="text/javascript" src="assets/js/deletereview.js"></script>
+    <link rel="stylesheet" href="assets/fonts.css">
+</head>
+<!-- HEADER -->
+<header class="centercontents">
+    <h1>UNiGames</h1>
+</header>
+<!-- END OF HEADER -->
+<body>
+    <!-- NAV -->
+    <nav class="centercontents">
+        <a href="index.html"><p>Home</p></a>
+        <a href="search.html"><p>Search Games</p></a>
+        <a href="create.html"><p>Create Game</p></a>
+        <a href="createuser.html"><p>Sign Up</p></a>
+        <a href="deleteuser.html"><p>Delete Your Account</p></a>
+        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
+    </nav>
+    <!-- END OF NAV -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Delete Your Review</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="deletereview" action="">
+                    <p class="delwarn">WARNING: If you delete your review, you will lose it forever</p>
+                    <div>
+                        <label for="username">Username: </label>
+                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">Your Password: </label>
+                        <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
+                        <p class="formerror" id="passworderror"></p>
+                    </div>
+                    <div class="flexcontainer">
+                        <input id="reviewbtn"type="submit" value="submit">
+                    </div>
+                </form>
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+</body>
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>
+
+<script>
+
+const vusername = document.getElementById('user');
+const vpassword = document.getElementById('password');
+
+const usernameerror = document.getElementById('usernameerror');
+const passworderror = document.getElementById('passworderror');
+
+const createreview = document.getElementById('deleteuser');
+
+createreview.addEventListener('submit', (e) => {
+    usernameerror.innerHTML = '';
+    passworderror.innerHTML = '';
+
+    // Checks to see if the username is contains no text
+    if (vusername.value === '' || vusername.value === null) {
+        e.preventDefault();
+        usernameerror.innerHTML = 'You must enter your username';
+    }
+    // Checks to see if the password contains no text
+    if (vpassword.value === '' || vpassword.value === null){
+        e.preventDefault();
+        passworderror.innerHTML = 'You must enter your account\'s password';
+    }
+});
+</script>

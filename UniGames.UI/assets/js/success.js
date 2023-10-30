@@ -12,6 +12,9 @@ function successPages(){
         case "2":
             successMessage = "Success! Your account has been deleted.";
             break;
+        case "3":
+            successMessage = "Success! Your review has been deleted";
+            break;
         default:
             successMessage = "An unknown success occurred?";
     }
