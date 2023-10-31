@@ -407,7 +407,9 @@ input::-webkit-inner-spin-button {
     padding-top: 0.5em;
 }
 
-
+.centersubmit {
+    min-width: 35% !important;
+}
 
 
 /* MAKE USER */
