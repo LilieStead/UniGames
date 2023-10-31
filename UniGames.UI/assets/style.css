@@ -480,3 +480,28 @@ form .formerror{
 }
 /* End of Delete User */
 
+
+/* Edit User Review */
+
+#editreviewbtn {
+    max-width: 40% !important;
+    min-width: 40% !important;
+    min-height: 10%;
+    text-align: center;
+}
+
+#editreview input[type=text] {
+    min-width: 100%;
+}
+
+
+#editreview input[type=number] {
+    max-width: 25%;
+    min-height: 50%;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 8px 0;
+    padding: 12px 20px;
+}
+
+/* End of Edit User Review */
