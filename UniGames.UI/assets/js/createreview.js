@@ -17,7 +17,7 @@ function createReview(event){
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
 
-    // Get UserID by Username
+    // Get Username and Password
     fetch(`http://localhost:5116/user/${username}/${password}`)
         .then(response => {
             if (response.status === 200){

@@ -18,8 +18,10 @@ namespace UniGames.Api.Repositories
             return dbContext.User.FirstOrDefault(x => x.UserId == id);
         }
 
+        // Creates a new method
         public User GetUserIDByName(string username)
         {
+            // Uses the dbContext class to match the username to records in the database 
             return dbContext.User.FirstOrDefault(u => u.Username == username);
         }
 

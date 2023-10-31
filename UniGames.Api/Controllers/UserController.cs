@@ -41,26 +41,31 @@ namespace UniGames.Api.Controllers
             return Ok(userDTO);
         }
 
+        // Uses the HttpGet Method
         [HttpGet]
+        // Decides the route, using a username and password
         [Route("{username}/{password}")]
+        // Creates a new Method
         public IActionResult GetUserIdByName([FromRoute] string password, string username)
         {
+            // Selects the GetUserIDByName from the userRepository and uses the username
             var userDM = userRepository.GetUserIDByName(username);
 
-
-
+            // If the username is invalid or null then
             if (userDM == null)
             {
+                // Return that no user has been found
                 return NotFound();
             }
-
+            // If the password for the username does not match the database records then
             if (userDM.Userpassword != password)
             {
+                // Return that the user is unauthorised
                 return Unauthorized();
             }
-
+            // Maps the DM to the DTO
             var userDTO = mapper.Map<UserDTO>(userDM);
-
+            // Returns the correct user details
             return Ok(userDTO);
 
         }
