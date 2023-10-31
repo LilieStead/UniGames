@@ -45,7 +45,7 @@ function createTableRow1(data) {
     // Create table cells
     const titleCell = document.createElement('td');
     const titleLink = document.createElement('a');
-
+    titleLink.className = "rtitlebutton";
 
     titleLink.href = 'details.html?id=' + data.detailID;
     titleLink.textContent = data.gameID;
