@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
@@ -16,23 +16,26 @@ namespace UniGames.Data.Repositories
 {
     public class SQLGameRepository : IGameRepository
     {
+        // Uses GameDbContext as dbContext
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         //reviewRepository added to get the games score
         private readonly IReviewRepository reviewRepository;
 
+        // Constructor to use imported entities (such as the private readonly lines) throughout the file
         public SQLGameRepository(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.reviewRepository = reviewRepository;
-   
+
 
         }
-
+        // Creates a new method to get all games
         // Uses GameDTO rather than Game so it directly adds to the DTO, but still fetches the data from Game
         public List<GameDTO> GetAllGames()
         {
+            // Returns all games and includes the platform details
             var games = dbContext.Games.Include(x => x.PlatformName).ToList();
             // Creates a new List using the GameDTO so it can be added to later
             var gamesDTOs = new List<GameDTO>();
@@ -64,12 +67,14 @@ namespace UniGames.Data.Repositories
             // Returns the new GameDTO list
             return gamesDTOs;
         }
-
+        
+        // Creates a new method to get games by their ID
         public Game GetGameById(int id)
         {
+            // Returns the game based on its ID and the platform details
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == id);
         }
-
+        
         public Game CreateGame(Game game)
         {
             dbContext.Games.Add(game);
@@ -77,6 +82,7 @@ namespace UniGames.Data.Repositories
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == game.GameID);
 
         }
+        
         // Uses GameDTO rather than Game so it directly adds to the DTO, but still fetches the data from Game
         public List<GameDTO> GetGamesByTitle(string title)
         {
@@ -111,8 +117,6 @@ namespace UniGames.Data.Repositories
             // Returns the new GameDTO list
             return gamesDTOs;
         }
-
-
     }
 }
 

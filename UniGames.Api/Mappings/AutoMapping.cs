@@ -8,6 +8,7 @@ using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Api.Mappings
 {
+    // Uses the built-in AutoMapper Profile to create a new Profile
     public class AutoMapperProfile: Profile 
     {
         public AutoMapperProfile()

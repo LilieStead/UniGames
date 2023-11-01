@@ -8,8 +8,10 @@ using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Data.Repositories
 {
+    // Public Interface For The Controllers
     public interface IGameRepository
     {
+        // For Each Line -- Publicly Accessible Method Through The Interface
         List<GameDTO> GetAllGames();
   
         Game GetGameById(int id);
@@ -17,6 +19,7 @@ namespace UniGames.Data.Repositories
         Game CreateGame(Game game);
 
         List<GameDTO> GetGamesByTitle(string title);
+
 
     }
 }

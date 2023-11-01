@@ -6,5 +6,7 @@ namespace UniGames.Api.Repositories
     {
         User GetUserById(int id);
         User GetUserIDByName(string username);
+
+        User DeleteUser(User user);
     }
 }

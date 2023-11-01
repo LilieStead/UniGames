@@ -1,19 +1,16 @@
 // Uses the URL to get the specific ID
 var urlParams = new URLSearchParams(window.location.search);
 // Gets the ID and stores it in a variable
-var gameID = urlParams.get('id');
+var reviewID = urlParams.get('id');
 // Logs the gameID
-console.log('Game ID:', gameID, "successfully transferred");
+console.log('Review:', reviewID, "successfully transferred");
 
 
-function createReview(event){
+function deleteReview(event){
     event.preventDefault();
 
-    const formData = new FormData(document.getElementById("createreview"));
+    const formData = new FormData(document.getElementById("deletereview"));
 
-    const reviewTitle = formData.get("ReviewTitle");
-    const reviewDesc = formData.get("ReviewDescription");
-    const score = formData.get("Score");
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
 
@@ -36,33 +33,27 @@ function createReview(event){
         })
         .then(data => {
             const userID = data.userId;
-            
-            data.ReviewTitle = reviewTitle;
-            data.ReviewDescription = reviewDesc;
-            data.Score = score;
-            data.UserID = userID;
-            data.GameID = gameID;
-
-            fetch('http://localhost:5116/review', {
-                method: "POST",
+            fetch(`http://localhost:5116/deletereview/${userID}/${reviewID}`, {
+                // Chooses the method used
+                method: "DELETE",
+                // Chooses the format of the content
                 headers: {
                     "Content-Type": "application/json",
                 },
+                // Converts the data to a string
                 body: JSON.stringify(data),
             })
             .then(response => response.json())
             .then(data => {
-                console.log("API Response: ", data)
-                window.location.href = "assets/inc/success.html?success=1";
+                console.log("api response: ", data)
+                window.location.href = "assets/inc/success.html?success=3";
             })
-
             .catch(error => {
-                console.error("Error:", error);
+                console.error(error);
+                window.location.href = "error.html";
             });
-            
-            
+
         })
-        
         .catch(error => {
             console.error("Error:", error);
         });
@@ -71,4 +62,4 @@ function createReview(event){
 }
 
 
-document.getElementById("createreview").addEventListener("submit", createReview);
+document.getElementById("deletereview").addEventListener("submit", deleteReview);

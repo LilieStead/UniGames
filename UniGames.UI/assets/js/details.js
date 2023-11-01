@@ -3,7 +3,9 @@ var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 console.log(gameid);
 
+// Gets the ID of the a tag (link)
 var link = document.getElementById('cReview');
+// When clicked, ensure that this link also brings the gameid through
 link.href = 'createreview.html?id=' + gameid;
 
 
@@ -43,7 +45,7 @@ function createTableRow1(data) {
     // Create table cells
     const titleCell = document.createElement('td');
     const titleLink = document.createElement('a');
-
+    titleLink.className = "rtitlebutton";
 
     titleLink.href = 'details.html?id=' + data.detailID;
     titleLink.textContent = data.gameID;
