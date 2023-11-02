@@ -103,6 +103,44 @@ namespace UniGames.Api.Controllers
             return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
         }
 
+
+        // Uses the HttpPut method
+        [HttpPut]
+        // Defines the Route
+        [Route("/reset-password/{username}/{email}/")]
+        // Public method -- also can be used to generally update a user password rather than saying 'reset'
+        public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
+        {
+            // Uses the GetUserIDByName method from the userRepository
+            var userDM = userRepository.GetUserIDByName(username);
+            // If the username does not exist then
+            if (userDM == null)
+            {
+                // Return a not found error message
+                return NotFound("No User with this username was found, please enter a valid username.");
+            }
+
+            if (userDM.Useremail != email)
+            {
+                return Unauthorized("The entered email address does not match the records within the database");
+            }
+
+            if (userDM.Userphone != phone && phone != null)
+            {
+                return BadRequest("The entered phone number does not match current database records");
+            }
+
+            // Map the userDM to the updatePasswordDTO
+            mapper.Map(updatePasswordDTO, userDM);
+            // And then save the changes
+            dbContext.SaveChanges();
+            // Maps the DM to the DTO
+            var userDTO = mapper.Map<UserDTO>(userDM);
+            // Returns as an output
+            return Ok(userDTO);
+
+        }
+
         // Uses the HttpDelete method
         [HttpDelete]
         // Defines the Route

@@ -1,16 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Api.Repositories
 {
     public class SQLUserRepository : IUserRepository
     {
         private readonly GameDbContext dbContext;
+        private readonly IMapper mapper;
         
-        public SQLUserRepository(GameDbContext dbContext)
+        public SQLUserRepository(GameDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public User GetUserById(int id)

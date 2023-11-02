@@ -480,3 +480,13 @@ form .formerror{
 }
 /* End of Delete User */
 
+/* Delete Username and Password Fields Button */
+#reset-userpass-fields{
+    background-color: red;
+    color: white;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 4px;
+    margin: 8px 0;
+    width: 37%;
+    border: none;
+}

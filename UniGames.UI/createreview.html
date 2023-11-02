@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniGames - Create Review</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/createreview.js"></script>
+    
+    <script src="assets/js/deluserpassfield.js"></script>
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -20,6 +21,7 @@
         <a href="search.html"><p>Search Games</p></a>
         <a href="create.html"><p>Create Game</p></a>
         <a href="createuser.html"><p>Sign Up</p></a>
+        <a href="deleteuser.html"><p>Delete Your Account</p></a>
         <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
     </nav>
     <!-- END OF NAV -->
@@ -59,6 +61,9 @@
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
+                        <input type="button" onclick="resetUser_PassFields();" id="reset-userpass-fields" value="Reset Username and Password Fields">
+                        <!-- Reset Password Button -->
+                        <a href="resetuserpass.html">Reset your password</a>
                     </div>
                 </form>
                 </div>
@@ -78,6 +83,8 @@
     </div>
 </footer>
 <!-- END OF FOOTER -->
+<!-- Script File Moved Here Due To Errors When Loading Before All Content Has Loaded -- Could be moved back. -->
+<script async defer type="text/javascript" src="assets/js/createreview.js"></script>
 </html>
 
 <script>

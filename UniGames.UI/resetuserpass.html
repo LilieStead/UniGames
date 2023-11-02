@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniGames - Create Review</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/deleteuser.js"></script>
+    <script src="assets/js/deluserpassfield.js"></script>
+    <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -29,26 +30,41 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Delete Your Account</h1>
+                    <h1>Make A Review</h1>
                 </div>
                 <div class=" flexcontainer">
-                <form id="deleteuser" action="">
-                    <p class="delwarn">WARNING: If you delete your account, you will lose it forever</p>
+                <form id="resetpassform" action="">
                     <div>
-                        <label for="username">Username: </label>
+                        <label for="username">Username: *</label>
                         <input type="text" name="Username" id="user" placeholder="Enter your username here...">
                         <p class="formerror" id="usernameerror"></p>
                     </div>
                     <div>
-                        <label for="password">Your Password: </label>
-                        <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
+                        <label for="email">Email: *</label>
+                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" name="Userphone" id="userphone" placeholder="Enter your phone number here... (if you added one)">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">New Password: *</label>
+                        <input type="password" name="Userpassword" id="password" placeholder="Enter your new password here...">
                         <p class="formerror" id="passworderror"></p>
+                    </div>
+                    <div>
+                        <label for="passwordnew2">Confirm New Password: *</label>
+                        <input type="password" name="UserPasswordAgain" id="password2" placeholder="Enter your new password again...">
+                        <p class="formerror" id="password2error"></p>
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
-                        <input type="button" onclick="resetUser_PassFields();" id="reset-userpass-fields" value="Reset Username and Password Fields">
                     </div>
+                    <p>* indicates a required field</p>
                 </form>
+                
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
             </div>
@@ -69,14 +85,15 @@
 </html>
 
 <script>
-
 const vusername = document.getElementById('user');
 const vpassword = document.getElementById('password');
+const vpassword2 = document.getElementById('password2');
 
 const usernameerror = document.getElementById('usernameerror');
 const passworderror = document.getElementById('passworderror');
+const passworderror2 = document.getElementById('password2error');
 
-const createreview = document.getElementById('deleteuser');
+const createreview = document.getElementById('resetpassform');
 
 createreview.addEventListener('submit', (e) => {
     usernameerror.innerHTML = '';
@@ -90,7 +107,12 @@ createreview.addEventListener('submit', (e) => {
     // Checks to see if the password contains no text
     if (vpassword.value === '' || vpassword.value === null){
         e.preventDefault();
-        passworderror.innerHTML = 'You must enter your account\'s password';
+        passworderror.innerHTML = 'You must enter your new password';
+    }
+    // Checks to see if the password contains no text
+    if (vpassword2.value === '' || vpassword2.value === null){
+        e.preventDefault();
+        passworderror.innerHTML = 'You must enter your matching password';
     }
 });
 </script>
