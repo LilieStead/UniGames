@@ -18,7 +18,6 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IReviewRepository reviewRepository;
         private readonly IUserRepository userRepository;
-        public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository, IUserRepository userRepository)
 
 
         public ReviewController(GameDbContext dbContext, IMapper mapper, IReviewRepository reviewRepository)
@@ -97,6 +96,25 @@ namespace UniGames.Api.Controllers
             var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
             return Ok(reviewDTO);
         }
+
+        [HttpDelete]
+        [Route ("/deletereview/{userID:int}/{id:int}")]
+        public IActionResult DeleteReview([FromRoute] int userID, int id) {
+            
+            var reviewdm = reviewRepository.GetReviewByID(id);
+            if (reviewdm == null)
+            {
+                return NotFound();
+            }
+            if (reviewdm.UserID != userID)
+            {
+                return BadRequest();
+            }
+
+            var delreview = reviewRepository.DeleteReview(reviewdm);
+            var reviewdto = mapper.Map<ReviewDTO>(delreview);
+            return Ok(reviewdto);
+        } 
 
     }
 }

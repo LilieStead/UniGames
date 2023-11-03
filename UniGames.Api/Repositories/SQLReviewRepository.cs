@@ -59,6 +59,16 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Where(review =>  review.UserName.Username == username).Include(x => x.UserName).ToList();
         }
 
+        public Review DeleteReview(Review review)
+        {
+            var user = dbContext.Review.Where(x => x.UserID == review.UserID).FirstOrDefault(x => x.ReviewID == review.ReviewID);
+            dbContext.Review.Remove(user);
+            dbContext.SaveChanges();
+            return review;
+        }
+
+
+
     }
 }
 

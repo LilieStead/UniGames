@@ -12,8 +12,13 @@ namespace UniGames.Api.Repositories
         public List<Review> GetReviewByUsername(string username);
 
         List<Review> GetReviewByUser(int userId);
-        List<Review> GetScoreByGameID(int id);
+
+        Review DeleteReview(Review review);
+
+        
     }
+
+
 }
 
 

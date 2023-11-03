@@ -101,12 +101,12 @@ namespace UniGames.Api.Controllers
         // Uses the HttpDelete method
         [HttpDelete]
         // Defines the Route
-        [Route("/delete/{id:int}")]
+        [Route("/delete/{username}")]
         // Public method
-        public IActionResult DeleteUser([FromRoute] int id)
+        public IActionResult DeleteUser([FromRoute] string username)
         {
             // Uses the GetUserById() method in userRepository and uses the id
-            var userDM = userRepository.GetUserById(id);
+            var userDM = userRepository.GetUserIDByName(username);
             // If no UserID is present then
             if (userDM == null)
             {
@@ -114,12 +114,13 @@ namespace UniGames.Api.Controllers
                 return NotFound("No User ID is found, please choose a valid ID");
             }
             // Gets the Review based on the User ID -- It only does this if a User ID is found
-            var userReviews = reviewRepository.GetReviewByUser(id);
+            var userReviews = reviewRepository.GetReviewByUser(userDM.UserId);
             // If there are any reviews present in the database then
             if (userReviews.Count > 0)
             {
                 // Return a bad request and tell the user they cannot delete their account because they have previously created reviews for games
                 return BadRequest("Cannot delete this user because they have created reviews for games, please delete these reviews first.");
+
             }
             // If the user does not have a review, delete their account using the method in the userRepository
             var delUser = userRepository.DeleteUser(userDM);
@@ -127,7 +128,6 @@ namespace UniGames.Api.Controllers
             var userDTO = mapper.Map<UserDTO>(delUser);
             // Returns the results
             return Ok(userDTO);
-
         }
     }
 }   

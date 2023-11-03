@@ -274,7 +274,7 @@ label {
 
 
 input[type=password] {
-    width: 50%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -407,7 +407,9 @@ input::-webkit-inner-spin-button {
     padding-top: 0.5em;
 }
 
-
+.centersubmit {
+    min-width: 35% !important;
+}
 
 
 /* MAKE USER */
@@ -479,4 +481,12 @@ form .formerror{
     padding: 12px 20px;
 }
 /* End of Delete User */
+
+/* Details Page */
+
+/*.rtitlebutton:hover:after {
+    content:"Delete Review";
+}*/
+
+
 
