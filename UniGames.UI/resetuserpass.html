@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames - Create Review</title>
+    <title>UniGames - Reset Pasword</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script src="assets/js/deluserpassfield.js"></script>
-    <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
+    
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -30,7 +29,7 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Make A Review</h1>
+                    <h1>Reset Your Password</h1>
                 </div>
                 <div class=" flexcontainer">
                 <form id="resetpassform" action="">
@@ -62,16 +61,32 @@
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
                     </div>
+                    <p id="timeout-countdown"></p>
                     <p>* indicates a required field</p>
                 </form>
                 
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
             </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
+
+
+    <!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
+    <script src="assets/js/deluserpassfield.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/passtimeout.js"></script>
+    <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
 </body>
+
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">
