@@ -582,56 +582,11 @@ form .formerror{
     font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
 }
-=======
+
 /* Details Page */
 
-
-
-/* START OF LOADING */
-.loading{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0.5rem;
-    animation: loading 2.5s ease-in-out infinite;
-  }
-  
-  @keyframes loading {
-    0%,
-    100% {
-      transform: scale(0.2);
-      background-color: #1DD577;
-    }
-    42% {
-      background-color: #7D53F8;
-    }
-    50% {
-      transform: scale(1);
-      background-color: #1db9d5;
-    }
-  }
-  
-  
- .one{
-    animation-delay:0.0s;
-  }
-  .two{
-    animation-delay:0.2s;
-  }
-  .three{
-    animation-delay:0.4s;
-  }
-  .four{
-    animation-delay:0.8s;
-  }
-  .five{
-    animation-delay:1.0s;
-  } 
-
-#loadingcontainer{
-    margin-top: 9rem;
-    margin-bottom: 9rem;
-}
+/*.rtitlebutton:hover:after {
+    content:"Delete Review";
+}*/
 
 /* END OF  LOADING*/
