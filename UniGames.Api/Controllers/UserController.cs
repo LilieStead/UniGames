@@ -2,10 +2,15 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
+using System.Numerics;
+using System;
+using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
+using System.Net;
 
 namespace UniGames.Api.Controllers
 {
@@ -41,26 +46,31 @@ namespace UniGames.Api.Controllers
             return Ok(userDTO);
         }
 
+        // Uses the HttpGet Method
         [HttpGet]
+        // Decides the route, using a username and password
         [Route("{username}/{password}")]
+        // Creates a new Method
         public IActionResult GetUserIdByName([FromRoute] string password, string username)
         {
+            // Selects the GetUserIDByName from the userRepository and uses the username
             var userDM = userRepository.GetUserIDByName(username);
 
-
-
+            // If the username is invalid or null then
             if (userDM == null)
             {
+                // Return that no user has been found
                 return NotFound();
             }
-
+            // If the password for the username does not match the database records then
             if (userDM.Userpassword != password)
             {
+                // Return that the user is unauthorised
                 return Unauthorized();
             }
-
+            // Maps the DM to the DTO
             var userDTO = mapper.Map<UserDTO>(userDM);
-
+            // Returns the correct user details
             return Ok(userDTO);
 
         }
@@ -96,6 +106,44 @@ namespace UniGames.Api.Controllers
             };
 
             return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
+        }
+
+
+        // Uses the HttpPut method
+        [HttpPut]
+        // Defines the Route
+        [Route("/reset-password/{username}/{email}/{phone?}")]
+        // Public method -- also can be used to generally update a user password rather than saying 'reset'
+        public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
+        {
+            // Uses the GetUserIDByName method from the userRepository
+            var userDM = userRepository.GetUserIDByName(username);
+            // If the username does not exist then
+            if (userDM == null)
+            {
+                // Return a not found error message
+                return BadRequest("No User Found");
+            }
+            
+            if (userDM.Useremail != email)
+            {
+               
+                return Unauthorized("Email address does not match database records");
+            }
+            if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
+            {
+                return StatusCode(409, "Conflict With Incorrect User Phone Number");
+              
+            }
+
+            // Map the userDM to the updatePasswordDTO
+            mapper.Map(updatePasswordDTO, userDM);
+            // And then save the changes
+            dbContext.SaveChanges();
+            // Maps the DM to the DTO
+            var userDTO = mapper.Map<UserDTO>(userDM);
+            // Returns as an output
+            return Ok(userDTO);
         }
 
         // Uses the HttpDelete method

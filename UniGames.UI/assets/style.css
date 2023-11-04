@@ -343,9 +343,36 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+#passworderror a{
+    text-decoration: none;
+    color: blue;
+}
+#passworderror a:hover{
+    text-decoration: none;
+    color: red;
+}
+
+#crPRButton{
+    text-decoration: none;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 1.4em;
+    width: 30%;
+    text-align: center;
+    background-color: #3c3f44;
+    color: white;
+    padding: 8px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+
+
+
+/* End of Create Review Form
   
 
-/* Error Page */
+/* Error Page -- WILL BE REDUNDANT AT SOME POINT IN THE FUTURE */
 #error-message{
     margin: auto;
     text-align: center;
@@ -482,6 +509,80 @@ form .formerror{
 }
 /* End of Delete User */
 
+
+/* Delete Username and Password Fields Button */
+#reset-userpass-fields{
+    background-color: red;
+    color: white;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 4px;
+    margin: 8px 0;
+    width: 50%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 0.3rem;
+}
+
+/* End of Delete Username and Password Fields Button */
+
+/* Start of Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index:999;
+    justify-content: center;
+    align-items: center;
+    font-family: Unidays-Book;
+}
+
+.popup-content{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: Unidays-Book;
+}
+
+
+#close-popup{
+    display: block;
+    margin: 15px auto;
+    padding: 10px 20px;
+    background-color: #7D53F8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Unidays-Book;
+    color: white;
+}
+/* End of Popup */
+
+
+/* Reset User Password */
+#requiredfield{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#resetpassform input[type=text]{
+    width: 100%;
+}
+
+/* End of Reset User Password */
+
+
+/* Start of Password Timeout */
+#timeout-countdown{
+    color: red;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+=======
 /* Details Page */
 
 
