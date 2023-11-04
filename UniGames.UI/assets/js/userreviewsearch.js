@@ -8,13 +8,11 @@ const apiUrl = `http://localhost:5116/userreview/${username}`;
 fetch(apiUrl)
   .then(response => {
     if (!response.ok) {
-      document.getElementById('loadingcontainer').style.display = 'none';
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return response.json();
   })
   .then(data => {
-    document.getElementById('loadingcontainer').style.display = 'none';
     const userreviewTableBody = document.querySelector('#UserreviewTable tbody');
 
     // Loop through the array of games and append them to the table
