@@ -98,6 +98,25 @@ namespace UniGames.Api.Controllers
             return Ok(reviewDTO);
         }
 
+        [HttpDelete]
+        [Route ("/deletereview/{userID:int}/{id:int}")]
+        public IActionResult DeleteReview([FromRoute] int userID, int id) {
+            
+            var reviewdm = reviewRepository.GetReviewByID(id);
+            if (reviewdm == null)
+            {
+                return NotFound();
+            }
+            if (reviewdm.UserID != userID)
+            {
+                return BadRequest();
+            }
+
+            var delreview = reviewRepository.DeleteReview(reviewdm);
+            var reviewdto = mapper.Map<ReviewDTO>(delreview);
+            return Ok(reviewdto);
+        } 
+
     }
 }
 

@@ -14,6 +14,7 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
     .then(response => response.json())
     .then(data => {
         // Select the table body element where game data will be displayed
+        document.getElementById('loadingcontainer').style.display = 'none';
         const gameTableBody = document.querySelector('#gameTable tbody');
 
         // Check if the 'data' is an array (for multiple games) or a single game object
@@ -34,6 +35,7 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
     })
     .catch(error => {
         // Handle errors when fetching game data
+        document.getElementById('loadingcontainer').style.display = 'none';
         console.error('Error fetching game data:', error);
     });
 
@@ -45,7 +47,7 @@ function createTableRow1(data) {
     // Create table cells
     const titleCell = document.createElement('td');
     const titleLink = document.createElement('a');
-
+    titleLink.className = "rtitlebutton";
 
     titleLink.href = 'details.html?id=' + data.detailID;
     titleLink.textContent = data.gameID;
