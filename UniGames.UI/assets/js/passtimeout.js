@@ -2,6 +2,7 @@
 let passAttempts = 0;
 const maxAttempts = 5;
 const timeOut = 120000;
+// Interval in which the function will run (for a timer to work)
 let interval;
 
 // Function to handle password timeouts
@@ -10,8 +11,11 @@ function passwordTimeout(){
     // Check to see if a timout is currently active
     const curTime = sessionStorage.getItem('passwordTimeout');
     if (curTime){
+        // Converts the current time left into a base-10 integer
         const endTime = parseInt(curTime, 10);
+        // Specifies if the cooldown is actually active if both are true
         if (!isNaN(endTime) && Date.now() < endTime){
+            // Maximum attempts have been reached
             passAttempts = maxAttempts;
             // Calculate the remaining time
             const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
@@ -32,26 +36,28 @@ function passwordTimeout(){
             // Add the placeholders back in
             document.getElementById('password').placeholder = 'Enter your new password here...';
             document.getElementById('password2').placeholder = 'Enter your new password again';
+
+            document.getElementById('passworderror').innerHTML = '';
             // Remove the localStorage item for disabling fields
             localStorage.removeItem('passwordFieldsDisabled');
         }
     }
-
     const newPassActual = document.getElementById('password').value;
     const newPassConfirm = document.getElementById('password2').value;
-
-
-    
-
+    // If both of the passwords don't match with each other then
     if (newPassActual !== newPassConfirm){
+        // Log an error to the console to say the passwords do not match
         console.error('Passwords do not match');
+        // Add 1 to passAttempts
         passAttempts++;
+        // Logs the increasing counter to the console
         console.log("Counter added." , '-', passAttempts);
+        // If the passAttempts are equal or more than the maxAttempts then
         if (passAttempts >= maxAttempts){
+            // Add the timeout duration to the current time
             const endTime = Date.now() + timeOut;
+            // Set a new item in sessionStorage called passwordTimeout with the current time provided 
             sessionStorage.setItem('passwordTimeout', endTime.toString());
-            
-            //alert('Maximum login attempts reached, please wait 2 minutes and try again.');
             
             // Remembers the disabled state of the inputs
             localStorage.setItem('passwordFieldsDisabled', 'true');
@@ -67,11 +73,14 @@ function passwordTimeout(){
             // Removes the placeholders
             document.getElementById('password').placeholder = '';
             document.getElementById('password2').placeholder = '';
-
+            // Sets the password error to tell the user to wait for the cooldown to expire
+            document.getElementById('passworderror').innerHTML = 'Please Wait For The Cooldown To Expire';
+            
 
             // Display the countdown message
             const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
             document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
+            // Utilises the custom popup to tell the user they have reached the max attempts
             customPopup(`Maximum login attempts reached, please wait 2 minutes and try again.`);
             interval = setInterval(passwordTimeout, 1000);
         }
@@ -82,7 +91,6 @@ function passwordTimeout(){
         localStorage.removeItem('passwordFieldsDisabled');
         
     }
-
     
 }
 

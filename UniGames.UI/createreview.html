@@ -63,7 +63,7 @@
                         <input id="reviewbtn"type="submit" value="submit">
                         <input type="button" onclick="resetUser_PassFields();" id="reset-userpass-fields" value="Reset Username and Password Fields">
                         <!-- Reset Password Button -->
-                        <a href="resetuserpass.html">Reset your password</a>
+                        <a id="crPRButton" href="resetuserpass.html">Reset your password</a>
                     </div>
                 </form>
                 </div>
@@ -87,7 +87,9 @@
 <script async defer type="text/javascript" src="assets/js/createreview.js"></script>
 </html>
 
-<script>
+<!--<script>
+let curFail = false;
+
 const vtitle = document.getElementById('rtitle');
 const vdescription = document.getElementById('rdesc');
 const vscore = document.getElementById('score');
@@ -115,32 +117,41 @@ createreview.addEventListener('submit', (e) => {
     if (vtitle.value === '' || vtitle.value === null) {
         e.preventDefault();
         titleerror.innerHTML = 'Your review needs a title';
+        curFail = true;
     }
     // Checks to see if the description contains no text
     if (vdescription.value === '' || vdescription.value === null) {
         e.preventDefault();
         descriptionerror.innerHTML = 'You need to provide a description';
-        // Checks if the length of the description is less than 20 or higher than 500
+        curFail = true;
+    // Checks if the length of the description is less than 20 or higher than 500
     } else if (vdescription.value.length < 20 || vdescription.value.length > 500) {
         e.preventDefault();
         descriptionerror.innerHTML = 'A description needs to be between 20 - 500 characters';
+        curFail = true;
     }
     // Checks to see if the number is valid or less than 0 or bigger than 100
     if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
         e.preventDefault();
         scoreerror.innerHTML = 'Your score needs to be between 0 and 100';
+        curFail = true;
     }else{
         scoreerror.innerHTML = (null);
+        curFail = true;
     }
     // Checks to see if the username is contains no text
     if (vusername.value === '' || vusername.value === null) {
         e.preventDefault();
         usernameerror.innerHTML = 'You must enter your username';
+        curFail = true;
     }
     // Checks to see if the password contains no text
     if (vpassword.value === '' || vpassword.value === null){
         e.preventDefault();
         passworderror.innerHTML = 'You must enter your account\'s password';
+        curFail = true;
     }
+
+    
 });
-</script>
+</script>-->

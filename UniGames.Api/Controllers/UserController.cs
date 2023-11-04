@@ -2,10 +2,15 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
+using System.Numerics;
+using System;
+using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
+using System.Net;
 
 namespace UniGames.Api.Controllers
 {
@@ -107,7 +112,7 @@ namespace UniGames.Api.Controllers
         // Uses the HttpPut method
         [HttpPut]
         // Defines the Route
-        [Route("/reset-password/{username}/{email}/")]
+        [Route("/reset-password/{username}/{email}/{phone?}")]
         // Public method -- also can be used to generally update a user password rather than saying 'reset'
         public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
         {
@@ -117,17 +122,18 @@ namespace UniGames.Api.Controllers
             if (userDM == null)
             {
                 // Return a not found error message
-                return NotFound("No User with this username was found, please enter a valid username.");
+                return BadRequest("No User Found");
             }
-
+            
             if (userDM.Useremail != email)
             {
-                return Unauthorized("The entered email address does not match the records within the database");
+               
+                return Unauthorized("Email address does not match database records");
             }
-
-            if (userDM.Userphone != phone && phone != null)
+            if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
             {
-                return BadRequest("The entered phone number does not match current database records");
+                return StatusCode(409, "Conflict With Incorrect User Phone Number");
+              
             }
 
             // Map the userDM to the updatePasswordDTO
@@ -138,7 +144,6 @@ namespace UniGames.Api.Controllers
             var userDTO = mapper.Map<UserDTO>(userDM);
             // Returns as an output
             return Ok(userDTO);
-
         }
 
         // Uses the HttpDelete method

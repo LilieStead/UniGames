@@ -41,12 +41,12 @@
                     <div>
                         <label for="email">Email: *</label>
                         <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
-                        <p class="formerror" id="usernameerror"></p>
+                        <p class="formerror" id="useremailerror"></p>
                     </div>
                     <div>
                         <label for="phone">Phone Number: </label>
                         <input type="text" name="Userphone" id="userphone" placeholder="Enter your phone number here... (if you added one)">
-                        <p class="formerror" id="usernameerror"></p>
+                        <p class="formerror" id="userphoneerror"></p>
                     </div>
                     <div>
                         <label for="password">New Password: *</label>
@@ -56,13 +56,14 @@
                     <div>
                         <label for="passwordnew2">Confirm New Password: *</label>
                         <input type="password" name="UserPasswordAgain" id="password2" placeholder="Enter your new password again...">
-                        <p class="formerror" id="password2error"></p>
+                        <p class="formerror" id="passworderror2"></p>
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
                     </div>
                     <p id="timeout-countdown"></p>
-                    <p>* indicates a required field</p>
+                    <p id="requiredfield">* indicates a required field</p>
+                    <h2 id="error-handling"></h1>
                 </form>
                 
                 </div>
@@ -98,36 +99,3 @@
 </footer>
 <!-- END OF FOOTER -->
 </html>
-
-<script>
-const vusername = document.getElementById('user');
-const vpassword = document.getElementById('password');
-const vpassword2 = document.getElementById('password2');
-
-const usernameerror = document.getElementById('usernameerror');
-const passworderror = document.getElementById('passworderror');
-const passworderror2 = document.getElementById('password2error');
-
-const createreview = document.getElementById('resetpassform');
-
-createreview.addEventListener('submit', (e) => {
-    usernameerror.innerHTML = '';
-    passworderror.innerHTML = '';
-
-    // Checks to see if the username is contains no text
-    if (vusername.value === '' || vusername.value === null) {
-        e.preventDefault();
-        usernameerror.innerHTML = 'You must enter your username';
-    }
-    // Checks to see if the password contains no text
-    if (vpassword.value === '' || vpassword.value === null){
-        e.preventDefault();
-        passworderror.innerHTML = 'You must enter your new password';
-    }
-    // Checks to see if the password contains no text
-    if (vpassword2.value === '' || vpassword2.value === null){
-        e.preventDefault();
-        passworderror.innerHTML = 'You must enter your matching password';
-    }
-});
-</script>

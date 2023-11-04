@@ -343,9 +343,36 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+#passworderror a{
+    text-decoration: none;
+    color: blue;
+}
+#passworderror a:hover{
+    text-decoration: none;
+    color: red;
+}
+
+#crPRButton{
+    text-decoration: none;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 1.4em;
+    width: 30%;
+    text-align: center;
+    background-color: #3c3f44;
+    color: white;
+    padding: 8px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+
+
+
+/* End of Create Review Form
   
 
-/* Error Page */
+/* Error Page -- WILL BE REDUNDANT AT SOME POINT IN THE FUTURE */
 #error-message{
     margin: auto;
     text-align: center;
@@ -487,8 +514,10 @@ form .formerror{
     font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 4px;
     margin: 8px 0;
-    width: 37%;
+    width: 50%;
+    word-wrap: break-word;
     border: none;
+    cursor: pointer;
 }
 
 /* End of Delete Username and Password Fields Button */
@@ -530,3 +559,12 @@ form .formerror{
 }
 
 /* End of Popup */
+
+
+/* Reset User Password */
+#requiredfield{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+/* End of Reset User Password */
