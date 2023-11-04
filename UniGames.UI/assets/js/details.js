@@ -1,12 +1,12 @@
-// Extract the 'id' query parameter from the current page's URL
+// // Extract the 'id' query parameter from the current page's URL
 var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 console.log(gameid);
 
-// Gets the ID of the a tag (link)
-var link = document.getElementById('cReview');
-// When clicked, ensure that this link also brings the gameid through
-link.href = 'createreview.html?id=' + gameid;
+// // Gets the ID of the a tag (link)
+// var link = document.getElementById('cReview');
+// // When clicked, ensure that this link also brings the gameid through
+// link.href = 'createreview.html?id=' + gameid;
 
 
 // Fetch game data from the server using the extracted 'gameid'
