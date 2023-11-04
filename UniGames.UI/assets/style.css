@@ -515,9 +515,10 @@ form .formerror{
     border-radius: 4px;
     margin: 8px 0;
     width: 50%;
-    word-wrap: break-word;
     border: none;
     cursor: pointer;
+    text-align: center;
+    padding-top: 0.3rem;
 }
 
 /* End of Delete Username and Password Fields Button */
@@ -550,14 +551,13 @@ form .formerror{
     display: block;
     margin: 15px auto;
     padding: 10px 20px;
-    background-color: #0074cc;
+    background-color: #7D53F8;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-family: Unidays-Book;
     color: white;
 }
-
 /* End of Popup */
 
 
@@ -566,5 +566,16 @@ form .formerror{
     font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+#resetpassform input[type=text]{
+    width: 100%;
+}
 
 /* End of Reset User Password */
+
+
+/* Start of Password Timeout */
+#timeout-countdown{
+    color: red;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
