@@ -223,6 +223,7 @@ function resetPassword(event){
         }
         else{
             console.log('Error: ', response.status);
+            inHTMLError.textContent = 'An unexpected error occurred.';
         }
     })
     .then(data => {
