@@ -259,7 +259,7 @@ label {
 }
 
     input[type=text]{
-    width: 50%;
+    min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -274,7 +274,7 @@ label {
 
 
 input[type=password] {
-    width: 100%;
+    min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -287,7 +287,7 @@ input[type=password] {
 
   input[type=submit] {
 
-    max-width: 15%;
+    min-width: 15%;
     background-color: #4CAF50;
     color: #FFFFFF;
     padding: 14px 20px;
@@ -315,6 +315,56 @@ form .formerror{
     text-align: center;
 }
 
+
+input[type=date]{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+input[type=datetime-local]{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+select{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+.searchform{
+    max-width: 70%;
+    margin-left: 2rem;
+}
+
+.searchform form input[type=submit]{
+    min-width: 30%;
+    max-width: 30%;
+}
+
+.searchform form input[type="text"]{
+    min-width: 100%;
+}
   
 
 /* Create Review Form */
@@ -446,7 +496,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=reset] {
-    max-width: 30%;
+    min-width: 30%;
     background-color: #4CAF50;
     color: #FFFFFF;
     padding: 14px 20px;
@@ -459,14 +509,6 @@ input[type=reset] {
     font-size: 1rem;
     transition: 0.3s;
     background-color: #bd0000;
-}
-
-
-input[type=reset]:hover {
-    padding: 1rem;
-    transition: 0.3s;
-    color: #FF0000;
-    font-family:Unidays-Book, sans-serif;
 }
 
 form .formerror{
@@ -582,11 +624,55 @@ form .formerror{
     font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
 }
-
 /* Details Page */
 
-/*.rtitlebutton:hover:after {
-    content:"Delete Review";
-}*/
+
+
+/* START OF LOADING */
+.loading{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0.5rem;
+    animation: loading 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes loading {
+    0%,
+    100% {
+      transform: scale(0.2);
+      background-color: #1DD577;
+    }
+    42% {
+      background-color: #7D53F8;
+    }
+    50% {
+      transform: scale(1);
+      background-color: #1db9d5;
+    }
+  }
+  
+  
+ .one{
+    animation-delay:0.0s;
+  }
+  .two{
+    animation-delay:0.2s;
+  }
+  .three{
+    animation-delay:0.4s;
+  }
+  .four{
+    animation-delay:0.8s;
+  }
+  .five{
+    animation-delay:1.0s;
+  } 
+
+#loadingcontainer{
+    margin-top: 9rem;
+    margin-bottom: 9rem;
+}
 
 /* END OF  LOADING*/

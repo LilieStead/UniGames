@@ -3,6 +3,7 @@ fetch('http://localhost:5116/game')
     .then(response => response.json())
     .then(data => {
         const gameTableBody = document.querySelector('#gameTable tbody');
+        document.getElementById('loadingcontainer').style.display = 'none';
 
         // Loop through the array of games and append them to the table
         data.forEach(game => {
@@ -11,12 +12,15 @@ fetch('http://localhost:5116/game')
         });
     })
     .catch(error => {
+        document.getElementById('loadingcontainer').style.display = 'none';
         console.error('Error fetching game data:', error);
     });
 
     function createTableRow(game) {
+        
       const row = document.createElement('tr');
       row.classList.add('game'); // Adding a class to the table row
+      
   
       // Create table cells
       const titleCell = document.createElement('td');
@@ -45,3 +49,4 @@ fetch('http://localhost:5116/game')
       return row;
 
     }
+
