@@ -132,6 +132,7 @@ namespace UniGames.Api.Controllers
             }
             if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
             {
+                // StatusCode 409 typically means a Conflict has occurred
                 return StatusCode(409, "Conflict With Incorrect User Phone Number");
               
             }

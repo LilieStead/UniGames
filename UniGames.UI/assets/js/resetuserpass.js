@@ -120,7 +120,6 @@ function resetPassword(event){
     const userName = formDataUser.get('Username');
     const userEmail = formDataUser.get('Useremail');
     const userPhone = formDataUser.get('Userphone');
-    //const oldpass = formData.get('UserpasswordOld')
     const newPassActual = formDataUser.get('Userpassword');
     const newPass2 = formDataUser.get('UserPasswordAgain');
 
@@ -162,7 +161,6 @@ function resetPassword(event){
     }
 
 
-
     if (newPassActual !== newPass2){
         const error_message = document.getElementById('passworderror2');
             
@@ -184,7 +182,8 @@ function resetPassword(event){
         Userpassword: newPassActual
     }
     const inHTMLError = document.getElementById('error-handling');
-
+    // Chooses the correct URL based on the condition of the phone number (if it is present in the data or not)
+    // ? means it is present, : means it is not -- This chooses the API endpoint to use
     const apiURL = userPhone
     ? `http://localhost:5116/reset-password/${userName}/${userEmail}/${userPhone}`
     : `http://localhost:5116/reset-password/${userName}/${userEmail}`
@@ -196,9 +195,7 @@ function resetPassword(event){
         },
         body: JSON.stringify(data),
     })
-    
     .then(response => {
-        
         if (response.status === 200){
             console.log('User Authenticated');
             inHTMLError.textContent = '';
@@ -229,10 +226,7 @@ function resetPassword(event){
     .then(data => {
         console.log('API Response: ', data);
         // Add code to go to success page or update current page with success
-        // Currently causes issues -- Similar fix needed alongside createreview.js
         window.location.href = "assets/inc/success.html?success=5";
-        
-        
     })
     .catch(error => {
         console.error('Error: ', error);

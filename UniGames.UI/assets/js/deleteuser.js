@@ -91,7 +91,7 @@ function deleteUser(event){
                     // Log to the console that the user has created reviews
                     console.log("User Has Previously Created Reviews");
                     // Returns a rejection for the provided reason
-                    return Promise.reject("User Has Previously Created Reviews, Denied From Deleting");
+                    return Promise.reject("Error: 400 - User Has Previously Created Reviews, Denied From Deleting");
                 } else {
                     // Returns an error in the console based on the response status
                     console.error("error", response.status);
@@ -105,10 +105,10 @@ function deleteUser(event){
                 
             })
             .catch(error => {
-                if (error === "User Has Previously Created Reviews, Denied From Deleting") {
-                    // When reviews are present, send the user to an error page to tell them
+                if (error.includes("Error: 400")) {
+                    // When reviews are present, present a popup to tell the user
                     // They need to delete existing reviews to delete their account
-                    window.location.href = "error.html?error=3";
+                    customPopup("You have previously created reviews, please remove all reviews and then try again")
                 } else {
                     // Logs the error to the console
                     console.error("Error:", error);
