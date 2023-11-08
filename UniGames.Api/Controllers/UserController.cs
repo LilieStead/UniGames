@@ -90,14 +90,23 @@ namespace UniGames.Api.Controllers
                 Userdob = CreateUserDTO.Userdob,
                 Userpassword = CreateUserDTO.Userpassword,
             };
-
+            //used to look for username
             var userExists = userRepository.GetUserIDByName(UsersDM.Username);
+            var userEmail = userRepository.GetAllUsers().Where(x => x.Useremail == UsersDM.Useremail);
 
             // if statment looks for if the username exites in the databse
             if (userExists != null)
             {
                 //if it is then return bad request and error code to the front end and do not allow the methord to continue
                 return BadRequest("Username is taken");
+            }
+
+            foreach (var Users in userEmail) { 
+                if (Users != null)
+                {
+                    return StatusCode(409, "Email is already being used");
+                }
+                
             }
 
             dbContext.User.Add(UsersDM);

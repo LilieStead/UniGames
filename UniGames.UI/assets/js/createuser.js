@@ -115,6 +115,9 @@ function CreateUsers(event){
         if(response.status === 400){
             console.log("username exists");
             return Promise.reject("error : 400, Username is taken");
+        }else if(response.status === 409){
+            console.log("Email is already being used");
+            return Promise.reject("error : 409, Email is already being used");
         }
          response.json()
     })
@@ -126,8 +129,10 @@ function CreateUsers(event){
     .catch(error=> {
         console.error('Error: ', error);
         if(error.includes("error : 400")){
-            errorhandling.innerHTML = ("Username is taken");
-        }
+            customPopup("Username has already been taken please find another one.");
+        }else if (error.includes("error : 409")){{
+            customPopup("Current email is already being used");
+        }}
     });
 }
 

@@ -6,6 +6,7 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="assets/style.css">
     <script async defer type="text/javascript" src="assets/js/createuser.js"></script>
+    
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 
@@ -43,43 +44,43 @@
                         <div>
                             <label for="Userfname">First Name: </label>
                             <input type="text" id="Userfname" name="FirstName" maxlength="50">
-                            <p id="firstnameerror"></p>
+                            <p id="firstnameerror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Userlname">Last Name: </label>
                             <input type="text" id="Userlname" name="LastName" maxlength="50">
-                            <p id="lastnameerror"></p>
+                            <p id="lastnameerror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Username">Username: </label>
                             <input type="text" id="Username" name="UserName" maxlength="50">
-                            <p id="usernameerror"></p>
+                            <p id="usernameerror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Useremail">Email Address: </label>
                             <input type="text" id="Useremail" name="Email" maxlength="50">
-                            <p id="emailerror"></p>
+                            <p id="emailerror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Userphone">Phone Number: </label>
                             <input type="text" id="Userphone" name="Phone" maxlength="15">
-                            <p id="phoneerror"></p>
+                            <p id="phoneerror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Userdob">Date of Birth: </label>
                             <input type="date" id="Userdob" name="userdob">
-                            <p id="doberror"></p>
+                            <p id="doberror" class="formerror"></p>
                         </div>
 
                         <div>
                             <label for="Userpassword">Password: </label>
                             <input type="password" name="Password" id="Userpassword" maxlength="50" min="8">
-                            <p id="passworderror"></p>
+                            <p id="passworderror" class="formerror"></p>
                         </div>
 
                         <input type="submit" value="Submit">
@@ -92,7 +93,13 @@
         </div>
     </div>
     <!-- Main Content -->
-
+    <div class="popup" id="custom-popup">
+        <div class="popup-content">
+            <span id="popup-message"></span>
+            <button id="close-popup">Close</button>
+        </div>
+    </div>
+    <script async defer type="text/javascript" src="assets/js/popup.js"></script>
 </body>
 
 <!-- Footer -->

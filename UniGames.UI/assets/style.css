@@ -590,6 +590,8 @@ form .formerror{
     border-radius: 5px;
     text-align: center;
     font-family: Unidays-Book;
+    min-width: 30rem;
+    max-width: 30rem;
 }
 
 
