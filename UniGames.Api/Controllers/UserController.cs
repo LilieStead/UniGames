@@ -79,33 +79,41 @@ namespace UniGames.Api.Controllers
         [HttpPost]
         public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUserDTO)
         {
-            var UsersDM = new User
+            if (ModelState.IsValid)
             {
-                Userfname = CreateUserDTO.Userfname,
-                Userlname = CreateUserDTO.Userlname,
-                Useremail = CreateUserDTO.Useremail,
-                Username = CreateUserDTO.Username,
-                Userphone = CreateUserDTO.Userphone,
-                Userdob = CreateUserDTO.Userdob,
-                Userpassword = CreateUserDTO.Userpassword,
-            };
+                var UsersDM = new User
+                {
+                    Userfname = CreateUserDTO.Userfname,
+                    Userlname = CreateUserDTO.Userlname,
+                    Useremail = CreateUserDTO.Useremail,
+                    Username = CreateUserDTO.Username,
+                    Userphone = CreateUserDTO.Userphone,
+                    Userdob = CreateUserDTO.Userdob,
+                    Userpassword = CreateUserDTO.Userpassword,
+                };
 
-            dbContext.User.Add(UsersDM);
-            dbContext.SaveChanges();
+                dbContext.User.Add(UsersDM);
+                dbContext.SaveChanges();
 
-            var CreateUsersDTO = new UserDTO
+                var CreateUsersDTO = new UserDTO
+                {
+                    UserId = UsersDM.UserId,
+                    Userfname = UsersDM.Userfname,
+                    Userlname = UsersDM.Userlname,
+                    Useremail = UsersDM.Useremail,
+                    Username = UsersDM.Username,
+                    Userphone = UsersDM.Userphone,
+                    Userdob = UsersDM.Userdob,
+                    Userpassword = UsersDM.Userpassword,
+                };
+
+                return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
+            }
+            else
             {
-                UserId = UsersDM.UserId,
-                Userfname = UsersDM.Userfname,
-                Userlname = UsersDM.Userlname,
-                Useremail = UsersDM.Useremail,
-                Username = UsersDM.Username,
-                Userphone = UsersDM.Userphone,
-                Userdob = UsersDM.Userdob,
-                Userpassword = UsersDM.Userpassword,
-            };
-
-            return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
+                return StatusCode(422, ModelState);
+            }
+            
         }
 
 
@@ -116,35 +124,43 @@ namespace UniGames.Api.Controllers
         // Public method -- also can be used to generally update a user password rather than saying 'reset'
         public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
         {
-            // Uses the GetUserIDByName method from the userRepository
-            var userDM = userRepository.GetUserIDByName(username);
-            // If the username does not exist then
-            if (userDM == null)
+            if (ModelState.IsValid)
             {
-                // Return a not found error message
-                return BadRequest("No User Found");
+                // Uses the GetUserIDByName method from the userRepository
+                var userDM = userRepository.GetUserIDByName(username);
+                // If the username does not exist then
+                if (userDM == null)
+                {
+                    // Return a not found error message
+                    return BadRequest("No User Found");
+                }
+
+                if (userDM.Useremail != email)
+                {
+
+                    return Unauthorized("Email address does not match database records");
+                }
+                if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
+                {
+                    // StatusCode 409 typically means a Conflict has occurred
+                    return StatusCode(409, "Conflict With Incorrect User Phone Number");
+
+                }
+
+                // Map the userDM to the updatePasswordDTO
+                mapper.Map(updatePasswordDTO, userDM);
+                // And then save the changes
+                dbContext.SaveChanges();
+                // Maps the DM to the DTO
+                var userDTO = mapper.Map<UserDTO>(userDM);
+                // Returns as an output
+                return Ok(userDTO);
+            }
+            else
+            {
+                return StatusCode(422, ModelState);
             }
             
-            if (userDM.Useremail != email)
-            {
-               
-                return Unauthorized("Email address does not match database records");
-            }
-            if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
-            {
-                // StatusCode 409 typically means a Conflict has occurred
-                return StatusCode(409, "Conflict With Incorrect User Phone Number");
-              
-            }
-
-            // Map the userDM to the updatePasswordDTO
-            mapper.Map(updatePasswordDTO, userDM);
-            // And then save the changes
-            dbContext.SaveChanges();
-            // Maps the DM to the DTO
-            var userDTO = mapper.Map<UserDTO>(userDM);
-            // Returns as an output
-            return Ok(userDTO);
         }
 
         // Uses the HttpDelete method

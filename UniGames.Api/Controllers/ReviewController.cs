@@ -63,7 +63,6 @@ namespace UniGames.Api.Controllers
                 return NotFound();
             }
 
-
             var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
             return Ok(reviewDTO);
         }
@@ -75,15 +74,23 @@ namespace UniGames.Api.Controllers
         // Public Method
         public IActionResult CreateReview([FromBody] CreateReviewDTO createReviewDTO)
         {
-            // Map DTO to DM
-            var reviewDM = mapper.Map<Review>(createReviewDTO);
-            // Execute the Create Review Method
-            var crreview = reviewRepository.CreateReview(reviewDM);
+            if (ModelState.IsValid)
+            {
+                // Map DTO to DM
+                var reviewDM = mapper.Map<Review>(createReviewDTO);
+                // Execute the Create Review Method
+                var crreview = reviewRepository.CreateReview(reviewDM);
 
-            // Map DM to DTO
-            var reviewDTO = mapper.Map<ReviewDTO>(crreview);
-            // Uses the GetReviewByID to match the new review's ID and pull it and all review details through the output
-            return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
+                // Map DM to DTO
+                var reviewDTO = mapper.Map<ReviewDTO>(crreview);
+                // Uses the GetReviewByID to match the new review's ID and pull it and all review details through the output
+                return CreatedAtAction("GetReviewByID", new { id = reviewDTO.ReviewID }, reviewDTO);
+            }
+            else
+            {
+                return StatusCode(422, ModelState);
+            }
+            
 
         }
 

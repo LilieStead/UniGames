@@ -61,9 +61,13 @@
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
-                        <a onclick="resetUser_PassFields();" id="reset-userpass-fields">Reset Username and <br> Password Fields</a>
+                        <a onclick="resetUser_PassFields();" class="reset-fields">Reset Username and <br> Password Fields</a>
+                        <!-- Reset Other Fields Button -->
+                        <a class="reset-fields" id="crOTHButton" onclick="resetReviewFields()">Reset Review</a>
+                        
                         <!-- Reset Password Button -->
-                        <a id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                        
                     </div>
                 </form>
                 </div>

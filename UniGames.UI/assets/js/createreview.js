@@ -117,7 +117,14 @@ function createReview(event){
                 },
                 body: JSON.stringify(data),
             })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 200){
+                    response.json()
+                }
+                else if (response.status === 422){
+                    return Promise.reject("Error: 422 - Required Field has been bypassed")
+                }
+            })
             .then(data => {
                 console.log("API Response: ", data)
                 window.location.href = "assets/inc/success.html?success=1";

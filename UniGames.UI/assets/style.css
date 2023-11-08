@@ -310,7 +310,6 @@ form .formerror{
 
 #reviewbtn{
     max-width: 40% !important;
-    min-width: 40% !important;
     min-height: 10%;
     text-align: center;
 }
@@ -511,7 +510,7 @@ form .formerror{
 
 
 /* Delete Username and Password Fields Button */
-#reset-userpass-fields{
+.reset-fields{
     background-color: red;
     color: white;
     font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -525,6 +524,19 @@ form .formerror{
 }
 
 /* End of Delete Username and Password Fields Button */
+
+/* Start of Delete Fields Button (Different For Each Form) */
+#crOTHButton{
+    background-color: red;
+    width: 20%;
+    padding-top: 0.9rem;
+}
+
+
+
+
+/* End of Delete Fields Button */
+
 
 /* Start of Popup */
 .popup {

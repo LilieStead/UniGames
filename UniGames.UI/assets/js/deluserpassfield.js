@@ -9,3 +9,14 @@ function resetUser_PassFields(){
     userInput.value = '';
     userPass.value = '';
 }
+
+
+function resetReviewFields(){
+    let revTitle = document.getElementById('rtitle');
+    let revDesc = document.getElementById('rdesc');
+    let revScore = document.getElementById('score');
+
+    revTitle.value = '';
+    revDesc.value = '';
+    revScore.value = '';
+}
