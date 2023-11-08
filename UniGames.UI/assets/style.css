@@ -482,6 +482,7 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
     height: 2em;
     padding-top: 0.5em;
+    border-radius: 2px;
 }
 
 .centersubmit {

@@ -67,7 +67,7 @@
                         <div>
                             <label for="Userphone">Phone Number: </label>
                             <input type="text" id="Userphone" name="Phone" maxlength="15">
-                            <p id="Userphone"></p>
+                            <p id="phoneerror"></p>
                         </div>
 
                         <div>
@@ -107,69 +107,3 @@
 <!-- Footer -->
 
 </html>
-
-<script>
-// getting all inputs
-const firstnamevalidation = document.getElementById("Userfname");
-const lastnamevalidation = document.getElementById("Userlname");
-const usernamevalidation = document.getElementById("Username");
-const emailvalidation = document.getElementById("Useremail");
-const phonevalidation = document.getElementById("Userphone");
-const userdobvalidation = document.getElementById("Userdob");
-const passwordvalidation = document.getElementById("Userpassword");
-// email format
-var emailformat = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
-
-// getting all error p tags
-
-const firstnameerror = document.getElementById("firstnameerror");
-const lastnameerror = document.getElementById("lastnameerror");
-const usernameerror = document.getElementById("usernameerror");
-const emailerror = document.getElementById("emailerror");
-const doberror = document.getElementById("doberror");
-const passworderror = document.getElementById("passworderror");
-const phoneerror = document.getElementById("phoneerror");
-
-SignUp.addEventListener('submit', (e) => {
-    if (firstnamevalidation == '' || firstnamevalidation == null){
-        firstnameerror.innerHTML = ("you need to enter a you first name");
-    }else {
-        firstnameerror.innerHTML = (null);
-    }
-    if (lastnamevalidation == '' || lastnamevalidation == null){
-        lastnameerror.innerHTML = ("You need to enter you last name");
-    }else{
-        lastnameerror.innerHTML = (null)
-    }
-    if (usernamevalidation == '' || usernamevalidation == null){
-        usernameerror.innerHTML = ("you need to enter a username");
-    }else{
-        usernameerror.innerHTML = null
-    }
-    if (emailvalidation == '' || emailvalidation == null){
-        emailerror.innerHTML = ("You need to enter you email");
-    }else if (!emailvalidation.value.match(emailformat)){
-        emailerror.innerHTML = ("you need to enter a valid email");
-    }else{
-        emailerror.innerHTML(null);
-    }
-    if (userdobvalidation == '' || userdobvalidation == null){
-        doberror.innerHTML == ("you need to enter your date of birth");
-    }else{
-        doberror.innerHTML == null
-    }
-    if (passwordvalidation == '' || passwordvalidation == null){
-        passworderror.innerHTML == ("you need to enter a password");
-    }else if ( passwordvalidation.length < 8  || passwordvalidation.length > 50){
-        passworderror.innerHTML = ("your password needs to be in between 8 and 50 characters");
-    }else{
-        passworderror.innerHTML = null;
-    }
-    if (phonevalidation == '' || phonevalidation == null || phonevalidation.length === 11){
-        phoneerror.innerHTML = null;
-    }else if (phonevalidation.length > 11 || phonevalidation < 11){
-        phoneerror.innerHTML = ("you phone number needs to be 11 numbers")
-    }
-})
-
-</script>

@@ -11,9 +11,87 @@ function CreateUsers(event){
     const userdob = formData.get('userdob');
     const Password = formData.get('Password');
     
-    const errorhandling = document.getElementById("usernameerror");
-    errorhandling.innerHTML = (null);
+    // email format
+    var emailformat = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
 
+    // getting all error p tags
+
+    const firstnameerror = document.getElementById("firstnameerror");
+    const lastnameerror = document.getElementById("lastnameerror");
+    const usernameerror = document.getElementById("usernameerror");
+    const emailerror = document.getElementById("emailerror");
+    const doberror = document.getElementById("doberror");
+    const passworderror = document.getElementById("passworderror");
+    const phoneerror = document.getElementById("phoneerror");
+
+    let nopass = false;
+    
+    if (FirstName  == '' || FirstName  == null){
+        firstnameerror.innerHTML = ("you need to enter a you first name");
+        nopass = true;
+        event.preventDefault();
+        
+    }else {
+        firstnameerror.innerHTML = (null);
+    }
+    if (LastName == '' || LastName == null){
+        lastnameerror.innerHTML = ("You need to enter you last name");
+        nopass = true;
+        event.preventDefault();
+    }else{
+        lastnameerror.innerHTML = (null);
+    }
+    if (UserName == '' || UserName == null){
+        usernameerror.innerHTML = ("you need to enter a username");
+        nopass = true;
+        event.preventDefault();
+    }else{
+        usernameerror.innerHTML = null
+    }
+    if (Email == '' || Email == null){
+        emailerror.innerHTML = ("You need to enter you email");
+        nopass = true;
+        event.preventDefault();
+    }else if (!Email.match(emailformat)){
+        emailerror.innerHTML = ("you need to enter a valid email");
+        nopass = true;
+        event.preventDefault();
+    }else{
+        emailerror.innerHTML = (null);
+    }
+    if (userdob == '' || userdob == null){
+        doberror.innerHTML = ("you need to enter your date of birth");
+        nopass = true;
+        event.preventDefault();
+    }else{
+        doberror.innerHTML = null;
+    }
+    if (Password == '' || Password == null){
+        passworderror.innerHTML = ("you need to enter a password");
+        nopass = true;
+        event.preventDefault();
+    }else if ( Password.length < 8  || Password.length > 50){
+        passworderror.innerHTML = ("your password needs to be in between 8 and 50 characters");
+        nopass = true;
+        event.preventDefault();
+    }else if ( Password != null || Password != ''){
+        passworderror.innerHTML = null;
+    }
+    if (Phone == null || Phone == ''){
+        phoneerror.innerHTML = null;
+    }
+    else if (Phone.length > 11 || Phone.length < 11){
+
+        phoneerror.innerHTML = ("you phone number needs to be 11 numbers");
+        nopass = true;
+        event.preventDefault();
+    }else {
+        phoneerror.innerHTML = null;
+    }
+    
+    if (nopass){
+        return;
+    }
     const data = {
         Userfname: FirstName,
         Userlname: LastName,
@@ -43,6 +121,7 @@ function CreateUsers(event){
         
     .then(responseData => {
         console.log('API Response: ', responseData)
+        window.location.href = "assets/inc/success.html?success=7";
     })
     .catch(error=> {
         console.error('Error: ', error);
