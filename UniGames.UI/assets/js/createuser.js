@@ -11,7 +11,7 @@ function CreateUsers(event){
     const userdob = formData.get('userdob');
     const Password = formData.get('Password');
     
-    const errorhandling = document.getElementById("error-handling");
+    const errorhandling = document.getElementById("usernameerror");
     errorhandling.innerHTML = (null);
 
     const data = {
