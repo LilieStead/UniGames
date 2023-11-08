@@ -97,7 +97,48 @@ namespace UniGames.Api.Controllers
             return Ok(reviewDTO);
         }
 
-        
+
+        //Find review based on userId and gameId
+        [HttpGet]
+        [Route("{UserId}/{GameId}")]
+        public IActionResult GetReviewByuserIDgameID([FromRoute] int UserID, int GameID)
+        {
+            var reviewDM = reviewRepository.GetReviewByuserIDgameID(UserID, GameID);
+            if (reviewDM == null)
+            {
+                return NotFound();
+            }
+            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
+            return Ok(reviewDTO);
+        }
+
+        //Update a Review
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult UpdateReview([FromRoute] int id, [FromBody] UpdateReviewDTO updateReviewDTO)
+        {
+
+            var reviewDM = dbContext.Review.FirstOrDefault(x => x.ReviewID == id);
+
+            if (reviewDM == null)
+            {
+                return NotFound();
+            }
+
+            var UpdateReviewDTO = mapper.Map<Review>(updateReviewDTO);
+
+            dbContext.SaveChanges();
+
+            var ReviewDTO = new UpdateReviewDTO 
+            { 
+                ReviewTitle = reviewDM.ReviewTitle,
+                ReviewDescription = reviewDM.ReviewDescription,
+                Score = reviewDM.Score 
+            };
+
+            return Ok(ReviewDTO);
+
+        }
 
     }
 }

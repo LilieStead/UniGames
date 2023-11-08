@@ -446,6 +446,15 @@ form .formerror{
 
 }
 
+#SignUp input[type=text] {
+    min-width: 100%;
+}
+
+#SignUp input[type=date] {
+    min-width: 100%;
+    min-height: 45px;
+}
+
 
 
 /* END OF MAKE USER */
@@ -494,6 +503,9 @@ form .formerror{
     min-width: 100%;
 }
 
+#searchreview input[type=text] {
+    min-width: 100%;
+}
 
 #editreview input[type=number] {
     max-width: 25%;
@@ -505,3 +517,4 @@ form .formerror{
 }
 
 /* End of Edit User Review */
+

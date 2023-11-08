@@ -12,6 +12,8 @@ namespace UniGames.Api.Repositories
         public List<Review> GetReviewByUsername(string username);
 
         List<Review> GetReviewByUser(int userId);
+
+        public List<Review> GetReviewByuserIDgameID(int UserID, int GameID);
     }
 }
 

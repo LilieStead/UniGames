@@ -59,6 +59,11 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Where(review =>  review.UserName.Username == username).Include(x => x.UserName).ToList();
         }
 
+        public List<Review> GetReviewByuserIDgameID(int UserID, int GameID)
+        {
+            return dbContext.Review.Where(review => review.UserID.UserID == UserID, review => review.GameID.GameID == GameID);
+        }
+
     }
 }
 

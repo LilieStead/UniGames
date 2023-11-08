@@ -16,14 +16,14 @@ function searchReview(event){
             }
         })
         .then(data => {
-            const userID = data.userId;
+            const UserID = data.UserId;
         }
     
      // Get GameID by Game Title
     ,fetch(`http://localhost:5116/game/${title}`)
         .then(response => {
              if (response.status === 200) {
-                 console.log("User authenticated");
+                 console.log("Game authenticated");
 
                  return response.json();
              } else if (response.status === 404) {
@@ -34,7 +34,7 @@ function searchReview(event){
              }
         })
         .then(data => {
-             const userID = data.gameId;
+             const GameID = data.GameId;
         }
 
     // Find the review by GameID and UserID to get the ReviewID
@@ -57,8 +57,8 @@ function editReview(event){
     data.ReviewTitle = reviewTitle;
     data.ReviewDescription = reviewDesc;
     data.Score = score;
-    data.UserID = userID;
-    data.GameID = gameID;
+    data.UserID = UserID;
+    data.GameID = GameID;
 
 
             fetch('http://localhost:5116/review/', {
