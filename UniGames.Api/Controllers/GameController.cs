@@ -60,13 +60,38 @@ namespace UniGames.Api.Controllers
         [HttpPost]
         public IActionResult CreateGame([FromBody] CreateGameDTO createGameDTO)
         {
-            var gamesDM = mapper.Map<Game>(createGameDTO);
-            var create = gameRepository.CreateGame(gamesDM);
-            var gamesDTO = mapper.Map<GameDTO>(create);
-            return CreatedAtAction("GetGameById", new
+            if (ModelState.IsValid)
             {
-                id = gamesDTO.GameID
-            }, gamesDTO);
+                var gamesDM = mapper.Map<Game>(createGameDTO);
+                var create = gameRepository.CreateGame(gamesDM);
+                var gamesDTO = mapper.Map<GameDTO>(create);
+                return CreatedAtAction("GetGameById", new
+                {
+                    id = gamesDTO.GameID
+                }, gamesDTO);
+            }
+            else
+            {
+                return BadRequest();
+            }
+            
+        }
+
+        [HttpPut]
+        [Route("/update-game/{id:int}")]
+        public IActionResult UpdateGame([FromRoute] int id, [FromBody] UpdateGameDTO updateGameDTO)
+        {
+            var gamesDM = gameRepository.GetGameById(id);
+            if (gamesDM == null)
+            {
+                return NotFound();
+            }
+            this.mapper.Map(updateGameDTO, gamesDM);
+            dbContext.SaveChanges();
+
+            var gamesDTO = mapper.Map<GameDTO>(gamesDM);
+            return Ok(gamesDTO);
+
         }
 
 

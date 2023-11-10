@@ -1,6 +1,7 @@
 function CreateUsers(event){
     event.preventDefault();
 
+
     const formData = new FormData(document.getElementById("SignUp"));
 
     const FirstName = formData.get('FirstName');
@@ -10,10 +11,32 @@ function CreateUsers(event){
     const Phone = formData.get('Phone');
     const userdob = formData.get('userdob');
     const Password = formData.get('Password');
-    
-    const errorhandling = document.getElementById("error-handling");
-    errorhandling.innerHTML = (null);
+    const Password2 = formData.get('Password2');
 
+    // Other errors go here
+    const passwordError = document.getElementById('passworderror');
+
+    let hasErrors = false;
+
+    if (Password === '' || Password === null){
+        passwordError.innerHTML = 'You must enter your new password';
+        hasErrors = true;
+    }
+
+    if (Password !== Password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "Passwords do not match, please try again"
+        return;
+    }
+
+    if (Password === Password){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = '';
+    }
+
+    if (hasErrors){
+        return;
+    }
     const data = {
         Userfname: FirstName,
         Userlname: LastName,
