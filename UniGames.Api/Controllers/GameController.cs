@@ -77,6 +77,23 @@ namespace UniGames.Api.Controllers
             
         }
 
+        [HttpPut]
+        [Route("/update-game/{id:int}")]
+        public IActionResult UpdateGame([FromRoute] int id, [FromBody] UpdateGameDTO updateGameDTO)
+        {
+            var gamesDM = gameRepository.GetGameById(id);
+            if (gamesDM == null)
+            {
+                return NotFound();
+            }
+            this.mapper.Map(updateGameDTO, gamesDM);
+            dbContext.SaveChanges();
+
+            var gamesDTO = mapper.Map<GameDTO>(gamesDM);
+            return Ok(gamesDTO);
+
+        }
+
 
         [HttpGet]
         [Route("{title}")]

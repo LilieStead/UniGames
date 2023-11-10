@@ -363,6 +363,7 @@ input::-webkit-inner-spin-button {
     padding: 8px 0;
     border: none;
     border-radius: 8px;
+    display: none;
 }
 
 
@@ -529,7 +530,6 @@ form .formerror{
 #crOTHButton{
     background-color: red;
     width: 20%;
-    padding-top: 0.9rem;
 }
 
 

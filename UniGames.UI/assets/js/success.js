@@ -13,9 +13,11 @@ function successPages(){
             successMessage = "Success! Your account has been deleted.";
             break;
 
-
         case "3":
             successMessage = "Success! Your review has been deleted";
+            break;
+        case "4":
+            successMessage = "Game Has Been Updated!"
             break;
         case "5":
             successMessage = "You have successfully reset your password!";

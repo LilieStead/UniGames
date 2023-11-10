@@ -6,7 +6,7 @@
     <title>UniGames - Create Review</title>
     <link rel="stylesheet" href="assets/style.css">
     
-    <script src="assets/js/deluserpassfield.js"></script>
+
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -59,19 +59,34 @@
                         <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
                         <p class="formerror" id="passworderror"></p>
                     </div>
+                    <div>
+                        <label for="password2">Confirm Password: </label>
+                        <input type="password" name="Userpassword2" id="password2" placeholder="Enter your password again...">
+                        <p class="formerror" id="passworderror2"></p>
+                    </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
                         <a onclick="resetUser_PassFields();" class="reset-fields">Reset Username and <br> Password Fields</a>
                         <!-- Reset Other Fields Button -->
                         <a class="reset-fields" id="crOTHButton" onclick="resetReviewFields()">Reset Review</a>
-                        
+
+                    </div>
+                    <br>
+                    <div class="flexcontainer">
+                        <p id="timeout-countdown"></p>
                         <!-- Reset Password Button -->
                         <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
-                        
                     </div>
+                    
                 </form>
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
@@ -89,73 +104,9 @@
 <!-- END OF FOOTER -->
 <!-- Script File Moved Here Due To Errors When Loading Before All Content Has Loaded -- Could be moved back. -->
 <script async defer type="text/javascript" src="assets/js/createreview.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/deluserpassfield.js"></script>
+<script src="assets/js/timeoutStatus.js"></script>
+<script src="assets/js/passtimeout.js"></script>
+
 </html>
-
-<!--<script>
-let curFail = false;
-
-const vtitle = document.getElementById('rtitle');
-const vdescription = document.getElementById('rdesc');
-const vscore = document.getElementById('score');
-const vusername = document.getElementById('user');
-const vpassword = document.getElementById('password');
-
-const titleerror = document.getElementById('titleerror');
-const descriptionerror = document.getElementById('descriptionerror');
-const scoreerror = document.getElementById('scoreerror');
-const usernameerror = document.getElementById('usernameerror');
-const passworderror = document.getElementById('passworderror');
-
-const createreview = document.getElementById('createreview');
-
-createreview.addEventListener('submit', (e) => {
-    const numberValue = parseFloat(vscore.value);
-    // Reset error messages before validation
-    titleerror.innerHTML = '';
-    descriptionerror.innerHTML = '';
-    scoreerror.innerHTML = '';
-    usernameerror.innerHTML = '';
-    passworderror.innerHTML = '';
-
-    // Checks to see if the title contains no text
-    if (vtitle.value === '' || vtitle.value === null) {
-        e.preventDefault();
-        titleerror.innerHTML = 'Your review needs a title';
-        curFail = true;
-    }
-    // Checks to see if the description contains no text
-    if (vdescription.value === '' || vdescription.value === null) {
-        e.preventDefault();
-        descriptionerror.innerHTML = 'You need to provide a description';
-        curFail = true;
-    // Checks if the length of the description is less than 20 or higher than 500
-    } else if (vdescription.value.length < 20 || vdescription.value.length > 500) {
-        e.preventDefault();
-        descriptionerror.innerHTML = 'A description needs to be between 20 - 500 characters';
-        curFail = true;
-    }
-    // Checks to see if the number is valid or less than 0 or bigger than 100
-    if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
-        e.preventDefault();
-        scoreerror.innerHTML = 'Your score needs to be between 0 and 100';
-        curFail = true;
-    }else{
-        scoreerror.innerHTML = (null);
-        curFail = true;
-    }
-    // Checks to see if the username is contains no text
-    if (vusername.value === '' || vusername.value === null) {
-        e.preventDefault();
-        usernameerror.innerHTML = 'You must enter your username';
-        curFail = true;
-    }
-    // Checks to see if the password contains no text
-    if (vpassword.value === '' || vpassword.value === null){
-        e.preventDefault();
-        passworderror.innerHTML = 'You must enter your account\'s password';
-        curFail = true;
-    }
-
-    
-});
-</script>-->

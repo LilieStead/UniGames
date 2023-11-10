@@ -2,31 +2,53 @@
 function deleteUser(event){
     // Prevents the event from occuring if data is not present
     event.preventDefault();
+
+    const activeTimeout = timeoutStatus();
+
     // Looks for the ID of the form and creates Form Data using the FormData method
     const formData = new FormData(document.getElementById("deleteuser"));
 
     // Gets the username and password from the form data
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
+    const password2 = formData.get('Userpassword2');
 
-    const usernameerror = document.getElementById('usernameerror');
-    const passworderror = document.getElementById('passworderror');
-    usernameerror.innerHTML = '';
-    passworderror.innerHTML = '';
+    const usernameError = document.getElementById('usernameerror');
+    const passwordError = document.getElementById('passworderror');
+    const passwordError2 = document.getElementById('passworderror2');
+    usernameError.innerHTML = '';
+    passwordError.innerHTML = '';
+    passwordError2.innerHTML = '';
 
     // Creates a false flag to stop progression if true
     let blankFields = false;
     // Checks to see if the username is contains no text
     if (username === '' || username === null) {
         event.preventDefault();
-        usernameerror.innerHTML = 'You must enter your username';
+        usernameError.innerHTML = 'You must enter your username';
         blankFields = true;
     }
     // Checks to see if the password contains no text
     if (password === '' || password === null){
-        event.preventDefault();
-        passworderror.innerHTML = 'You must enter your account\'s password';
-        blankFields = true;
+        if (activeTimeout){
+            passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+        }else{
+            passwordError.innerHTML = 'You must enter your account\'s password';
+            curFail = true;
+        }
+    }
+
+    if (password !== password2){
+        const error_message = document.getElementById('passworderror2');
+            
+        error_message.innerHTML = "Passwords do not match, please try again";
+        passwordTimeout();
+        return;
+    }
+    if (password === password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "";
+        
     }
 
     if (blankFields){

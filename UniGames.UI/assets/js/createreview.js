@@ -6,10 +6,10 @@ var gameID = urlParams.get('id');
 console.log('Game ID:', gameID, "successfully transferred");
 
 
-
-
 function createReview(event){
     event.preventDefault();
+
+    const activeTimeout = timeoutStatus();
 
     const formData = new FormData(document.getElementById("createreview"));
 
@@ -18,65 +18,80 @@ function createReview(event){
     const score = formData.get("Score");
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
-
+    const password2 = formData.get('UserPassword2');
     
-    const vtitle = document.getElementById('rtitle');
-    const vdescription = document.getElementById('rdesc');
-    const vscore = document.getElementById('score');
-    const vusername = document.getElementById('user');
-    const vpassword = document.getElementById('password');
-    
-    const titleerror = document.getElementById('titleerror');
-    const descriptionerror = document.getElementById('descriptionerror');
-    const scoreerror = document.getElementById('scoreerror');
-    const usernameerror = document.getElementById('usernameerror');
-    const passworderror = document.getElementById('passworderror');
+    const titleError = document.getElementById('titleerror');
+    const descriptionError = document.getElementById('descriptionerror');
+    const scoreError = document.getElementById('scoreerror');
+    const usernameError = document.getElementById('usernameerror');
+    const passwordError = document.getElementById('passworderror');
+    const passwordError2 = document.getElementById('passworderror2');
 
-    const numberValue = parseFloat(vscore.value);
+    const numberValue = parseFloat(score);
     // Reset error messages before validation
-    titleerror.innerHTML = '';
-    descriptionerror.innerHTML = '';
-    scoreerror.innerHTML = '';
-    usernameerror.innerHTML = '';
-    passworderror.innerHTML = '';
+    titleError.innerHTML = '';
+    descriptionError.innerHTML = '';
+    scoreError.innerHTML = '';
+    usernameError.innerHTML = '';
+    passwordError.innerHTML = '';
+    passwordError2.innerHTML = '';
     let curFail = false;
 
     // Checks to see if the title contains no text
-    if (vtitle.value === '' || vtitle.value === null) {
+    if (reviewTitle === '' || reviewTitle === null) {
         event.preventDefault();
-        titleerror.innerHTML = 'Your review needs a title';
+        titleError.innerHTML = 'Your review needs a title';
         curFail = true;
     }
     // Checks to see if the description contains no text
-    if (vdescription.value === '' || vdescription.value === null) {
+    if (reviewDesc === '' || reviewDesc === null) {
         event.preventDefault();
-        descriptionerror.innerHTML = 'You need to provide a description';
+        descriptionError.innerHTML = 'You need to provide a description';
         curFail = true;
     // Checks if the length of the description is less than 20 or higher than 500
-    } else if (vdescription.value.length < 20 || vdescription.value.length > 500) {
+    } else if (reviewDesc.length < 20 || reviewDesc.length > 500) {
         event.preventDefault();
-        descriptionerror.innerHTML = 'A description needs to be between 20 - 500 characters';
+        descriptionError.innerHTML = 'A description needs to be between 20 - 500 characters';
         curFail = true;
     }
     // Checks to see if the number is valid or less than 0 or bigger than 100
     if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
         event.preventDefault();
-        scoreerror.innerHTML = 'Your score needs to be between 0 and 100';
+        scoreError.innerHTML = 'Your score needs to be between 0 and 100';
         curFail = true;
     }else{
-        scoreerror.innerHTML = (null);
+        scoreError.innerHTML = (null);
     }
     // Checks to see if the username is contains no text
-    if (vusername.value === '' || vusername.value === null) {
+    if (username === '' || username === null) {
         event.preventDefault();
-        usernameerror.innerHTML = 'You must enter your username';
+        usernameError.innerHTML = 'You must enter your username';
         curFail = true;
     }
     // Checks to see if the password contains no text
-    if (vpassword.value === '' || vpassword.value === null){
-        event.preventDefault();
-        passworderror.innerHTML = 'You must enter your account\'s password';
-        curFail = true;
+    if (password === '' || password === null){
+        if (activeTimeout){
+            passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+        }else{
+            passwordError.innerHTML = 'You must enter your account\'s password';
+            curFail = true;
+        }
+        
+    }else{
+        passwordError.innerHTML = '';
+    }
+
+    if (password !== password2){
+        const error_message = document.getElementById('passworderror2');
+            
+        error_message.innerHTML = "Passwords do not match, please try again";
+        passwordTimeout();
+        return;
+    }
+    if (password === password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "";
+        
     }
 
         
