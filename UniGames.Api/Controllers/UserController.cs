@@ -115,8 +115,9 @@ namespace UniGames.Api.Controllers
                 return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
             }
             else
+            { 
                 return StatusCode(422, ModelState);
-            };
+            }
             
 
                 
@@ -165,6 +166,7 @@ namespace UniGames.Api.Controllers
             }
             else
             {
+            
                 return StatusCode(422, ModelState);
             }
             
