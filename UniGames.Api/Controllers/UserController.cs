@@ -92,6 +92,11 @@ namespace UniGames.Api.Controllers
                     Userpassword = CreateUserDTO.Userpassword,
                 };
 
+                // if statment looks for if the username exites in the databse
+                if (UsersDM !=null) { 
+                //if it is then reutn bad request and error code to the front end and do not allow the methord to continue
+                return BadRequest("Username is taken");
+                }
                 dbContext.User.Add(UsersDM);
                 dbContext.SaveChanges();
 
@@ -110,9 +115,11 @@ namespace UniGames.Api.Controllers
                 return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
             }
             else
-            {
                 return StatusCode(422, ModelState);
-            }
+            };
+            
+
+                
             
         }
 

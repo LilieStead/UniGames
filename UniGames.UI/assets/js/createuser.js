@@ -56,12 +56,22 @@ function CreateUsers(event){
         },
         body: JSON.stringify(data),
     })
-    .then(response => response.json())
+    .then(response => {
+        if(response.status === 400){
+            console.log("username exists");
+            return Promise.reject("error : 400, Username is taken");
+        }
+         response.json()
+    })
+        
     .then(responseData => {
         console.log('API Response: ', responseData)
     })
     .catch(error=> {
         console.error('Error: ', error);
+        if(error.includes("error : 400")){
+            errorhandling.innerHTML = ("Username is taken");
+        }
     });
 }
 
