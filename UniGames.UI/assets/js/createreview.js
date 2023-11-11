@@ -137,7 +137,7 @@ function createReview(event){
                     response.json()
                 }
                 else if (response.status === 422){
-                    return Promise.reject("Error: 422 - Required Field has been bypassed")
+                    return Promise.reject("Error: 422 - Required Field has been bypassed");
                 }
             })
             .then(data => {
@@ -147,6 +147,13 @@ function createReview(event){
 
             .catch(error => {
                 console.error("Error:", error);
+
+                if (error.includes("Error: 422")){
+                    // In all capitals to signify importance
+                    console.error("USER HAS BYPASSED JAVASCRIPT!");
+                    // Not entirely sure this may show up but worth adding here anyway.
+                    customPopup("You have bypassed the JavaScript, please try again with JavaScript enabled");
+                }
             });
             
             

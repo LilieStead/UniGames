@@ -60,6 +60,8 @@ function passwordTimeout(){
             document.getElementById('passworderror').innerHTML = '';
             // Remove the localStorage item for disabling fields
             localStorage.removeItem('passwordFieldsDisabled');
+            // Remove the cookie for disabling fields
+            deleteCookie('passwordFieldsDisabled');
         }
     }
     const newPassActual = document.getElementById('password').value;
@@ -81,6 +83,9 @@ function passwordTimeout(){
             
             // Remembers the disabled state of the inputs
             localStorage.setItem('passwordFieldsDisabled', 'true');
+            // Set a cookie to disable the fields
+            setCookie('passwordFieldsDisabled', 'true', 2);
+
             // Remove the content from the password fields -- Prevents this from looping
             document.getElementById('password').value = '';
             document.getElementById('password2').value = '';
@@ -113,15 +118,17 @@ function passwordTimeout(){
         passAttempts = 0;
         sessionStorage.removeItem('passwordTimeout');
         localStorage.removeItem('passwordFieldsDisabled');
-        
+        setCookie('passwordFieldsDisabled', '', -1);
     }
     
 }
 
-// Start the time when the page loads and update the timer every second
-interval = setInterval(passwordTimeout, 1000);
-window.addEventListener('load', function(){
-    if (localStorage.getItem('passwordFieldsDisabled') === 'true'){
+
+function setFormState(){
+    const timeoutActive = sessionStorage.getItem('passwordTimeout');
+    const passDisabled = getCookie('passwordFieldsDisabled');
+
+    if (passDisabled === 'true' || timeoutActive){
         document.getElementById('password').disabled = true;
         document.getElementById('password2').disabled = true;
         // Sets the background colour to grey -- Could be modified to a different colour
@@ -132,4 +139,18 @@ window.addEventListener('load', function(){
         document.getElementById('password2').placeholder = '';
         
     }
-})
+    else{
+        document.getElementById('password').disabled = false;
+        document.getElementById('password2').disabled = false;
+        document.getElementById('password').style.backgroundColor = 'white';
+        document.getElementById('password2').style.backgroundColor = 'white';
+        // Removes the placeholders
+        document.getElementById('password').placeholder = 'Enter your new password here...';
+        document.getElementById('password2').placeholder = 'Enter your new password again...';
+    }
+}
+window.addEventListener('DOMContentLoaded', setFormState);
+window.addEventListener('pageshow', setFormState);
+
+// Start the time when the page loads and update the timer every second
+interval = setInterval(passwordTimeout, 1000);
