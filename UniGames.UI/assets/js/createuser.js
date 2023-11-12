@@ -89,35 +89,27 @@ function CreateUsers(event){
     }else {
         phoneerror.innerHTML = null;
     }
-    
-    if (nopass){
 
     const Password2 = formData.get('Password2');
 
     // Other errors go here
     const passwordError = document.getElementById('passworderror');
 
-    let hasErrors = false;
-
-    if (Password === '' || Password === null){
-        passwordError.innerHTML = 'You must enter your new password';
-        hasErrors = true;
-    }
-
     if (Password !== Password2){
         const error_message = document.getElementById('passworderror2');
-        error_message.innerHTML = "Passwords do not match, please try again"
+        error_message.innerHTML = "Passwords do not match, please try again";
         return;
     }
 
-    if (Password === Password){
+    if (Password2 === Password){
         const error_message = document.getElementById('passworderror2');
         error_message.innerHTML = '';
     }
 
-    if (hasErrors){
+    if (nopass){
         return;
     }
+    
     const data = {
         Userfname: FirstName,
         Userlname: LastName,
