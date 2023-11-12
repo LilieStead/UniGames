@@ -482,6 +482,7 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
     height: 2em;
     padding-top: 0.5em;
+    border-radius: 2px;
 }
 
 .centersubmit {
@@ -601,6 +602,8 @@ form .formerror{
     border-radius: 5px;
     text-align: center;
     font-family: Unidays-Book;
+    min-width: 30rem;
+    max-width: 30rem;
 }
 
 

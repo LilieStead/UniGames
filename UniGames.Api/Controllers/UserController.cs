@@ -79,6 +79,7 @@ namespace UniGames.Api.Controllers
         [HttpPost]
         public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUserDTO)
         {
+
             if (ModelState.IsValid)
             {
                 var UsersDM = new User
@@ -91,27 +92,31 @@ namespace UniGames.Api.Controllers
                     Userdob = CreateUserDTO.Userdob,
                     Userpassword = CreateUserDTO.Userpassword,
                 };
-
+                //used to look for username
+                var userExists = userRepository.GetUserIDByName(UsersDM.Username);
+                var userEmail = userRepository.GetAllUsers().Where(x => x.Useremail == UsersDM.Useremail);
+    
                 // if statment looks for if the username exites in the databse
-                if (UsersDM !=null) { 
-                //if it is then reutn bad request and error code to the front end and do not allow the methord to continue
-                return BadRequest("Username is taken");
+                if (userExists != null)
+                {
+                    //if it is then return bad request and error code to the front end and do not allow the methord to continue
+                    return BadRequest("Username is taken");
                 }
+    
+                foreach (var Users in userEmail) { 
+                    if (Users != null)
+                    {
+                        return StatusCode(409, "Email is already being used");
+                    }
+                    
+                }
+    
                 dbContext.User.Add(UsersDM);
                 dbContext.SaveChanges();
-
-                var CreateUsersDTO = new UserDTO
-                {
-                    UserId = UsersDM.UserId,
-                    Userfname = UsersDM.Userfname,
-                    Userlname = UsersDM.Userlname,
-                    Useremail = UsersDM.Useremail,
-                    Username = UsersDM.Username,
-                    Userphone = UsersDM.Userphone,
-                    Userdob = UsersDM.Userdob,
-                    Userpassword = UsersDM.Userpassword,
-                };
-
+    
+                
+            
+    
                 return CreatedAtAction("GetUserById", new { id = CreateUsersDTO.UserId }, CreateUsersDTO);
             }
             else
@@ -119,6 +124,7 @@ namespace UniGames.Api.Controllers
                 return StatusCode(422, ModelState);
             }
             
+
 
                 
             

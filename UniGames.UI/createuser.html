@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="assets/style.css">
-    
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 
@@ -40,46 +39,52 @@
                 <!--  Sign Up Table -->
                 <div id="formcontainer" class="flexcontainer">
                     <form id="SignUp" action="">
-                        <div id="Userfname">
+                        <div>
                             <label for="Userfname">First Name: </label>
                             <input type="text" id="Userfname" name="FirstName" maxlength="50">
+                            <p id="firstnameerror" class="formerror"></p>
                         </div>
 
-                        <div id="Userlname">
+                        <div>
                             <label for="Userlname">Last Name: </label>
                             <input type="text" id="Userlname" name="LastName" maxlength="50">
+                            <p id="lastnameerror" class="formerror"></p>
                         </div>
 
-                        <div id="Username">
+                        <div>
                             <label for="Username">Username: </label>
                             <input type="text" id="Username" name="UserName" maxlength="50">
-                            <h2 id="error-handling"></h2>
+                            <p id="usernameerror" class="formerror"></p>
                         </div>
 
-                        <div id="Useremail">
+                        <div>
                             <label for="Useremail">Email Address: </label>
                             <input type="text" id="Useremail" name="Email" maxlength="50">
+                            <p id="emailerror" class="formerror"></p>
                         </div>
 
-                        <div id="Userphone">
+                        <div>
                             <label for="Userphone">Phone Number: </label>
                             <input type="text" id="Userphone" name="Phone" maxlength="15">
+                            <p id="phoneerror" class="formerror"></p>
                         </div>
 
-                        <div id="Userdob">
+                        <div>
                             <label for="Userdob">Date of Birth: </label>
                             <input type="date" id="Userdob" name="userdob">
+                            <p id="doberror" class="formerror"></p>
                         </div>
 
-                        <div id="Userpassword">
+                        <div>
                             <label for="Userpassword">Password: </label>
-                            <input type="password" name="Password" id="password" maxlength="50" min="8">
-                            <p class="formerror" id="passworderror"></p>
+                            <input type="password" name="Password" id="Userpassword" maxlength="50" min="8">
+                            <p id="passworderror" class="formerror"></p>
                         </div>
                         <div>
                             <label for="userpassword2">Confirm Password: </label>
                             <input type="password" name="Password2" id="password2" placeholder="Enter your password again...">
                             <p class="formerror" id="passworderror2"></p>
+
                         </div>
 
                         
@@ -88,11 +93,6 @@
                             <input type="reset" value="Reset">
                         </div>
                         <br>
-                        <div class="flexcontainer">
-                            <p id="timeout-countdown"></p>
-                            <!-- Reset Password Button -->
-                            <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
-                        </div>
                     </form>
                     
                 </div>
@@ -106,7 +106,13 @@
         </div>
     </div>
     <!-- Main Content -->
-
+    <div class="popup" id="custom-popup">
+        <div class="popup-content">
+            <span id="popup-message"></span>
+            <button id="close-popup">Close</button>
+        </div>
+    </div>
+    <script async defer type="text/javascript" src="assets/js/popup.js"></script>
 </body>
 
 <script async defer type="text/javascript" src="assets/js/createuser.js"></script>

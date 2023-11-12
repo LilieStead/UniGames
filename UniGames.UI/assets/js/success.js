@@ -16,11 +16,16 @@ function successPages(){
         case "3":
             successMessage = "Success! Your review has been deleted";
             break;
+
+        case "7":
+            successMessage = "You now have an account!";
+
         case "4":
             successMessage = "Game Has Been Updated!"
             break;
         case "5":
             successMessage = "You have successfully reset your password!";
+
             break;
         default:
             successMessage = "An unknown success occurred?";
