@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+
+    <link rel="stylesheet" href="assets/fonts.css">
+</head>
+<!-- HEADER -->
+<header class="centercontents">
+    <h1>UNiGames</h1>
+</header>
+<!-- END OF HEADER -->
+<body>
+    <!-- NAV -->
+    <nav class="centercontents">
+        <a href="index.html"><p>Home</p></a>
+        <a href="search.html"><p>Search Games</p></a>
+        <a href="create.html"><p>Create Game</p></a>
+        <a href="updateGame.html"><p>Update Game Details</p></a>
+    </nav>
+    <!-- END OF NAV -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Update Game Details</h1>
+                </div>
+                <div class="flexcontainer">
+                    <form id="updategame">
+                        <label for="gname">Game Name: </label><br>
+                        <input type="text" id="gname" name="Title"><br>
+                        <label for="Platform">Platform: </label><br>
+                            <select name="Platform" id="platform">
+                                <option value="1">Xbox</option>
+                                <option value="2">PC</option>
+                                <option value="3">PS4</option>
+                                <option value="4">Mobile</option>
+                                <option value="5">PS5</option>
+                                <option value="6">Nintendo Switch</option>
+                            </select>
+                        <div id="Releasedate">
+                            <label for="Release">Release Date: </label>
+                        </div>
+                        <div>
+                            <input type="datetime-local" name="ReleaseDate" id="date">     
+                        </div>
+                        
+                        <div>
+                            <input type="submit" value="Submit">
+                        </div>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+</body>
+<script async defer type="text/javascript" src="assets/js/updategame.js"></script>
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>

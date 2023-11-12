@@ -75,6 +75,13 @@ namespace UniGames.Data.Repositories
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == game.GameID);
 
         }
+
+        public Game UpdateGame(int id)
+        {
+            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).FirstOrDefault(x => x.GameID == id);
+            dbContext.SaveChanges();
+            return Games;
+        }
         
         // Uses GameDTO rather than Game so it directly adds to the DTO, but still fetches the data from Game
         public List<GameDTO> GetGamesByTitle(string title)

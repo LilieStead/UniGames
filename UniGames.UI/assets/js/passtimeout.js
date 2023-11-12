@@ -5,6 +5,11 @@ const timeOut = 120000;
 // Interval in which the function will run (for a timer to work)
 let interval;
 
+// Get the URL of the page
+var curURL = window.location.pathname;
+// Extract the filename from the URL
+var fileName = curURL.substring(curURL.lastIndexOf("/") + 1)
+
 // Function to handle password timeouts
 function passwordTimeout(){
     clearInterval(interval);
@@ -21,12 +26,27 @@ function passwordTimeout(){
             const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
             // Update the countdown in the HTML
             document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
-            interval = setInterval(passwordTimeout, 1000);
-            return;
+            // If the current file is the reset user password page then
+            if (fileName === "resetuserpass.html"){
+                // Do not mention the reset password button as it is not present on this page
+                // This prevents errors with the timer not working
+                interval = setInterval(passwordTimeout, 1000);
+                return;
+            }else{
+                interval = setInterval(passwordTimeout, 1000);
+                document.getElementById('crPRButton').style.display = 'block';
+                return;
+            }
+            
         }
         else{
             // Sets the countdown to be null
             document.getElementById('timeout-countdown').textContent = '';
+            if (fileName !== "resetuserpass.html"){
+                // Removes the reset password button
+                document.getElementById('crPRButton').style.display = 'none';
+            }
+            
             // Re-enables both inputs
             document.getElementById('password').disabled = false;
             document.getElementById('password2').disabled = false;
@@ -79,6 +99,10 @@ function passwordTimeout(){
 
             // Display the countdown message
             const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+            if (fileName !== "resetuserpass.html"){
+                // Displays the reset password button
+                document.getElementById('crPRButton').style.display = 'block';
+            }
             document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
             // Utilises the custom popup to tell the user they have reached the max attempts
             customPopup(`Maximum login attempts reached, please wait 2 minutes and try again.`);

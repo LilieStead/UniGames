@@ -1,6 +1,7 @@
 function CreateUsers(event){
     event.preventDefault();
 
+
     const formData = new FormData(document.getElementById("SignUp"));
 
     const FirstName = formData.get('FirstName');
@@ -10,7 +11,7 @@ function CreateUsers(event){
     const Phone = formData.get('Phone');
     const userdob = formData.get('userdob');
     const Password = formData.get('Password');
-    
+
     // email format
     var emailformat = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
 
@@ -90,6 +91,31 @@ function CreateUsers(event){
     }
     
     if (nopass){
+
+    const Password2 = formData.get('Password2');
+
+    // Other errors go here
+    const passwordError = document.getElementById('passworderror');
+
+    let hasErrors = false;
+
+    if (Password === '' || Password === null){
+        passwordError.innerHTML = 'You must enter your new password';
+        hasErrors = true;
+    }
+
+    if (Password !== Password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "Passwords do not match, please try again"
+        return;
+    }
+
+    if (Password === Password){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = '';
+    }
+
+    if (hasErrors){
         return;
     }
     const data = {

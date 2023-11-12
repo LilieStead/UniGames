@@ -120,7 +120,6 @@ function resetPassword(event){
     const userName = formDataUser.get('Username');
     const userEmail = formDataUser.get('Useremail');
     const userPhone = formDataUser.get('Userphone');
-    //const oldpass = formData.get('UserpasswordOld')
     const newPassActual = formDataUser.get('Userpassword');
     const newPass2 = formDataUser.get('UserPasswordAgain');
 
@@ -162,7 +161,6 @@ function resetPassword(event){
     }
 
 
-
     if (newPassActual !== newPass2){
         const error_message = document.getElementById('passworderror2');
             
@@ -184,7 +182,8 @@ function resetPassword(event){
         Userpassword: newPassActual
     }
     const inHTMLError = document.getElementById('error-handling');
-
+    // Chooses the correct URL based on the condition of the phone number (if it is present in the data or not)
+    // ? means it is present, : means it is not -- This chooses the API endpoint to use
     const apiURL = userPhone
     ? `http://localhost:5116/reset-password/${userName}/${userEmail}/${userPhone}`
     : `http://localhost:5116/reset-password/${userName}/${userEmail}`
@@ -196,9 +195,7 @@ function resetPassword(event){
         },
         body: JSON.stringify(data),
     })
-    
     .then(response => {
-        
         if (response.status === 200){
             console.log('User Authenticated');
             inHTMLError.textContent = '';
@@ -223,15 +220,13 @@ function resetPassword(event){
         }
         else{
             console.log('Error: ', response.status);
+            inHTMLError.textContent = 'An unexpected error occurred.';
         }
     })
     .then(data => {
         console.log('API Response: ', data);
         // Add code to go to success page or update current page with success
-        // Currently causes issues -- Similar fix needed alongside createreview.js
         window.location.href = "assets/inc/success.html?success=5";
-        
-        
     })
     .catch(error => {
         console.error('Error: ', error);
@@ -259,18 +254,18 @@ function resetPassword(event){
 }
 
 // Function to check if passwordTimeout function is active
-function timeoutStatus(){
-    const curTime  = sessionStorage.getItem('passwordTimeout');
-    // If it is active then
-    if (curTime){
-        // Converts the current time left into a base-10 integer
-        const endTime = parseInt(curTime, 10);
-        // Specifies if the cooldown is actually active if both are true
-        return !isNaN(endTime) && Date.now() < endTime;
-    }
-    // Cooldown is not active
-    return false;
-}
+// function timeoutStatus(){
+//     const curTime  = sessionStorage.getItem('passwordTimeout');
+//     // If it is active then
+//     if (curTime){
+//         // Converts the current time left into a base-10 integer
+//         const endTime = parseInt(curTime, 10);
+//         // Specifies if the cooldown is actually active if both are true
+//         return !isNaN(endTime) && Date.now() < endTime;
+//     }
+//     // Cooldown is not active
+//     return false;
+// }
 
 
 // Event listener to find the button click
