@@ -8,13 +8,13 @@ let interval;
 // Get the URL of the page
 var curURL = window.location.pathname;
 // Extract the filename from the URL
-var fileName = curURL.substring(curURL.lastIndexOf("/") + 1)
+var fileName = curURL.substring(curURL.lastIndexOf("/") + 1);
 
 // Function to handle password timeouts
 function passwordTimeout(){
     clearInterval(interval);
     // Check to see if a timout is currently active
-    const curTime = sessionStorage.getItem('passwordTimeout');
+    const curTime = localStorage.getItem('passwordTimeout');
     if (curTime){
         // Converts the current time left into a base-10 integer
         const endTime = parseInt(curTime, 10);
@@ -50,6 +50,9 @@ function passwordTimeout(){
             // Re-enables both inputs
             document.getElementById('password').disabled = false;
             document.getElementById('password2').disabled = false;
+            document.getElementById('subbutton').disabled = false;
+            document.getElementById('subbutton').style.backgroundColor = "#1DD577";
+            document.getElementById('subbutton').style.cursor = "pointer";
             // Sets the background colour to be white (indicates it is accepting inputs)
             document.getElementById('password').style.backgroundColor = 'white';
             document.getElementById('password2').style.backgroundColor = 'white';
@@ -60,8 +63,6 @@ function passwordTimeout(){
             document.getElementById('passworderror').innerHTML = '';
             // Remove the localStorage item for disabling fields
             localStorage.removeItem('passwordFieldsDisabled');
-            // Remove the cookie for disabling fields
-            deleteCookie('passwordFieldsDisabled');
         }
     }
     const newPassActual = document.getElementById('password').value;
@@ -78,13 +79,11 @@ function passwordTimeout(){
         if (passAttempts >= maxAttempts){
             // Add the timeout duration to the current time
             const endTime = Date.now() + timeOut;
-            // Set a new item in sessionStorage called passwordTimeout with the current time provided 
-            sessionStorage.setItem('passwordTimeout', endTime.toString());
+            // Set a new item in localStorage called passwordTimeout with the current time provided 
+            localStorage.setItem('passwordTimeout', endTime.toString());
             
             // Remembers the disabled state of the inputs
             localStorage.setItem('passwordFieldsDisabled', 'true');
-            // Set a cookie to disable the fields
-            setCookie('passwordFieldsDisabled', 'true', 2);
 
             // Remove the content from the password fields -- Prevents this from looping
             document.getElementById('password').value = '';
@@ -92,6 +91,9 @@ function passwordTimeout(){
             // Disable the password fields -- Means they cannot progress for 2 minutes unless JavaScript is disabled
             document.getElementById('password').disabled = true;
             document.getElementById('password2').disabled = true;
+            document.getElementById('subbutton').disabled = true;
+            document.getElementById('subbutton').style.backgroundColor = "grey";
+            document.getElementById('subbutton').style.cursor = "no-drop";
             // Sets the background colour to grey -- Could be modified to a different colour
             document.getElementById('password').style.backgroundColor = 'grey';
             document.getElementById('password2').style.backgroundColor = 'grey';
@@ -116,37 +118,46 @@ function passwordTimeout(){
     }
     if (newPassActual === newPassConfirm){
         passAttempts = 0;
-        sessionStorage.removeItem('passwordTimeout');
+        localStorage.removeItem('passwordTimeout');
         localStorage.removeItem('passwordFieldsDisabled');
-        setCookie('passwordFieldsDisabled', '', -1);
     }
     
 }
 
 
 function setFormState(){
-    const timeoutActive = sessionStorage.getItem('passwordTimeout');
-    const passDisabled = getCookie('passwordFieldsDisabled');
+    const timeoutActive = localStorage.getItem('passwordTimeout');
+    const passDisabled = localStorage.getItem('passwordFieldsDisabled');
 
     if (passDisabled === 'true' || timeoutActive){
         document.getElementById('password').disabled = true;
         document.getElementById('password2').disabled = true;
+        document.getElementById('subbutton').disabled = true;
+        document.getElementById('subbutton').style.backgroundColor = "grey";
+        document.getElementById('subbutton').style.cursor = "no-drop";
         // Sets the background colour to grey -- Could be modified to a different colour
         document.getElementById('password').style.backgroundColor = 'grey';
         document.getElementById('password2').style.backgroundColor = 'grey';
         // Removes the placeholders
         document.getElementById('password').placeholder = '';
         document.getElementById('password2').placeholder = '';
+        // Sets the password error to tell the user to wait for the cooldown to expire
+        document.getElementById('passworderror').innerHTML = 'Please Wait For The Cooldown To Expire';
         
     }
     else{
         document.getElementById('password').disabled = false;
         document.getElementById('password2').disabled = false;
+        document.getElementById('subbutton').disabled = false;
+        document.getElementById('subbutton').style.backgroundColor = "#1DD577";
+        document.getElementById('subbutton').style.cursor = "pointer";
         document.getElementById('password').style.backgroundColor = 'white';
         document.getElementById('password2').style.backgroundColor = 'white';
         // Removes the placeholders
         document.getElementById('password').placeholder = 'Enter your new password here...';
         document.getElementById('password2').placeholder = 'Enter your new password again...';
+        // Sets the password error to tell the user to wait for the cooldown to expire
+        document.getElementById('passworderror').innerHTML = '';
     }
 }
 window.addEventListener('DOMContentLoaded', setFormState);
