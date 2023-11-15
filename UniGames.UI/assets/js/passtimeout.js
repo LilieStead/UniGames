@@ -160,6 +160,7 @@ function setFormState(){
         document.getElementById('passworderror').innerHTML = '';
     }
 }
+// Both set the state fo the form when the page loads 
 window.addEventListener('DOMContentLoaded', setFormState);
 window.addEventListener('pageshow', setFormState);
 

@@ -18,7 +18,7 @@ function createReview(event){
     const score = formData.get("Score");
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
-    const password2 = formData.get('UserPassword2');
+    const password2 = formData.get('Userpassword2');
     
     const titleError = document.getElementById('titleerror');
     const descriptionError = document.getElementById('descriptionerror');
@@ -80,7 +80,8 @@ function createReview(event){
     }else{
         passwordError.innerHTML = '';
     }
-
+    console.log(password);
+    console.log(password2);
     if (password !== password2){
         const error_message = document.getElementById('passworderror2');
             
@@ -107,11 +108,11 @@ function createReview(event){
                 return response.json();
             } else if (response.status === 404){
                 // User is not found
-                usernameerror.innerHTML = 'Username not recognised, please try again';
+                usernameError.innerHTML = 'Username not recognised, please try again';
                 return;
             } else if (response.status === 401){
                 // Password is incorrect
-                passworderror.innerHTML = 'Your password is incorrect, please try again or reset it <br> by clicking here: <a href="resetuserpass.html">Reset Password</a>';
+                passwordError.innerHTML = 'Your password is incorrect, please try again or reset it <br> by clicking here: <a href="resetuserpass.html">Reset Password</a>';
             } else{
                 console.error("error", response.status);
             }
@@ -129,31 +130,34 @@ function createReview(event){
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    
                 },
                 body: JSON.stringify(data),
             })
             .then(response => {
                 if (response.status === 200){
                     response.json()
-                }
-                else if (response.status === 422){
-                    return Promise.reject("Error: 422 - Required Field has been bypassed");
+                } else if (response.status === 400){
+                    return Promise.resolve(response.json());
                 }
             })
             .then(data => {
                 console.log("API Response: ", data)
-                window.location.href = "assets/inc/success.html?success=1";
+                
+                //window.location.href = "assets/inc/success.html?success=1";
+                if (data.status === 400){
+                    console.log(data.errors);
+                    console.log(data.errors.ReviewDescription[0]);
+                    //if (data.errors.)
+                    //customPopup(data.errors.ReviewDescription[0])
+                    return;
+                }else if (data.status === 200){
+                    console.log("Success");
+                }
             })
 
             .catch(error => {
                 console.error("Error:", error);
-
-                if (error.includes("Error: 422")){
-                    // In all capitals to signify importance
-                    console.error("USER HAS BYPASSED JAVASCRIPT!");
-                    // Not entirely sure this may show up but worth adding here anyway.
-                    customPopup("You have bypassed the JavaScript, please try again with JavaScript enabled");
-                }
             });
             
             

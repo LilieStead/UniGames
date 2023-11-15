@@ -22,6 +22,7 @@ namespace UniGames.Api.Controllers
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
         private readonly IReviewRepository reviewRepository;
+        private object errorText;
 
         public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IReviewRepository reviewRepository)
         {
@@ -136,19 +137,33 @@ namespace UniGames.Api.Controllers
                 if (userDM == null)
                 {
                     // Return a not found error message
-                    return BadRequest("No User Found");
+                    return NotFound("No User Found");
                 }
+
+                var validationObj = new List<ValidationDTO>();
 
                 if (userDM.Useremail != email)
                 {
-
-                    return Unauthorized("Email address does not match database records");
-                }
-                if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
+                    validationObj.Add(new ValidationDTO
+                    {
+                        ErrorText = "Email Does Not Match User Records",
+                        Type = "Email",
+                    });
+                }              
+                if (userDM.Userphone != phone && phone != null)
                 {
-                    // StatusCode 409 typically means a Conflict has occurred
-                    return StatusCode(409, "Conflict With Incorrect User Phone Number");
 
+                    validationObj.Add(new ValidationDTO
+                    {
+                        ErrorText = "Phone Number Does Not Match Records",
+                        Type = "Phone",
+                    });
+
+                }
+
+                if (validationObj.Any())
+                {
+                    return BadRequest(validationObj);
                 }
 
                 // Map the userDM to the updatePasswordDTO

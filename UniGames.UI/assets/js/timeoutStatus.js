@@ -1,6 +1,6 @@
 // Function to check if passwordTimeout function is active
 function timeoutStatus(){
-    const curTime  = sessionStorage.getItem('passwordTimeout');
+    const curTime  = localStorage.getItem('passwordTimeout');
     // If it is active then
     if (curTime){
         // Converts the current time left into a base-10 integer

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.Validators;
 
 namespace UniGames.Api.Models.DTOs
 {
@@ -7,8 +8,7 @@ namespace UniGames.Api.Models.DTOs
     {
         [Required]
         public string ReviewTitle { get; set; }
-        [Required]
-        [MaxLength(500, ErrorMessage = "Review Descriptions cannot have more than 500 characters")]
+        [ReviewDescriptionValidator]
         public string ReviewDescription { get; set; }
         [Required]
         public short Score { get; set; }
