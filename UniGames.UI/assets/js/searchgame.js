@@ -1,6 +1,6 @@
 // Get the Title parameter from the URL
 const urlParams = new URLSearchParams(window.location.search);
-const title = urlParams.get('Title'); // Assuming 'Title' is the parameter name in the URL
+const title = urlParams.get('Title');
 
 // Construct the URL with the Title parameter
 const apiUrl = `http://localhost:5116/game/${title}`;
@@ -38,6 +38,40 @@ fetch(apiUrl)
   });
 
 function createTableRow(game) {
+
+  const starnumber = game.averageScore
+  var star = null 
+  if (starnumber <= 10){
+      // half a star
+      star = '<p class="star"><i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if(starnumber <= 20 && starnumber >= 10){
+      // one star 
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if(starnumber <= 30 && starnumber >= 20){
+      // one and a half star
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if(starnumber <= 40 && starnumber >= 30){
+      //two stars
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>'
+  }else if(starnumber <= 50 && starnumber >= 40){
+      //two and ahalf stars 
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>'
+  } else if(starnumber <= 60 && starnumber >= 50){
+      //three starts
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if(starnumber <= 70 && starnumber >= 60){
+      //three and a half stars
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if(starnumber <= 80 && starnumber >= 70){
+      //four stars
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
+  }else if (starnumber <= 90 && starnumber >= 80){
+      // four and a half stars 
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i></p>';
+  }else if (starnumber <= 100 && starnumber >= 90){
+      // five stars
+      star = '<p class="star"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i></p>';
+  }
   const row = document.createElement('tr');
   row.classList.add('game'); // Adding a class to the table row
 
@@ -55,7 +89,7 @@ function createTableRow(game) {
   row.appendChild(platformCell);
 
   const scoreCell = document.createElement('td');
-  scoreCell.textContent = game.averageScore;
+  scoreCell.innerHTML += star;
   row.appendChild(scoreCell);
 
   // Attach click event listener to the link
