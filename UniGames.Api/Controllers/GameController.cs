@@ -41,6 +41,7 @@ namespace UniGames.Api.Controllers
             var gamesDTO = mapper.Map<List<GameDTO>>(gamesDM);
 
             return Ok(gamesDTO.OrderByDescending(r => r.AverageScore ).Take(20));
+
         }
 
         [HttpGet]
