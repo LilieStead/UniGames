@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames - Create Review</title>
+    <title>UniGames - Reset Pasword</title>
     <link rel="stylesheet" href="assets/style.css">
-
+    
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -29,36 +29,42 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Delete Your Review</h1>
+                    <h1>Reset Your Password</h1>
                 </div>
                 <div class=" flexcontainer">
-                <form id="deletereview" action="">
-                    <p class="delwarn">WARNING: If you delete your review, you will lose it forever</p>
+                <form id="resetpassform" action="">
                     <div>
-                        <label for="username">Username: </label>
+                        <label for="username">Username: *</label>
                         <input type="text" name="Username" id="user" placeholder="Enter your username here...">
                         <p class="formerror" id="usernameerror"></p>
                     </div>
                     <div>
-                        <label for="password">Your Password: </label>
-                        <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
+                        <label for="email">Email: *</label>
+                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
+                        <p class="formerror" id="useremailerror"></p>
+                    </div>
+                    <div>
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" name="Userphone" id="userphone" placeholder="Enter your phone number here... (if you have one)">
+                        <p class="formerror" id="userphoneerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">New Password: *</label>
+                        <input type="password" name="Userpassword" id="password" placeholder="Enter your new password here...">
                         <p class="formerror" id="passworderror"></p>
                     </div>
                     <div>
-                        <label for="password2">Confirm Password: </label>
-                        <input type="password" name="Userpassword2" id="password2" placeholder="Enter your password again...">
+                        <label for="passwordnew2">Confirm New Password: *</label>
+                        <input type="password" name="UserPasswordAgain" id="password2" placeholder="Enter your new password again...">
                         <p class="formerror" id="passworderror2"></p>
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
                     </div>
-                    <br>
                     <p id="timeout-countdown"></p>
-                    <div class="flexcontainer">
-                        <!-- Reset Password Button -->
-                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
-                    </div>
+                    <h2 id="error-handling"></h1>
                 </form>
+                
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
             </div>
@@ -71,12 +77,17 @@
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
+
+
+    <!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
+    <script src="assets/js/deluserpassfield.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/passtimeout.js"></script>
+    <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
+    <script src="assets/js/timeoutStatus.js"></script>
 </body>
 
-<script async defer type="text/javascript" src="assets/js/deletereview.js"></script>
-<script src="assets/js/timeoutStatus.js"></script>
-<script src="assets/js/passtimeout.js"></script>
-<script src="assets/js/popup.js"></script>
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

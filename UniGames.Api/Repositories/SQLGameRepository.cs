@@ -1,12 +1,5 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
@@ -81,6 +74,13 @@ namespace UniGames.Data.Repositories
             dbContext.SaveChanges();
             return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == game.GameID);
 
+        }
+
+        public Game UpdateGame(int id)
+        {
+            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).FirstOrDefault(x => x.GameID == id);
+            dbContext.SaveChanges();
+            return Games;
         }
         
         // Uses GameDTO rather than Game so it directly adds to the DTO, but still fetches the data from Game

@@ -1,4 +1,5 @@
 ﻿using UniGames.Api.Models.Domain;
+using UniGames.Api.Models.DTOs;
 
 namespace UniGames.Api.Repositories
 {
@@ -7,6 +8,8 @@ namespace UniGames.Api.Repositories
         User GetUserById(int id);
         User GetUserIDByName(string username);
 
+        List<User> GetAllUsers();
         User DeleteUser(User user);
+
     }
 }
