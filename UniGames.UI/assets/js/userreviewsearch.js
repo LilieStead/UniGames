@@ -19,7 +19,6 @@ fetch(apiUrl)
 
     // Loop through the array of games and append them to the table
     data.forEach(review => {
-      console.log(review.games.title)
       createReview(review);
     });
   })
@@ -76,30 +75,3 @@ function createReview(review) {
   </div>`;
 
 }
-
-//     //reviewtitleLink.href = '.html?id=' + game.gameID; 
-//     reviewtitleLink.textContent = review.reviewTitle;
-//     reviewtitleCell.appendChild(reviewtitleLink);
-//     row.appendChild(reviewtitleCell);
-
-//     const reviewdescCell = document.createElement('td');
-//     // Tells the frontend to look in the game table then look in platforms and then get the platform name from the foreign key.
-//     reviewdescCell.textContent = review.reviewDescription;
-//     row.appendChild(reviewdescCell);
-
-//     const scoreCell = document.createElement('td');
-//     scoreCell.textContent = review.score;
-//     row.appendChild(scoreCell);
-
-//     const userCell = document.createElement('td');
-//     userCell.textContent = review.userName.username;
-//     row.appendChild(userCell);
-
-//     // Attach click event listener to the link
-//     reviewtitleLink.addEventListener('click', function(event) {
-//         // Handle the click event if needed
-//         console.log('Clicked on review with ID:', review.reviewID);
-//     });
-
-//     return row;
-// }
