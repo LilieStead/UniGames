@@ -57,11 +57,12 @@ function resetPassword(event){
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
-        //passwordTimeout();
+        passwordTimeout();
         return;
     }
     if (newPassActual === newPass2){
         const error_message = document.getElementById('passworderror2');
+        passwordTimeout();
         error_message.innerHTML = "";
         
     }
@@ -167,20 +168,6 @@ function resetPassword(event){
     
 
 }
-
-// Function to check if passwordTimeout function is active
-// function timeoutStatus(){
-//     const curTime  = sessionStorage.getItem('passwordTimeout');
-//     // If it is active then
-//     if (curTime){
-//         // Converts the current time left into a base-10 integer
-//         const endTime = parseInt(curTime, 10);
-//         // Specifies if the cooldown is actually active if both are true
-//         return !isNaN(endTime) && Date.now() < endTime;
-//     }
-//     // Cooldown is not active
-//     return false;
-// }
 
 
 // Event listener to find the button click

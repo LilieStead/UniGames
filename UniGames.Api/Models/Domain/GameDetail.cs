@@ -13,6 +13,6 @@ namespace UniGames.Api.Models.Domain
         public string Developer { get; set; }
         public string Genre { get; set; }
 
-
+        public Game Games { get; set; }
     }
 }

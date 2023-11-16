@@ -23,7 +23,7 @@ namespace UniGames.Data.Repositories
         }
         public GameDetail GetDetailByID(int id)
         {
-            return dbContext.GameDetail.Find(id);
+            return dbContext.GameDetail.FirstOrDefault(x => x.GameID == id);
         }
     }
 }
