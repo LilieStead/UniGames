@@ -17,6 +17,11 @@ namespace UniGames.Api.Repositories
             this.mapper = mapper;
         }
 
+        public List<User> GetAllUsers() 
+        { 
+            return dbContext.User.ToList();
+        }
+
         public User GetUserById(int id)
         {
             return dbContext.User.FirstOrDefault(x => x.UserId == id);
