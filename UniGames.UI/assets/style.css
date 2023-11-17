@@ -111,6 +111,7 @@ align-items: center;
     justify-content: space-around;
     min-width: 55%;
     background-color: #FFFFFF;
+    max-width: 60%;
 }
 #mainsize{
     height: 105vh;
@@ -120,6 +121,9 @@ align-items: center;
 @media screen and (max-width: 1050px) {
     #mainsize{
       min-width: 90vw;
+    }
+    #main{
+        min-width: 80%;
     }
   }
 
@@ -195,6 +199,10 @@ td a:hover{
     color: #1DD577;
     transition: 0.2s;
     
+}
+
+.star{
+    color: #ffd500;
 }
 
 /* END OF INDEX TABLE */
@@ -695,3 +703,120 @@ form .formerror{
 }
 
 /* END OF  LOADING*/
+
+/* START OF GENERAL REVIEWS */
+.review .options a{
+    color: black;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.review .options a:hover{
+    color: #7D53F8;
+    transition: 0.5s;
+}
+.review .rating{
+    margin-left: auto;
+    margin-right: 2rem;
+    color: #ffd500;
+}
+.review .options{
+    margin-left: auto;
+    margin-right: 2rem;
+    margin-top: 2rem;
+}
+
+
+/* END OF GENERAL REVIEWS*/
+
+/* START OF REVIEWS FOR SEARCH*/
+
+#reviewbody .review{
+    min-width: 70%;
+    min-height: 18rem;
+    background-color: #f5f5f5;
+    max-width: 70%;
+    max-height: 60rem;
+    padding: 2rem;
+    border-radius: 2.5px;
+    margin-bottom: 2rem;
+}
+
+
+#reviewbody .review p{
+    font-family:Unidays-Book, sans-serif ;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    max-width: 100%;
+}
+
+#reviewbody .review h1 {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.6rem;
+}
+
+#reviewbody .review div{
+    flex-direction: row;
+    display: flex;
+}
+@media  screen and (max-width: 1047px) {
+    #reviewbody{
+        max-width: 90%;
+        min-width: 90%;
+    }
+}
+
+
+
+
+
+
+
+/* END OF REVIEWS FOR SEARCH */
+
+/* START OF REVIEWS FOR DETAILS */
+
+#detail-review .review{
+    min-width: 70%;
+    min-height: 15rem;
+    background-color: #f5f5f5;
+    max-width: 70%;
+    max-height: 20rem;
+    padding: 2rem;
+    border-radius: 2.5px;
+    margin-bottom: 2rem;
+}
+
+
+#detail-review .review p{
+    font-family:Unidays-Book, sans-serif ;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    max-width: 100%;
+}
+
+#detail-review .review h1 {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.3rem;
+}
+
+#detail-review .review div{
+    flex-direction: row;
+    display: flex;
+}
+
+@media  screen and (max-width: 1047px) {
+    #detail-review{
+        max-width: 90%;
+        min-width: 90%;
+    }
+}
+
+
+/* END OF REVIEWS FOR DETAILS */

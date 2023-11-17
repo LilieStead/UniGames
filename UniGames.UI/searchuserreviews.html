@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UniGames</title>
     <script async defer type="text/javascript" src="assets/js/userreviewsearch.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -31,7 +32,7 @@
                 <div id="contenttitle">
                     <h1>Search for user reviews</h1>
                 </div>
-                <div class="searchform">
+                <div class="searchform" id="searchform">
                     <form id="searchreviewform" class="form" method="get">
                         <label for="Review">User Reviews</label>
                         <input  id="Review" type="text" name="Username" placeholder="Please enter a user" maxlength="50">
@@ -39,7 +40,15 @@
                         <input type="submit">
                     </form>
                 </div>
-                <div id="tablecontainer">
+                <div class="flexcontainer" id="reviewbody">
+                    
+                </div>
+
+
+
+
+
+                <!-- <div id="tablecontainer">
                     <table id="UserreviewTable">
                         <thead>
                         <tr>
@@ -51,9 +60,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- Dynamic content will be added here -->
-                        </tbody>
-                    </table>
+                        Dynamic content will be added here -->
+                        <!-- </tbody>
+                    </table> -->
                     <!-- START LOADING ICON -->
                     <div class="centercontents" id="loadingcontainer">
                         <div class="one loading"></div>
