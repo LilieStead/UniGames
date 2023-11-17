@@ -37,6 +37,7 @@
                         <div id="GameName">
                             <label for="Name">Name: </label>
                             <input type="text" id= "gname" name = "Title" maxlength="50">
+                            <p class = "formerror" id="titleerror"></p>
 
                         </div>
                         <div id="Platform">
@@ -49,10 +50,12 @@
                                 <option value="5">PS5</option>
                                 <option value="6">Nintendo Switch</option>
                             </select>
+                            <p class="formerror" id ="platformerror"></p>
                         </div>
                         <div id="Releasedate">
                             <label for="Release">Release Date: </label>
                             <input type="datetime-local" name="ReleaseDate" id="date" >
+                            <p class="formerror" id = "releasedate"></p>
                         </div>
                         <input type="submit" value="Submit" class="centersubmit">
                    </form>
