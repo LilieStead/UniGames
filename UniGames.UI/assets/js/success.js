@@ -19,13 +19,16 @@ function successPages(){
 
         case "7":
             successMessage = "You now have an account!";
-
+            break;
         case "4":
             successMessage = "Game Has Been Updated!"
             break;
         case "5":
             successMessage = "You have successfully reset your password!";
 
+            break;
+        case "8":
+            successMessage = "You have created a game!";
             break;
         default:
             successMessage = "An unknown success occurred?";
