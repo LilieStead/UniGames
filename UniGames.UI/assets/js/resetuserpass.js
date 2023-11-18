@@ -19,6 +19,8 @@ function resetPassword(event){
     const usernameError = document.getElementById('usernameerror');
     const emailError = document.getElementById('useremailerror');
     const passwordError = document.getElementById('passworderror');
+    const phoneError = document.getElementById('userphoneerror');
+    phoneError.innerHTML = '';
 
     // Create an error flag
     let hasErrors = false;
@@ -93,23 +95,12 @@ function resetPassword(event){
         if (response.status === 200){
             console.log('User Authenticated');
             inHTMLError.textContent = '';
+            //return newvar;
         }
         else if (response.status === 400){
             console.log(newvar);
             return Promise.resolve(newvar);
         }
-        /*else if (response.status === 401){
-            console.log('User\'s Email Address Does Not Match Current Records');
-            return Promise.reject('Error: 401 - User\'s Email Address Does Not Match Current Records');
-        }
-        else if (response.status === 409){
-            console.log('Phone Number Is Present But Incorrect');
-            return Promise.reject('Error: 409 - Phone Number Is Incorrect For Current User');
-        }
-        else if (response.status === 500){
-            console.log("Is the API off?");
-            return Promise.reject('Error: 500 - API Endpoint IS NOT Found (Is The API Turned Off?)');
-        }*/
         else{
             console.log('Error: ', response.status);
             inHTMLError.textContent = 'An unexpected error occurred.';
@@ -117,30 +108,34 @@ function resetPassword(event){
     })
     .then(data => {
         console.log('API Response: ', data);
-        //console.log(data.errorText);
-        // Add code to go to success page or update current page with success
-        //window.location.href = "assets/inc/success.html?success=5";
+        const errorMessages = [];
         if (data.length > 0){
-            //console.log(data.errorText);
-            const phoneError = document.getElementById('userphoneerror');
+            
+            
             data.forEach((error) =>
             {
-                console.log(error.type);
                 if (error.type === "Email"){
                     emailError.textContent = error.errorText;
                     console.log(data.errorText);
+                    errorMessages.push(error.errorText);
                 } 
                 if (error.type === "Phone"){
                     phoneError.textContent = error.errorText;
+                    //customPopup(error.errorText);
+                    errorMessages.push(error.errorText);
+                    
                 }
+                
+                
                 console.log(error)
-            }
-            );
-            
-            
+            });
+            multi_Popup(errorMessages);
+
             return;
             //console.log
-        } 
+        } else{
+            window.location.href = "assets/inc/success.html?success=5";
+        }
         
 
     

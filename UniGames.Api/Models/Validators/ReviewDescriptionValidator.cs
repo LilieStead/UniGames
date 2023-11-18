@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniGames.Api.Models.Validators
 {
@@ -8,13 +9,17 @@ namespace UniGames.Api.Models.Validators
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var description = value.ToString();
+            var description = value.ToString().ToLower();
             if (description.StartsWith("shit"))
             {
                 return new ValidationResult("Please do not use bad language for a review");
             }
-
+           
+            
             return ValidationResult.Success;
+            
+
+            
         }
     }
 }
