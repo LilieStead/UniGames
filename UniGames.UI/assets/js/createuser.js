@@ -109,7 +109,7 @@ function CreateUsers(event){
     if (nopass){
         return;
     }
-    
+    console.log("Hello line 112");
     const data = {
         Userfname: FirstName,
         Userlname: LastName,
@@ -119,7 +119,7 @@ function CreateUsers(event){
         Userdob: userdob,
         Userpassword: Password,
     };
-
+    console.log("Hello line 122");
 
     fetch('http://localhost:5116/User', {
         method: 'POST',
@@ -142,7 +142,28 @@ function CreateUsers(event){
         
     .then(responseData => {
         console.log('API Response: ', responseData)
-        window.location.href = "assets/inc/success.html?success=7";
+        //window.location.href = "assets/inc/success.html?success=7";
+        // Local storage could be used so it can be used across the browser as a "session"
+        // But then removed upon closure of the current browser
+
+        fetch(`http://localhost:5116/user/${UserName}/${Password}`)
+            .then(response => response.json())
+            .then(data => {
+                const authToken = data.token;
+
+                sessionStorage.setItem('authToken', authToken);
+                if (stayLogged.checked){
+                    savePreference();
+                }
+
+                window.location.href = "home.html";
+            })
+            .catch(error => {
+                console.log("error:", error);
+            })
+
+
+            
     })
     .catch(error=> {
         console.error('Error: ', error);
@@ -153,6 +174,6 @@ function CreateUsers(event){
         }}
     });
 }
-
-
+var stayLogged = document.getElementById('stayLoggedIn');
+loginStatus();
 document.getElementById("SignUp").addEventListener('submit', CreateUsers);

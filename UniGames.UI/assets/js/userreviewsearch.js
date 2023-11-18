@@ -75,3 +75,5 @@ function createReview(review) {
   </div>`;
 
 }
+
+loginStatus();

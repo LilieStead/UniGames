@@ -81,3 +81,4 @@ function createTableRow1(data) {
 
     return row; // Returns the table row
 }
+loginStatus();

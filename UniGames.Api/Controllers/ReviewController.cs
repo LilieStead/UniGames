@@ -1,5 +1,5 @@
 using AutoMapper;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
@@ -71,6 +71,7 @@ namespace UniGames.Api.Controllers
 
         // Uses the HttpPost method
         [HttpPost]
+        //[Authorize]
         // Public Method
         public IActionResult CreateReview([FromBody] CreateReviewDTO createReviewDTO)
         {
@@ -107,6 +108,7 @@ namespace UniGames.Api.Controllers
 
         [HttpDelete]
         [Route ("/deletereview/{userID:int}/{id:int}")]
+        [Authorize]
         public IActionResult DeleteReview([FromRoute] int userID, int id) {
             
             var reviewdm = reviewRepository.GetReviewByID(id);

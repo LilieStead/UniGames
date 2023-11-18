@@ -11,6 +11,8 @@ using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
 using System.Net;
+using UniGames.Api.Models.Sessions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniGames.Api.Controllers
 {
@@ -52,7 +54,7 @@ namespace UniGames.Api.Controllers
         // Decides the route, using a username and password
         [Route("{username}/{password}")]
         // Creates a new Method
-        public IActionResult GetUserIdByName([FromRoute] string password, string username)
+        public IActionResult UserLogin([FromRoute] string password, string username)
         {
             // Selects the GetUserIDByName from the userRepository and uses the username
             var userDM = userRepository.GetUserIDByName(username);
@@ -69,10 +71,31 @@ namespace UniGames.Api.Controllers
                 // Return that the user is unauthorised
                 return Unauthorized();
             }
+
+            // Generates a user token for the login system
+            string jwtToken = UserSessionGenerator.GenerateJwtToken(userDM.UserId.ToString());
+
+            HttpContext.Session.SetString("UserAuthenticated", "true");;
+
             // Maps the DM to the DTO
             var userDTO = mapper.Map<UserDTO>(userDM);
             // Returns the correct user details
-            return Ok(userDTO);
+            return Ok(new { Token = jwtToken, User = userDTO});
+
+        }
+
+        [HttpGet]
+        [Route("logout")]
+        //[Authorize]
+        public IActionResult Logout()
+        {
+            // Removes all authentication, session-related variables
+            HttpContext.Session.Remove("UserAuthenticated");
+            
+
+
+            return Ok(new { Message = "Logout was successful" });
+
 
         }
 
@@ -142,6 +165,7 @@ namespace UniGames.Api.Controllers
         [HttpPut]
         // Defines the Route
         [Route("/reset-password/{username}/{email}/{phone?}")]
+        //[Authorize]
         // Public method -- also can be used to generally update a user password rather than saying 'reset'
         public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
         {
@@ -203,6 +227,7 @@ namespace UniGames.Api.Controllers
         [HttpDelete]
         // Defines the Route
         [Route("/delete/{username}")]
+        //[Authorize]
         // Public method
         public IActionResult DeleteUser([FromRoute] string username)
         {

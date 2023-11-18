@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/index.js"></script>
+    <title>UNiGames</title>
+    <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -14,16 +14,9 @@
     <h1>UNiGames</h1>
 </header>
 <!-- END OF HEADER -->
-<body>
+<body id="loginpage">
     <!-- NAV -->
     <nav class="centercontents">
-        <a href="index.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
-        
     </nav>
     <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
@@ -31,38 +24,19 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Select Your Option</h1>
                 </div>
-                <!--  GAME TABLE -->
-                <div id="tablecontainer">
-                    <table id="gameTable">
-                        <thead>
-                        <tr>
-                            <th>Game Title</th>
-                            <th>Platform</th>
-                            <th>Star Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- Dynamic content will be added here -->
-                        </tbody>
-                    </table>
-                    <!-- START LOADING ICON -->
-                    <div class="centercontents" id="loadingcontainer">
-                        <div class="one loading"></div>
-                        <div class="two loading"></div>
-                        <div class="three loading"></div>
-                        <div class="four loading"></div>
-                        <div class="five loading"></div>
-                    </div>
-                    <!-- END LOADING ICON -->
-                </div>
-                <!-- END OF GAME TABLE -->
+                <div class="flexcontainer">
+                    <a href="login.html">Login</a>
+                    <a href="createuser.html">Signup</a>
+                </div>             
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+
+<script src="assets/js/index.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">
@@ -74,4 +48,3 @@
 </footer>
 <!-- END OF FOOTER -->
 </html>
-

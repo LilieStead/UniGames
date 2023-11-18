@@ -19,7 +19,7 @@ function createReview(event){
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
     const password2 = formData.get('Userpassword2');
-    
+    console.log(username);
     const titleError = document.getElementById('titleerror');
     const descriptionError = document.getElementById('descriptionerror');
     const scoreError = document.getElementById('scoreerror');
@@ -80,8 +80,7 @@ function createReview(event){
     }else{
         passwordError.innerHTML = '';
     }
-    console.log(password);
-    console.log(password2);
+
     if (password !== password2){
         const error_message = document.getElementById('passworderror2');
             
@@ -99,76 +98,58 @@ function createReview(event){
     if (curFail){
         return;
     }
+    console.log(username);
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+
+   
+    
     // Get Username and Password
-    fetch(`http://localhost:5116/user/${username}/${password}`)
-        .then(response => {
-            if (response.status === 200){
-                console.log("User authenticated");
+    const data = {
+        ReviewTitle: reviewTitle,
+        ReviewDescription: reviewDesc,
+        Score: score, 
+        UserID: userID,
+        GameID: gameID,
+    };
 
-                return response.json();
-            } else if (response.status === 404){
-                // User is not found
-                usernameError.innerHTML = 'Username not recognised, please try again';
-                return;
-            } else if (response.status === 401){
-                // Password is incorrect
-                passwordError.innerHTML = 'Your password is incorrect, please try again or reset it <br> by clicking here: <a href="resetuserpass.html">Reset Password</a>';
-            } else{
-                console.error("error", response.status);
-            }
-        })
-        .then(data => {
-            const userID = data.userId;
+    fetch('http://localhost:5116/review', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
             
-            data.ReviewTitle = reviewTitle;
-            data.ReviewDescription = reviewDesc;
-            data.Score = score;
-            data.UserID = userID;
-            data.GameID = gameID;
-
-            fetch('http://localhost:5116/review', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => {
-                if (response.status === 200){
-                    response.json()
-                } else if (response.status === 400){
-                    return Promise.resolve(response.json());
-                }
-            })
-            .then(data => {
-                console.log("API Response: ", data)
-                
-                //window.location.href = "assets/inc/success.html?success=1";
-                if (data.status === 400){
-                    console.log(data.errors);
-                    console.log(data.errors.ReviewDescription[0]);
-                    //if (data.errors.)
-                    //customPopup(data.errors.ReviewDescription[0])
-                    return;
-                }else if (data.status === 200){
-                    console.log("Success");
-                }
-            })
-
-            .catch(error => {
-                console.error("Error:", error);
-            });
-            
-            
-        })
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.status === 200){
+            response.json()
+        } else if (response.status === 400){
+            return Promise.resolve(response.json());
+        }
+    })
+    .then(data => {
+        console.log("API Response: ", data)
         
-        .catch(error => {
-            console.error("Error:", error);
-        });
+        //window.location.href = "assets/inc/success.html?success=1";
+        if (data.status === 400){
+            console.log(data.errors);
+            console.log(data.errors.ReviewDescription[0]);
+            //if (data.errors.)
+            //customPopup(data.errors.ReviewDescription[0])
+            return;
+        }else if (data.status === 200){
+            console.log("Success");
+        }
+    })
+
+    .catch(error => {
+        console.error("Error:", error);
+    });
+            
 
            
 }
 
-
+loginStatus();
 document.getElementById("createreview").addEventListener("submit", createReview);

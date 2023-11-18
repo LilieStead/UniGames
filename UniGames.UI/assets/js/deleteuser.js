@@ -154,5 +154,5 @@ function deleteUser(event){
            
 }
 
-
+loginStatus();
 document.getElementById("deleteuser").addEventListener("submit", deleteUser);

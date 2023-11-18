@@ -1,4 +1,7 @@
-// Creating a function to handle new game data
+//const loggeduser2 = sessionStorage.removeItem('loggedusername');
+//const loggedemail2 = sessionStorage.removeItem('loggedemail');
+//const loggedpass2 = sessionStorage.removeItem('loggedpassword');
+
 function createGame(event){
     event.preventDefault();
 
@@ -70,5 +73,5 @@ function createGame(event){
     });
 }
 
-
+loginStatus();
 document.getElementById("NewGame").addEventListener('submit', createGame);

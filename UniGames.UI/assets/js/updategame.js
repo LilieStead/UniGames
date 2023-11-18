@@ -77,5 +77,5 @@ function updateGame(event){
     })
     
 }
-
+loginStatus();
 document.getElementById('updategame').addEventListener('submit', updateGame);

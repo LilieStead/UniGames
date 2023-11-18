@@ -110,5 +110,5 @@ function deleteReview(event){
            
 }
 
-
+loginStatus();
 document.getElementById("deletereview").addEventListener("submit", deleteReview);

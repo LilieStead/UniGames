@@ -8,7 +8,7 @@ using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
 using UniGames.Api.Repositories;
 using System.Diagnostics.Metrics;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniGames.Api.Controllers
 {
@@ -59,6 +59,7 @@ namespace UniGames.Api.Controllers
         }
 
         [HttpPost]
+        //[Authorize]
         public IActionResult CreateGame([FromBody] CreateGameDTO createGameDTO)
         {
             if (ModelState.IsValid)
@@ -80,6 +81,7 @@ namespace UniGames.Api.Controllers
 
         [HttpPut]
         [Route("/update-game/{id:int}")]
+        //[Authorize]
         public IActionResult UpdateGame([FromRoute] int id, [FromBody] UpdateGameDTO updateGameDTO)
         {
             var gamesDM = gameRepository.GetGameById(id);

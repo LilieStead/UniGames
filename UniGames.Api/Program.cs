@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using UniGames.Data.Repositories;
 using System.Diagnostics;
 using UniGames.Api.Repositories;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,30 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddDistributedMemoryCache();
+// Adds session options
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("7FjkL0tRiZDNf8aQz6e1b2XJmOygHqKvItPp3sVhUc4WnAd5xYrEgSdCfBvNlM"))
+        };
+    });
+
 
 builder.Services.AddDbContext<GameDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("UniGamesConnectionString")));
@@ -41,6 +68,19 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
+// Uses sessions
+app.UseSession();
+// Configures the last time the user accesses an API endpoint and prevents session timeout
+// Not the best to use for a high volume of requests but this is a small project so it can
+//be used for now
+/*app.Use((context, next) =>
+{
+    context.Session.SetString("LastAccessTime", DateTime.UtcNow.ToString("o"));
+    return next();
+});*/
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

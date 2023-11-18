@@ -9,7 +9,7 @@ function resetPassword(event){
     const formDataUser = new FormData(document.getElementById('resetpassform'));
 
     // Get all of the form data and store them to variables -- Const so they cannot be changed
-    const userName = formDataUser.get('Username');
+    const username = formDataUser.get('Username');
     const userEmail = formDataUser.get('Useremail');
     const userPhone = formDataUser.get('Userphone');
     const newPassActual = formDataUser.get('Userpassword');
@@ -24,7 +24,7 @@ function resetPassword(event){
     let hasErrors = false;
 
     // Validation checks
-    if (userName === '' || userName === null) {
+    if (username === '' || username === null) {
         usernameError.textContent = 'You must enter your username';
         hasErrors = true;
     } else{
@@ -57,7 +57,7 @@ function resetPassword(event){
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
-        //passwordTimeout();
+        passwordTimeout();
         return;
     }
     if (newPassActual === newPass2){
@@ -77,8 +77,8 @@ function resetPassword(event){
     // Chooses the correct URL based on the condition of the phone number (if it is present in the data or not)
     // ? means it is present, : means it is not -- This chooses the API endpoint to use
     const apiURL = userPhone
-    ? `http://localhost:5116/reset-password/${userName}/${userEmail}/${userPhone}`
-    : `http://localhost:5116/reset-password/${userName}/${userEmail}`
+    ? `http://localhost:5116/reset-password/${username}/${userEmail}/${userPhone}`
+    : `http://localhost:5116/reset-password/${username}/${userEmail}`
     // Fetches the correct API endpoint needed
     fetch(apiURL, {
         method: "PUT",
@@ -182,6 +182,6 @@ function resetPassword(event){
 //     return false;
 // }
 
-
+loginStatus();
 // Event listener to find the button click
 document.getElementById('resetpassform').addEventListener('submit', resetPassword);
