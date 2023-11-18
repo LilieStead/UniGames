@@ -29,6 +29,7 @@ function deleteUser(){
     // Checks to see if the username is contains no text
     if (username === '' || username === null) {
         //event.preventDefault();
+        modifyError("An unknown error occured");
         usernameError.innerHTML = 'You must enter your username';
         blankFields = true;
     }
@@ -58,6 +59,7 @@ function deleteUser(){
     }
 
     if (blankFields){
+        
         return;
         
     }
@@ -184,7 +186,7 @@ function deleteUser(){
                     // Logs the error to the console
                     console.error("Error:", error);
                     // Sends the user to the default error page
-                    window.location.href = "error.html?error=default";
+                    modifyError("An unknown error occured");
                 }
             });
             

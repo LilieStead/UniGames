@@ -460,7 +460,20 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
   }
 
+#errorbackbut{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: red;
+    margin-top: 2em;
+}
 
+/* End of Error Page
 /*  Success Page(s)  */
 .success h1{
     color: green;
