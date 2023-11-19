@@ -9,23 +9,32 @@
 
     <script async defer type="text/javascript" src="assets/js/creategame.js"></script>
     <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
 </head>
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
-</header>
+<header>
+    <div id="logo">
+      <h1>UNiDAYS</h1>
+    </div>
+    <div id="navbar">
+      <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> YourUsername <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="#">Edit Details</a>
+  <a href="#">My games</a>
+  <a href="#">My Reviews</a>
+  <a href="#">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
 <!-- END OF HEADER -->
-<body>
-    <!-- NAV -->
-    <nav class="centercontents">
-        <a href="home.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a id="signup-page" href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
-    </nav>
-    <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
     <div id="container">
         <div id="main">

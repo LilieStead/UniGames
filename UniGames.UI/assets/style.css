@@ -16,54 +16,93 @@
     justify-content: center;
     align-items: center;
 }
-
-
-/*HEADER */
-
+/* START OF USER SIDE MENU*/
 header{
+    overflow-x: hidden;
+  }
+  
+#navbar {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+  }
+
+  #logo{
     min-width: 100vw;
     background-color: #FFFFFF;
-    padding: 0.5rem 0;
-}
+    min-height: 7vh;
+    max-height: 7vh;
+  }
 
-header h1{
+  #logo h1{
     color: #000000;
     font-family: Unidays-Heavy, sans-serif;
     font-size: 3rem;
-}
-
-/* END OF HEADER  */
-
-/* NAV */
-nav{
-    min-width: 100vw;
-    background-color: #000000;
-    height: 2rem;
-}
-nav a p{
-    font-size: 1.3rem;
-    font-family: Unidays-Heavy, sans-serif;
-    transition: 0.3s;
-}
-
-nav a{
-    text-decoration: none;
-    width: 15%;
     text-align: center;
-    color: #FFFFFF;
-}
-@media screen and (max-width: 515px) {
-    nav a{
-      min-width: 15%;
-    }
+    padding-top: 0.5rem;
   }
-
-nav a p:hover{
+  
+  #usernameToggle {
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 20px;
+    width: 16rem;
+    font-family: Unidays-Heavy, sans-serif;
     font-size: 1.5rem;
-    transition: 0.3s;
-}
-/* END OF NAV */
+  }
+  
+  #mainLinks {
+    display: flex;
+    flex-direction: row;
+    flex: 1; /* Allow the links to shrink */
+  }
+  
+  #mainLinks a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    min-width: 25%;
+    text-align: center;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.5rem;
+    transition: 0.5s;
+  }
+  
+  
+  #hamburgerMenu {
+    display: none;
+    flex-direction: column;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: 0; /* Align the menu to the left */
+    width: 16rem; /* Adjust the width as needed */
+    padding: 10px;
+    margin-top: 4.3rem;
+    z-index: 1; /*To stop interference with rest of the page*/
+    border-radius: 2.5px;
+  }
+  
+  #hamburgerMenu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-family: Unidays-Heavy, sans-serif;
+    padding: 02rem, 0;
+  }
+  
+  #hamburgerMenu a:hover {
+    background-color: #555;
+  }
+  
 
+
+/* END OF USER SIDE MENU*/
 /* FOOTER */
 
 footer{
