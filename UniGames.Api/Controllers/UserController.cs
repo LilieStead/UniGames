@@ -1,18 +1,14 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
-using System.Numerics;
-using System;
-using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
-using System.Net;
 using UniGames.Api.Models.Sessions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using UniGames.Data.Repositories;
 
 namespace UniGames.Api.Controllers
 {
@@ -23,15 +19,41 @@ namespace UniGames.Api.Controllers
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
-        private readonly IReviewRepository reviewRepository;
-        private object errorText;
+        private readonly IGameRepository gameRepository;
+        private readonly JwtService jwtService;
+        private readonly IOptions<JwtConfig> jwtConfig;
 
-        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IReviewRepository reviewRepository)
+        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IGameRepository gameRepository, JwtService jwtService, IOptions<JwtConfig> jwtConfig)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.userRepository = userRepository;
-            this.reviewRepository = reviewRepository;
+            this.gameRepository = gameRepository;
+            this.jwtService = jwtService;
+            this.jwtConfig = jwtConfig;
+        }
+
+        [HttpGet("decodeToken")]
+        public IActionResult DecodeToken([FromQuery] string jwtToken)
+        {
+            try
+            {
+                var decodedToken = jwtService.DecodeJwtAndGetUserId(jwtToken);
+                
+
+                if (decodedToken.UserId != null && decodedToken.UserName != null)
+                {
+                    return Ok(new { UserID = decodedToken.UserId, Username = decodedToken.UserName});
+                }
+                else
+                {
+                    return BadRequest(new { Message = "Failed to decode token" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while decoding the token", Error = ex.Message });
+            }
         }
 
 
@@ -72,10 +94,12 @@ namespace UniGames.Api.Controllers
                 return Unauthorized();
             }
 
+            var jwtConfig = new JwtConfig();
+            var userSessionGenerator = new UserSessionGenerator(jwtConfig);
             // Generates a user token for the login system
-            string jwtToken = UserSessionGenerator.GenerateJwtToken(userDM.UserId.ToString());
+            string jwtToken = userSessionGenerator.GenerateJwtToken(userDM.UserId.ToString(), userDM.Username.ToString());
 
-            HttpContext.Session.SetString("UserAuthenticated", "true");;
+            HttpContext.Session.SetString("UserAuthenticated", "true");
 
             // Maps the DM to the DTO
             var userDTO = mapper.Map<UserDTO>(userDM);
@@ -226,10 +250,10 @@ namespace UniGames.Api.Controllers
         // Uses the HttpDelete method
         [HttpDelete]
         // Defines the Route
-        [Route("/delete/{username}")]
+        [Route("/delete/{username}/{password}")]
         //[Authorize]
         // Public method
-        public IActionResult DeleteUser([FromRoute] string username)
+        public IActionResult DeleteUser([FromRoute] string username, string password)
         {
             // Uses the GetUserById() method in userRepository and uses the id
             var userDM = userRepository.GetUserIDByName(username);
@@ -239,15 +263,20 @@ namespace UniGames.Api.Controllers
                 // Return that no ID is found
                 return NotFound("No User ID is found, please choose a valid ID");
             }
-            // Gets the Review based on the User ID -- It only does this if a User ID is found
-            var userReviews = reviewRepository.GetReviewByUser(userDM.UserId);
-            // If there are any reviews present in the database then
-            if (userReviews.Count > 0)
+            if (userDM.Userpassword != password)
+            {
+                return Unauthorized();
+            }
+
+            var gamesDM = gameRepository.GetGameByUserID(userDM.UserId);
+            if (gamesDM.Count > 0)
             {
                 // Return a bad request and tell the user they cannot delete their account because they have previously created reviews for games
-                return BadRequest("Cannot delete this user because they have created reviews for games, please delete these reviews first.");
+                return BadRequest("Cannot delete this user because they have created games, please delete the games first.");
 
             }
+
+            HttpContext.Session.Remove("UserAuthenticated");
             // If the user does not have a review, delete their account using the method in the userRepository
             var delUser = userRepository.DeleteUser(userDM);
             // Map the delete action to the DTO

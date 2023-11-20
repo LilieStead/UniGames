@@ -89,6 +89,11 @@ namespace UniGames.Api.Controllers
             {
                 return NotFound();
             }
+            if (gamesDM.UserID != updateGameDTO.UserID)
+            {
+                return Unauthorized();
+            }
+
             this.mapper.Map(updateGameDTO, gamesDM);
             dbContext.SaveChanges();
 

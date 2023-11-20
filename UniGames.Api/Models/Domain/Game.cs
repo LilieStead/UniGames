@@ -10,6 +10,8 @@ namespace UniGames.Api.Models.Domain
 
         public DateTime ReleaseDate { get; set; }
 
+        public int UserID { get; set; }
+
         // Navigation Properties
         public Platform PlatformName{ get; set; }
 

@@ -9,43 +9,48 @@ function deleteUser(event){
     const formData = new FormData(document.getElementById("deleteuser"));
 
     // Gets the username and password from the form data
-    const username = formData.get('Username');
+    //const username = formData.get('Username');
     const password = formData.get('Userpassword');
     const password2 = formData.get('Userpassword2');
 
-    const usernameError = document.getElementById('usernameerror');
+    //const usernameError = document.getElementById('usernameerror');
     const passwordError = document.getElementById('passworderror');
     const passwordError2 = document.getElementById('passworderror2');
-    usernameError.innerHTML = '';
+    //usernameError.innerHTML = '';
     passwordError.innerHTML = '';
     passwordError2.innerHTML = '';
 
     // Creates a false flag to stop progression if true
     let blankFields = false;
     // Checks to see if the username is contains no text
-    if (username === '' || username === null) {
-        event.preventDefault();
-        usernameError.innerHTML = 'You must enter your username';
-        blankFields = true;
-    }
+    // if (username === '' || username === null) {
+    //     event.preventDefault();
+    //     usernameError.innerHTML = 'You must enter your username';
+    //     blankFields = true;
+    // }
     // Checks to see if the password contains no text
     if (password === '' || password === null){
+        event.preventDefault();
         if (activeTimeout){
             passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+            
         }else{
+            event.preventDefault();
             passwordError.innerHTML = 'You must enter your account\'s password';
-            curFail = true;
+            blankFields = true;
         }
     }
 
     if (password !== password2){
+        event.preventDefault();
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
+        blankFields = true;
         passwordTimeout();
         return;
     }
-    if (password === password2){
+    if (password === password2 && password != null){
         const error_message = document.getElementById('passworderror2');
         error_message.innerHTML = "";
         
@@ -55,101 +60,93 @@ function deleteUser(event){
         return; // Stops progression to the fetch -- Allows for separate error messages
     }
 
-    // Gets the user endpoint with the user's username and password
-    fetch(`http://localhost:5116/user/${username}/${password}`)
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    console.log(authToken.value);
+    var idType;
+
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        // Logs the data
+        console.log(data);
+        // Creates a variable which stores the username from the token
+        const userName = data.username;
+        // Uses the delete endpoint with the username from the database
+        fetch(`http://localhost:5116/delete/${userName}/${password}`, {
+            // Chooses the method used
+            method: "DELETE",
+            // Chooses the format of the content
+            headers: {
+                "Content-Type": "application/json",
+            },
+            // Converts the data to a string
+            body: JSON.stringify(data),
+        })
         .then(response => {
-            // If the username and password match then
-            if (response.status === 200){
-                // Log to the console that the user has been authenticated
-                console.log("User authenticated");
-                // Return the response
+            // If the deletion was a success then
+            if (response.status === 200) {
+                // Log in the console that the user can delete their account
+                console.log("User Is Able To Delete Account");
+                // Returns the response
                 return response.json();
-                // If the username is not found then
-            } else if (response.status === 404){
-                // Sends to an error page where it tells the user the username is not found 
-                //window.location.href = "error.html?error=2";
-                //usernameerror.innerHTML = "Username does not exist in the database, please try again"
-                return Promise.reject('Error: 404 - Username does not exist in the database');
+                // If the response status code is equal to 400 then
+            } else if (response.status === 401){
+                return Promise.reject("Error: 401");
+            } else if (response.status === 400){
+                return Promise.reject("Error: 400");
             }
-            else if (response.status === 401){
-                // Sends to an error page where it tells the user the password is incorrect
-                //window.location.href = "error.html?error=1";
-                //passworderror.innerHTML = "Password is incorrect, please try again or reset your password first";
-                return Promise.reject('Error: 401 - Password for this username is incorrect');
-                
-            }
-            else{
-                // Logs an error to the console
+            else {
+                // Returns an error in the console based on the response status
                 console.error("error", response.status);
-                // Popup to give an error to the userZ
-                return customPopup("An unexpected error has occurred, please try again in a moment.");
             }
         })
         .then(data => {
-            // Logs the data
-            console.log(data);
-            // Creates a variable which stores the username from the database itself
-            const userName = data.username;
-            // Uses the delete endpoint with the username from the database
-            fetch(`http://localhost:5116/delete/${userName}`, {
-                // Chooses the method used
-                method: "DELETE",
-                // Chooses the format of the content
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // Converts the data to a string
-                body: JSON.stringify(data),
-            })
-            .then(response => {
-                // If the deletion was a success then
-                if (response.status === 200) {
-                    // Log in the console that the user can delete their account
-                    console.log("User Is Able To Delete Account");
-                    // Returns the response
-                    return response.json();
-                    // If the response status code is equal to 400 then
-                } else if (response.status === 400) {
-                    // Log to the console that the user has created reviews
-                    console.log("User Has Previously Created Reviews");
-                    // Returns a rejection for the provided reason
-                    return Promise.reject("Error: 400 - User Has Previously Created Reviews, Denied From Deleting");
-                } else {
-                    // Returns an error in the console based on the response status
-                    console.error("error", response.status);
-                }
-            })
-            .then(data => {
-                // Logs the API Response and the data to the console
-                console.log("API Response: ", data);
-                // Sends the user to a success page to tell them their account has been deleted
-                window.location.href = "assets/inc/success.html?success=2";
-                
-            })
-            .catch(error => {
-                if (error.includes("Error: 400")) {
-                    // When reviews are present, present a popup to tell the user
-                    // They need to delete existing reviews to delete their account
-                    customPopup("You have previously created reviews, please remove all reviews and then try again")
-                } else {
-                    // Logs the error to the console
-                    console.error("Error:", error);
-                    // Sends the user to the default error page
-                    window.location.href = "error.html?error=default";
-                }
-            });
+            // Logs the API Response and the data to the console
+            console.log("API Response: ", data);
+
+
+            // Sends the user to a success page to tell them their account has been deleted
+            //window.location.href = "assets/inc/success.html?success=2";
+            console.log("Success");
+            sessionStorage.removeItem('authToken');
+            localStorage.removeItem('authTokenLocal');
+            // Temporary, will be replaced with the new success system from the Kieron Branch eventually
+            window.location.href = "index.html";
             
         })
         .catch(error => {
+            // Logs the error to the console
             console.error("Error:", error);
+            // Sends the user to the default error page
+            //indow.location.href = "error.html?error=default";
             if (error.includes("Error: 401")){
-                //passworderror.innerHTML = "Password is incorrect, please try again or reset your password first";
-                customPopup("Password is incorrect, please try again or reset your password first");
-            } else if (error.includes("Error: 404")){
-                //usernameerror.innerHTML = "Username does not exist in the database, please try again";
-                customPopup("Username does not exist in the database, please try again");
+                customPopup("Password does not match user");
+            } else if (error.includes("Error: 400")){
+                customPopup("Please delete the games you have made before deleting your account");
             }
         });
+    })
+    .catch(error => {
+        console.error(error);
+    })
+
+    
+       
+            
+            
 
            
 }

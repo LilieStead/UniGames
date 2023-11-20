@@ -117,6 +117,11 @@ namespace UniGames.Data.Repositories
             // Returns the new GameDTO list
             return gamesDTOs;
         }
+
+        public List<Game> GetGameByUserID(int id)
+        {
+            return dbContext.Games.Where(x => x.UserID == id).ToList();
+        }
     }
 }
 

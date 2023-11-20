@@ -6,5 +6,7 @@
         public int PlatformID { get; set; }
 
         public DateTime ReleaseDate { get; set; }
+
+        public int UserID { get; set; }
     }
 }

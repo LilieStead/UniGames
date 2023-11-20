@@ -50,32 +50,74 @@ function updateGame(event){
     if (hasErrors){
         return;
     }*/
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    console.log(authToken.value);
+    var idType;
+
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
 
 
-    const data = {
-        Title: gameName,
-        PlatformID: platform,
-        ReleaseDate: releaseDate,
-    };
-
-
-    fetch(`http://localhost:5116/update-game/${gameid}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
+    fetch(apiURL)
     .then(response => response.json())
-    .then(data => {
-        console.log("API Response: ", data)
-        window.location.href = "assets/inc/success.html?success=4";
-    })
+    .then(data =>{
 
-    .catch(error => {
-        console.error("Error:", error);
-    })
+        const userID = data.userID;
+        const gameData = {
+            Title: gameName,
+            PlatformID: platform,
+            ReleaseDate: releaseDate,
+            UserID: userID,
+        };
+
+        fetch(`http://localhost:5116/update-game/${gameid}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(gameData),
+        })
+        .then(response => {
+            if (response.status === 200){
+                response.json()
+            }
+            else if (response.status === 401){
+                return Promise.reject("Error: 401");
+            } else if (response.status === 400){
+                return Promise.reject("Error: 400");
+            }
+            else{
+                console.error(response.status);
+            }
+        })
+        .then(data => {
+            console.log("API Response: ", data)
+            window.location.href = "assets/inc/success.html?success=4";
+        })
     
+        .catch(error => {
+            console.error("Error:", error);
+            if (error.includes("Error: 401")){
+                customPopup("Cannot delete game you did not make m8");
+            } else if (error.includes("Error: 400")){
+                customPopup("Password does not match user");
+            }
+        })
+        
+    })
+    .catch(error => {
+        console.error(error);
+        
+    })
 }
 loginStatus();
 document.getElementById('updategame').addEventListener('submit', updateGame);

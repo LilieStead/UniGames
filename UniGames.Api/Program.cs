@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
+using UniGames.Api.Models.Sessions;
+using UniGames.Api.Models.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,16 +31,28 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+
+builder.Configuration.Bind("JwtConfig", new JwtConfig());
+var jwtConfig = builder.Configuration.Get<JwtConfig>();
+
+//var jwtConfig = new JwtConfig();
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+
+
+builder.Services.AddSingleton(jwtConfig);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        Console.WriteLine("Setting up JWT authentication");
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
+            ValidateIssuer = true,
             ValidateAudience = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("kJzRYdJJUhdq4WgEy0b9776inofSohUC7uuNZkhwwE4=")),
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("7FjkL0tRiZDNf8aQz6e1b2XJmOygHqKvItPp3sVhUc4WnAd5xYrEgSdCfBvNlM"))
+            ValidateIssuerSigningKey = true
         };
     });
 
@@ -50,6 +64,8 @@ builder.Services.AddScoped<IGameRepository, SQLGameRepository>();
 builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IGameDetailRepository, SQLGameDetailRepository>();
+builder.Services.AddScoped<JwtService>();
+
 
 
 

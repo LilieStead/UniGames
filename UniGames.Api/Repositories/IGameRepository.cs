@@ -22,6 +22,8 @@ namespace UniGames.Data.Repositories
 
         List<GameDTO> GetGamesByTitle(string title);
 
+        List<Game> GetGameByUserID(int id);
+
 
     }
 }

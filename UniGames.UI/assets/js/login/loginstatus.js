@@ -12,8 +12,8 @@ function savePreference(){
         // Copy data from session storage to local storage
 
         if (authToken){
-            var expriationDays = 1;
-            var expirationTime = new Date().getTime() + expriationDays * 60 * 1000;
+            var expriationDays = 7;
+            var expirationTime = new Date().getTime() + expriationDays * 24 * 60 * 60 * 1000;
             
             const item = {
                 value: authToken,
@@ -30,75 +30,58 @@ function loadPreference(){
     // var usernameData = localStorage.getItem('localloggedusername') === 'true';
     // var emailData = localStorage.getItem('localloggedemail') === 'true';
     // var passwordData = localStorage.getItem('localloggedpassword') === 'true';
+    var authTokenDataSess = sessionStorage.getItem('authToken');
     var authTokenData = localStorage.getItem('authTokenLocal');
     if (authTokenData){
         var authToken = JSON.parse(authTokenData);
+        
         var expirTime = authToken.expiry;
-        console.log("Extime", new Date(expirTime).toLocaleString());
         const newtime = new Date().getTime();
-        console.log("NEwqtime",  new Date(newtime).toLocaleString());
         if (newtime >= expirTime){
             // Token has expired
             localStorage.removeItem('authTokenLocal');
             console.log('Token has expired');
             return;
         }
-
-        console.log('Token is valid still');
-        // var user = usernameData ? 'localloggedusername' : 'localloggedusername';
-        // var email = emailData ? 'localloggedemail' : 'localloggedemail';
-        // var password = passwordData ? 'localloggedpassword' : 'localloggedpassword';
+        // Check if the authToken matches the name of the stored data
         var userAuth = authTokenData ? 'authTokenLocal' : 'authTokenLocal';
-
-        // var getData1 = localStorage.getItem(user) || 'Default Data';
-        // var getData2 = localStorage.getItem(email) || 'Default Data';
-        // var getData3 = localStorage.getItem(password) || 'Default Data';
+        
         var getToken = localStorage.getItem(userAuth) || 'No Token';
 
-        console.log('Loaded Data: ', getToken);
-    } else{
+        //console.log('Loaded Data: ', getToken);
+    } else if (authTokenDataSess){
+        return;
+    }
+    else{
         console.log('No token found');
+        return;
     }
     
 }
 
 
 function loginStatus(){
-    // const loggeduser = sessionStorage.getItem('loggedusername');
-    // const loggedemail = sessionStorage.getItem('loggedemail');
-    // const loggedpass = sessionStorage.getItem('loggedpassword');
-
-    // const localuser = localStorage.getItem('localloggedusername');
-    // const localemail = localStorage.getItem('localloggedemail');
-    // const localpass = localStorage.getItem('localloggedpassword');
     const authTokenSess = sessionStorage.getItem('authToken');
     const authTokenLocal = localStorage.getItem('authTokenLocal');
 
-    console.log(authTokenSess, "also local?= ", authTokenLocal);
     var curURL = window.location.pathname;
     // Extract the filename from the URL
     var file = curURL.substring(curURL.lastIndexOf("/") + 1);
     
-    // if (loggeduser && loggedemail && loggedpass){
     if (authTokenSess){
         if (file === "login.html" || file === "createuser.html" || file === "index.html"){
             window.location.href = "home.html";
         } else{
-            // Failsafe if team members accidentally add this back
-            const removeSignUp = document.getElementById('signup-page');
-            removeSignUp.remove();
+            console.log("Signed In, In Session");
         }
         
     }
     else{
-        //if (localuser && localemail && localpass){
         if (authTokenLocal){
             if (file === "login.html" || file === "createuser.html" || file === "index.html"){
                 window.location.href = "home.html";
             } else{
-                // Failsafe if team members accidentally add this back
-                const removeSignUp = document.getElementById('signup-page');
-                removeSignUp.remove();
+                console.log("Signed In Locally");
             }
         } else{
             if (file === "index.html"){

@@ -1,13 +1,4 @@
-
-
-// localStorage.removeItem('localloggedusername');
-// localStorage.removeItem('localloggedemail');
-// localStorage.removeItem('localloggedpassword');
-//localStorage.removeItem('authTokenLocal');
-
-
-
-
+localStorage.removeItem('authTokenLocal');
 function userLogin(event){
     event.preventDefault();
     const formData = new FormData(document.getElementById("loginform"));

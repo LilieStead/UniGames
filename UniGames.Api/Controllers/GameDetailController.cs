@@ -30,6 +30,7 @@ namespace UniGames.Api.Controllers
             {
                 return NotFound();
             }
+
             var gamesdetailDTO=mapper.Map<GameDetailDTO>(gamesdetailDM);
             return Ok (gamesdetailDTO);
         }
