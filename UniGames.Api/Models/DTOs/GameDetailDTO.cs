@@ -16,5 +16,7 @@ namespace UniGames.Api.Models.DTOs
         public string AgeRating { get; set; }
         public string Developer { get; set; }
         public string Genre { get; set; }
+
+        public Game Games { get; set; }
     }
 }

@@ -64,7 +64,7 @@
                         <p class="formerror" id="passworderror2"></p>
                     </div>
                     <div class="flexcontainer">
-                        <input id="subbutton" type="submit" value="submit">
+                        <input id="subbutton" onclick="createReview();" type="button" value="submit">
                         <a onclick="resetUser_PassFields();" class="reset-fields">Reset Username and <br> Password Fields</a>
                         <!-- Reset Other Fields Button -->
                         <a class="reset-fields" id="crOTHButton" onclick="resetReviewFields()">Reset Review</a>
@@ -91,6 +91,7 @@
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">
@@ -107,4 +108,5 @@
 <script src="assets/js/deluserpassfield.js"></script>
 <script src="assets/js/timeoutStatus.js"></script>
 <script src="assets/js/passtimeout.js"></script>
+<script src="assets/js/success.js"></script>
 </html>

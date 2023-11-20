@@ -57,7 +57,10 @@
                             <input type="datetime-local" name="ReleaseDate" id="date" >
                             <p class="formerror" id = "releasedate"></p>
                         </div>
-                        <input type="submit" value="Submit" class="centersubmit">
+                        <div class="flexcontainer">
+                            <input id="subbutton" onclick="createGame();" class="centersubmit" type="button" value="submit">
+                        </div>
+                        
                    </form>
                 </div>
                 <!-- END OF GAME TABLE -->
@@ -66,6 +69,7 @@
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+<script src="assets/js/success.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

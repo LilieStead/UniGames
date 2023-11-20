@@ -460,7 +460,20 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
   }
 
+#errorbackbut{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: red;
+    margin-top: 2em;
+}
 
+/* End of Error Page
 /*  Success Page(s)  */
 .success h1{
     color: green;
@@ -537,6 +550,7 @@ form .formerror{
     margin: 3em 0 3em 0;
     font-size: 1.3em;
     font-family: Unidays-Book, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
 }
 
 #deleteuser input[type=text]{
@@ -558,6 +572,26 @@ form .formerror{
     margin: 8px 0;
     padding: 12px 20px;
 }
+
+.DelUserConfirms{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+}
+
+#YesButtonDelUser{
+    background-color: #1DD577;
+}
+
+#NoButtonDelUser{
+    background-color: red;
+}
+
 /* End of Delete User */
 
 
@@ -583,7 +617,22 @@ form .formerror{
     width: 20%;
 }
 
-
+#subbutton{
+    min-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    background-color: #1DD577;
+    text-align: center;
+}
 
 
 /* End of Delete Fields Button */
