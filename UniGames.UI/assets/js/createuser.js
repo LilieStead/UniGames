@@ -142,7 +142,8 @@ function CreateUsers(event){
         
     .then(responseData => {
         console.log('API Response: ', responseData)
-        window.location.href = "assets/inc/success.html?success=7";
+        //window.location.href = "assets/inc/success.html?success=7";
+        
     })
     .catch(error=> {
         console.error('Error: ', error);

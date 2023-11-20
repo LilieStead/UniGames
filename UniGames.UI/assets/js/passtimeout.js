@@ -116,8 +116,9 @@ function passwordTimeout(){
             interval = setInterval(passwordTimeout, 1000);
         }
     }
-    if (newPassActual === newPassConfirm){
+    else if (newPassActual === newPassConfirm){
         passAttempts = 0;
+        console.log("Passwords match (or are blank), attempts are:", passAttempts);
         localStorage.removeItem('passwordTimeout');
         localStorage.removeItem('passwordFieldsDisabled');
     }

@@ -6,8 +6,7 @@ var reviewID = urlParams.get('id');
 console.log('Review:', reviewID, "successfully transferred");
 
 
-function deleteReview(event){
-    event.preventDefault();
+function deleteReview(){
 
     const activeTimeout = timeoutStatus();
 
@@ -29,7 +28,6 @@ function deleteReview(event){
 
     // Checks to see if the username is contains no text
     if (username === '' || username === null) {
-        event.preventDefault();
         usernameError.innerHTML = 'You must enter your username';
         curFail = true;
     }
@@ -95,7 +93,8 @@ function deleteReview(event){
             .then(response => response.json())
             .then(data => {
                 console.log("api response: ", data)
-                window.location.href = "assets/inc/success.html?success=3";
+                //window.location.href = "assets/inc/success.html?success=3";
+                modifySuccess("You have successfully deleted your review!");
             })
             .catch(error => {
                 console.error(error);
@@ -109,6 +108,3 @@ function deleteReview(event){
 
            
 }
-
-
-document.getElementById("deletereview").addEventListener("submit", deleteReview);
