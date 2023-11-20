@@ -1,11 +1,18 @@
 function getUsername(){
   const userIDSess = sessionStorage.getItem('authToken');
   const userIDLocal = localStorage.getItem('authTokenLocal');
-  const apiURL = userIDSess
+  const authToken = JSON.parse(userIDLocal);
+  var idType;
+
+  if (userIDSess){
+      idType = "session";
+  } else{
+      idType = "local";
+  }
+
+  const apiURL = idType === 'session'
   ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
-  : userIDLocal
-  ?`http://localhost:5116/user/decodeToken?jwtToken=${userIDLocal}`
-  : null;
+  : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
   fetch(apiURL)
   .then(response => {
     if (response.status === 200){
