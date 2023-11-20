@@ -2,8 +2,7 @@ var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 console.log(gameid);
 // Function to update game details in the SQL database
-function updateGame(event){
-    event.preventDefault();
+function updateGame(){
 
     //const activeTimeout = timeoutstatus();
 
@@ -77,5 +76,3 @@ function updateGame(event){
     })
     
 }
-
-document.getElementById('updategame').addEventListener('submit', updateGame);

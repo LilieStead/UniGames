@@ -6,8 +6,7 @@ var gameID = urlParams.get('id');
 console.log('Game ID:', gameID, "successfully transferred");
 
 
-function createReview(event){
-    event.preventDefault();
+function createReview(){
 
     const activeTimeout = timeoutStatus();
 
@@ -39,24 +38,20 @@ function createReview(event){
 
     // Checks to see if the title contains no text
     if (reviewTitle === '' || reviewTitle === null) {
-        event.preventDefault();
         titleError.innerHTML = 'Your review needs a title';
         curFail = true;
     }
     // Checks to see if the description contains no text
     if (reviewDesc === '' || reviewDesc === null) {
-        event.preventDefault();
         descriptionError.innerHTML = 'You need to provide a description';
         curFail = true;
     // Checks if the length of the description is less than 20 or higher than 500
     } else if (reviewDesc.length < 20 || reviewDesc.length > 500) {
-        event.preventDefault();
         descriptionError.innerHTML = 'A description needs to be between 20 - 500 characters';
         curFail = true;
     }
     // Checks to see if the number is valid or less than 0 or bigger than 100
     if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
-        event.preventDefault();
         scoreError.innerHTML = 'Your score needs to be between 0 and 100';
         curFail = true;
     }else{
@@ -64,7 +59,6 @@ function createReview(event){
     }
     // Checks to see if the username is contains no text
     if (username === '' || username === null) {
-        event.preventDefault();
         usernameError.innerHTML = 'You must enter your username';
         curFail = true;
     }
@@ -178,6 +172,3 @@ function createReview(event){
 
            
 }
-
-
-document.getElementById("createreview").addEventListener("submit", createReview);

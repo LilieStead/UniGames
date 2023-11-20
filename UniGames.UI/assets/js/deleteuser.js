@@ -169,6 +169,10 @@ function deleteUser(){
 
                 const successMessage = "Success! Your account has been deleted.";
 
+                // Due to the login functionality being developed, this entire section for the success
+                // may change due to the circumstances around directing out of the page but this will
+                // be solved quickly
+
                 // The message can also be typed manually, 
                 // just like this: modifySuccess("This was a great success!")
                 // Invokes the modifySuccess() function and adds the message to it
@@ -177,17 +181,12 @@ function deleteUser(){
                 
             })
             .catch(error => {
-                // If statement is now irrelevant and will be deleted soon.
-                if (error.includes("Error: 400")) {
-                    // When reviews are present, present a popup to tell the user
-                    // They need to delete existing reviews to delete their account
-                    customPopup("You have previously created reviews, please remove all reviews and then try again")
-                } else {
-                    // Logs the error to the console
-                    console.error("Error:", error);
-                    // Sends the user to the default error page
-                    modifyError("An unknown error occured");
-                }
+
+                // Logs the error to the console
+                console.error("Error:", error);
+                // Sends the user to the default error page
+                modifyError("An unknown error occured");
+                
             });
             
         });

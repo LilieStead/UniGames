@@ -1,6 +1,5 @@
 // Creating a function to handle new game data
-function createGame(event){
-    event.preventDefault();
+function createGame(){
 
     const formData = new FormData(document.getElementById("NewGame"));
 
@@ -29,11 +28,9 @@ function createGame(event){
     .then(response => response.json())
     .then(responseData => {
         console.log('API Response: ', responseData)
+        modifySuccess("You have successfully created a game!");
     })
     .catch(error=> {
         console.error('Error: ', error);
     });
 }
-
-
-document.getElementById("NewGame").addEventListener('submit', createGame);

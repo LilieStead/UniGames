@@ -1,6 +1,5 @@
 // Function to reset the user password
-function resetPassword(event){
-    event.preventDefault();
+function resetPassword(){
     
     const activeTimeout = timeoutStatus();
 
@@ -134,7 +133,8 @@ function resetPassword(event){
             return;
             //console.log
         } else{
-            window.location.href = "assets/inc/success.html?success=5";
+            //window.location.href = "assets/inc/success.html?success=5";
+            modifySuccess("You have successfully reset your password!");
         }
         
 
