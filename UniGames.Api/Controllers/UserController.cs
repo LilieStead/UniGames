@@ -21,7 +21,6 @@ namespace UniGames.Api.Controllers
         private readonly IUserRepository userRepository;
         private readonly IGameRepository gameRepository;
         private readonly JwtService jwtService;
-        private readonly IOptions<JwtConfig> jwtConfig;
 
         public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IGameRepository gameRepository, JwtService jwtService, IOptions<JwtConfig> jwtConfig)
         {
@@ -30,7 +29,6 @@ namespace UniGames.Api.Controllers
             this.userRepository = userRepository;
             this.gameRepository = gameRepository;
             this.jwtService = jwtService;
-            this.jwtConfig = jwtConfig;
         }
 
         [HttpGet("decodeToken")]

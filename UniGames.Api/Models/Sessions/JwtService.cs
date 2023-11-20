@@ -30,21 +30,18 @@ namespace UniGames.Api.Models.Sessions
             var validationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("kJzRYdJJUhdq4WgEy0b9776inofSohUC7uuNZkhwwE4=")),
-                ValidateIssuer = false,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey)),
+                ValidateIssuer = true,
+                ValidIssuer = "UniGames",
                 ValidateAudience = false,
             };
 
             try
-            {;
-                
+            {
                 var claimsPrinciple = tokenHandler.ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
-
-                //var userIdClaim = claimsPrinciple.FindFirst("sub");
 
                 var userIdClaim = (validatedToken as JwtSecurityToken)?.Claims?.FirstOrDefault(claim => claim.Type == "sub");
                 var userNameClaim = (validatedToken as JwtSecurityToken)?.Claims?.FirstOrDefault(claim => claim.Type == "username");
-                //var userIdClaim = (claimsPrinciple?.Claims?.FirstOrDefault(claims => claims.Type == "sub"));
                 if (userIdClaim != null && userNameClaim != null)
                 {
                     return (userIdClaim.Value, userNameClaim.Value);

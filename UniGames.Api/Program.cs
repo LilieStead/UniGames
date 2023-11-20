@@ -31,17 +31,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-
-builder.Configuration.Bind("JwtConfig", new JwtConfig());
-var jwtConfig = builder.Configuration.Get<JwtConfig>();
-
-//var jwtConfig = new JwtConfig();
-builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
-
-
+var jwtConfig = new JwtConfig();
 builder.Services.AddSingleton(jwtConfig);
+builder.Configuration.Bind("JwtConfig", new JwtConfig());
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -50,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuer = true,
             ValidateAudience = false,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("kJzRYdJJUhdq4WgEy0b9776inofSohUC7uuNZkhwwE4=")),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey)),
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };

@@ -11,28 +11,11 @@ namespace UniGames.Api.Models.Sessions
     public class UserSessionGenerator
     {
 
-        private readonly JwtConfig jwtConfig;
+        private readonly JwtConfig _jwtConfig;
         public UserSessionGenerator(JwtConfig jwtConfig)
         {
-            this.jwtConfig = jwtConfig;
+            this._jwtConfig = jwtConfig;
         }
-        /*public static string GenerateSessionIdentifier()
-        {
-            // Creates a Byte array to store random data for the session identifier
-            byte[] sessionIDBytes = new byte[64];
-
-            // Uses the RandomNumberGenerator method te generate a random number
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-            {
-                // Fill the byte array with random data
-                rng.GetBytes(sessionIDBytes);
-            }
-
-            // Convert the byte array to a string representation
-            string sessionID = BitConverter.ToString(sessionIDBytes).Replace("-", "").ToLower();
-
-            return sessionID;
-        }*/
 
         // Generates a random key and returns it as a base64-encoded string
         public static string GenerateRandomBase64Key()
@@ -59,6 +42,12 @@ namespace UniGames.Api.Models.Sessions
             // Creates a new instance of the class
             var handleToken = new JwtSecurityTokenHandler();
 
+            var keyId = "access-token-key";
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey))
+            {
+                KeyId = keyId,
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 // Represents the user by the userID
@@ -69,8 +58,9 @@ namespace UniGames.Api.Models.Sessions
                 }),
                 // Set when the token will expire (in days)
                 Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = "UniGames",
                 // Signs the cryptographic details of the token and defines the algorithm
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("kJzRYdJJUhdq4WgEy0b9776inofSohUC7uuNZkhwwE4=")), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
             };
 
             // Creates the token itself based on the TokenDescriptor

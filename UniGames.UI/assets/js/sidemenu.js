@@ -7,7 +7,16 @@ function getUsername(){
   ?`http://localhost:5116/user/decodeToken?jwtToken=${userIDLocal}`
   : null;
   fetch(apiURL)
-  .then(response => response.json())
+  .then(response => {
+    if (response.status === 200){
+      return response.json()
+    }else if (response.status === 400){
+      console.error("Token cannot be decoded, server has likely restarted... Logging out user");
+      sessionStorage.removeItem("authToken");
+      localStorage.removeItem("authTokenLocal");
+      window.location.href = "index.html";
+    }
+  })
   .then(data => {
     const username = data.username;
 

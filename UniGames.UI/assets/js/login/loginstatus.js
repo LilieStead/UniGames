@@ -2,15 +2,16 @@ function savePreference(){
     var stayInChecked = document.getElementById('stayLoggedIn');
     var useLoStor = stayInChecked.checked;
     console.log("checked");
+
     // Ideally, localStorage would not be used and HTTP cookies would be used to then store
     // The user's authToken but this is not possible in this project without using a server
     // of some sorts, such as XAMPP
+
     // Creating a function to handle new game data
     localStorage.setItem('loginLocalStorage', useLoStor);
     if (useLoStor){
         var authToken = sessionStorage.getItem('authToken');
-        // Copy data from session storage to local storage
-
+        // Copy data from session storage to local storage and set an expiration date
         if (authToken){
             var expriationDays = 7;
             var expirationTime = new Date().getTime() + expriationDays * 24 * 60 * 60 * 1000;
@@ -27,9 +28,6 @@ function savePreference(){
 
 
 function loadPreference(){
-    // var usernameData = localStorage.getItem('localloggedusername') === 'true';
-    // var emailData = localStorage.getItem('localloggedemail') === 'true';
-    // var passwordData = localStorage.getItem('localloggedpassword') === 'true';
     var authTokenDataSess = sessionStorage.getItem('authToken');
     var authTokenData = localStorage.getItem('authTokenLocal');
     if (authTokenData){
@@ -56,7 +54,6 @@ function loadPreference(){
         console.log('No token found');
         return;
     }
-    
 }
 
 
