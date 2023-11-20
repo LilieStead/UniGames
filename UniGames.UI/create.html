@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/js/login/loginstatus.js"></script>
 
-    <script async defer type="text/javascript" src="assets/js/creategame.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts.css">
     <script src="assets/js/sidemenu.js"></script>
 </head>
@@ -17,7 +18,7 @@
       <h1>UNiDAYS</h1>
     </div>
     <div id="navbar">
-      <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> YourUsername <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -25,7 +26,7 @@
           <a href="searchuserreviews.html">Search Reviews</a>
         </nav>
       </div>
-    </header>
+</header>
 <nav id="hamburgerMenu">
   <!-- Your menu items go here -->
   <a href="#">Edit Details</a>
@@ -40,7 +41,7 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Create A Game</h1>
                 </div>
                 <!--  GAME TABLE -->
                 <div id="formcontainer" class="flexcontainer">
@@ -77,7 +78,8 @@
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
-
+<script async defer type="text/javascript" src="assets/js/creategame.js"></script>
+<script src="assets/js/logout.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

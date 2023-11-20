@@ -12,9 +12,29 @@
     <script src="assets/js/sidemenu.js"></script>
 </head>
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
-</header>
+<!-- HEADER -->
+<header>
+    <div id="logo">
+      <h1>UNiDAYS</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="#">Edit Details</a>
+  <a href="#">My games</a>
+  <a href="#">My Reviews</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
 
 <!-- END OF HEADER -->
     <!-- MAIN CONTENT -->
@@ -62,7 +82,7 @@
 </body>
 <script src="assets/js/popup.js"></script>
 <script async defer type="text/javascript" src="assets/js/updategame.js"></script>
-
+<script src="assets/js/logout.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">
