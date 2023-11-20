@@ -101,6 +101,7 @@ namespace UniGames.Api.Controllers
                 if (userExists != null)
                 {
                     //if it is then return bad request and error code to the front end and do not allow the methord to continue
+
                     return BadRequest("Username is taken");
                 }
     
