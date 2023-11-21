@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames - Reset Pasword</title>
+    <title>UniGames - Create Review</title>
     <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -39,42 +39,51 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Reset Your Password</h1>
+                    <h1>Edit your details</h1>
                 </div>
                 <div class=" flexcontainer">
-                <form id="resetpassform" action="">
+                <form id="editdetails" action="">
                     <div>
-                        <label for="username">Username: *</label>
-                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                        <label for="username">Username: </label>
+                        <input type="text" name="Username" id="user" placeholder="Change your username">
                         <p class="formerror" id="usernameerror"></p>
                     </div>
-                    <div>
-                        <label for="email">Email: *</label>
-                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
-                        <p class="formerror" id="useremailerror"></p>
+                    <div id="detailsdob">
+                        <label for="dob">User date of birth</label>
+                        <input type="datetime-local" name="dob" id="dob" placeholder="Change your username">
+                        <p class="formerror" id="userdoberror"></p>
                     </div>
                     <div>
-                        <label for="phone">Phone Number: </label>
-                        <input type="text" name="Userphone" id="userphone" placeholder="Enter your phone number here... (if you have one)">
+                        <label for="phone">Phone number</label>
+                        <input type="number" name="phone" id="phone" placeholder="Change your username">
                         <p class="formerror" id="userphoneerror"></p>
                     </div>
                     <div>
-                        <label for="password">New Password: *</label>
-                        <input type="password" name="Userpassword" id="password">
-                        <p class="formerror" id="passworderror"></p>
+                        <label for="email">email</label>
+                        <input type="text" name="email" id="email" placeholder="Change your username">
+                        <p class="formerror" id="useremailerror"></p>
                     </div>
                     <div>
-                        <label for="passwordnew2">Confirm New Password: *</label>
-                        <input type="password" name="UserPasswordAgain" id="password2">
-                        <p class="formerror" id="passworderror2"></p>
+                        <label for="fristname">First name</label>
+                        <input type="text" name="firstname" id="firstname" placeholder="Change your username">
+                        <p class="formerror" id="userfirstnameerror"></p>
                     </div>
+                    <div>
+                        <label for="lastname">Last name</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Change your username">
+                        <p class="formerror" id="userlastnameerror"></p>
+                    </div>
+                    
                     <div class="flexcontainer">
-                        <input id="subbutton" type="submit" value="submit">
+                        <input id="reviewbtn"type="button" onclick="validateUser()" value="submit">
                     </div>
+                    <br>
                     <p id="timeout-countdown"></p>
-                    <h2 id="error-handling"></h1>
+                    <div class="flexcontainer">
+                        <!-- Reset Password Button -->
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                    </div>
                 </form>
-                
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
             </div>
@@ -87,16 +96,11 @@
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
-
-
-    
 </body>
-<!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
-<script src="assets/js/deluserpassfield.js"></script>
+
 <script src="assets/js/popup.js"></script>
-<script src="assets/js/passtimeout.js"></script>
-<script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
-<script src="assets/js/timeoutStatus.js"></script>
+<script src="assets/js/login/loginstatus.js"></script>
+<script src="assets/js/userdetails.js"></script>
 <script src="assets/js/logout.js"></script>
 <!-- FOOTER -->
 <footer>
