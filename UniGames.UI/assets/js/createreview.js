@@ -141,7 +141,7 @@ function createReview(){
                     //window.location.href = "assets/inc/success.html?success=1";
                     if (data.status === 400){
                         console.log(data.errors);
-                        console.log(data.errors.ReviewDescription[0]);
+                        //console.log(data.errors.ReviewDescription[0]);
                         customPopup(data.errors.ReviewDescription[0]);
                         //if (data.errors.)
                         //customPopup(data.errors.ReviewDescription[0])
