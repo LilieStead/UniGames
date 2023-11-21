@@ -16,7 +16,7 @@ namespace UniGames.Api.Models.Validators
             {
                 return new ValidationResult("Please do not use bad language for a review");
             }
-            if (description.Count < 20)
+            if (description.Length < 20)
             {
                 return new ValidationResult("Please make sure your reviews are over 20 characters");
             }
