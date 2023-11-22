@@ -16,5 +16,7 @@ namespace UniGames.Api.Models.Domain
         public Platform PlatformName{ get; set; }
 
 
+        public GameDetail GameDetail { get; set; }
+
     }
 }

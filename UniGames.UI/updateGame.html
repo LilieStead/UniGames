@@ -29,7 +29,7 @@
 <nav id="hamburgerMenu">
   <!-- Your menu items go here -->
   <a href="userdetails.html">Edit Details</a>
-  <a href="#">My games</a>
+  <a href="mygames.html">My games</a>
   <a href="userreviews.html">My Reviews</a>
   <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
@@ -48,6 +48,7 @@
                     <form id="updategame">
                         <label for="gname">Game Name: </label><br>
                         <input type="text" id="gname" name="Title"><br>
+                        <p class = "formerror" id="titleerror"></p>
                         <label for="Platform">Platform: </label><br>
                             <select name="Platform" id="platform">
                                 <option value="1">Xbox</option>
@@ -57,12 +58,7 @@
                                 <option value="5">PS5</option>
                                 <option value="6">Nintendo Switch</option>
                             </select>
-                        <div id="Releasedate">
-                            <label for="Release">Release Date: </label>
-                        </div>
-                        <div>
-                            <input type="datetime-local" name="ReleaseDate" id="date">     
-                        </div>
+                            <p class="formerror" id ="platformerror"></p> 
                         <div>
                             <label for="desc">Description: </label>
                             <textarea name="Description" id="rdesc" cols="30" rows="10"></textarea>
@@ -89,6 +85,7 @@
                         <div>
                             <label for="genre">Genre</label>
                             <input type="text" name="Genre" id="genre" placeholder="Enter the game genre here">
+                            <p class="formerror" id="genreerror"></p>
                         </div>
                         
                         <div>

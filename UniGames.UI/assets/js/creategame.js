@@ -12,9 +12,13 @@ function createGame(event){
     const platform = parseInt(formData.get('Platform'));
 
     const rawDate = formData.get('ReleaseDate');
+
+
     let blankFields = false;
+
     const releaseError2 = document.getElementById('releasedate');
     releaseError2.innerHTML = '';
+    
 
     if (rawDate === '' || rawDate === null) {
         event.preventDefault();
@@ -29,10 +33,19 @@ function createGame(event){
 
     const titleError = document.getElementById('titleerror');
     const platformError = document.getElementById('platformerror');
-   
+    
+    const gameDescError = document.getElementById('descerror');
+    const ageratingerror = document.getElementById('ageerrors');
+    const deverror = document.getElementById('deverror');
+    const genreerror = document.getElementById('genreerror')
+
+
     titleError.innerHTML = '';
     platformError.innerHTML = '';
-   
+    gameDescError.innerHTML = '';
+    ageratingerror.innerHTML = '';
+    deverror.innerHTML = '';
+    genreerror.innerHTML = '';
 
     // Checks to see if the username is contains no text
     if (title === '' || title === null) {
@@ -43,21 +56,64 @@ function createGame(event){
     // Checks to see if the password contains no text
     if (platform === '' || platform === null){
             platformError.innerHTML = 'You must select a platform!';
-            curFail = true;
+            blankFields = true;
+    }
+    if (gameDesc == null || gameDesc == ''){
+        gameDescError.innerHTML = 'You need to enter a game description!';
+    }else if (gameDesc.length < 20){
+        gameDescError.innerHTML = 'Your game description needs to be more than 20 characters!';
+    }else if (gameDesc.length > 200){
+        gameDescError.innerHTML = "Your game description cannot be more than 200 characters!";
+    }
+    if (ageRating == null || ageRating ==''){
+        ageratingerror.innerHTML = 'You need to enter your games age rating!'
+    }
+    if (devs == null || devs == ''){
+        deverror.innerHTML = 'you need to enter the games developer!'
+    }
+    if (genre == null || genre == ''){
+        genreerror.innerHTML = 'You need to enter your games genre!'
+    } else if (genre.length > 50){
+        genreerror.innerHTML = 'You game genre cannot be more than 50 characters!'
     }
 
-    const dateObject = new Date(rawDate);
-    const releaseDate = dateObject.toISOString();
+
+
+    
 
     if (blankFields){
         return;
     }
+    const dateObject = new Date(rawDate);
+    const releaseDate = dateObject.toISOString();
 
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    //console.log(authToken.value);
+    var idType;
 
-    const data = {
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+    fetch(apiURL)
+    .then (response => response.json())
+    .then (data => {
+        
+    const userID = data.userID;
+
+    const gamedata = {
         Title: title,
         PlatformID: platform,
         ReleaseDate: releaseDate,
+        UserID: userID,
     };
 
     
@@ -68,7 +124,7 @@ function createGame(event){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(gamedata),
     })
     .then(response => response.json())
     .then(responseData => {
@@ -112,6 +168,15 @@ function createGame(event){
         console.error('Error: ', error);
         modifyError("Something went wrong :(");
     });
+
+
+
+    })
+    .catch (error => {
+        console.error(error);
+    })
+
+
 }
 
 loginStatus();

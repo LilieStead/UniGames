@@ -1,6 +1,45 @@
 var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 
+fetch(`http://localhost:5116/Game/${gameid}`)
+.then(response => response.json())
+.then(data => {
+    
+    const gameName = document.getElementById("gname");
+    const platform = document.getElementById("platform");
+    const gameDesc = document.getElementById('rdesc');
+    const ageRating = document.getElementById('agrate');
+    const devs = document.getElementById('gamedev');
+    const genre = document.getElementById('genre');
+
+    gameName.value = data.title;
+    gameDesc.value = data.gameDetail.description;
+    ageRating.value = data.gameDetail.ageRating;
+    devs.value = data.gameDetail.developer;
+    genre.value = data.gameDetail.genre;
+    platform.value = data.platformName.platformID;
+
+    
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Function to update game details in the SQL database
 function updateGame(event){
     event.preventDefault();
@@ -12,48 +51,71 @@ function updateGame(event){
 
     const gameName = formData.get("Title");
     const platform = formData.get("Platform");
-    const releaseDate = formData.get("ReleaseDate");
+    const rawDate = formData.get('ReleaseDate');
+
+    
+    let blankFields = false
 
     const gameDesc = formData.get('Description');
     const ageRating = formData.get('AgeRating');
     const devs = formData.get('Developer');
     const genre = formData.get('Genre');
 
-    //const gameNameError = document.getElementById('Game Name Error')
-    //const platformError = document.getElementById('Platform Error')
-    //const releaseDateError = document.getElementById('Release Date Error')
-    
 
-    /*let hasErrors = false;
+    const titleError = document.getElementById('titleerror');
+    const platformError = document.getElementById('platformerror');
+    const gameDescError = document.getElementById('descerror');
+    const ageratingerror = document.getElementById('ageerrors');
+    const deverror = document.getElementById('deverror');
+    const genreerror = document.getElementById('genreerror')
+
+
+    titleError.innerHTML = '';
+    platformError.innerHTML = '';
+    gameDescError.innerHTML = '';
+    ageratingerror.innerHTML = '';
+    deverror.innerHTML = '';
+    genreerror.innerHTML = '';
+
+    
 
 
     if (gameName === '' || gameName === null) {
-        gameNameError.textContent = 'You must enter a Game Name';
-        hasErrors = true;
-    } else{
-        gameNameError.textContent = '';
-        hasErrors = false;
+        event.preventDefault();
+        titleError.innerHTML = 'You must enter your game name!';
+        blankFields = true;
+    }
+    // Checks to see if the password contains no text
+    if (platform === '' || platform === null){
+            platformError.innerHTML = 'You must select a platform!';
+            blankFields = true;
+    }
+    if (gameDesc == null || gameDesc == ''){
+        gameDescError.innerHTML = 'You need to enter a game description!';
+    }else if (gameDesc.length < 20){
+        gameDescError.innerHTML = 'Your game description needs to be more than 20 characters!';
+    }else if (gameDesc.length > 200){
+        gameDescError.innerHTML = "Your game description cannot be more than 200 characters!";
+    }
+    if (ageRating == null || ageRating ==''){
+        ageratingerror.innerHTML = 'You need to enter your games age rating!'
+    }
+    if (devs == null || devs == ''){
+        deverror.innerHTML = 'you need to enter the games developer!'
+    }
+    if (genre == null || genre == ''){
+        genreerror.innerHTML = 'You need to enter your games genre!'
+    } else if (genre.length > 50){
+        genreerror.innerHTML = 'You game genre cannot be more than 50 characters!'
     }
 
-    if (platform === '' || platform === null) {
-        platformError.textContent = 'You must select a valid Platform';
-        hasErrors = true;
-    } else{
-        platformError.textContent = '';
-        hasErrors = false;
-    }
-
-    if (releaseDate === '' || releaseDate === null) {
-        releaseDateError.textContent = 'You must enter a valid Release Date';
-        hasErrors = true;
-    } else {
-        releaseDateError.textContent = '';
-        hasErrors = false;
-    }
-
-    if (hasErrors){
+    if (blankFields){
         return;
-    }*/
+    }
+
+
+
+
     const userIDSess = sessionStorage.getItem('authToken');
     const userIDLocal = localStorage.getItem('authTokenLocal');
     const authToken = JSON.parse(userIDLocal);
@@ -79,7 +141,6 @@ function updateGame(event){
         const gameData = {
             Title: gameName,
             PlatformID: platform,
-            ReleaseDate: releaseDate,
             UserID: userID,
         };
 

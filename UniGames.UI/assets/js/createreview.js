@@ -9,7 +9,6 @@ console.log('Game ID:', gameID, "successfully transferred");
 function createReview(event){
     event.preventDefault();
 
-    const activeTimeout = timeoutStatus();
 
     const formData = new FormData(document.getElementById("createreview"));
 
