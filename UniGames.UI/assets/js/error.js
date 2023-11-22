@@ -1,26 +1,26 @@
-function errorPages(){
-    console.log("Error");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const errorType = urlParams.get("error");
+function modifyError(message){
+    // Gets the ID of a specific div (contains all main content in this case)
+    const replaceDiv = document.getElementById('mainsize');
 
-    let errorMessage;
-    switch (errorType){
-        case "1":
-            errorMessage = "Error: Your password is incorrect, please try again";
-            break;
-        case "2":
-            errorMessage = "Error: Your username is incorrect, please try again";
-            break;
-        case "3":
-            errorMessage = "Error: You have previously created reviews for games, <br> \
-            please delete your current reviews and try again.";
-            break;
-        default:
-            errorMessage = "An unknown error occurred";
-    }
+    const orgCont = replaceDiv.innerHTML;
+    // Replaces the HTML code within to nothing/blank
+    replaceDiv.innerHTML = '';
+    // Gets the error message from the function invoke
+    const errorMessage = message;
+    // Defines the error content (grabbed from error.html)
+    const errorContent = 
+    `<div id="contenttitle">
+        <h1>Error</h1>
+    </div>
+    <p id="error-message">${errorMessage}</p>
+    <div class="flexcontainer">
+        <button id="errorbackbut">Go Back</button>
+    </div>`;
+    // Adds the error content into the div
+    replaceDiv.innerHTML = errorContent;
 
-    const errorMessageP = document.getElementById("error-message");
-    errorMessageP.innerHTML = errorMessage;
+    const button = document.getElementById('errorbackbut');
+    button.addEventListener('click', function(){
+        replaceDiv.innerHTML = orgCont;
+    })
 }
-document.addEventListener("DOMContentLoaded", errorPages);

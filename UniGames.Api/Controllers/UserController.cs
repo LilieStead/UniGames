@@ -1,14 +1,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
 using UniGames.Api.Models.Sessions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using UniGames.Data.Repositories;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace UniGames.Api.Controllers
 {
@@ -85,8 +84,10 @@ namespace UniGames.Api.Controllers
                 // Return that no user has been found
                 return NotFound();
             }
+            // Verify the plain text password to the value of the hashed password
+            bool matchingPass = BCryptNet.Verify(password, userDM.Userpassword);
             // If the password for the username does not match the database records then
-            if (userDM.Userpassword != password)
+            if (!matchingPass)
             {
                 // Return that the user is unauthorised
                 return Unauthorized();
@@ -138,6 +139,9 @@ namespace UniGames.Api.Controllers
                     Userdob = CreateUserDTO.Userdob,
                     Userpassword = CreateUserDTO.Userpassword,
                 };
+
+                string passHash = BCryptNet.HashPassword(UsersDM.Userpassword);
+                UsersDM.Userpassword = passHash;
                 //used to look for username
                 var userExists = userRepository.GetUserIDByName(UsersDM.Username);
                 var userEmail = userRepository.GetAllUsers().Where(x => x.Useremail == UsersDM.Useremail);
@@ -227,6 +231,8 @@ namespace UniGames.Api.Controllers
                 {
                     return BadRequest(validationObj);
                 }
+                string passHash = BCryptNet.HashPassword(updatePasswordDTO.Userpassword);
+                updatePasswordDTO.Userpassword = passHash;
 
                 // Map the userDM to the updatePasswordDTO
                 mapper.Map(updatePasswordDTO, userDM);

@@ -15,10 +15,10 @@
 <!-- HEADER -->
 <header>
     <div id="logo">
-      <h1>UNiDAYS</h1>
+      <h1>UNiGames</h1>
     </div>
     <div id="navbar">
-      <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -31,7 +31,8 @@
   <!-- Your menu items go here -->
   <a href="#">Edit Details</a>
   <a href="#">My games</a>
-  <a href="#">My Reviews</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
   <!-- Add more menu items as needed -->
 </nav>
@@ -48,9 +49,8 @@
                    <form id="NewGame" action="">
                         <div id="GameName">
                             <label for="Name">Name: </label>
-                            <input type="text" id= "gname" name = "Title" maxlength="50">
+                            <input type="text" id= "gname" name = "Title" maxlength="50" placeholder="Enter the game name here">
                             <p class = "formerror" id="titleerror"></p>
-
                         </div>
                         <div id="Platform">
                             <label for="Platform">Platform: </label>
@@ -69,10 +69,43 @@
                             <input type="datetime-local" name="ReleaseDate" id="date" >
                             <p class="formerror" id = "releasedate"></p>
                         </div>
+                        <div>
+                            <label for="desc">Description: </label>
+                            <textarea name="Description" id="rdesc" cols="30" rows="10"></textarea>
+                            <p class="formerror" id="descerror"></p>
+                        </div>
+                        <div>
+                            <label for="agerating">Age Rating: </label>
+                            <select name="AgeRating" id="agrate">
+                                <option value="PEGI-3">PEGI-3</option>
+                                <option value="PEGI-7">PEGI-7</option>
+                                <option value="PEGI-12">PEGI-12</option>
+                                <option value="PG">PG</option>
+                                <option value="PEGI-16">PEGI-16</option>
+                                <option value="PEGI-18">PEGI-18</option>
+                                <option value="Mature">Mature</option>
+                            </select>
+                            <p class="formerror" id="ageerrors"></p>
+                        </div>
+                        <div>
+                            <label for="dev">Developer: </label>
+                            <input type="text" name="Developer" id="gamedev" placeholder="Enter the game developer here">
+                            <p class="formerror" id="deverror"></p>
+                        </div>
+                        <div>
+                            <label for="genre">Genre</label>
+                            <input type="text" name="Genre" id="genre" placeholder="Enter the game genre here">
+                        </div>
                         <input type="submit" value="Submit" class="centersubmit">
                    </form>
                 </div>
                 <!-- END OF GAME TABLE -->
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
@@ -80,6 +113,9 @@
 </body>
 <script async defer type="text/javascript" src="assets/js/creategame.js"></script>
 <script src="assets/js/logout.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

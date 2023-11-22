@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Mappings;
+using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
 
@@ -33,6 +34,45 @@ namespace UniGames.Api.Controllers
 
             var gamesdetailDTO=mapper.Map<GameDetailDTO>(gamesdetailDM);
             return Ok (gamesdetailDTO);
+        }
+
+        [HttpPost]
+        public IActionResult CreateGameDetail([FromBody] CreateGameDetailDTO creategameDetailDTO)
+        {
+            var gameDetailDM = mapper.Map<GameDetail>(creategameDetailDTO);
+            var existing = gamedetailRepository.GetDetailByID(creategameDetailDTO.GameID);
+            if (existing != null)
+            {
+                return BadRequest("Game details exist for this game already");
+            }
+            
+            var creGD = gamedetailRepository.CreateDetail(gameDetailDM);
+
+            var gameDetailDTO = mapper.Map<GameDetailDTO>(creGD);
+            return CreatedAtAction("GetDetailByID", new { id = gameDetailDTO.DetailID }, gameDetailDTO);
+
+        }
+
+        [HttpPut]
+        [Route("/updatedetails/{id:int}")]
+        public IActionResult UpdateGameDetail([FromRoute] int id, [FromBody]  UpdateGameDetailDTO updategameDetailDTO)
+        {
+            var gameDetailDM = gamedetailRepository.GetDetailByID(id);
+            if (gameDetailDM == null)
+            {
+                return NotFound();
+            }
+            if (gameDetailDM.GameID != updategameDetailDTO.GameID)
+            {
+                return Unauthorized("The game IDs do not match");
+            }
+
+            this.mapper.Map(updategameDetailDTO, gameDetailDM);
+            dbContext.SaveChanges();
+
+            var gameDetailDTO = mapper.Map<GameDetailDTO>(gameDetailDM);
+            return Ok(gameDetailDTO);
+
         }
     }
 }

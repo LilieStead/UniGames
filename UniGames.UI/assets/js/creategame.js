@@ -22,6 +22,11 @@ function createGame(event){
         blankFields = true;
     }
 
+    const gameDesc = formData.get('Description');
+    const ageRating = formData.get('AgeRating');
+    const devs = formData.get('Developer');
+    const genre = formData.get('Genre');
+
     const titleError = document.getElementById('titleerror');
     const platformError = document.getElementById('platformerror');
    
@@ -55,6 +60,8 @@ function createGame(event){
         ReleaseDate: releaseDate,
     };
 
+    
+
 
     fetch('http://localhost:5116/game' , {
         method: 'POST',
@@ -66,10 +73,44 @@ function createGame(event){
     .then(response => response.json())
     .then(responseData => {
         console.log('API Response: ', responseData);
-        window.location.href = "assets/inc/success.html?success=8";
+        console.log(responseData.gameID)
+        const detailData = {
+            GameID: responseData.gameID,
+            Description: gameDesc,
+            AgeRating: ageRating,
+            Developer: devs,
+            Genre: genre
+        };
+
+        fetch(`http://localhost:5116/gameDetail`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(detailData),
+        })
+        .then(response => {
+            if (response.status === 201){
+                return response.json();
+            }
+            else{
+                console.error(response.status);
+            }
+        })
+        .then(data => {
+            console.log(data);
+
+            modifySuccess("Your have successfully created a game!");
+        })
+        .catch(error =>{
+            console.error(error);
+            customPopup("Error");
+        })
+        //window.location.href = "assets/inc/success.html?success=8";
     })
     .catch(error=> {
         console.error('Error: ', error);
+        modifyError("Something went wrong :(");
     });
 }
 

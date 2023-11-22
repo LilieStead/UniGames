@@ -1,4 +1,3 @@
-localStorage.removeItem('authTokenLocal');
 function userLogin(event){
     event.preventDefault();
     const formData = new FormData(document.getElementById("loginform"));
@@ -29,6 +28,7 @@ function userLogin(event){
         emailError.textContent = '';
     }
 
+    
     if (userPassword === '' || userPassword === null){
         passwordError.textContent = 'You must enter your password';
         blankFields = true;
@@ -38,12 +38,6 @@ function userLogin(event){
 
     if (blankFields){
         return;
-    }
-    
-    const data = {
-        Useremail: userEmail,
-        Username: username,
-        Userpassword: userPassword
     }
 
     fetch(`http://localhost:5116/user/${username}/${userPassword}`)
@@ -56,15 +50,9 @@ function userLogin(event){
                 return response.json();
                 // If the username is not found then
             } else if (response.status === 404){
-                // Sends to an error page where it tells the user the username is not found 
-                //window.location.href = "error.html?error=2";
-                //usernameerror.innerHTML = "Username does not exist in the database, please try again"
                 return Promise.reject('Error: 404 - Username does not exist in the database');
             }
             else if (response.status === 401){
-                // Sends to an error page where it tells the user the password is incorrect
-                //window.location.href = "error.html?error=1";
-                //passworderror.innerHTML = "Password is incorrect, please try again or reset your password first";
                 return Promise.reject('Error: 401 - Password for this username is incorrect');
                 
             }
@@ -105,6 +93,7 @@ function userLogin(event){
                 customPopup("Username is invalid");
             } else if (error.includes('Error: 401')){
                 customPopup("Password is incorrect");
+                setTimeoutItself();
             }
         })
 }

@@ -87,7 +87,10 @@ function loginStatus(){
                 return;
             } else if (file === "createuser.html"){
                 return;
-            } else{
+            } else if (file ==="resetuserpass.html"){
+                return;
+            }
+            else{
                 window.location.href = "index.html";
             }
         }

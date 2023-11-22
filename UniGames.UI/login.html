@@ -12,7 +12,7 @@
 <!-- HEADER -->
 <header>
     <div id="logo">
-      <h1>UNiDAYS</h1>
+      <h1>UNiGames</h1>
     </div>
     <div id="navbar">
       
@@ -48,6 +48,7 @@
                         <label for="password">Password: *</label>
                         <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
                         <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password">Show Password
                     </div>
                     <div class="flexcontainer">
                         <input id="subbutton" type="submit" value="submit">
@@ -58,7 +59,11 @@
                 </form>
                 
                 </div>
+                <div class="flexcontainer">
+                    <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+                
             </div>
             <div class="popup" id="custom-popup">
                 <div class="popup-content">
@@ -76,10 +81,9 @@
 <!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
 <script src="assets/js/deluserpassfield.js"></script>
 <script src="assets/js/popup.js"></script>
-<!--<script src="assets/js/passtimeout.js"></script>
-
+<script src="assets/js/passtimeout.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
 <script src="assets/js/timeoutStatus.js"></script>
--->
 <script async defer type="text/javascript" src="assets/js/login/login.js"></script>
 
 

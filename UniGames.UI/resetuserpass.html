@@ -13,10 +13,10 @@
 <!-- HEADER -->
 <header>
     <div id="logo">
-      <h1>UNiDAYS</h1>
+      <h1>UNiGames</h1>
     </div>
     <div id="navbar">
-        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -29,7 +29,8 @@
   <!-- Your menu items go here -->
   <a href="#">Edit Details</a>
   <a href="#">My games</a>
-  <a href="#">My Reviews</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
   <!-- Add more menu items as needed -->
 </nav>
@@ -62,11 +63,13 @@
                         <label for="password">New Password: *</label>
                         <input type="password" name="Userpassword" id="password">
                         <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password">Show Password
                     </div>
                     <div>
                         <label for="passwordnew2">Confirm New Password: *</label>
                         <input type="password" name="UserPasswordAgain" id="password2">
                         <p class="formerror" id="passworderror2"></p>
+                        <input type="checkbox" onclick="showSecondPassword();" id="show-password">Show Password
                     </div>
                     <div class="flexcontainer">
                         <input id="subbutton" type="submit" value="submit">
@@ -98,6 +101,9 @@
 <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
 <script src="assets/js/timeoutStatus.js"></script>
 <script src="assets/js/logout.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

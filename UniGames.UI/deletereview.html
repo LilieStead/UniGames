@@ -13,10 +13,10 @@
 <!-- HEADER -->
 <header>
     <div id="logo">
-      <h1>UNiDAYS</h1>
+      <h1>UNiGames</h1>
     </div>
     <div id="navbar">
-        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -29,7 +29,8 @@
   <!-- Your menu items go here -->
   <a href="#">Edit Details</a>
   <a href="#">My games</a>
-  <a href="#">My Reviews</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
   <!-- Add more menu items as needed -->
 </nav>
@@ -53,11 +54,13 @@
                         <label for="password">Your Password: </label>
                         <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
                         <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password">Show Password
                     </div>
                     <div>
                         <label for="password2">Confirm Password: </label>
                         <input type="password" name="Userpassword2" id="password2" placeholder="Enter your password again...">
                         <p class="formerror" id="passworderror2"></p>
+                        <input type="checkbox" onclick="showSecondPassword();" id="show-password">Show Password
                     </div>
                     <div class="flexcontainer">
                         <input id="reviewbtn"type="submit" value="submit">
@@ -89,6 +92,9 @@
 <script src="assets/js/popup.js"></script>
 <script src="assets/js/login/loginstatus.js"></script>
 <script src="assets/js/logout.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

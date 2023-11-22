@@ -79,7 +79,6 @@ function resetPassword(event){
     const userIDSess = sessionStorage.getItem('authToken');
     const userIDLocal = localStorage.getItem('authTokenLocal');
     const authToken = JSON.parse(userIDLocal);
-    console.log(authToken.value);
     var idType;
 
     if (userIDSess){
@@ -101,6 +100,10 @@ function resetPassword(event){
         // Creates a variable which stores the username from the token itself
         const userName = data.username;
 
+        const newData = {
+            Userpassword: newPassActual,
+        };
+
         // Chooses the correct URL based on the condition of the phone number (if it is present in the data or not)
         // ? means it is present, : means it is not -- This chooses the API endpoint to use
         const apiURL = userPhone
@@ -112,13 +115,14 @@ function resetPassword(event){
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(newData),
         })
         .then(response => {
             var newvar = response.json();
             if (response.status === 200){
                 console.log('User Authenticated');
                 inHTMLError.textContent = '';
+                return response.json();
             }
             else if (response.status === 400){
                 console.log(newvar);
