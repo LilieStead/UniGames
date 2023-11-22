@@ -95,7 +95,7 @@ function deleteReview(event){
             .then(response => response.json())
             .then(data => {
                 console.log("api response: ", data)
-                window.location.href = "assets/inc/success.html?success=3";
+                modifySuccess("You have successfully deleted your review!");
             })
             .catch(error => {
                 console.error(error);

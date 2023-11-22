@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGames - Create Review</title>
+    <script src="assets/js/login/loginstatus.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
+</head>
+<!-- HEADER -->
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="#">Edit Details</a>
+  <a href="#">My games</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
+<!-- END OF HEADER -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Edit Your Review</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="editreview" action="">
+                    <div>
+                        <label for="rtitle">Review Title: </label>
+                        <input type="text" name="ReviewTitle" id="rtitle" placeholder="Enter your review title...">
+                        <p class="formerror" id="titleerror"></p>
+                    </div>
+                    <div>
+                        <label for="rdesc">Review Description: </label>
+                        <textarea name="ReviewDescription" id="rdesc" placeholder="Enter your description here..."></textarea>
+                        <p class="formerror" id="descriptionerror"></p>
+                    </div>
+                    <div>
+                        <label for="score">Score: </label>
+                        <input type="number" name="Score" id="score">
+                        <p class="formerror" id="scoreerror"></p>
+                    </div>
+                    
+                    <div class="flexcontainer">
+                        <input id="subbutton" onclick="editReview();" type="button" value="submit">
+                       
+                        <!-- Reset Other Fields Button -->
+                        <a class="reset-fields" id="crOTHButton" onclick="resetReviewFields()">Reset Review</a>
+
+                    </div>
+                    <br>
+                    <div class="flexcontainer">
+                        <p id="timeout-countdown"></p>
+                        <!-- Reset Password Button -->
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                    </div>
+                    
+                </form>
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+</body>
+<script src="assets/js/logout.js"></script>
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+
+
+<script async defer type="text/javascript" src="assets/js/editreview.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
+</html>

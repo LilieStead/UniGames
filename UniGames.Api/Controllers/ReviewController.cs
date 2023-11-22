@@ -95,6 +95,53 @@ namespace UniGames.Api.Controllers
 
         }
 
+        [HttpPut]
+        [Route("/editreview/{id:int}")]
+        public IActionResult EditReview([FromRoute] int id, [FromBody] UpdateReviewDTO updateReviewDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var reviewDM = reviewRepository.GetReviewByID(id);
+                if (reviewDM == null)
+                {
+                    return NotFound();
+                }
+                if (reviewDM.UserID != updateReviewDTO.UserID)
+                {
+                    return Unauthorized("User is editing the wrong review");
+                }
+                /*if (reviewDM.GameID != updateReviewDTO.GameID)
+                {
+                    return BadRequest("User is attempting to update the game ID for this review");
+                }*/
+
+                this.mapper.Map(updateReviewDTO, reviewDM);
+                dbContext.SaveChanges();
+
+                var reviewDTO = mapper.Map<ReviewDTO>(reviewDM);
+                return Ok(reviewDTO);
+            }
+            else
+            {
+                return StatusCode(500, new { Message = "Illegal method of editing a review attempted"});
+            }
+           
+            
+        }
+
+        [HttpGet]
+        [Route("/userreview/{id:int}")]
+        public IActionResult GetReviewByUserID([FromRoute] int id)
+        {
+            var reviewDM = reviewRepository.GetReviewByUser(id);
+            if (reviewDM == null)
+            {
+                return NotFound();
+            }
+            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
+            return Ok(reviewDTO);
+        }
+
         [HttpGet]
         [Route("/userreview/{username}")]
         public IActionResult GetReviewByUsername([FromRoute] string username) {

@@ -65,6 +65,7 @@ namespace UniGames.Api.Controllers
             if (ModelState.IsValid)
             {
                 var gamesDM = mapper.Map<Game>(createGameDTO);
+                
                 var create = gameRepository.CreateGame(gamesDM);
                 var gamesDTO = mapper.Map<GameDTO>(create);
                 return CreatedAtAction("GetGameById", new

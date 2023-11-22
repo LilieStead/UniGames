@@ -9,6 +9,63 @@ let interval;
 var curURL = window.location.pathname;
 // Extract the filename from the URL
 var fileName = curURL.substring(curURL.lastIndexOf("/") + 1);
+var newPassConfirm = (fileName === "login.html") ? undefined : document.getElementById("password2").value;
+
+
+function setTimeoutItself(){
+    // Add 1 to passAttempts
+    passAttempts++;
+    // Logs the increasing counter to the console
+    console.log("Counter added." , '-', passAttempts);
+    // If the passAttempts are equal or more than the maxAttempts then
+    if (passAttempts >= maxAttempts){
+        // Add the timeout duration to the current time
+        const endTime = Date.now() + timeOut;
+        // Set a new item in localStorage called passwordTimeout with the current time provided 
+        localStorage.setItem('passwordTimeout', endTime.toString());
+        
+        // Remembers the disabled state of the inputs
+        localStorage.setItem('passwordFieldsDisabled', 'true');
+
+        // Remove the content from the password fields -- Prevents this from looping
+        document.getElementById('password').value = '';
+        
+        
+        // Disable the password fields -- Means they cannot progress for 2 minutes unless JavaScript is disabled
+        document.getElementById('password').disabled = true;
+        
+        document.getElementById('subbutton').disabled = true;
+        document.getElementById('subbutton').style.backgroundColor = "grey";
+        document.getElementById('subbutton').style.cursor = "no-drop";
+        // Sets the background colour to grey -- Could be modified to a different colour
+        document.getElementById('password').style.backgroundColor = 'grey';
+        
+        // Removes the placeholders
+        document.getElementById('password').placeholder = '';
+        
+        if (fileName !== "login.html"){
+            document.getElementById('password2').value = '';
+            document.getElementById('password2').disabled = true;
+            document.getElementById('password2').style.backgroundColor = 'grey';
+            document.getElementById('password2').placeholder = '';
+        }
+        // Sets the password error to tell the user to wait for the cooldown to expire
+        document.getElementById('passworderror').innerHTML = 'Please Wait For The Cooldown To Expire';
+        
+
+        // Display the countdown message
+        const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+        if (fileName !== "resetuserpass.html"){
+            // Displays the reset password button
+            document.getElementById('crPRButton').style.display = 'block';
+        }
+        document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
+        // Utilises the custom popup to tell the user they have reached the max attempts
+        customPopup(`Maximum login attempts reached, please wait 2 minutes and try again.`);
+        interval = setInterval(passwordTimeout, 1000);
+    }
+}
+
 
 // Function to handle password timeouts
 function passwordTimeout(){
@@ -49,74 +106,44 @@ function passwordTimeout(){
             
             // Re-enables both inputs
             document.getElementById('password').disabled = false;
-            document.getElementById('password2').disabled = false;
+            
             document.getElementById('subbutton').disabled = false;
             document.getElementById('subbutton').style.backgroundColor = "#1DD577";
             document.getElementById('subbutton').style.cursor = "pointer";
             // Sets the background colour to be white (indicates it is accepting inputs)
             document.getElementById('password').style.backgroundColor = 'white';
-            document.getElementById('password2').style.backgroundColor = 'white';
+            
             // Add the placeholders back in
             document.getElementById('password').placeholder = 'Enter your new password here...';
-            document.getElementById('password2').placeholder = 'Enter your new password again';
-
+            
+            if (fileName !== "login.html"){
+                document.getElementById('password2').disabled = false;
+                document.getElementById('password2').style.backgroundColor = 'white';
+                document.getElementById('password2').placeholder = 'Enter your new password again';
+            }
             document.getElementById('passworderror').innerHTML = '';
             // Remove the localStorage item for disabling fields
             localStorage.removeItem('passwordFieldsDisabled');
         }
     }
     const newPassActual = document.getElementById('password').value;
-    const newPassConfirm = document.getElementById('password2').value;
-    // If both of the passwords don't match with each other then
-    if (newPassActual !== newPassConfirm){
-        // Log an error to the console to say the passwords do not match
-        console.error('Passwords do not match');
-        // Add 1 to passAttempts
-        passAttempts++;
-        // Logs the increasing counter to the console
-        console.log("Counter added." , '-', passAttempts);
-        // If the passAttempts are equal or more than the maxAttempts then
-        if (passAttempts >= maxAttempts){
-            // Add the timeout duration to the current time
-            const endTime = Date.now() + timeOut;
-            // Set a new item in localStorage called passwordTimeout with the current time provided 
-            localStorage.setItem('passwordTimeout', endTime.toString());
-            
-            // Remembers the disabled state of the inputs
-            localStorage.setItem('passwordFieldsDisabled', 'true');
-
-            // Remove the content from the password fields -- Prevents this from looping
-            document.getElementById('password').value = '';
-            document.getElementById('password2').value = '';
-            // Disable the password fields -- Means they cannot progress for 2 minutes unless JavaScript is disabled
-            document.getElementById('password').disabled = true;
-            document.getElementById('password2').disabled = true;
-            document.getElementById('subbutton').disabled = true;
-            document.getElementById('subbutton').style.backgroundColor = "grey";
-            document.getElementById('subbutton').style.cursor = "no-drop";
-            // Sets the background colour to grey -- Could be modified to a different colour
-            document.getElementById('password').style.backgroundColor = 'grey';
-            document.getElementById('password2').style.backgroundColor = 'grey';
-            // Removes the placeholders
-            document.getElementById('password').placeholder = '';
-            document.getElementById('password2').placeholder = '';
-            // Sets the password error to tell the user to wait for the cooldown to expire
-            document.getElementById('passworderror').innerHTML = 'Please Wait For The Cooldown To Expire';
-            
-
-            // Display the countdown message
-            const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
-            if (fileName !== "resetuserpass.html"){
-                // Displays the reset password button
-                document.getElementById('crPRButton').style.display = 'block';
-            }
-            document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
-            // Utilises the custom popup to tell the user they have reached the max attempts
-            customPopup(`Maximum login attempts reached, please wait 2 minutes and try again.`);
-            interval = setInterval(passwordTimeout, 1000);
+    
+    if (fileName === "login.html" && passAttempts >= 6){
+        setTimeoutItself();
+    } else{
+        // If both of the passwords don't match with each other then
+        if (newPassActual !== newPassConfirm && fileName !== "login.html"){
+            // Log an error to the console to say the passwords do not match
+            console.error('Passwords do not match');
+            setTimeoutItself();
         }
     }
-    if (newPassActual === newPassConfirm){
+    
+    if (newPassActual === newPassConfirm && fileName !== "login.html"){
+        passAttempts = 0;
+        localStorage.removeItem('passwordTimeout');
+        localStorage.removeItem('passwordFieldsDisabled');
+    } else{
         passAttempts = 0;
         localStorage.removeItem('passwordTimeout');
         localStorage.removeItem('passwordFieldsDisabled');
@@ -131,31 +158,42 @@ function setFormState(){
 
     if (passDisabled === 'true' || timeoutActive){
         document.getElementById('password').disabled = true;
-        document.getElementById('password2').disabled = true;
+        
         document.getElementById('subbutton').disabled = true;
         document.getElementById('subbutton').style.backgroundColor = "grey";
         document.getElementById('subbutton').style.cursor = "no-drop";
         // Sets the background colour to grey -- Could be modified to a different colour
         document.getElementById('password').style.backgroundColor = 'grey';
-        document.getElementById('password2').style.backgroundColor = 'grey';
+        
         // Removes the placeholders
         document.getElementById('password').placeholder = '';
-        document.getElementById('password2').placeholder = '';
+        if (fileName !== "login.html"){
+            document.getElementById('password2').disabled = true;
+            document.getElementById('password2').style.backgroundColor = 'grey';
+            document.getElementById('password2').placeholder = '';
+        }
+        
+        
         // Sets the password error to tell the user to wait for the cooldown to expire
         document.getElementById('passworderror').innerHTML = 'Please Wait For The Cooldown To Expire';
         
     }
     else{
         document.getElementById('password').disabled = false;
-        document.getElementById('password2').disabled = false;
+        
         document.getElementById('subbutton').disabled = false;
         document.getElementById('subbutton').style.backgroundColor = "#1DD577";
         document.getElementById('subbutton').style.cursor = "pointer";
         document.getElementById('password').style.backgroundColor = 'white';
-        document.getElementById('password2').style.backgroundColor = 'white';
+        
         // Removes the placeholders
         document.getElementById('password').placeholder = 'Enter your new password here...';
-        document.getElementById('password2').placeholder = 'Enter your new password again...';
+        
+        if (fileName !== "login.html"){
+            document.getElementById('password2').disabled = false;
+            document.getElementById('password2').style.backgroundColor = 'white';
+            document.getElementById('password2').placeholder = 'Enter your new password again...';
+        }
         // Sets the password error to tell the user to wait for the cooldown to expire
         document.getElementById('passworderror').innerHTML = '';
     }

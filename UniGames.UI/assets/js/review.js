@@ -1,19 +1,16 @@
 // Extract the 'id' query parameter from the current page's URL
 // Extract the 'id' query parameter from the current page's URL
 var urlparams = new URLSearchParams(window.location.search);
-var reviewid = urlparams.get('id');
-console.log(reviewid);
-
+var gameid = urlparams.get('id');
 // Select the table body element where review data will be displayed // Adjust the selector as needed
 
-// Fetch review data from the server using the extracted 'reviewid'
-fetch(`http://localhost:5116/review/${reviewid}`)
+// Fetch review data from the server using the extracted 'gameid'
+fetch(`http://localhost:5116/review/${gameid}`)
     .then(response => response.json())
     .then(data => {
         // Check if the 'data' is an array (for multiple reviews) or a single review object
         // If it's an array, loop through the reviews and append them to the table
         if(Array.isArray(data)){
-        console.log(data);
         data.forEach(review => {
             createReview(review);
             
@@ -71,9 +68,10 @@ function createReview(review) {
                 </div>
                 <div>
                     <h1>${review.reviewTitle}</h1>
-                    <p class="options"><a href="#">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a></p>
+                    <p class="options"><a id='editreview' href="editreview.html?id=${review.reviewID}">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a></p>
                 </div>
                 <p>${review.reviewDescription}</p>
             </div>`;
+    
 
 }

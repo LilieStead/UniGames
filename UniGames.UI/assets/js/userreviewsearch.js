@@ -69,7 +69,7 @@ function createReview(review) {
     </div>\
     <div>\
     <h1>${review.reviewTitle}</h1>
-    <p class="options"><a href="#">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a> </p>
+    <p class="options"><a href="editreview.html?id=${review.reviewID}">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a> </p>
   </div>\
   <p> ${review.reviewDescription}\
   </div>`;

@@ -71,13 +71,15 @@
 
                         <div>
                             <label for="Userpassword">Password: </label>
-                            <input type="password" name="Password" id="Userpassword" maxlength="50" min="8">
+                            <input type="password" name="Password" id="password" maxlength="50" min="8">
                             <p id="passworderror" class="formerror"></p>
+                            <input type="checkbox" onclick="showPassword();" id="show-password">Show Password
                         </div>
                         <div>
                             <label for="userpassword2">Confirm Password: </label>
                             <input type="password" name="Password2" id="password2" placeholder="Enter your password again...">
                             <p class="formerror" id="passworderror2"></p>
+                            <input type="checkbox" onclick="showSecondPassword();" id="show-password">Show Password
 
                         </div>
 
@@ -111,7 +113,7 @@
 
 <script async defer type="text/javascript" src="assets/js/createuser.js"></script>
 <script src="assets/js/popup.js"></script>
-
+<script src="assets/js/passwordvisibility.js"></script>
 
 <!-- Footer -->
 <footer>

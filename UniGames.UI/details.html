@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game Details and Top 5 Reviews</title>
     <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +18,7 @@
       <h1>UNiGames</h1>
     </div>
     <div id="navbar">
-        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -31,7 +31,8 @@
   <!-- Your menu items go here -->
   <a href="userdetails.html">Edit Details</a>
   <a href="#">My games</a>
-  <a href="#">My Reviews</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
   <!-- Add more menu items as needed -->
 </nav>
@@ -79,6 +80,12 @@
                 </div>
                 <!-- END OF GAME TABLE -->
             </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
         </div>
         <!-- END OF MAIN CONTENT -->
     </div>
@@ -86,6 +93,7 @@
 <script async defer type="text/javascript" src="assets/js/details.js"></script>
 <script async defer type="text/javascript" src="assets/js/review.js"></script>
 <script src="assets/js/logout.js"></script>
+<script src="assets/js/popup.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

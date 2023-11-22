@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search For Games</title>
     <script src="assets/js/login/loginstatus.js"></script>
-    <script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
@@ -17,7 +17,7 @@
       <h1>UNiGames</h1>
     </div>
     <div id="navbar">
-        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide">YourUsername</span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
       <nav id="mainLinks"class="flexcontainer">
           <a href="home.html">Home</a>
           <a href="search.html">Search Games</a>
@@ -30,7 +30,8 @@
   <!-- Your menu items go here -->
   <a href="userdetails.html">Edit Details</a>
   <a href="#">My games</a>
-  <a href="#">My Reviews</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
   <!-- Add more menu items as needed -->
 </nav>
@@ -80,6 +81,7 @@
     </div>
 </body>
 <script src="assets/js/logout.js"></script>
+<script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

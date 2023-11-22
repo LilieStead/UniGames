@@ -123,8 +123,17 @@ function deleteUser(event){
             console.log("Success");
             sessionStorage.removeItem('authToken');
             localStorage.removeItem('authTokenLocal');
-            // Temporary, will be replaced with the new success system from the Kieron Branch eventually
-            window.location.href = "index.html";
+            
+            const successMessage = "Success! Your account has been deleted.";
+
+            // Due to the login functionality being developed, this entire section for the success
+            // may change due to the circumstances around directing out of the page but this will
+            // be solved quickly
+
+            // The message can also be typed manually, 
+            // just like this: modifySuccess("This was a great success!")
+            // Invokes the modifySuccess() function and adds the message to it
+            modifySuccess(successMessage);
             
         })
         .catch(error => {
