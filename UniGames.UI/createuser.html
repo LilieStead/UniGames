@@ -73,13 +73,13 @@
                             <label for="Userpassword">Password: </label>
                             <input type="password" name="Password" id="password" maxlength="50" min="8">
                             <p id="passworderror" class="formerror"></p>
-                            <input type="checkbox" onclick="showPassword();" id="show-password">Show Password
+                            <input type="checkbox" onclick="showPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                         </div>
                         <div>
                             <label for="userpassword2">Confirm Password: </label>
                             <input type="password" name="Password2" id="password2" placeholder="Enter your password again...">
                             <p class="formerror" id="passworderror2"></p>
-                            <input type="checkbox" onclick="showSecondPassword();" id="show-password">Show Password
+                            <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
 
                         </div>
 
@@ -87,7 +87,7 @@
                         <div class="flexcontainer">
                             <input type="submit" value="Submit">
                             <input type="reset" value="Reset">
-                            <input type="checkbox" id="stayLoggedIn">Stay Logged In
+                            <input type="checkbox" id="stayLoggedIn"><span id="stayLoggedText">Stay Logged In</span>
                         </div>
                         <br>
                     </form>

@@ -931,7 +931,25 @@ form .formerror{
     margin: -20px;
     padding:  10px 10px;
 }
-
-
-
 /* END OF INDEX */
+
+/* Start of Show Password Button and Stay Logged In Text*/
+#show-password{
+    margin-bottom: 0.7em;
+    
+}
+.show-password-span{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 0.4em;
+}
+
+#stayLoggedText{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin:auto;
+}
+
+#stayLoggedIn{
+    margin-left: 1.4em;
+}
+
+/* End of Show Password Button */
