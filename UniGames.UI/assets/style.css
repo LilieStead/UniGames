@@ -305,7 +305,7 @@ label {
     font-family:Unidays-Book, sans-serif ;
 }
 
-    input[type=text]{
+    input[type=text], input[type=number], #detailsdob input{
     min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
