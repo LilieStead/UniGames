@@ -105,74 +105,68 @@ function createGame(){
     fetch(apiURL)
     .then (response => response.json())
     .then (data => {
-        
-    const userID = data.userID;
-
-    const gamedata = {
-        Title: title,
-        PlatformID: platform,
-        ReleaseDate: releaseDate,
-        UserID: userID,
-    };
-
-    
-    fetch('http://localhost:5116/game' , {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(gamedata),
-    })
-    .then(response => response.json())
-    .then(responseData => {
-
-        console.log('API Response: ', responseData);
-        console.log(responseData.gameID)
-        const detailData = {
-            GameID: responseData.gameID,
-            Description: gameDesc,
-            AgeRating: ageRating,
-            Developer: devs,
-            Genre: genre
+        const userID = data.userID;
+        const gamedata = {
+            Title: title,
+            PlatformID: platform,
+            ReleaseDate: releaseDate,
+            UserID: userID,
         };
 
-        fetch(`http://localhost:5116/gameDetail`, {
+        fetch('http://localhost:5116/game' , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(detailData),
+            body: JSON.stringify(gamedata),
         })
-        .then(response => {
-            if (response.status === 201){
-                return response.json();
-            }
-            else{
-                console.error(response.status);
-            }
+        .then(response => response.json())
+        .then(responseData => {
+
+            console.log('API Response: ', responseData);
+            console.log(responseData.gameID)
+            const detailData = {
+                GameID: responseData.gameID,
+                Description: gameDesc,
+                AgeRating: ageRating,
+                Developer: devs,
+                Genre: genre
+            };
+
+            fetch(`http://localhost:5116/gameDetail`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(detailData),
+            })
+            .then(response => {
+                if (response.status === 201){
+                    return response.json();
+                }
+                else{
+                    console.error(response.status);
+                }
+            })
+            .then(data => {
+                console.log(data);
+
+                modifySuccess("Your have successfully created a game!");
+            })
+            .catch(error =>{
+                console.error(error);
+                customPopup("Error");
+            })
+
         })
-        .then(data => {
-            console.log(data);
-
-            modifySuccess("Your have successfully created a game!");
-        })
-        .catch(error =>{
-            console.error(error);
-            customPopup("Error");
-        })
-
-    })
-    .catch(error=> {
-        console.error('Error: ', error);
-        modifyError("Something went wrong :(");
-    });
-
-
-
+        .catch(error=> {
+            console.error('Error: ', error);
+            modifyError("Something went wrong :(");
+        });
     })
     .catch (error => {
         console.error(error);
-    })
+    });
 
 
 }

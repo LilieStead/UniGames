@@ -41,14 +41,12 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
             // If it's an array, loop through the games and append them to the table
             console.log(data);
             data.forEach(game => {
-                const rrow = createTableRow(game);
-                reviewTableBody.appendChild(rrow);
+                createTableRow1(game);
             });
         } else {
             // If it's a single game, create a row and append it to the table
             console.log(data);
-            const rrow = createTableRow(data);
-            reviewTableBody.appendChild(rrow);
+            createTableRow1(data);
         }
     })
     .catch(error => {
