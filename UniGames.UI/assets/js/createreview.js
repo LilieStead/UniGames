@@ -97,57 +97,57 @@ function createReview(){
     fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-            const userID = data.userID;
-            // Get Username and Password
-            const reviewData = {
-                ReviewTitle: reviewTitle,
-                ReviewDescription: reviewDesc,
-                Score: score, 
-                UserID: userID,
-                GameID: gameID,
-            };
+        const userID = data.userID;
+        // Get Username and Password
+        const reviewData = {
+            ReviewTitle: reviewTitle,
+            ReviewDescription: reviewDesc,
+            Score: score, 
+            UserID: userID,
+            GameID: gameID,
+        };
 
-            fetch('http://localhost:5116/review', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    
-                },
-                body: JSON.stringify(reviewData),
-            })
-            .then(response => {
-                if (response.status === 201){
-                    return response.json()
-                } else if (response.status === 400){
-                    return Promise.resolve(response.json());
-                } else{
-                    console.error("Error:", response.status);
-                }
-            })
-            .then(rdata => {
-                console.log("API Response: ", rdata);
-                //window.location.href = "assets/inc/success.html?success=1";
-                if ('status' in rdata){
-                    //window.location.href = "assets/inc/success.html?success=1";
-                    if (rdata.status === 400){
-                        console.log(rdata.errors);
-                        console.log(rdata.errors.ReviewDescription[0]);
-                        customPopup(rdata.errors.ReviewDescription[0]);
-                    }else{
-                        console.log("Unexpected Status/Error: ", rdata.status);
-                    }
-                }else{
-                    console.log("No status returned, assuming success.");
-                    //window.location.href = "assets/inc/success.html?success=1";
-                    // Invokes the modifySuccess() function and adds the message to it
-                    modifySuccess("Your review has been added, thank you!");
-                }
+        fetch('http://localhost:5116/review', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
                 
-            })
+            },
+            body: JSON.stringify(reviewData),
+        })
+        .then(response => {
+            if (response.status === 201){
+                return response.json()
+            } else if (response.status === 400){
+                return Promise.resolve(response.json());
+            } else{
+                console.error("Error:", response.status);
+            }
+        })
+        .then(rdata => {
+            console.log("API Response: ", rdata);
+            //window.location.href = "assets/inc/success.html?success=1";
+            if ('status' in rdata){
+                //window.location.href = "assets/inc/success.html?success=1";
+                if (rdata.status === 400){
+                    console.log(rdata.errors);
+                    console.log(rdata.errors.ReviewDescription[0]);
+                    customPopup(rdata.errors.ReviewDescription[0]);
+                }else{
+                    console.log("Unexpected Status/Error: ", rdata.status);
+                }
+            }else{
+                console.log("No status returned, assuming success.");
+                //window.location.href = "assets/inc/success.html?success=1";
+                // Invokes the modifySuccess() function and adds the message to it
+                modifySuccess("Your review has been added, thank you!");
+            }
+            
+        })
 
-            .catch(error => {
-                console.error("Error:", error);
-            });
+        .catch(error => {
+            console.error("Error:", error);
+        });
     })
     .catch(error => {
         console.error(error);
