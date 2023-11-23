@@ -143,8 +143,7 @@ function passwordTimeout(){
         passAttempts = 0;
         localStorage.removeItem('passwordTimeout');
         localStorage.removeItem('passwordFieldsDisabled');
-    } else{
-
+    } 
     else if (newPassActual === newPassConfirm){
 
         passAttempts = 0;

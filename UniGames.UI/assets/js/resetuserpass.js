@@ -115,7 +115,7 @@ function resetPassword(){
             if (response.status === 200){
                 console.log('User Authenticated');
                 inHTMLError.textContent = '';
-                return response.json();
+                return newvar;
             }
             else if (response.status === 400){
                 console.log(newvar);
