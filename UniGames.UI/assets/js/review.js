@@ -10,6 +10,9 @@ console.log(reviewid);
 fetch(`http://localhost:5116/review/${reviewid}`)
     .then(response => response.json())
     .then(data => {
+        // Select the table body element where game data will be displayed
+        const reviewTableBody = document.querySelector('#reviewTable #reviewtbody');
+  
         // Check if the 'data' is an array (for multiple reviews) or a single review object
         // If it's an array, loop through the reviews and append them to the table
         if(Array.isArray(data)){
@@ -26,6 +29,7 @@ fetch(`http://localhost:5116/review/${reviewid}`)
         // Handle errors when fetching review data
         console.error('Error fetching review data:', error);
     });
+
 
 // Function to create a table row for a review
 function createReview(review) {
