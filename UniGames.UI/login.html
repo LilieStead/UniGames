@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="assets/js/login/loginstatus.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts.css">
+</head>
+<!-- HEADER -->
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+      
+    </div>
+</header>
+<!-- END OF HEADER -->
+<body id="login">
+    <!-- NAV -->
+    <nav class="centercontents">
+
+    </nav>
+    <!-- END OF NAV -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Log into your account</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="loginform" action="">
+                    <div>
+                        <label for="username">Username: *</label>
+                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">Password: *</label>
+                        <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
+                        <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password"> <span class="show-password-span">Show Password</span>
+                    </div>
+                    <div class="flexcontainer">
+                        <input id="subbutton" type="submit" value="submit">
+                        <input type="checkbox" id="stayLoggedIn"><span id="stayLoggedText">Stay Logged In</span>
+                    </div>
+                    <p id="timeout-countdown"></p>
+                    <h2 id="error-handling"></h1>
+                </form>
+                
+                </div>
+                <div class="flexcontainer">
+                    <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+                
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+
+
+    
+</body>
+<!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
+<script src="assets/js/deluserpassfield.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/passtimeout.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
+<script src="assets/js/timeoutStatus.js"></script>
+<script async defer type="text/javascript" src="assets/js/login/login.js"></script>
+
+
+
+
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>

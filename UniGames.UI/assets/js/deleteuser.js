@@ -3,45 +3,38 @@
 let noReturn = true;
 function deleteUser(){
     // Prevents the event from occuring if data is not present
-    //event.preventDefault();
-
-    
-
+  
     const activeTimeout = timeoutStatus();
 
     // Looks for the ID of the form and creates Form Data using the FormData method
     const formData = new FormData(document.getElementById("deleteuser"));
 
     // Gets the username and password from the form data
-    const username = formData.get('Username');
+    //const username = formData.get('Username');
     const password = formData.get('Userpassword');
     const password2 = formData.get('Userpassword2');
 
-    const usernameError = document.getElementById('usernameerror');
+    //const usernameError = document.getElementById('usernameerror');
     const passwordError = document.getElementById('passworderror');
     const passwordError2 = document.getElementById('passworderror2');
-    usernameError.innerHTML = '';
+    //usernameError.innerHTML = '';
     passwordError.innerHTML = '';
     passwordError2.innerHTML = '';
+
     console.log("We making it back?");
     // Creates a false flag to stop progression if true
     let blankFields = false;
-    // Checks to see if the username is contains no text
-    if (username === '' || username === null) {
-        //event.preventDefault();
-        modifyError("An unknown error occured");
-        usernameError.innerHTML = 'You must enter your username';
-        blankFields = true;
-    }
 
     // Checks to see if the password contains no text
     if (password === '' || password === null){
         if (activeTimeout){
             passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+            
         }else{
             passwordError.innerHTML = 'You must enter your account\'s password';
-            curFail = true;
+            blankFields = true;
             return;
+
         }
     }
 
@@ -49,10 +42,11 @@ function deleteUser(){
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
+        blankFields = true;
         passwordTimeout();
         return;
     }
-    if (password === password2){
+    if (password === password2 && password != null){
         const error_message = document.getElementById('passworderror2');
         error_message.innerHTML = "";
         
@@ -64,34 +58,25 @@ function deleteUser(){
         
     }
 
-    // Gets the user endpoint with the user's username and password
-    fetch(`http://localhost:5116/user/${username}/${password}`)
-    .then(response => {
-        // If the username and password match then
-        if (response.status === 200){
-            // Log to the console that the user has been authenticated
-            console.log("User authenticated");
-            // Return the response
-            return response.json();
-            // If the username is not found then
-        } else if (response.status === 404){
-            // Sends to an error page where it tells the user the username is not found 
-            
-            return Promise.reject('Error: 404 - Username does not exist in the database');
-        }
-        else if (response.status === 401){
-            // Sends to an error page where it tells the user the password is incorrect
-            
-            return Promise.reject('Error: 401 - Password for this username is incorrect');
-            
-        }
-        else{
-            // Logs an error to the console
-            console.error("error", response.status);
-            // Popup to give an error to the user
-            return customPopup("An unexpected error has occurred, please try again in a moment.");
-        }
-    })
+
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    var idType;
+
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+
+    fetch(apiURL)
+    .then(response => response.json())
     .then(data => {
         const noRetDiv = document.getElementById('mainsize');
         const orignalContent = noRetDiv.innerHTML;
@@ -132,10 +117,10 @@ function deleteUser(){
         });
         yesButton.addEventListener('click', function(){
             noReturn = true;
-            // Creates a variable which stores the username from the database itself
+             // Creates a variable which stores the username from the token
             const userName = data.username;
             // Uses the delete endpoint with the username from the database
-            fetch(`http://localhost:5116/delete/${userName}`, {
+            fetch(`http://localhost:5116/delete/${userName}/${password}`, {
                 // Chooses the method used
                 method: "DELETE",
                 // Chooses the format of the content
@@ -152,6 +137,11 @@ function deleteUser(){
                     console.log("User Is Able To Delete Account");
                     // Returns the response
                     return response.json();
+                    // If the response status code is equal to 400 then
+                } else if (response.status === 401){
+                    return Promise.reject("Error: 401");
+                } else if (response.status === 400){
+                    return Promise.reject("Error: 400");
                 }
                 else {
                     // Returns an error in the console based on the response status
@@ -161,11 +151,13 @@ function deleteUser(){
             .then(data => {
                 // Logs the API Response and the data to the console
                 console.log("API Response: ", data);
+
+
                 // Sends the user to a success page to tell them their account has been deleted
                 //window.location.href = "assets/inc/success.html?success=2";
-
-                // The following code is experimental and requires testing   
-                noRetDiv.innerHTML = '';
+                console.log("Success");
+                sessionStorage.removeItem('authToken');
+                localStorage.removeItem('authTokenLocal');
 
                 const successMessage = "Success! Your account has been deleted.";
 
@@ -178,38 +170,94 @@ function deleteUser(){
                 // Invokes the modifySuccess() function and adds the message to it
                 modifySuccess(successMessage);
 
-                
             })
             .catch(error => {
-
                 // Logs the error to the console
                 console.error("Error:", error);
                 // Sends the user to the default error page
-                modifyError("An unknown error occured");
-                
+                //indow.location.href = "error.html?error=default";
+                if (error.includes("Error: 401")){
+                    customPopup("Password does not match user");
+                } else if (error.includes("Error: 400")){
+                    customPopup("Please delete the games you have made before deleting your account");
+                }
             });
             
         });
+        // Creates a variable which stores the username from the token
+        const userName = data.username;
+        // Uses the delete endpoint with the username from the database
+        fetch(`http://localhost:5116/delete/${userName}/${password}`, {
+            // Chooses the method used
+            method: "DELETE",
+            // Chooses the format of the content
+            headers: {
+                "Content-Type": "application/json",
+            },
+            // Converts the data to a string
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            // If the deletion was a success then
+            if (response.status === 200) {
+                // Log in the console that the user can delete their account
+                console.log("User Is Able To Delete Account");
+                // Returns the response
+                return response.json();
+                // If the response status code is equal to 400 then
+            } else if (response.status === 401){
+                return Promise.reject("Error: 401");
+            } else if (response.status === 400){
+                return Promise.reject("Error: 400");
+            }
+            else {
+                // Returns an error in the console based on the response status
+                console.error("error", response.status);
+            }
+        })
+        .then(data => {
+            // Logs the API Response and the data to the console
+            console.log("API Response: ", data);
+
+
+            // Sends the user to a success page to tell them their account has been deleted
+            //window.location.href = "assets/inc/success.html?success=2";
+            console.log("Success");
+            sessionStorage.removeItem('authToken');
+            localStorage.removeItem('authTokenLocal');
+            
+            const successMessage = "Success! Your account has been deleted.";
+
+            // Due to the login functionality being developed, this entire section for the success
+            // may change due to the circumstances around directing out of the page but this will
+            // be solved quickly
+
+            // The message can also be typed manually, 
+            // just like this: modifySuccess("This was a great success!")
+            // Invokes the modifySuccess() function and adds the message to it
+            modifySuccess(successMessage);
+            
+        })
+        .catch(error => {
+            // Logs the error to the console
+            console.error("Error:", error);
+            // Sends the user to the default error page
+            //indow.location.href = "error.html?error=default";
+            if (error.includes("Error: 401")){
+                customPopup("Password does not match user");
+            } else if (error.includes("Error: 400")){
+                customPopup("Please delete the games you have made before deleting your account");
+            }
+        });
     })
     .catch(error => {
-        console.error("Error:", error);
-        if (error.includes("Error: 401")){
-            //passworderror.innerHTML = "Password is incorrect, please try again or reset your password first";
-            customPopup("Password is incorrect, please try again or reset your password first");
-            document.getElementById('crPRButton').style.display = 'block';
-            
-        } else if (error.includes("Error: 404")){
-            //usernameerror.innerHTML = "Username does not exist in the database, please try again";
-            customPopup("Username does not exist in the database, please try again");
-        }
-    });
+        console.error(error);
+    })
     
+}
 
-
-    
 
            
-}
 
 function getEnterKey(event){
     // Check if the pressed key is Enter (key code 13)
@@ -221,5 +269,5 @@ function getEnterKey(event){
         deleteUser();
     }
 }
-
+loginStatus();
 document.getElementById("deleteuser").addEventListener("keydown", getEnterKey);

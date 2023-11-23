@@ -16,54 +16,93 @@
     justify-content: center;
     align-items: center;
 }
-
-
-/*HEADER */
-
+/* START OF USER SIDE MENU*/
 header{
+    overflow-x: hidden;
+  }
+  
+#navbar {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+  }
+
+  #logo{
     min-width: 100vw;
     background-color: #FFFFFF;
-    padding: 0.5rem 0;
-}
+    min-height: 7vh;
+    max-height: 7vh;
+  }
 
-header h1{
+  #logo h1{
     color: #000000;
     font-family: Unidays-Heavy, sans-serif;
     font-size: 3rem;
-}
-
-/* END OF HEADER  */
-
-/* NAV */
-nav{
-    min-width: 100vw;
-    background-color: #000000;
-    height: 2rem;
-}
-nav a p{
-    font-size: 1.3rem;
-    font-family: Unidays-Heavy, sans-serif;
-    transition: 0.3s;
-}
-
-nav a{
-    text-decoration: none;
-    width: 15%;
     text-align: center;
-    color: #FFFFFF;
-}
-@media screen and (max-width: 515px) {
-    nav a{
-      min-width: 15%;
-    }
+    padding-top: 0.5rem;
   }
-
-nav a p:hover{
+  
+  #usernameToggle {
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 20px;
+    width: 16rem;
+    font-family: Unidays-Heavy, sans-serif;
     font-size: 1.5rem;
-    transition: 0.3s;
-}
-/* END OF NAV */
+  }
+  
+  #mainLinks {
+    display: flex;
+    flex-direction: row;
+    flex: 1; /* Allow the links to shrink */
+  }
+  
+  #mainLinks a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    min-width: 25%;
+    text-align: center;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.5rem;
+    transition: 0.5s;
+  }
+  
+  
+  #hamburgerMenu {
+    display: none;
+    flex-direction: column;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: 0; /* Align the menu to the left */
+    width: 16rem; /* Adjust the width as needed */
+    padding: 10px;
+    margin-top: 4.3rem;
+    z-index: 1; /*To stop interference with rest of the page*/
+    border-radius: 2.5px;
+  }
+  
+  #hamburgerMenu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-family: Unidays-Heavy, sans-serif;
+    padding: 02rem, 0;
+  }
+  
+  #hamburgerMenu a:hover {
+    background-color: #555;
+  }
+  
 
+
+/* END OF USER SIDE MENU*/
 /* FOOTER */
 
 footer{
@@ -266,7 +305,7 @@ label {
     font-family:Unidays-Book, sans-serif ;
 }
 
-    input[type=text]{
+    input[type=text], input[type=number], #detailsdob input{
     min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -913,6 +952,106 @@ form .formerror{
         min-width: 90%;
     }
 }
-
-
 /* END OF REVIEWS FOR DETAILS */
+
+/* Login Page */
+#loginpage a{
+    background-color: #20c871;
+    font-family: Unidays-Book;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    min-height: 4rem;
+    font-size: 2.2em;
+    margin-top: 5rem;
+    padding: 14px 0;
+    margin: 0 5rem;
+    margin-bottom: 2rem;
+    min-width: 70%;
+    max-width: 70%;
+    margin-top: 2rem;
+    border-radius: 2.5px;
+}
+
+#loginpage h3{
+    font-family: Unidays-Heavy;
+    color: #000000;
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+/* End of Login Page */
+
+/* Start of User Settings */
+#usersettings #setbuttons a{
+    background-color: #1DD577;
+    font-family: Unidays-Book;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    min-height: 4rem;
+    font-size: 1.7em;
+    min-width: 25%;
+    width: 13%;
+    margin-top: 5rem;
+    padding: 18px 0;
+    border-radius: 7px;
+}
+
+
+/* End of User Settings */
+
+/* START OF INDEX */
+.glasscard{
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+    padding: 10px 10px ;
+}
+
+.glasscard::before{
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .8);
+    filter: blur(10px);
+    margin: -20px;
+    padding:  10px 10px;
+}
+/* END OF INDEX */
+
+/* Start of Show Password Button and Stay Logged In Text*/
+#show-password{
+    margin-bottom: 0.7em;
+    
+}
+.show-password-span{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 0.4em;
+}
+
+#stayLoggedText{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin:auto;
+}
+
+#login #stayLoggedText{
+    margin: auto 0;
+    margin-right: 1.9em;
+}
+
+#stayLoggedIn{
+    margin-left: 1.4em;
+}
+
+/* End of Show Password Button */
+

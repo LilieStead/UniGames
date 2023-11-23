@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniGames</title>
+    <script src="assets/js/login/loginstatus.js"></script>
     <script async defer type="text/javascript" src="assets/js/userreviewsearch.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
 </head>
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
-</header>
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="userdetails.html">Edit Details</a>
+  <a href="mygames.html">My games</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
 <!-- END OF HEADER -->
-<body>
-    <!-- NAV -->
-    <nav class="centercontents">
-        <a href="index.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
-    </nav>
-    <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
     <div id="container">
         <div id="main">
@@ -79,6 +90,7 @@
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+<script src="assets/js/logout.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

@@ -10,6 +10,7 @@ namespace UniGames.Data.Repositories
     public interface IGameDetailRepository
     {
         GameDetail GetDetailByID(int id);
+        GameDetail CreateDetail(GameDetail gameDetail);
     }
 }
 

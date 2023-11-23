@@ -65,7 +65,7 @@ namespace UniGames.Data.Repositories
         public Game GetGameById(int id)
         {
             // Returns the game based on its ID and the platform details
-            return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == id);
+            return dbContext.Games.Include(x => x.PlatformName).Include(x => x.GameDetail).FirstOrDefault(x => x.GameID == id);
         }
         
         public Game CreateGame(Game game)
@@ -78,7 +78,7 @@ namespace UniGames.Data.Repositories
 
         public Game UpdateGame(int id)
         {
-            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).FirstOrDefault(x => x.GameID == id);
+            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).Include(x => x.GameDetail).FirstOrDefault(x => x.GameID == id);
             dbContext.SaveChanges();
             return Games;
         }
@@ -116,6 +116,11 @@ namespace UniGames.Data.Repositories
             }
             // Returns the new GameDTO list
             return gamesDTOs;
+        }
+
+        public List<Game> GetGameByUserID(int id)
+        {
+            return dbContext.Games.Where(x => x.UserID == id).Include(x => x.PlatformName).Include(x => x.GameDetail).ToList();
         }
     }
 }

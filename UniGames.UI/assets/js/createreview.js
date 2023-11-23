@@ -8,32 +8,24 @@ console.log('Game ID:', gameID, "successfully transferred");
 
 function createReview(){
 
-    const activeTimeout = timeoutStatus();
-
     const formData = new FormData(document.getElementById("createreview"));
 
     const reviewTitle = formData.get("ReviewTitle");
     const reviewDesc = formData.get("ReviewDescription");
     const score = formData.get("Score");
-    const username = formData.get('Username');
-    const password = formData.get('Userpassword');
-    const password2 = formData.get('Userpassword2');
-    
+
+
     const titleError = document.getElementById('titleerror');
     const descriptionError = document.getElementById('descriptionerror');
     const scoreError = document.getElementById('scoreerror');
-    const usernameError = document.getElementById('usernameerror');
-    const passwordError = document.getElementById('passworderror');
-    const passwordError2 = document.getElementById('passworderror2');
+
 
     const numberValue = parseFloat(score);
     // Reset error messages before validation
     titleError.innerHTML = '';
     descriptionError.innerHTML = '';
     scoreError.innerHTML = '';
-    usernameError.innerHTML = '';
-    passwordError.innerHTML = '';
-    passwordError2.innerHTML = '';
+
     let curFail = false;
 
     // Checks to see if the title contains no text
@@ -57,11 +49,7 @@ function createReview(){
     }else{
         scoreError.innerHTML = (null);
     }
-    // Checks to see if the username is contains no text
-    if (username === '' || username === null) {
-        usernameError.innerHTML = 'You must enter your username';
-        curFail = true;
-    }
+
     // Checks to see if the password contains no text
     if (password === '' || password === null){
         if (activeTimeout){
@@ -91,32 +79,33 @@ function createReview(){
     if (curFail){
         return;
     }
-    // Get Username and Password
-    fetch(`http://localhost:5116/user/${username}/${password}`)
-        .then(response => {
-            if (response.status === 200){
-                console.log("User authenticated");
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    var idType;
 
-                return response.json();
-            } else if (response.status === 404){
-                // User is not found
-                usernameError.innerHTML = 'Username not recognised, please try again';
-                return;
-            } else if (response.status === 401){
-                // Password is incorrect
-                passwordError.innerHTML = 'Your password is incorrect, please try again or reset it <br> by clicking here: <a href="resetuserpass.html">Reset Password</a>';
-            } else{
-                console.error("error", response.status);
-            }
-        })
-        .then(data => {
-            const userID = data.userId;
-            
-            data.ReviewTitle = reviewTitle;
-            data.ReviewDescription = reviewDesc;
-            data.Score = score;
-            data.UserID = userID;
-            data.GameID = gameID;
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+    
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+            const userID = data.userID;
+            // Get Username and Password
+            const reviewData = {
+                ReviewTitle: reviewTitle,
+                ReviewDescription: reviewDesc,
+                Score: score, 
+                UserID: userID,
+                GameID: gameID,
+            };
 
             fetch('http://localhost:5116/review', {
                 method: "POST",
@@ -124,7 +113,7 @@ function createReview(){
                     "Content-Type": "application/json",
                     
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(reviewData),
             })
             .then(response => {
                 if (response.status === 201){
@@ -135,20 +124,17 @@ function createReview(){
                     console.error("Error:", response.status);
                 }
             })
-            .then(data => {
-                //console.log("API Response: ", data)
-                if ('status' in data){
+            .then(rdata => {
+                console.log("API Response: ", rdata);
+                //window.location.href = "assets/inc/success.html?success=1";
+                if ('status' in rdata){
                     //window.location.href = "assets/inc/success.html?success=1";
-                    if (data.status === 400){
-                        console.log(data.errors);
-                        console.log(data.errors.ReviewDescription[0]);
-                        customPopup(data.errors.ReviewDescription[0]);
-                        //if (data.errors.)
-                        //customPopup(data.errors.ReviewDescription[0])
-                        return;
-                    }
-                    else{
-                        console.log("Unexpected Status/Error: ", data.status);
+                    if (rdata.status === 400){
+                        console.log(rdata.errors);
+                        console.log(rdata.errors.ReviewDescription[0]);
+                        customPopup(rdata.errors.ReviewDescription[0]);
+                    }else{
+                        console.log("Unexpected Status/Error: ", rdata.status);
                     }
                 }else{
                     console.log("No status returned, assuming success.");
@@ -162,13 +148,18 @@ function createReview(){
             .catch(error => {
                 console.error("Error:", error);
             });
+    })
+    .catch(error => {
+        console.error(error);
+    })
+    
+    
             
-            
-        })
-        
-        .catch(error => {
-            console.error("Error:", error);
-        });
 
            
+
 }
+
+loginStatus();
+document.getElementById("createreview").addEventListener("submit", createReview);
+

@@ -8,7 +8,7 @@ using UniGames.Api.Models.DTOs;
 using UniGames.Data.Repositories;
 using UniGames.Api.Repositories;
 using System.Diagnostics.Metrics;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniGames.Api.Controllers
 {
@@ -59,11 +59,13 @@ namespace UniGames.Api.Controllers
         }
 
         [HttpPost]
+        //[Authorize]
         public IActionResult CreateGame([FromBody] CreateGameDTO createGameDTO)
         {
             if (ModelState.IsValid)
             {
                 var gamesDM = mapper.Map<Game>(createGameDTO);
+                
                 var create = gameRepository.CreateGame(gamesDM);
                 var gamesDTO = mapper.Map<GameDTO>(create);
                 return CreatedAtAction("GetGameById", new
@@ -80,6 +82,7 @@ namespace UniGames.Api.Controllers
 
         [HttpPut]
         [Route("/update-game/{id:int}")]
+        //[Authorize]
         public IActionResult UpdateGame([FromRoute] int id, [FromBody] UpdateGameDTO updateGameDTO)
         {
             var gamesDM = gameRepository.GetGameById(id);
@@ -87,6 +90,11 @@ namespace UniGames.Api.Controllers
             {
                 return NotFound();
             }
+            if (gamesDM.UserID != updateGameDTO.UserID)
+            {
+                return Unauthorized();
+            }
+
             this.mapper.Map(updateGameDTO, gamesDM);
             dbContext.SaveChanges();
 
@@ -94,6 +102,7 @@ namespace UniGames.Api.Controllers
             return Ok(gamesDTO);
 
         }
+
 
 
         [HttpGet]
@@ -112,7 +121,27 @@ namespace UniGames.Api.Controllers
             return Ok(gamesWithAvgScore);
 
         }
+
+
+        [HttpGet]
+        [Route("/userid/{id:int}")]
+        public IActionResult GetUserGames([FromRoute] int id)
+        {
+            var gameDM = gameRepository.GetGameByUserID(id);
+            if (gameDM == null)
+            {
+                return NotFound();
+            }
+
+            var gameDTO = mapper.Map<List<GameDTO>>(gameDM);
+
+            return Ok(gameDTO);
+        }
     }
 
 
+
+
 }
+
+
