@@ -1,12 +1,12 @@
-// Extract the 'id' query parameter from the current page's URL
+// // Extract the 'id' query parameter from the current page's URL
 var urlparams = new URLSearchParams(window.location.search);
 var gameid = urlparams.get('id');
 console.log(gameid);
 
-// Gets the ID of the a tag (link)
-var link = document.getElementById('cReview');
-// When clicked, ensure that this link also brings the gameid through
-link.href = 'createreview.html?id=' + gameid;
+// // Gets the ID of the a tag (link)
+// var link = document.getElementById('cReview');
+// // When clicked, ensure that this link also brings the gameid through
+// link.href = 'createreview.html?id=' + gameid;
 
 
 // Fetch game detail data from the server using the extracted 'gameid'
@@ -14,6 +14,7 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
     .then(response => response.json())
     .then(data => {
         // Select the table body element where game data will be displayed
+        document.getElementById('loadingcontainer').style.display = 'none';
         const gameTableBody = document.querySelector('#gameTable tbody');
 
         // Check if the 'data' is an array 
@@ -52,6 +53,7 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
     })
     .catch(error => {
         // Handle errors when fetching game data
+        document.getElementById('loadingcontainer').style.display = 'none';
         console.error('Error fetching game data:', error);
     });
 

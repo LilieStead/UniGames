@@ -1,86 +1,83 @@
 // Extract the 'id' query parameter from the current page's URL
+// Extract the 'id' query parameter from the current page's URL
 var urlparams = new URLSearchParams(window.location.search);
-var gameid = urlparams.get('id');
-console.log(gameid);
+var reviewid = urlparams.get('id');
+console.log(reviewid);
 
-// Fetch game data from the server using the extracted 'gameid'
-fetch(`http://localhost:5116/review/${gameid}`)
+// Select the table body element where review data will be displayed // Adjust the selector as needed
+
+// Fetch review data from the server using the extracted 'reviewid'
+fetch(`http://localhost:5116/review/${reviewid}`)
     .then(response => response.json())
     .then(data => {
         // Select the table body element where game data will be displayed
         const reviewTableBody = document.querySelector('#reviewTable #reviewtbody');
-
-        // Check if the 'data' is an array (for multiple games) or a single game object
-        if (Array.isArray(data)) {
-            // If it's an array, loop through the games and append them to the table
-            console.log(data);
-            data.forEach(game => {
-                const row = createTableRow(game);
-                reviewTableBody.appendChild(row);
-            });
-        } else {
-            // If it's a single game, create a row and append it to the table
-            console.log(data);
-            const row = createTableRow(data);
-            reviewTableBody.appendChild(row);
+  
+        // Check if the 'data' is an array (for multiple reviews) or a single review object
+        // If it's an array, loop through the reviews and append them to the table
+        if(Array.isArray(data)){
+        console.log(data);
+        data.forEach(review => {
+            createReview(review);
+            
+        });}
+        else{
+            createReview(data)
         }
     })
     .catch(error => {
-        // Handle errors when fetching game data
-        console.error('Error fetching game data:', error);
+        // Handle errors when fetching review data
+        console.error('Error fetching review data:', error);
     });
 
-// Function to create a table row for review details
-function createTableRow(review) {
-    const row = document.createElement('tr');
-    row.classList.add('review'); // Adding a class to the table row
 
-    // Create table cells
-    const reviewtitleCell = document.createElement('td');
-    const reviewtitleLink = document.createElement('a');
+// Function to create a table row for a review
+function createReview(review) {
+    let reviewTableBody = document.querySelector('#detail-review');
+    const starnumber = review.score;
+    var star = null;
+    if (starnumber <= 10){
+        // half a star
+        star = '<i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if(starnumber <= 20 && starnumber >= 10){
+        // one star 
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if(starnumber <= 30 && starnumber >= 20){
+        // one and a half star
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if(starnumber <= 40 && starnumber >= 30){
+        //two stars
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>'
+    }else if(starnumber <= 50 && starnumber >= 40){
+        //two and ahalf stars 
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>'
+    } else if(starnumber <= 60 && starnumber >= 50){
+        //three starts
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if(starnumber <= 70 && starnumber >= 60){
+        //three and a half stars
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if(starnumber <= 80 && starnumber >= 70){
+        //four stars
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
+    }else if (starnumber <= 90 && starnumber >= 80){
+        // four and a half stars 
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i>';
+    }else if (starnumber <= 100 && starnumber >= 90){
+        // five stars
+        star = '<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>';
+    }
+    reviewTableBody.innerHTML +=
+            `<div class="review">
+                <div>
+                    <p><i class='fa fa-user-circle-o' aria-hidden='true'></i> ${review.userName.username}</p>
+                    <p class="rating">${star}</p>
+                </div>
+                <div>
+                    <h1>${review.reviewTitle}</h1>
+                    <p class="options"><a href="#">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a></p>
+                </div>
+                <p>${review.reviewDescription}</p>
+            </div>`;
 
-    //reviewdetails is a placeholder for now 
-    reviewtitleLink.href = 'deletereview.html?id=' + review.reviewID;
-    reviewtitleLink.textContent = review.reviewTitle;
-    reviewtitleCell.appendChild(reviewtitleLink);
-    row.appendChild(reviewtitleCell);
-
-    // Description for the review
-    const reviewdescriptionCell = document.createElement('td');
-    reviewdescriptionCell.textContent = review.reviewDescription;
-    row.appendChild(reviewdescriptionCell);
-    
-
-    // Score for the game review
-    const scoreCell = document.createElement('td');
-    scoreCell.textContent = review.score;
-    row.appendChild(scoreCell);
-    
-    // User Id for the game review
-    const useridCell = document.createElement('td');
-    useridCell.textContent = review.userName.username;
-    row.appendChild(useridCell);
-
-    //Delete review link 
-    const descdel = document.createElement('td');
-
-    const deleteLink = document.createElement('a');
-    deleteLink.href = "deletereview.html?id=" + review.reviewID;
-    deleteLink.innerHTML = "&vellip;"; //Creates vertical ellipsis 
-    deleteLink.classList.add("deletereviewbutton"); // Adds the 'deletereviewbutton' class.
-
-    //When user moves mouse over it will display "Delete"
-    deleteLink.addEventListener("mouseover", function () {
-        deleteLink.textContent = "Delete";
-    });
-
-    //Reset to ellipsis when the user moves the mouse off
-    deleteLink.addEventListener("mouseout", function () {
-        deleteLink.innerHTML = "&vellip;"; //Links the vertical ellipsis  
-    });
-
-    descdel.appendChild(deleteLink);
-    row.appendChild(descdel);
-
-    return row; // Returns the table row
 }

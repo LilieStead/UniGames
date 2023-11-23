@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script async defer type="text/javascript" src="assets/js/searchgame.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -31,27 +32,36 @@
                 <div id="contenttitle">
                     <h1>Search for games</h1>
                 </div>
-                <div>
+                <div class="searchform">
                     <form id="searchform" class="form" method="get">
                         <label for="Title">Game Title</label>
-                        <input  id="Title" type="text" name="Title" placeholder="Please enter a game" maxlength="50">
+                        <input id="Title" type="text" name="Title" placeholder="Please enter a game" maxlength="50">
                         <p class="formerror" id="titleerror"></p>
                         <input type="submit">
                     </form>
-                </div>
+                </div>                
                 <div id="tablecontainer">
                     <table id="gameTable">
                         <thead>
                         <tr>
                             <th>Game Title</th>
                             <th>Platform</th>
-                            <th>Average Score</th>
+                            <th>Star Rating</th>
                         </tr>
                         </thead>
                         <tbody>
                         <!-- Dynamic content will be added here -->
                         </tbody>
                     </table>
+                    <!-- START LOADING ICON -->
+                    <div class="centercontents" id="loadingcontainer">
+                        <div class="one loading"></div>
+                        <div class="two loading"></div>
+                        <div class="three loading"></div>
+                        <div class="four loading"></div>
+                        <div class="five loading"></div>
+                    </div>
+                    <!-- END LOADING ICON -->
                 </div>
                 
             </div>

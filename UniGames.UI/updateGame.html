@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/creategame.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -19,9 +20,7 @@
         <a href="index.html"><p>Home</p></a>
         <a href="search.html"><p>Search Games</p></a>
         <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
+        <a href="updateGame.html"><p>Update Game Details</p></a>
     </nav>
     <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
@@ -29,19 +28,13 @@
         <div id="main">
             <div id="mainsize">
                 <div id="contenttitle">
-                    <h1>Our Top Games</h1>
+                    <h1>Update Game Details</h1>
                 </div>
-                <!--  GAME TABLE -->
-                <div id="formcontainer" class="flexcontainer">
-                   <form id="NewGame" action="">
-                        <div id="GameName">
-                            <label for="Name">Name: </label>
-                            <input type="text" id= "gname" name = "Title" maxlength="50">
-                            <p class = "formerror" id="titleerror"></p>
-
-                        </div>
-                        <div id="Platform">
-                            <label for="Platform">Platform: </label>
+                <div class="flexcontainer">
+                    <form id="updategame">
+                        <label for="gname">Game Name: </label><br>
+                        <input type="text" id="gname" name="Title"><br>
+                        <label for="Platform">Platform: </label><br>
                             <select name="Platform" id="platform">
                                 <option value="1">Xbox</option>
                                 <option value="2">PC</option>
@@ -50,25 +43,24 @@
                                 <option value="5">PS5</option>
                                 <option value="6">Nintendo Switch</option>
                             </select>
-                            <p class="formerror" id ="platformerror"></p>
-                        </div>
                         <div id="Releasedate">
                             <label for="Release">Release Date: </label>
-                            <input type="datetime-local" name="ReleaseDate" id="date" >
-                            <p class="formerror" id = "releasedate"></p>
                         </div>
-                        <div class="flexcontainer">
-                            <input id="subbutton" onclick="createGame();" class="centersubmit" type="button" value="submit">
+                        <div>
+                            <input type="datetime-local" name="ReleaseDate" id="date">     
                         </div>
                         
-                   </form>
+                        <div>
+                            <input onclick="updateGame();" class="centersubmit" type="button" value="submit">
+                        </div>  
+                    </form>
                 </div>
-                <!-- END OF GAME TABLE -->
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+<script async defer type="text/javascript" src="assets/js/updategame.js"></script>
 <script src="assets/js/success.js"></script>
 <!-- FOOTER -->
 <footer>

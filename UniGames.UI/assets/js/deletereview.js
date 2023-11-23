@@ -9,9 +9,58 @@ console.log('Review:', reviewID, "successfully transferred");
 function deleteReview(event) {
     event.preventDefault();
 
+    const activeTimeout = timeoutStatus();
+
+
     const formData = new FormData(document.getElementById("deletereview"));
     const username = formData.get('Username');
     const password = formData.get('Userpassword');
+    const password2 = formData.get('Userpassword2');
+
+    const usernameError = document.getElementById('usernameerror');
+    const passwordError = document.getElementById('passworderror');
+    const passwordError2 = document.getElementById('passworderror2');
+
+    usernameError.innerHTML = '';
+    passwordError.innerHTML = '';
+    passwordError2.innerHTML = '';
+    let curFail = false;
+
+
+    // Checks to see if the username is contains no text
+    if (username === '' || username === null) {
+        usernameError.innerHTML = 'You must enter your username';
+        curFail = true;
+    }
+    // Checks to see if the password contains no text
+    if (password === '' || password === null){
+        if (activeTimeout){
+            passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+        }else{
+            passwordError.innerHTML = 'You must enter your account\'s password';
+            curFail = true;
+        }
+        
+    }else{
+        passwordError.innerHTML = '';
+    }
+
+    if (password !== password2){
+        const error_message = document.getElementById('passworderror2');
+            
+        error_message.innerHTML = "Passwords do not match, please try again";
+        passwordTimeout();
+        return;
+    }
+    if (password === password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "";
+        
+    }
+
+    if (curFail){
+        return;
+    }
 
     let blankFields = false;
 
@@ -81,7 +130,7 @@ function deleteReview(event) {
                         //Log the API response and redirect the user to success page 3
                         .then(data => {
                             console.log("api response: ", data)
-                            window.location.href = "assets/inc/success.html?success=3";
+                            modifySuccess("You have successfully deleted your review!");
                         })
                         //Error handling for a user deleting another users review
                         .catch(error => {
@@ -111,6 +160,3 @@ function deleteReview(event) {
             }
         });
 }
-
-
-document.getElementById("deletereview").addEventListener("submit", deleteReview);

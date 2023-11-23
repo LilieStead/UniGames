@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game Details</title>
     <link rel="stylesheet" href="assets/style.css">
-    <Script src="assets/js/handleid.js"></Script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <script async defer type="text/javascript" src="assets/js/details.js"></script>
-    <script async defer type="text/javascript" src="assets/js/review.js"></script> 
+
+    <script async defer type="text/javascript" src="assets/js/review.js"></script>
+    <script src="assets/js/handleid.js"></script>
+
 
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
@@ -38,10 +41,16 @@
                     <h1>Game Details</h1>
                 </div>
                 <!--  GAME TABLE -->
+
                 <div class="button-container">
                     <a <button id="cReview" href="createreview.html">Create a Review</button></a>
                     <a <button id="cReview" href="editreview.html">Edit a Review</button></a>
                 </div>
+
+                <a id="cReview" onclick="cReviewHandle()" href="createreview.html">Create Review</a>
+                <a id="editGame" onclick="editGameHandle()" href="updateGame.html">Update Game</a>
+                <!-- <a id="cReview" href="createreview.html">Create Review</a> -->
+
                 <div id="tablecontainer">
                     <table id="gameTable">
                         <thead>
@@ -57,20 +66,20 @@
                             <!-- Dynamic content will be added here -->
                         </tbody>
                     </table>
-                    <table id="reviewTable">
-                        <thead>
-                            <tr>
-                                <!--<th>ReviewID</th>-->
-                                <th>Review Title</th>
-                                <th>Review Description</th>
-                                <th>Score</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reviewtbody">
-                            <!-- Dynamic content will be added here -->
-                        </tbody>
-                    </table>
+                    <!-- START LOADING ICON -->
+                    <div class="centercontents" id="loadingcontainer">
+                        <div class="one loading"></div>
+                        <div class="two loading"></div>
+                        <div class="three loading"></div>
+                        <div class="four loading"></div>
+                        <div class="five loading"></div>
+                    </div>
+                    <div id="contenttitle">
+                        <h1>Top five reviews</h1>
+                    </div>
+                    <div id="detail-review" class="flexcontainer">
+
+                    </div>
                 </div>
                 <!-- END OF GAME TABLE -->
             </div>

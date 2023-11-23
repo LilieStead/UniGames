@@ -23,6 +23,8 @@ namespace UniGames.Api.Mappings
             CreateMap<Review, CreateReviewDTO>().ReverseMap();
             CreateMap<User, CreateUsersDTO>().ReverseMap();
             CreateMap<Game, CreateGameDTO>().ReverseMap();
+            CreateMap<User, UpdatePasswordDTO>().ReverseMap();
+            CreateMap<Game, UpdateGameDTO>().ReverseMap();
 
         }
     }

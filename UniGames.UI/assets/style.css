@@ -111,6 +111,7 @@ align-items: center;
     justify-content: space-around;
     min-width: 55%;
     background-color: #FFFFFF;
+    max-width: 60%;
 }
 #mainsize{
     height: 105vh;
@@ -120,6 +121,9 @@ align-items: center;
 @media screen and (max-width: 1050px) {
     #mainsize{
       min-width: 90vw;
+    }
+    #main{
+        min-width: 80%;
     }
   }
 
@@ -197,6 +201,10 @@ td a:hover{
     
 }
 
+.star{
+    color: #ffd500;
+}
+
 /* END OF INDEX TABLE */
 
 /* SCROLL BAR SETTINGS */
@@ -259,7 +267,7 @@ label {
 }
 
     input[type=text]{
-    width: 50%;
+    min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -274,7 +282,7 @@ label {
 
 
 input[type=password] {
-    width: 100%;
+    min-width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -287,7 +295,7 @@ input[type=password] {
 
   input[type=submit] {
 
-    max-width: 15%;
+    min-width: 15%;
     background-color: #4CAF50;
     color: #FFFFFF;
     padding: 14px 20px;
@@ -310,11 +318,60 @@ form .formerror{
 
 #reviewbtn{
     max-width: 40% !important;
-    min-width: 40% !important;
     min-height: 10%;
     text-align: center;
 }
 
+
+input[type=date]{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+input[type=datetime-local]{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+select{
+    min-width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #570c0c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+}
+
+.searchform{
+    max-width: 70%;
+    margin-left: 2rem;
+}
+
+.searchform form input[type=submit]{
+    min-width: 30%;
+    max-width: 30%;
+}
+
+.searchform form input[type="text"]{
+    min-width: 100%;
+}
   
 
 /* Create Review Form */
@@ -343,9 +400,37 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+#passworderror a{
+    text-decoration: none;
+    color: blue;
+}
+#passworderror a:hover{
+    text-decoration: none;
+    color: red;
+}
+
+#crPRButton{
+    text-decoration: none;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 1.4em;
+    width: 30%;
+    text-align: center;
+    background-color: #3c3f44;
+    color: white;
+    padding: 8px 0;
+    border: none;
+    border-radius: 8px;
+    display: none;
+}
+
+
+
+
+/* End of Create Review Form
   
 
-/* Error Page */
+/* Error Page -- WILL BE REDUNDANT AT SOME POINT IN THE FUTURE */
 #error-message{
     margin: auto;
     text-align: center;
@@ -375,7 +460,20 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
   }
 
+#errorbackbut{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: red;
+    margin-top: 2em;
+}
 
+/* End of Error Page
 /*  Success Page(s)  */
 .success h1{
     color: green;
@@ -405,9 +503,12 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
     height: 2em;
     padding-top: 0.5em;
+    border-radius: 2px;
 }
 
-
+.centersubmit {
+    min-width: 35% !important;
+}
 
 
 /* MAKE USER */
@@ -417,7 +518,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=reset] {
-    max-width: 30%;
+    min-width: 30%;
     background-color: #4CAF50;
     color: #FFFFFF;
     padding: 14px 20px;
@@ -430,14 +531,6 @@ input[type=reset] {
     font-size: 1rem;
     transition: 0.3s;
     background-color: #bd0000;
-}
-
-
-input[type=reset]:hover {
-    padding: 1rem;
-    transition: 0.3s;
-    color: #FF0000;
-    font-family:Unidays-Book, sans-serif;
 }
 
 form .formerror{
@@ -457,6 +550,7 @@ form .formerror{
     margin: 3em 0 3em 0;
     font-size: 1.3em;
     font-family: Unidays-Book, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
 }
 
 #deleteuser input[type=text]{
@@ -478,7 +572,28 @@ form .formerror{
     margin: 8px 0;
     padding: 12px 20px;
 }
+
+.DelUserConfirms{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+}
+
+#YesButtonDelUser{
+    background-color: #1DD577;
+}
+
+#NoButtonDelUser{
+    background-color: red;
+}
+
 /* End of Delete User */
+
 
 
 /*Create a review button*/
@@ -518,13 +633,48 @@ form .formerror{
     padding: 10px;
 }
 
-    .deletereviewbutton:hover {
-        background: radial-gradient(#1DD577 5%, #7D53F8 25%,#1DD577 40%, #7D53F8 90%); /*Same background used on the body */
-        color: white;
-        font-family: Unidays-Heavy;
-    }
+/* Delete Username and Password Fields Button */
+.reset-fields{
+    background-color: red;
+    color: white;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 4px;
+    margin: 8px 0;
+    width: 50%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 0.3rem;
+}
 
-/*End Of delete review button*/
+/* End of Delete Username and Password Fields Button */
+
+/* Start of Delete Fields Button (Different For Each Form) */
+#crOTHButton{
+    background-color: red;
+    width: 20%;
+}
+
+#subbutton{
+    min-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    background-color: #1DD577;
+    text-align: center;
+}
+
+
+/* End of Delete Fields Button */
+
 
 /* Start of Popup */
 .popup {
@@ -535,13 +685,13 @@ form .formerror{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 999;
+    z-index:999;
     justify-content: center;
     align-items: center;
     font-family: Unidays-Book;
 }
 
-.popup-content {
+.popup-content{
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -552,7 +702,7 @@ form .formerror{
 }
 
 
-#close-popup {
+#close-popup{
     display: block;
     margin: 15px auto;
     padding: 10px 20px;
@@ -564,3 +714,205 @@ form .formerror{
     color: white;
 }
 /* End of Popup */
+
+
+/* Reset User Password */
+#requiredfield{
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#resetpassform input[type=text]{
+    width: 100%;
+}
+
+/* End of Reset User Password */
+
+
+/* Start of Password Timeout */
+#timeout-countdown{
+    color: red;
+    font-family: Unidays-Book, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+/* End of Password Timeout */
+
+
+/* Details Page */
+
+
+
+    .deletereviewbutton:hover {
+        background: radial-gradient(#1DD577 5%, #7D53F8 25%,#1DD577 40%, #7D53F8 90%); /*Same background used on the body */
+        color: white;
+        font-family: Unidays-Heavy;
+    }
+
+
+/*End Of delete review button*/
+
+/* START OF LOADING */
+.loading{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0.5rem;
+    animation: loading 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes loading {
+    0%,
+    100% {
+      transform: scale(0.2);
+      background-color: #1DD577;
+    }
+    42% {
+      background-color: #7D53F8;
+    }
+    50% {
+      transform: scale(1);
+      background-color: #1db9d5;
+    }
+  }
+  
+  
+ .one{
+    animation-delay:0.0s;
+  }
+  .two{
+    animation-delay:0.2s;
+  }
+  .three{
+    animation-delay:0.4s;
+  }
+  .four{
+    animation-delay:0.8s;
+  }
+  .five{
+    animation-delay:1.0s;
+  } 
+
+#loadingcontainer{
+    margin-top: 9rem;
+    margin-bottom: 9rem;
+}
+
+/* END OF  LOADING*/
+
+/* START OF GENERAL REVIEWS */
+.review .options a{
+    color: black;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.review .options a:hover{
+    color: #7D53F8;
+    transition: 0.5s;
+}
+.review .rating{
+    margin-left: auto;
+    margin-right: 2rem;
+    color: #ffd500;
+}
+.review .options{
+    margin-left: auto;
+    margin-right: 2rem;
+    margin-top: 2rem;
+}
+
+
+/* END OF GENERAL REVIEWS*/
+
+/* START OF REVIEWS FOR SEARCH*/
+
+#reviewbody .review{
+    min-width: 70%;
+    min-height: 18rem;
+    background-color: #f5f5f5;
+    max-width: 70%;
+    max-height: 60rem;
+    padding: 2rem;
+    border-radius: 2.5px;
+    margin-bottom: 2rem;
+}
+
+
+#reviewbody .review p{
+    font-family:Unidays-Book, sans-serif ;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    max-width: 100%;
+}
+
+#reviewbody .review h1 {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.6rem;
+}
+
+#reviewbody .review div{
+    flex-direction: row;
+    display: flex;
+}
+@media  screen and (max-width: 1047px) {
+    #reviewbody{
+        max-width: 90%;
+        min-width: 90%;
+    }
+}
+
+
+
+
+
+
+
+/* END OF REVIEWS FOR SEARCH */
+
+/* START OF REVIEWS FOR DETAILS */
+
+#detail-review .review{
+    min-width: 70%;
+    min-height: 15rem;
+    background-color: #f5f5f5;
+    max-width: 70%;
+    max-height: 20rem;
+    padding: 2rem;
+    border-radius: 2.5px;
+    margin-bottom: 2rem;
+}
+
+
+#detail-review .review p{
+    font-family:Unidays-Book, sans-serif ;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    max-width: 100%;
+}
+
+#detail-review .review h1 {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-family: Unidays-Heavy, sans-serif;
+    font-size: 1.3rem;
+}
+
+#detail-review .review div{
+    flex-direction: row;
+    display: flex;
+}
+
+@media  screen and (max-width: 1047px) {
+    #detail-review{
+        max-width: 90%;
+        min-width: 90%;
+    }
+}
+
+
+/* END OF REVIEWS FOR DETAILS */

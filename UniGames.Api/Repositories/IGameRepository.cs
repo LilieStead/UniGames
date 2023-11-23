@@ -18,6 +18,8 @@ namespace UniGames.Data.Repositories
 
         Game CreateGame(Game game);
 
+        Game UpdateGame(int id);
+
         List<GameDTO> GetGamesByTitle(string title);
 
 
