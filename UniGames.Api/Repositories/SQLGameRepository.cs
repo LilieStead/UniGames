@@ -78,7 +78,7 @@ namespace UniGames.Data.Repositories
 
         public Game UpdateGame(int id)
         {
-            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).FirstOrDefault(x => x.GameID == id);
+            var Games = dbContext.Games.Include(x => x.PlatformName.PlatformName).Include(x => x.GameDetail).FirstOrDefault(x => x.GameID == id);
             dbContext.SaveChanges();
             return Games;
         }
@@ -120,7 +120,7 @@ namespace UniGames.Data.Repositories
 
         public List<Game> GetGameByUserID(int id)
         {
-            return dbContext.Games.Where(x => x.UserID == id).ToList();
+            return dbContext.Games.Where(x => x.UserID == id).Include(x => x.PlatformName).Include(x => x.GameDetail).ToList();
         }
     }
 }

@@ -56,6 +56,7 @@ namespace UniGames.Api.Repositories
         return dbContext.Review
             .Where(r => r.GameID == id)
             .Include(r=> r.UserName)
+            .Include (r=> r.Games)
             .OrderByDescending(r => r.Score)
             .Take(5)
             .ToList();

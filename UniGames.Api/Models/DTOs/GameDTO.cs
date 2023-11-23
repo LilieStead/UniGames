@@ -17,5 +17,8 @@ namespace UniGames.Api.Models.DTOs
         public int UserID { get; set; }
         public Platform PlatformName { get; set; }
         public double AverageScore { get; set; }
-    }
+        
+        public GameDetail GameDetail { get; set; }
+
+}
 }

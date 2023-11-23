@@ -104,6 +104,7 @@ namespace UniGames.Api.Controllers
         }
 
 
+
         [HttpGet]
         [Route("{title}")]
         public IActionResult GetGamesByTitle([FromRoute] string title)
@@ -120,7 +121,27 @@ namespace UniGames.Api.Controllers
             return Ok(gamesWithAvgScore);
 
         }
+
+
+        [HttpGet]
+        [Route("/userid/{id:int}")]
+        public IActionResult GetUserGames([FromRoute] int id)
+        {
+            var gameDM = gameRepository.GetGameByUserID(id);
+            if (gameDM == null)
+            {
+                return NotFound();
+            }
+
+            var gameDTO = mapper.Map<List<GameDTO>>(gameDM);
+
+            return Ok(gameDTO);
+        }
     }
 
 
+
+
 }
+
+
