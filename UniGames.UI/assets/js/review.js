@@ -15,14 +15,14 @@ fetch(`http://localhost:5116/review/${gameid}`)
             // If it's an array, loop through the games and append them to the table
             console.log(data);
             data.forEach(game => {
-                const rrow = createTableRow(game);
-                reviewTableBody.appendChild(rrow);
+                const row = createTableRow(game);
+                reviewTableBody.appendChild(row);
             });
         } else {
             // If it's a single game, create a row and append it to the table
             console.log(data);
-            const rrow = createTableRow(data);
-            reviewTableBody.appendChild(rrow);
+            const row = createTableRow(data);
+            reviewTableBody.appendChild(row);
         }
     })
     .catch(error => {
@@ -30,10 +30,10 @@ fetch(`http://localhost:5116/review/${gameid}`)
         console.error('Error fetching game data:', error);
     });
 
-// Function to create a table row for a game
+// Function to create a table row for review details
 function createTableRow(review) {
-    const rrow = document.createElement('tr');
-    rrow.classList.add('review'); // Adding a class to the table row
+    const row = document.createElement('tr');
+    row.classList.add('review'); // Adding a class to the table row
 
     // Create table cells
     const reviewtitleCell = document.createElement('td');
@@ -43,33 +43,44 @@ function createTableRow(review) {
     reviewtitleLink.href = 'deletereview.html?id=' + review.reviewID;
     reviewtitleLink.textContent = review.reviewTitle;
     reviewtitleCell.appendChild(reviewtitleLink);
-    rrow.appendChild(reviewtitleCell);
+    row.appendChild(reviewtitleCell);
 
     // Description for the review
     const reviewdescriptionCell = document.createElement('td');
     reviewdescriptionCell.textContent = review.reviewDescription;
-    rrow.appendChild(reviewdescriptionCell);
+    row.appendChild(reviewdescriptionCell);
     
 
     // Score for the game review
     const scoreCell = document.createElement('td');
     scoreCell.textContent = review.score;
-    rrow.appendChild(scoreCell);
+    row.appendChild(scoreCell);
     
     // User Id for the game review
     const useridCell = document.createElement('td');
     useridCell.textContent = review.userName.username;
-    rrow.appendChild(useridCell);
+    row.appendChild(useridCell);
 
-    const descdel = document.createElement('a');
-    descdel.href = "deletereview.html?id=" + review.reviewID;
-    descdel.textContent = "Delete review";
-    rrow.appendChild(descdel);
+    //Delete review link 
+    const descdel = document.createElement('td');
 
-    reviewtitleLink.addEventListener('click', function (event) {
-        // Handle the click event if needed
-        console.log('Clicked on game with ID:', data.gameID.reviewID);
+    const deleteLink = document.createElement('a');
+    deleteLink.href = "deletereview.html?id=" + review.reviewID;
+    deleteLink.innerHTML = "&vellip;"; //Creates vertical ellipsis 
+    deleteLink.classList.add("deletereviewbutton"); // Adds the 'deletereviewbutton' class.
+
+    //When user moves mouse over it will display "Delete"
+    deleteLink.addEventListener("mouseover", function () {
+        deleteLink.textContent = "Delete";
     });
 
-    return rrow; // Returns the table row
+    //Reset to ellipsis when the user moves the mouse off
+    deleteLink.addEventListener("mouseout", function () {
+        deleteLink.innerHTML = "&vellip;"; //Links the vertical ellipsis  
+    });
+
+    descdel.appendChild(deleteLink);
+    row.appendChild(descdel);
+
+    return row; // Returns the table row
 }

@@ -16,6 +16,10 @@ function errorPages(){
             errorMessage = "Error: You have previously created reviews for games, <br> \
             please delete your current reviews and try again.";
             break;
+        case "4":
+            errorMessage = "Error: Please enter the correct account details <br> \
+            associated with this review";
+            break;
         default:
             errorMessage = "An unknown error occurred";
     }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniGames - Create Review</title>
     <link rel="stylesheet" href="assets/style.css">
-    <script async defer type="text/javascript" src="assets/js/deletereview.js"></script>
+    
     <link rel="stylesheet" href="assets/fonts.css">
 </head>
 <!-- HEADER -->
@@ -32,29 +32,38 @@
                     <h1>Delete Your Review</h1>
                 </div>
                 <div class=" flexcontainer">
-                <form id="deletereview" action="">
-                    <p class="delwarn">WARNING: If you delete your review, you will lose it forever</p>
-                    <div>
-                        <label for="username">Username: </label>
-                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
-                        <p class="formerror" id="usernameerror"></p>
-                    </div>
-                    <div>
-                        <label for="password">Your Password: </label>
-                        <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
-                        <p class="formerror" id="passworderror"></p>
-                    </div>
-                    <div class="flexcontainer">
-                        <input id="reviewbtn"type="submit" value="submit">
-                    </div>
-                </form>
+                    <form id="deletereview" action="">
+                        <p class="delwarn">WARNING: If you delete your review, you will lose it forever</p>
+                        <div>
+                            <label for="username">Username: </label>
+                            <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                            <p class="formerror" id="usernameerror"></p>
+                        </div>
+                        <div>
+                            <label for="password">Your Password: </label>
+                            <input type="password" name="Userpassword" id="password" placeholder="Enter your password here...">
+                            <p class="formerror" id="passworderror"></p>
+                        </div>
+                        <div class="flexcontainer">
+                            <input id="reviewbtn" type="submit" value="submit">
+                        </div>
+                    </form>
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+<script src="assets/js/popup.js"></script>
+<script async defer type="text/javascript" src="assets/js/deletereview.js"></script>
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">
