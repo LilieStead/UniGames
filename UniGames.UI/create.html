@@ -30,7 +30,7 @@
 <nav id="hamburgerMenu">
   <!-- Your menu items go here -->
   <a href="userdetails.html">Edit Details</a>
-  <a <a href="mygames.html">My games</a>
+  <a href="mygames.html">My games</a>
   <a href="userreviews.html">My Reviews</a>
   <a href="settings.html">Settings</a>
   <a onclick="logout();">Logout</a>
@@ -98,6 +98,10 @@
                             <p class="formerror" id="genreerror"></p>
                         </div>
                         <input type="submit" value="Submit" class="centersubmit">
+                        <div class="flexcontainer">
+                            <input id="subbutton" onclick="createGame();" class="centersubmit" type="button" value="submit">
+                        </div>
+                        
                    </form>
                 </div>
                 <!-- END OF GAME TABLE -->
@@ -112,11 +116,13 @@
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+
 <script async defer type="text/javascript" src="assets/js/creategame.js"></script>
 <script src="assets/js/logout.js"></script>
 <script src="assets/js/popup.js"></script>
 <script src="assets/js/success.js"></script>
 <script src="assets/js/error.js"></script>
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

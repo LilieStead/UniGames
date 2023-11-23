@@ -1,6 +1,5 @@
 // Function to reset the user password
-function resetPassword(event){
-    event.preventDefault();
+function resetPassword(){
     
     const activeTimeout = timeoutStatus();
 
@@ -17,6 +16,8 @@ function resetPassword(event){
 
     const emailError = document.getElementById('useremailerror');
     const passwordError = document.getElementById('passworderror');
+    const phoneError = document.getElementById('userphoneerror');
+    phoneError.innerHTML = '';
 
     // Create an error flag
     let hasErrors = false;
@@ -53,6 +54,7 @@ function resetPassword(event){
     }
     if (newPassActual === newPass2){
         const error_message = document.getElementById('passworderror2');
+        passwordTimeout();
         error_message.innerHTML = "";
         
     }
@@ -78,12 +80,12 @@ function resetPassword(event){
         idType = "local";
     }
 
-    const apiURL = idType === 'session'
+    const apiTURL = idType === 'session'
     ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
     : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
 
 
-    fetch(apiURL)
+    fetch(apiTURL)
     .then(response => response.json())
     .then(data => {
         // Logs the data
@@ -126,50 +128,37 @@ function resetPassword(event){
         })
         .then(data => {
             console.log('API Response: ', data);
-            //console.log(data.errorText);
-            // Add code to go to success page or update current page with success
-            //window.location.href = "assets/inc/success.html?success=5";
+            const errorMessages = [];
             if (data.length > 0){
-                //console.log(data.errorText);
-                const phoneError = document.getElementById('userphoneerror');
+
+
                 data.forEach((error) =>
                 {
-                    console.log(error.type);
                     if (error.type === "Email"){
                         emailError.textContent = error.errorText;
                         console.log(data.errorText);
+                        errorMessages.push(error.errorText);
                     } 
                     if (error.type === "Phone"){
                         phoneError.textContent = error.errorText;
+                        //customPopup(error.errorText);
+                        errorMessages.push(error.errorText);
+
                     }
                     console.log(error)
-                }
-                );
-                
-                
+                });
+                multi_Popup(errorMessages);
+
                 return;
                 //console.log
-            } 
-            
-
+            } else{
+                //window.location.href = "assets/inc/success.html?success=5";
+                modifySuccess("You have successfully reset your password!");
+            }
         
         })
         .catch(error => {
             console.error('Error: ', error);
-            const usernameError = document.getElementById('usernameerror');
-
-            //phoneError.textContent = '';
-            emailError.textContent = '';
-            usernameError.textContent = '';
-
-            //console.log(error.errorText);
-            // Add code to append an error to the page for the user to see (potentially with
-            // The loading logo applied to the page)
-            if (error.includes('Error: 409')){
-                phoneError.textContent = 'Phone Number Is Incorrect For Current User';
-            } else if (error.includes('Error: 401')){
-                emailError.textContent = 'User\'s Email Address Does Not Match Current Records';
-            }
             
         });
 
@@ -178,6 +167,5 @@ function resetPassword(event){
         console.error(error);
     })
 }
+
 loginStatus();
-// Event listener to find the button click
-document.getElementById('resetpassform').addEventListener('submit', resetPassword);

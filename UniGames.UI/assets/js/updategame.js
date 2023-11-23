@@ -26,8 +26,7 @@ fetch(`http://localhost:5116/Game/${gameid}`)
 
 
 // Function to update game details in the SQL database
-function updateGame(event){
-    event.preventDefault();
+function updateGame(){
 
 
     //Use the built in FormData
@@ -65,7 +64,6 @@ function updateGame(event){
 
 
     if (gameName === '' || gameName === null) {
-        event.preventDefault();
         titleError.innerHTML = 'You must enter your game name!';
         blankFields = true;
     }
@@ -179,6 +177,7 @@ function updateGame(event){
             })
             .then(data => {
                 console.log(data);
+                modifySuccess("You have updated this game successfully!");
             })
             .catch(error => {
                 console.error(error);
@@ -203,5 +202,6 @@ function updateGame(event){
         
     })
 }
+
 loginStatus();
-document.getElementById('updategame').addEventListener('submit', updateGame);
+

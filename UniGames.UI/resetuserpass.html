@@ -45,11 +45,6 @@
                 <div class=" flexcontainer">
                 <form id="resetpassform" action="">
                     <div>
-                        <label for="username">Username: *</label>
-                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
-                        <p class="formerror" id="usernameerror"></p>
-                    </div>
-                    <div>
                         <label for="email">Email: *</label>
                         <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
                         <p class="formerror" id="useremailerror"></p>
@@ -72,7 +67,7 @@
                         <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                     </div>
                     <div class="flexcontainer">
-                        <input id="subbutton" type="submit" value="submit">
+                        <input onclick="resetPassword();" class="centersubmit" type="button" value="submit">
                     </div>
                     <p id="timeout-countdown"></p>
                     <h2 id="error-handling"></h1>
@@ -104,6 +99,9 @@
 <script src="assets/js/passwordvisibility.js"></script>
 <script src="assets/js/success.js"></script>
 <script src="assets/js/error.js"></script>
+
+
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

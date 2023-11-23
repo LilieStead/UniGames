@@ -499,7 +499,20 @@ input::-webkit-inner-spin-button {
     background-color: #1DD577;
   }
 
+#errorbackbut{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: red;
+    margin-top: 2em;
+}
 
+/* End of Error Page
 /*  Success Page(s)  */
 .success h1{
     color: green;
@@ -576,6 +589,7 @@ form .formerror{
     margin: 3em 0 3em 0;
     font-size: 1.3em;
     font-family: Unidays-Book, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
 }
 
 #deleteuser input[type=text]{
@@ -597,8 +611,66 @@ form .formerror{
     margin: 8px 0;
     padding: 12px 20px;
 }
+
+.DelUserConfirms{
+    min-width: 20%;
+    min-height: 3em;
+    font-size: 1.9em;
+    font-family: Unidays-Book;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+}
+
+#YesButtonDelUser{
+    background-color: #1DD577;
+}
+
+#NoButtonDelUser{
+    background-color: red;
+}
+
 /* End of Delete User */
 
+
+
+/*Create a review button*/
+.button-container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+}
+
+#cReview {
+    padding: 5px 5px;
+    font-size: 1rem;
+    font-family: Unidays-Heavy, sans-serif; /*Kept font consistent with the rest of the website*/
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 5px;
+    transition: background-color 1s, color 1s, font-size 1s;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+#cReview:hover {
+    color: white;
+    font-size: 1.2rem;
+    transition: 0.5s;
+    background: radial-gradient(#1DD577 5%, #7D53F8 25%,#1DD577 40%, #7D53F8 90%); /*Same background used on the body */
+}
+/*End of Create a review button*/
+
+/*Delete review button*/
+.deletereviewbutton {
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius:5px;
+    padding: 10px;
+}
 
 /* Delete Username and Password Fields Button */
 .reset-fields{
@@ -622,7 +694,22 @@ form .formerror{
     width: 20%;
 }
 
-
+#subbutton{
+    min-width: 15%;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-height: 50%;
+    font-family:Unidays-Book, sans-serif;
+    font-size: 1rem;
+    size: 1rem;
+    background-color: #1DD577;
+    text-align: center;
+}
 
 
 /* End of Delete Fields Button */
@@ -693,6 +780,15 @@ form .formerror{
 /* Details Page */
 
 
+
+    .deletereviewbutton:hover {
+        background: radial-gradient(#1DD577 5%, #7D53F8 25%,#1DD577 40%, #7D53F8 90%); /*Same background used on the body */
+        color: white;
+        font-family: Unidays-Heavy;
+    }
+
+
+/*End Of delete review button*/
 
 /* START OF LOADING */
 .loading{
@@ -958,3 +1054,4 @@ form .formerror{
 }
 
 /* End of Show Password Button */
+

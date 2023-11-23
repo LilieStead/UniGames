@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniGames - Create Review</title>
     <script src="assets/js/login/loginstatus.js"></script>
+    <title>UniGames - Delete Review</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="assets/fonts.css">
     <script src="assets/js/sidemenu.js"></script>
 </head>
@@ -43,6 +44,7 @@
                     <h1>Delete Your Review</h1>
                 </div>
                 <div class=" flexcontainer">
+
                 <form id="deletereview" action="">
                     <p class="delwarn">WARNING: If you delete your review, you will lose it forever</p>
                     <div>
@@ -58,7 +60,7 @@
                         <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                     </div>
                     <div class="flexcontainer">
-                        <input id="subbutton"type="submit" value="submit">
+                        <input id="subbutton" onclick="deleteReview();" type="button" value="submit">
                     </div>
                     <br>
                     <p id="timeout-countdown"></p>
@@ -66,7 +68,7 @@
                         <!-- Reset Password Button -->
                         <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
                     </div>
-                </form>
+                </form
                 </div>
                 <a id="revsuccess" href="assets/inc/success.html" hidden></a>
             </div>
@@ -76,20 +78,20 @@
                     <button id="close-popup">Close</button>
                 </div>
             </div>
+            
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
-
 <script async defer type="text/javascript" src="assets/js/deletereview.js"></script>
 <script src="assets/js/timeoutStatus.js"></script>
 <script src="assets/js/passtimeout.js"></script>
 <script src="assets/js/popup.js"></script>
-<script src="assets/js/login/loginstatus.js"></script>
 <script src="assets/js/logout.js"></script>
 <script src="assets/js/passwordvisibility.js"></script>
 <script src="assets/js/success.js"></script>
 <script src="assets/js/error.js"></script>
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

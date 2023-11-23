@@ -6,8 +6,7 @@ var gameID = urlParams.get('id');
 console.log('Game ID:', gameID, "successfully transferred");
 
 
-function createReview(event){
-    event.preventDefault();
+function createReview(){
 
     const formData = new FormData(document.getElementById("createreview"));
 
@@ -31,30 +30,50 @@ function createReview(event){
 
     // Checks to see if the title contains no text
     if (reviewTitle === '' || reviewTitle === null) {
-        event.preventDefault();
         titleError.innerHTML = 'Your review needs a title';
         curFail = true;
     }
     // Checks to see if the description contains no text
     if (reviewDesc === '' || reviewDesc === null) {
-        event.preventDefault();
         descriptionError.innerHTML = 'You need to provide a description';
         curFail = true;
     // Checks if the length of the description is less than 20 or higher than 500
     } else if (reviewDesc.length < 20 || reviewDesc.length > 500) {
-        event.preventDefault();
         descriptionError.innerHTML = 'A description needs to be between 20 - 500 characters';
         curFail = true;
     }
     // Checks to see if the number is valid or less than 0 or bigger than 100
     if (isNaN(numberValue) || numberValue < 0 || numberValue > 100) {
-        event.preventDefault();
         scoreError.innerHTML = 'Your score needs to be between 0 and 100';
         curFail = true;
     }else{
         scoreError.innerHTML = (null);
     }
 
+    // Checks to see if the password contains no text
+    if (password === '' || password === null){
+        if (activeTimeout){
+            passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
+        }else{
+            passwordError.innerHTML = 'You must enter your account\'s password';
+            curFail = true;
+        }
+        
+    }else{
+        passwordError.innerHTML = '';
+    }
+    if (password !== password2){
+        const error_message = document.getElementById('passworderror2');
+            
+        error_message.innerHTML = "Passwords do not match, please try again";
+        passwordTimeout();
+        return;
+    }
+    if (password === password2){
+        const error_message = document.getElementById('passworderror2');
+        error_message.innerHTML = "";
+        
+    }
 
         
     if (curFail){
@@ -101,6 +120,8 @@ function createReview(event){
                     return response.json()
                 } else if (response.status === 400){
                     return Promise.resolve(response.json());
+                } else{
+                    console.error("Error:", response.status);
                 }
             })
             .then(rdata => {
@@ -108,23 +129,20 @@ function createReview(event){
                 //window.location.href = "assets/inc/success.html?success=1";
                 if ('status' in rdata){
                     //window.location.href = "assets/inc/success.html?success=1";
-                    if (data.status === 400){
+                    if (rdata.status === 400){
                         console.log(rdata.errors);
                         console.log(rdata.errors.ReviewDescription[0]);
                         customPopup(rdata.errors.ReviewDescription[0]);
-                        //if (data.errors.)
-                        //customPopup(data.errors.ReviewDescription[0])
-                        return;
-                    }
-                    else{
+                    }else{
                         console.log("Unexpected Status/Error: ", rdata.status);
                     }
                 }else{
                     console.log("No status returned, assuming success.");
-
+                    //window.location.href = "assets/inc/success.html?success=1";
                     // Invokes the modifySuccess() function and adds the message to it
                     modifySuccess("Your review has been added, thank you!");
                 }
+                
             })
 
             .catch(error => {
@@ -139,7 +157,9 @@ function createReview(event){
             
 
            
+
 }
 
 loginStatus();
 document.getElementById("createreview").addEventListener("submit", createReview);
+

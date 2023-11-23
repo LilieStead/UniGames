@@ -145,11 +145,12 @@ namespace UniGames.Api.Controllers
                 //used to look for username
                 var userExists = userRepository.GetUserIDByName(UsersDM.Username);
                 var userEmail = userRepository.GetAllUsers().Where(x => x.Useremail == UsersDM.Useremail);
-    
+
                 // if statment looks for if the username exites in the databse
                 if (userExists != null)
                 {
-                    //if it is then reutn bad request and error code to the front end and do not allow the methord to continue
+                    //if it is then return bad request and error code to the front end and do not allow the methord to continue
+
                     return BadRequest("Username is taken");
                 }
     
@@ -281,6 +282,9 @@ namespace UniGames.Api.Controllers
             }
 
             HttpContext.Session.Remove("UserAuthenticated");
+            // Gets the Review based on the User ID -- It only does this if a User ID is found
+            //var userReviews = reviewRepository.GetReviewByUser(userDM.UserId);
+            
             // If the user does not have a review, delete their account using the method in the userRepository
             var delUser = userRepository.DeleteUser(userDM);
             // Map the delete action to the DTO

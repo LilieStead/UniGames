@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniGames.Api.Models.Validators
 {
@@ -13,8 +14,12 @@ namespace UniGames.Api.Models.Validators
             {
                 return new ValidationResult("Please do not use bad language for a review");
             }
-
+           
+            
             return ValidationResult.Success;
+            
+
+            
         }
     }
 }

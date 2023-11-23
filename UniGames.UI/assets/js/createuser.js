@@ -138,6 +138,7 @@ function CreateUsers(event){
     .then(responseData => {
         console.log('API Response: ', responseData)
 
+
         fetch(`http://localhost:5116/user/${UserName}/${Password}`)
             .then(response => response.json())
             .then(data => {

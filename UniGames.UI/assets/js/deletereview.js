@@ -6,10 +6,10 @@ var reviewID = urlParams.get('id');
 console.log('Review:', reviewID, "successfully transferred");
 
 
-function deleteReview(event){
-    event.preventDefault();
+function deleteReview() {
 
     const activeTimeout = timeoutStatus();
+
 
     const formData = new FormData(document.getElementById("deletereview"));
 
@@ -41,6 +41,7 @@ function deleteReview(event){
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
+        curFail = true;
         passwordTimeout();
         return;
     }
@@ -101,15 +102,17 @@ function deleteReview(event){
                 console.error(error);
                 modifyError("Something went wrong, please try again :(");
             });
-
-        })
+  
+        //Error handling for incorrect username and password
         .catch(error => {
             console.error("Error:", error);
-            
-        });
+            if (error.includes("Error: 404")) {
+                customPopup("Username does not exist");
 
-           
+            } else if (error.includes("Error: 401")) {
+                customPopup("Password is incorrect");
+            }
+        });
 }
 
 loginStatus();
-document.getElementById("deletereview").addEventListener("submit", deleteReview);
