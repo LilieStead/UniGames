@@ -21,7 +21,7 @@ namespace UniGames.Api.Controllers
         private readonly IGameRepository gameRepository;
         private readonly JwtService jwtService;
 
-        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IGameRepository gameRepository, JwtService jwtService, IOptions<JwtConfig> jwtConfig)
+        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IGameRepository gameRepository, JwtService jwtService)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -72,7 +72,7 @@ namespace UniGames.Api.Controllers
         [HttpGet]
         // Decides the route, using a username and password
         [Route("{username}/{password}")]
-        // Creates a new Method
+        // Creates a new Method -- Previosuly called GetUserIDByName
         public IActionResult UserLogin([FromRoute] string password, string username)
         {
             // Selects the GetUserIDByName from the userRepository and uses the username
@@ -113,7 +113,7 @@ namespace UniGames.Api.Controllers
         public IActionResult Logout()
         {
             // Removes all authentication, session-related variables
-            HttpContext.Session.Remove("UserAuthenticated");
+            HttpContext.Session.Clear();
             
 
 

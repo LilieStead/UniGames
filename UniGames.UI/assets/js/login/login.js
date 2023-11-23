@@ -3,11 +3,9 @@ function userLogin(event){
     const formData = new FormData(document.getElementById("loginform"));
 
     const username = formData.get('Username');
-    const userEmail = formData.get('Useremail');
     const userPassword = formData.get('Userpassword');
 
     const usernameError = document.getElementById('usernameerror');
-    const emailError = document.getElementById('useremailerror');
     const passwordError = document.getElementById('passworderror');
 
     // Create an error flag
@@ -19,13 +17,6 @@ function userLogin(event){
         blankFields = true;
     } else{
         usernameError.textContent = '';
-    }
-
-    if (userEmail === '' || userEmail === null) {
-        emailError.textContent = 'You must enter your email address';
-        blankFields = true;
-    } else{
-        emailError.textContent = '';
     }
 
     
@@ -63,29 +54,14 @@ function userLogin(event){
                 return customPopup("An unexpected error has occurred, please try again in a moment.");
             }
         })
-        .then(data => {
-            //console.log(data);
-            const actEmail = data.user.useremail;
-            console.log(data);
-            console.log(data.user.useremail);
-            if (actEmail !== userEmail){
-                console.log("OH NO BOY");
-                customPopup("Your email address does not match database records, please try again");
-                return;
-            } else{
-                
-                const authToken = data.token;
+        .then(data => {  
+            const authToken = data.token;
 
-                sessionStorage.setItem('authToken', authToken);
-                if (stayLogged.checked){
-                    savePreference();
-                }
-
-                window.location.href = "home.html";
+            sessionStorage.setItem('authToken', authToken);
+            if (stayLogged.checked){
+                savePreference();
             }
-
-            
-
+            window.location.href = "home.html";
         })
         .catch(error => {
             console.log(error);

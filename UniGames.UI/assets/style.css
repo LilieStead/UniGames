@@ -948,6 +948,11 @@ form .formerror{
     margin:auto;
 }
 
+#login #stayLoggedText{
+    margin: auto 0;
+    margin-right: 1.9em;
+}
+
 #stayLoggedIn{
     margin-left: 1.4em;
 }

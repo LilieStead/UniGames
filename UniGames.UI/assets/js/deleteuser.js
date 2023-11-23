@@ -20,14 +20,10 @@ function deleteUser(event){
     passwordError.innerHTML = '';
     passwordError2.innerHTML = '';
 
-    // Creates a false flag to stop progression if true
     let blankFields = false;
-    // Checks to see if the username is contains no text
-    // if (username === '' || username === null) {
-    //     event.preventDefault();
-    //     usernameError.innerHTML = 'You must enter your username';
-    //     blankFields = true;
-    // }
+
+    // Creates a false flag to stop progression if true
+
     // Checks to see if the password contains no text
     if (password === '' || password === null){
         event.preventDefault();
@@ -63,7 +59,6 @@ function deleteUser(event){
     const userIDSess = sessionStorage.getItem('authToken');
     const userIDLocal = localStorage.getItem('authTokenLocal');
     const authToken = JSON.parse(userIDLocal);
-    console.log(authToken.value);
     var idType;
 
     if (userIDSess){

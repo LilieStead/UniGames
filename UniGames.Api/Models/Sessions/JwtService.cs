@@ -10,7 +10,6 @@ namespace UniGames.Api.Models.Sessions
 {
     public class JwtService
     {
-        private static readonly RandomNumberGenerator randomNumber = RandomNumberGenerator.Create();
         private readonly JwtConfig _jwtConfig;
 
         public JwtService(JwtConfig _jwtConfig)
@@ -18,12 +17,6 @@ namespace UniGames.Api.Models.Sessions
             this._jwtConfig = _jwtConfig;
         }
 
-        public string GenerateRandomBase64Key(int length)
-        {
-            byte[] keyBytes = new byte[length];
-            randomNumber.GetBytes(keyBytes);
-            return Convert.ToBase64String(keyBytes);
-        }
         public (string UserId, string UserName) DecodeJwtAndGetUserId(string jwtToken)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -52,10 +45,6 @@ namespace UniGames.Api.Models.Sessions
             catch (SecurityTokenValidationException ex)
             {
                 Console.WriteLine("Token failure: " + ex.Message);
-                Console.WriteLine($"Token validation failure: {ex.Message}");
-
-                // Optionally, log the entire exception to get more details
-                Console.WriteLine($"Exception details: {ex}");
                 return(null, null);
             }
 

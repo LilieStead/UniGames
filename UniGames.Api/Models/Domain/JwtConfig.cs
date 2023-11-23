@@ -10,7 +10,6 @@ namespace UniGames.Api.Models.Domain
         public string SecretKey => LazySecretKey.Value;
         private static string GenerateRandomBase64Key()
         {
-            // You can customize the logic for generating the key as needed
             return UserSessionGenerator.GenerateRandomBase64Key();
         }
 
