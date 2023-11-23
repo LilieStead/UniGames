@@ -124,9 +124,7 @@ namespace UniGames.Api.Controllers
             else
             {
                 return StatusCode(500, new { Message = "Illegal method of editing a review attempted"});
-            }
-           
-            
+            }   
         }
 
         [HttpGet]
