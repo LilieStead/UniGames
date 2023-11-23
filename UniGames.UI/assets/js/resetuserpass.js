@@ -9,14 +9,12 @@ function resetPassword(event){
     const formDataUser = new FormData(document.getElementById('resetpassform'));
 
     // Get all of the form data and store them to variables -- Const so they cannot be changed
-    const username = formDataUser.get('Username');
     const userEmail = formDataUser.get('Useremail');
     const userPhone = formDataUser.get('Userphone');
     const newPassActual = formDataUser.get('Userpassword');
     const newPass2 = formDataUser.get('UserPasswordAgain');
 
 
-    const usernameError = document.getElementById('usernameerror');
     const emailError = document.getElementById('useremailerror');
     const passwordError = document.getElementById('passworderror');
 
@@ -24,13 +22,6 @@ function resetPassword(event){
     let hasErrors = false;
 
     // Validation checks
-    if (username === '' || username === null) {
-        usernameError.textContent = 'You must enter your username';
-        hasErrors = true;
-    } else{
-        usernameError.textContent = '';
-        hasErrors = false;
-    }
 
     if (userEmail === '' || userEmail === null) {
         emailError.textContent = 'You must enter your email address';
@@ -108,7 +99,7 @@ function resetPassword(event){
         // ? means it is present, : means it is not -- This chooses the API endpoint to use
         const apiURL = userPhone
         ? `http://localhost:5116/reset-password/${userName}/${userEmail}/${userPhone}`
-        : `http://localhost:5116/reset-password/${username}/${userEmail}`
+        : `http://localhost:5116/reset-password/${userName}/${userEmail}`
         // Fetches the correct API endpoint needed
         fetch(apiURL, {
             method: "PUT",
@@ -128,18 +119,6 @@ function resetPassword(event){
                 console.log(newvar);
                 return Promise.resolve(newvar);
             }
-            /*else if (response.status === 401){
-                console.log('User\'s Email Address Does Not Match Current Records');
-                return Promise.reject('Error: 401 - User\'s Email Address Does Not Match Current Records');
-            }
-            else if (response.status === 409){
-                console.log('Phone Number Is Present But Incorrect');
-                return Promise.reject('Error: 409 - Phone Number Is Incorrect For Current User');
-            }
-            else if (response.status === 500){
-                console.log("Is the API off?");
-                return Promise.reject('Error: 500 - API Endpoint IS NOT Found (Is The API Turned Off?)');
-            }*/
             else{
                 console.log('Error: ', response.status);
                 inHTMLError.textContent = 'An unexpected error occurred.';
@@ -190,9 +169,7 @@ function resetPassword(event){
                 phoneError.textContent = 'Phone Number Is Incorrect For Current User';
             } else if (error.includes('Error: 401')){
                 emailError.textContent = 'User\'s Email Address Does Not Match Current Records';
-            } //else if (error.includes('Error: 400')){
-                //usernameError.textContent = 'User Does Not Exist, Re-enter Your Username';
-            //}
+            }
             
         });
 

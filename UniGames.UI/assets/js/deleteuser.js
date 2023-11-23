@@ -75,8 +75,6 @@ function deleteUser(event){
     fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-        // Logs the data
-        console.log(data);
         // Creates a variable which stores the username from the token
         const userName = data.username;
         // Uses the delete endpoint with the username from the database

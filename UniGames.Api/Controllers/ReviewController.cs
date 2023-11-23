@@ -153,7 +153,7 @@ namespace UniGames.Api.Controllers
 
         [HttpDelete]
         [Route ("/deletereview/{userID:int}/{id:int}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult DeleteReview([FromRoute] int userID, int id) {
             
             var reviewdm = reviewRepository.GetReviewByID(id);
