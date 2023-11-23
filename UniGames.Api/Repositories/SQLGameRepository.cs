@@ -65,7 +65,7 @@ namespace UniGames.Data.Repositories
         public Game GetGameById(int id)
         {
             // Returns the game based on its ID and the platform details
-            return dbContext.Games.Include(x => x.PlatformName).FirstOrDefault(x => x.GameID == id);
+            return dbContext.Games.Include(x => x.PlatformName).Include(x => x.GameDetail).FirstOrDefault(x => x.GameID == id);
         }
         
         public Game CreateGame(Game game)

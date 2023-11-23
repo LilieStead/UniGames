@@ -4,7 +4,7 @@ var gameid = urlparams.get('id');
 fetch(`http://localhost:5116/Game/${gameid}`)
 .then(response => response.json())
 .then(data => {
-    
+    console.log(data);
     const gameName = document.getElementById("gname");
     const platform = document.getElementById("platform");
     const gameDesc = document.getElementById('rdesc');
@@ -25,26 +25,10 @@ fetch(`http://localhost:5116/Game/${gameid}`)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Function to update game details in the SQL database
 function updateGame(event){
     event.preventDefault();
 
-    //const activeTimeout = timeoutstatus();
 
     //Use the built in FormData
     const formData = new FormData(document.getElementById("updategame"));

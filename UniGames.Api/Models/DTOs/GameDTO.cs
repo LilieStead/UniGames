@@ -20,5 +20,5 @@ namespace UniGames.Api.Models.DTOs
         
         public GameDetail GameDetail { get; set; }
 
-}
+    }
 }
