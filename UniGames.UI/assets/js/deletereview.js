@@ -102,7 +102,7 @@ function deleteReview() {
                 console.error(error);
                 modifyError("Something went wrong, please try again :(");
             });
-  
+        })
         //Error handling for incorrect username and password
         .catch(error => {
             console.error("Error:", error);

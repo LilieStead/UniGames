@@ -87,7 +87,7 @@ function loginStatus(){
                 return;
             } else if (file === "createuser.html"){
                 return;
-            } else if (file ==="resetuserpass.html"){
+            } else if (file ==="resetuserpass(nologin).html"){
                 return;
             }
             else{

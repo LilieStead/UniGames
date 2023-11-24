@@ -63,7 +63,7 @@ namespace UniGames.Api.Repositories
         }
         public List<Review> GetReviewByUsername(string username)
         {
-            return dbContext.Review.Where(x => x.UserName.Userfname.Contains(username)).Where(review => review.UserName.Userlname.Contains(username)).Where(review => review.UserName.Username.Contains(username)).Include(x => x.UserName).Include(x => x.Games).ToList();
+            return dbContext.Review.Where(review => review.UserName.Username.Contains(username) || review.UserName.Userfname.Contains(username)).Include(x => x.UserName).Include(x => x.Games).ToList();
         }
 
         public Review DeleteReview(Review review)
