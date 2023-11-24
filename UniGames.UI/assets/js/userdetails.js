@@ -47,7 +47,7 @@ function validateUser(){
     }
 
     const email = formData.get("email");
-    var emailformat = "/^(?:[\w!#$%&'*+-/=?^`{|}~]+.)*[\w!#$%&'*+-/=?^`{|}~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5]).){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])]))$/";
+    var emailformat = "^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,})$";
     if (email == null || email == ""){
         emailerror.innerText = ("You need to enter your email");
         blankFields = true ;

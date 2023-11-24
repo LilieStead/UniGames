@@ -74,21 +74,28 @@ function updateGame(){
     }
     if (gameDesc == null || gameDesc == ''){
         gameDescError.innerHTML = 'You need to enter a game description!';
+        blankFields = true;
     }else if (gameDesc.length < 20){
         gameDescError.innerHTML = 'Your game description needs to be more than 20 characters!';
+        blankFields = true;
     }else if (gameDesc.length > 200){
         gameDescError.innerHTML = "Your game description cannot be more than 200 characters!";
+        blankFields = true;
     }
     if (ageRating == null || ageRating ==''){
-        ageratingerror.innerHTML = 'You need to enter your games age rating!'
+        ageratingerror.innerHTML = 'You need to enter your games age rating!';
+        blankFields = true;
     }
     if (devs == null || devs == ''){
-        deverror.innerHTML = 'you need to enter the games developer!'
+        deverror.innerHTML = 'you need to enter the games developer!';
+        blankFields = true;
     }
     if (genre == null || genre == ''){
-        genreerror.innerHTML = 'You need to enter your games genre!'
+        genreerror.innerHTML = 'You need to enter your games genre!';
+        blankFields = true;
     } else if (genre.length > 50){
-        genreerror.innerHTML = 'You game genre cannot be more than 50 characters!'
+        genreerror.innerHTML = 'You game genre cannot be more than 50 characters!';
+        blankFields = true;
     }
 
     if (blankFields){
