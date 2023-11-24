@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGames - Create Review</title>
+    <script src="assets/js/login/loginstatus.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
+</head>
+<!-- HEADER -->
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="userdetails.html">Edit Details</a>
+  <a href="mygames.html">My games</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
+<!-- END OF HEADER -->
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Edit your details</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="editdetails" action="">
+                    <div>
+                        <label for="username">Username: </label>
+                        <input type="text" name="Username" id="user" placeholder="Change your username">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div id="detailsdob">
+                        <label for="dob">User date of birth</label>
+                        <input type="datetime-local" name="dob" id="dob" placeholder="Change your username">
+                        <p class="formerror" id="userdoberror"></p>
+                    </div>
+                    <div>
+                        <label for="phone">Phone number</label>
+                        <input type="number" name="phone" id="phone" placeholder="Change your username">
+                        <p class="formerror" id="userphoneerror"></p>
+                    </div>
+                    <div>
+                        <label for="email">email</label>
+                        <input type="text" name="email" id="email" placeholder="Change your username">
+                        <p class="formerror" id="useremailerror"></p>
+                    </div>
+                    <div>
+                        <label for="fristname">First name</label>
+                        <input type="text" name="firstname" id="firstname" placeholder="Change your username">
+                        <p class="formerror" id="userfirstnameerror"></p>
+                    </div>
+                    <div>
+                        <label for="lastname">Last name</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Change your username">
+                        <p class="formerror" id="userlastnameerror"></p>
+                    </div>
+                    
+                    <div class="flexcontainer">
+                        <input id="reviewbtn"type="button" onclick="validateUser()" value="submit">
+                    </div>
+                    <br>
+                    <p id="timeout-countdown"></p>
+                    <div class="flexcontainer">
+                        <!-- Reset Password Button -->
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
+                    </div>
+                </form>
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+</body>
+
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/login/loginstatus.js"></script>
+<script src="assets/js/userdetails.js"></script>
+<script src="assets/js/logout.js"></script>
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>

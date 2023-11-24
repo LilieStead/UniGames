@@ -4,30 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/fonts.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+      
+    </div>
 </header>
 <!-- HEADER -->
-
 <body>
-
-    <!-- NAV -->
-    <nav class="centercontents">
-        <a href="index.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
-    </nav>
-    <!-- NAV -->
-
     <!-- Main Content -->
     <div id="container">
         <div id="main">
@@ -78,13 +71,15 @@
 
                         <div>
                             <label for="Userpassword">Password: </label>
-                            <input type="password" name="Password" id="Userpassword" maxlength="50" min="8">
+                            <input type="password" name="Password" id="password" maxlength="50" min="8">
                             <p id="passworderror" class="formerror"></p>
+                            <input type="checkbox" onclick="showPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                         </div>
                         <div>
                             <label for="userpassword2">Confirm Password: </label>
                             <input type="password" name="Password2" id="password2" placeholder="Enter your password again...">
                             <p class="formerror" id="passworderror2"></p>
+                            <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
 
                         </div>
 
@@ -92,6 +87,7 @@
                         <div class="flexcontainer">
                             <input type="submit" value="Submit">
                             <input type="reset" value="Reset">
+                            <input type="checkbox" id="stayLoggedIn"><span id="stayLoggedText">Stay Logged In</span>
                         </div>
                         <br>
                     </form>
@@ -113,11 +109,11 @@
             <button id="close-popup">Close</button>
         </div>
     </div>
-    <script async defer type="text/javascript" src="assets/js/popup.js"></script>
 </body>
 
 <script async defer type="text/javascript" src="assets/js/createuser.js"></script>
 <script src="assets/js/popup.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
 
 <!-- Footer -->
 <footer>

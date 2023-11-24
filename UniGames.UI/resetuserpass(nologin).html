@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="assets/js/login/loginstatus.js"></script>
+    <title>UniGames - Reset Pasword</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts.css">
+</head>
+<!-- HEADER -->
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+      
+    </div>
+</header>
+<!-- END OF HEADER -->
+<body>
+    <!-- MAIN CONTENT -->
+    <div id="container">
+        <div id="main">
+            <div id="mainsize">
+                <div id="contenttitle">
+                    <h1>Reset Your Password</h1>
+                </div>
+                <div class=" flexcontainer">
+                <form id="resetpassform" action="">
+                    <div>
+                        <label for="username">Username: *</label>
+                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
+                        <p class="formerror" id="usernameerror"></p>
+                    </div>
+                    <div>
+                        <label for="email">Email: *</label>
+                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
+                        <p class="formerror" id="useremailerror"></p>
+                    </div>
+                    <div>
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" name="Userphone" id="userphone" placeholder="Enter your phone number here... (if you have one)">
+                        <p class="formerror" id="userphoneerror"></p>
+                    </div>
+                    <div>
+                        <label for="password">New Password: *</label>
+                        <input type="password" name="Userpassword" id="password">
+                        <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password"><span class="show-password-span">Show Password</span>
+                    </div>
+                    <div>
+                        <label for="passwordnew2">Confirm New Password: *</label>
+                        <input type="password" name="UserPasswordAgain" id="password2">
+                        <p class="formerror" id="passworderror2"></p>
+                        <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
+                    </div>
+                    <div class="flexcontainer">
+                        <input onclick="resetPasswordNotLoggedIn();" class="centersubmit" id="subbutton" type="button" value="submit">
+                        <a onclick="resetUser_PassFields();" class="reset-fields">Reset Username and <br> Password Fields</a>
+                    </div>
+                    <p id="timeout-countdown"></p>
+                    <h2 id="error-handling"></h1>
+                </form>
+                
+                </div>
+                <a id="revsuccess" href="assets/inc/success.html" hidden></a>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
+        </div>
+    <!-- END OF MAIN CONTENT -->
+    </div>
+
+
+    
+</body>
+<!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
+<script src="assets/js/deluserpassfield.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/error.js"></script>
+<script src="assets/js/passtimeout.js"></script>
+<script src="assets/js/timeoutStatus.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
+<script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
+
+
+<!-- FOOTER -->
+<footer>
+    <div id="topfooter" class="centercontents">
+        <h2>UNiGames</h2>
+    </div>
+    <div  id="bottomfooter" class="centercontents">
+        <p>Copyright © UNiDAYS. All rights reserved</p>
+    </div>
+</footer>
+<!-- END OF FOOTER -->
+</html>

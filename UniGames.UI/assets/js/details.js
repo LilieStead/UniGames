@@ -9,7 +9,7 @@ console.log(gameid);
 // link.href = 'createreview.html?id=' + gameid;
 
 
-// Fetch game data from the server using the extracted 'gameid'
+// Fetch game detail data from the server using the extracted 'gameid'
 fetch(`http://localhost:5116/gamedetail/${gameid}`)
     .then(response => response.json())
     .then(data => {
@@ -17,7 +17,7 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
         document.getElementById('loadingcontainer').style.display = 'none';
         const gameTableBody = document.querySelector('#gameTable tbody');
 
-        // Check if the 'data' is an array (for multiple games) or a single game object
+        // Check if the 'data' is an array 
         if (Array.isArray(data)) {
             // If it's an array, loop through the games and append them to the table
             console.log(data);
@@ -26,11 +26,27 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
                 gameTableBody.appendChild(row);
             });
         } else {
-            // If it's a single game, create a row and append it to the table
+            // If it's not an array, create a row and append it to the table
             console.log(data);
             const row = createTableRow1(data);
             gameTableBody.appendChild(row);
 
+        }
+
+        // Select the table body element where game data will be displayed
+        const reviewTableBody = document.querySelector('#reviewTable #reviewtbody');
+
+        // Check if the 'data' is an array (for multiple games) or a single game object
+        if (Array.isArray(data)) {
+            // If it's an array, loop through the games and append them to the table
+            console.log(data);
+            data.forEach(game => {
+                createTableRow1(game);
+            });
+        } else {
+            // If it's a single game, create a row and append it to the table
+            console.log(data);
+            createTableRow1(data);
         }
     })
     .catch(error => {
@@ -81,3 +97,4 @@ function createTableRow1(data) {
 
     return row; // Returns the table row
 }
+loginStatus();

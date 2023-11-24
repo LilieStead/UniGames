@@ -5,6 +5,7 @@ function customPopup(message){
     popup.style.display = 'flex';
 }
 
+
 // Function made to display multiple messages on one popup, not multiple popups
 function multi_Popup(messages){
     const popup = document.getElementById('custom-popup');
