@@ -132,5 +132,4 @@ function createReview(){
 }
 
 loginStatus();
-document.getElementById("createreview").addEventListener("submit", createReview);
 
