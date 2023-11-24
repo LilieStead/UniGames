@@ -25,5 +25,12 @@ namespace UniGames.Data.Repositories
         {
             return dbContext.GameDetail.FirstOrDefault(x => x.GameID == id);
         }
+
+        public GameDetail CreateDetail(GameDetail gameDetail)
+        {
+            dbContext.GameDetail.Add(gameDetail);
+            dbContext.SaveChanges();
+            return gameDetail ;
+        }
     }
 }

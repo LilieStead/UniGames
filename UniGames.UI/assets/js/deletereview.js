@@ -6,31 +6,24 @@ var reviewID = urlParams.get('id');
 console.log('Review:', reviewID, "successfully transferred");
 
 
-function deleteReview(){
+function deleteReview() {
 
     const activeTimeout = timeoutStatus();
 
+
     const formData = new FormData(document.getElementById("deletereview"));
 
-    const username = formData.get('Username');
     const password = formData.get('Userpassword');
     const password2 = formData.get('Userpassword2');
 
-    const usernameError = document.getElementById('usernameerror');
     const passwordError = document.getElementById('passworderror');
     const passwordError2 = document.getElementById('passworderror2');
 
-    usernameError.innerHTML = '';
     passwordError.innerHTML = '';
     passwordError2.innerHTML = '';
     let curFail = false;
 
 
-    // Checks to see if the username is contains no text
-    if (username === '' || username === null) {
-        usernameError.innerHTML = 'You must enter your username';
-        curFail = true;
-    }
     // Checks to see if the password contains no text
     if (password === '' || password === null){
         if (activeTimeout){
@@ -48,6 +41,7 @@ function deleteReview(){
         const error_message = document.getElementById('passworderror2');
             
         error_message.innerHTML = "Passwords do not match, please try again";
+        curFail = true;
         passwordTimeout();
         return;
     }
@@ -60,26 +54,35 @@ function deleteReview(){
     if (curFail){
         return;
     }
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    //console.log(authToken.value);
+    var idType;
 
-    // Get UserID by Username
-    fetch(`http://localhost:5116/user/${username}/${password}`)
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+    
+    fetch(apiURL)
         .then(response => {
             if (response.status === 200){
-                console.log("User authenticated");
-
                 return response.json();
-            } else if (response.status === 404){
-                // User is not found
-                window.location.href = "error.html?error=2";
-            } else if (response.status === 401){
-                // Password is incorrect
-                window.location.href = "error.html?error=1";
-            } else{
-                console.error("error", response.status);
+            } else if (response.status === 500){
+                return modifyError("Failed to decode user token, please logout, log back in and try again");
+            }
+            else{
+                console.error(response.status);
             }
         })
         .then(data => {
-            const userID = data.userId;
+            const userID = data.userID;
             fetch(`http://localhost:5116/deletereview/${userID}/${reviewID}`, {
                 // Chooses the method used
                 method: "DELETE",
@@ -93,18 +96,23 @@ function deleteReview(){
             .then(response => response.json())
             .then(data => {
                 console.log("api response: ", data)
-                //window.location.href = "assets/inc/success.html?success=3";
                 modifySuccess("You have successfully deleted your review!");
             })
             .catch(error => {
                 console.error(error);
-                window.location.href = "error.html";
+                modifyError("Something went wrong, please try again :(");
             });
-
         })
+        //Error handling for incorrect username and password
         .catch(error => {
             console.error("Error:", error);
-        });
+            if (error.includes("Error: 404")) {
+                customPopup("Username does not exist");
 
-           
+            } else if (error.includes("Error: 401")) {
+                customPopup("Password is incorrect");
+            }
+        });
 }
+
+loginStatus();

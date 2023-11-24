@@ -30,7 +30,7 @@ namespace UniGames.Api.Repositories
 
         public List<Review> GetReviewByUser(int userId)
         {
-            return dbContext.Review.Where(review => review.UserID == userId).Include(x => x.UserName).ToList();
+            return dbContext.Review.Where(review => review.UserID == userId).Include(x => x.Games).Include(x => x.UserName).ToList();
         }
 
         public Review CreateReview(Review review)
@@ -44,19 +44,26 @@ namespace UniGames.Api.Repositories
 
         }
 
+        public Review EditReview(int id)
+        {
+            var review = dbContext.Review.Include(x => x.UserName).FirstOrDefault(x => x.ReviewID == id);
+            dbContext.SaveChanges();
+            return review;
+        }
         
         public List<Review> GetScoreByGameID(int id)
         {
         return dbContext.Review
             .Where(r => r.GameID == id)
             .Include(r=> r.UserName)
+            .Include (r=> r.Games)
             .OrderByDescending(r => r.Score)
             .Take(5)
             .ToList();
         }
         public List<Review> GetReviewByUsername(string username)
         {
-            return dbContext.Review.Where(x => x.UserName.Userfname.Contains(username)).Where(review => review.UserName.Username.Contains(username)).Include(x => x.UserName).Include(x => x.Games).ToList();
+            return dbContext.Review.Where(review => review.UserName.Username.Contains(username) || review.UserName.Userfname.Contains(username)).Include(x => x.UserName).Include(x => x.Games).ToList();
         }
 
         public Review DeleteReview(Review review)
