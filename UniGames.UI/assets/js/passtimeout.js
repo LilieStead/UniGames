@@ -55,7 +55,7 @@ function setTimeoutItself(){
 
         // Display the countdown message
         const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
-        if (fileName !== "resetuserpass.html"){
+        if (fileName !== "resetuserpass.html" || fileName !== "resetuserpass(nologin).html"){
             // Displays the reset password button
             document.getElementById('crPRButton').style.display = 'block';
         }
@@ -84,7 +84,7 @@ function passwordTimeout(){
             // Update the countdown in the HTML
             document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
             // If the current file is the reset user password page then
-            if (fileName === "resetuserpass.html"){
+            if (fileName === "resetuserpass.html" || fileName !== "resetuserpass(nologin).html"){
                 // Do not mention the reset password button as it is not present on this page
                 // This prevents errors with the timer not working
                 interval = setInterval(passwordTimeout, 1000);
@@ -99,7 +99,7 @@ function passwordTimeout(){
         else{
             // Sets the countdown to be null
             document.getElementById('timeout-countdown').textContent = '';
-            if (fileName !== "resetuserpass.html"){
+            if (fileName !== "resetuserpass.html" || fileName !== "resetuserpass(nologin).html"){
                 // Removes the reset password button
                 document.getElementById('crPRButton').style.display = 'none';
             }
@@ -124,6 +124,7 @@ function passwordTimeout(){
             document.getElementById('passworderror').innerHTML = '';
             // Remove the localStorage item for disabling fields
             localStorage.removeItem('passwordFieldsDisabled');
+            localStorage.removeItem('passwordTimeout');
         }
     }
     const newPassActual = document.getElementById('password').value;
@@ -131,12 +132,16 @@ function passwordTimeout(){
     if (fileName === "login.html" && passAttempts >= 6){
         setTimeoutItself();
     } else{
-        // If both of the passwords don't match with each other then
-        if (newPassActual !== newPassConfirm && fileName !== "login.html"){
-            // Log an error to the console to say the passwords do not match
-            console.error('Passwords do not match');
-            setTimeoutItself();
+        if (fileName !== "login.html"){
+            const secPass = document.getElementById('password2').value
+            // If both of the passwords don't match with each other then
+            if (newPassActual !== secPass && fileName !== "login.html"){
+                // Log an error to the console to say the passwords do not match
+                console.error('Passwords do not match');
+                setTimeoutItself();
+            }
         }
+       
     }
     
     if (newPassActual === newPassConfirm && fileName !== "login.html"){

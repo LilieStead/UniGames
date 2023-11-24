@@ -4,10 +4,12 @@
 function resetUser_PassFields(){
     let userInput = document.getElementById('user');
     let userPass = document.getElementById('password');
+    let userPass2 = document.getElementById('password2');
 
     // Reset the value of the fields
     userInput.value = '';
     userPass.value = '';
+    userPass2.value = '';
 }
 
 

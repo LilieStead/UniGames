@@ -268,7 +268,9 @@ namespace UniGames.Api.Controllers
                 // Return that no ID is found
                 return NotFound("No User ID is found, please choose a valid ID");
             }
-            if (userDM.Userpassword != password)
+
+            bool matchingPass = BCryptNet.Verify(password, userDM.Userpassword);
+            if (!matchingPass)
             {
                 return Unauthorized();
             }

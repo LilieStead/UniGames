@@ -49,32 +49,6 @@ function createReview(){
     }else{
         scoreError.innerHTML = (null);
     }
-
-    // Checks to see if the password contains no text
-    if (password === '' || password === null){
-        if (activeTimeout){
-            passwordError.innerHTML = 'Please Wait For The Cooldown To Expire';
-        }else{
-            passwordError.innerHTML = 'You must enter your account\'s password';
-            curFail = true;
-        }
-        
-    }else{
-        passwordError.innerHTML = '';
-    }
-    if (password !== password2){
-        const error_message = document.getElementById('passworderror2');
-            
-        error_message.innerHTML = "Passwords do not match, please try again";
-        passwordTimeout();
-        return;
-    }
-    if (password === password2){
-        const error_message = document.getElementById('passworderror2');
-        error_message.innerHTML = "";
-        
-    }
-
         
     if (curFail){
         return;
@@ -126,9 +100,7 @@ function createReview(){
         })
         .then(rdata => {
             console.log("API Response: ", rdata);
-            //window.location.href = "assets/inc/success.html?success=1";
             if ('status' in rdata){
-                //window.location.href = "assets/inc/success.html?success=1";
                 if (rdata.status === 400){
                     console.log(rdata.errors);
                     console.log(rdata.errors.ReviewDescription[0]);
@@ -138,7 +110,6 @@ function createReview(){
                 }
             }else{
                 console.log("No status returned, assuming success.");
-                //window.location.href = "assets/inc/success.html?success=1";
                 // Invokes the modifySuccess() function and adds the message to it
                 modifySuccess("Your review has been added, thank you!");
             }
