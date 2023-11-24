@@ -39,7 +39,7 @@ function validateUser(){
     const phone = formData.get("phone");
     if (phone == null || phone == ""){
         phoneerror.innerText = (null);
-    }else if (phone > 11 || phone < 11){
+    }else if (phone.length >= 12 || phone.length <= 10){
         phoneerror.innerText = ("You phone number needs to be 11 numbers");
         blankFields = true ;
     }else{
@@ -47,7 +47,7 @@ function validateUser(){
     }
 
     const email = formData.get("email");
-    var emailformat = "/^(?:[\w!#$%&'*+-/=?^`{|}~]+.)*[\w!#$%&'*+-/=?^`{|}~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5]).){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])]))$/";
+    var emailformat = "^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,})$"
     if (email == null || email == ""){
         emailerror.innerText = ("You need to enter your email");
         blankFields = true ;
@@ -82,6 +82,56 @@ function validateUser(){
         return;
     }
 
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    //console.log(authToken.value);
+    var idType;
+
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        const userName = data.username;
+
+        const userdata = {
+            Userfname: firstname,
+            Userlname: lastname,
+            Useremail: email,
+            Userphone: phone,
+            Userdob: userdob,
+            Username: username
+        };
+        fetch(`http://localhost:5116/EditUser/${userName}` , {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userdata),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); 
+            modifySuccess("You have successfully updated your details!");
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    })
+    .catch(error => {
+        console.error(error);
+    })
+
+
 
 
 
@@ -89,5 +139,4 @@ function validateUser(){
 
 
 }
-document.getElementById('editdetails').addEventListener("submit", validateUser);
 loginStatus();
