@@ -51,8 +51,9 @@ fetch(apiTokenURL)
 
   function createTableRow(game) {
 
-  const starnumber = game.averageScore
-  var star = null 
+  const starnumber = game.averageScore;
+  console.log(starnumber);
+  var star = null;
   if (starnumber <= 10){
       // half a star
       star = '<p class="star"><i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i></p>';
