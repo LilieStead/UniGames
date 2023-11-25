@@ -24,7 +24,6 @@ namespace UniGames.Data.Repositories
 
         List<Game> GetGameByUserID(int id);
 
-
     }
 }
 
