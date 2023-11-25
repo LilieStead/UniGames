@@ -30,6 +30,7 @@ namespace UniGames.Api.Mappings
 
             // Created by Kieron -- Original team member did not finish
             CreateMap<Review, UpdateReviewDTO>().ReverseMap();
+            CreateMap<User, UpdateUserDTO>().ReverseMap();
         }
     }
 }

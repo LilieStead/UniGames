@@ -294,5 +294,26 @@ namespace UniGames.Api.Controllers
             // Returns the results
             return Ok(userDTO);
         }
+        [HttpPut]
+        [Route("/EditUser/{username}")]
+        public IActionResult EditUser([FromRoute] string username, [FromBody] UpdateUserDTO updateUserDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var UserDM = userRepository.GetUserIDByName(username);
+                if (UserDM == null)
+                {
+                    return NotFound();
+                }
+                this.mapper.Map(updateUserDTO, UserDM);
+                dbContext.SaveChanges();
+                var UserDTO = mapper.Map<UserDTO>(UserDM);
+                return Ok(UserDTO);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }   
