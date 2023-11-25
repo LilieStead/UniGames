@@ -118,9 +118,37 @@ namespace UniGames.Data.Repositories
             return gamesDTOs;
         }
 
-        public List<Game> GetGameByUserID(int id)
+        public List<GameDTO> GetGameByUserID(int id)
         {
-            return dbContext.Games.Where(x => x.UserID == id).Include(x => x.PlatformName).Include(x => x.GameDetail).ToList();
+            var games = dbContext.Games.Where(x => x.UserID == id).Include(x => x.PlatformName).Include(x => x.GameDetail).ToList();
+            // Creates a new List using the GameDTO so it can be added to later
+            var gamesDTOs = new List<GameDTO>();
+
+            // For each game in the games table
+            foreach (var game in games)
+            {
+                var gameId = game.GameID;
+                // Gets the reviews where the GameID is the game ID in the database and adds it to a list (repeats for each game due to the foreach loop)
+                var reviews = reviewRepository.GetReviews().Where(x => x.GameID == gameId).ToList();
+                // Calculates the average score using the number of reviews for a specific game and the total of their scores
+                double avgScore = reviews.Any() ? (double)reviews.Sum(r => r.Score) / reviews.Count() : 0;
+                // Rounds the average score to 0 decimal places (presents as an integer)
+                var newavg = Math.Round(avgScore);
+                //var gameDTO = mapper.Map<List<GameDTO>>(avgScore);
+
+                // Creates a new GameDTO using the exisitng GameDTO and includes the new average score
+                var gameDTO = new GameDTO
+                {
+                    GameID = game.GameID,
+                    Title = game.Title,
+                    PlatformName = game.PlatformName,
+                    AverageScore = newavg,
+                };
+                // Adds the new GameDTO to the created GameDTO list earlier
+                gamesDTOs.Add(gameDTO);
+            }
+            // Returns the new GameDTO list
+            return gamesDTOs;
         }
     }
 }
