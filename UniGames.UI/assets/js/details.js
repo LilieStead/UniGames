@@ -8,6 +8,46 @@ console.log(gameid);
 // // When clicked, ensure that this link also brings the gameid through
 // link.href = 'createreview.html?id=' + gameid;
 
+fetch(`http://localhost:5116/game/${gameid}`)
+.then(response => response.json())
+.then(data => {
+    const currentUser = data.userID;
+    const userIDSess = sessionStorage.getItem('authToken');
+    const userIDLocal = localStorage.getItem('authTokenLocal');
+    const authToken = JSON.parse(userIDLocal);
+    var idType;
+
+    if (userIDSess){
+        idType = "session";
+    } else{
+        idType = "local";
+    }
+
+    const apiURL = idType === 'session'
+    ? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+    : `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(rdata => {
+        const user = rdata.userID;
+        if (currentUser == user){
+            const updateHandle = document.getElementById('editGame');
+            updateHandle.style.display = "block";
+            console.log("You made this game, you can edit it if you would like")
+        } else{
+            console.log("You did not make this game")
+            return;
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    })
+})
+.catch(error => {
+    console.error(error);
+})
+
 
 // Fetch game detail data from the server using the extracted 'gameid'
 fetch(`http://localhost:5116/gamedetail/${gameid}`)
@@ -20,34 +60,17 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
         // Check if the 'data' is an array 
         if (Array.isArray(data)) {
             // If it's an array, loop through the games and append them to the table
-            console.log(data);
             data.forEach(game => {
                 const row = createTableRow1(game);
                 gameTableBody.appendChild(row);
             });
         } else {
             // If it's not an array, create a row and append it to the table
-            console.log(data);
             const row = createTableRow1(data);
             gameTableBody.appendChild(row);
 
         }
 
-        // Select the table body element where game data will be displayed
-        const reviewTableBody = document.querySelector('#reviewTable #reviewtbody');
-
-        // Check if the 'data' is an array (for multiple games) or a single game object
-        if (Array.isArray(data)) {
-            // If it's an array, loop through the games and append them to the table
-            console.log(data);
-            data.forEach(game => {
-                createTableRow1(game);
-            });
-        } else {
-            // If it's a single game, create a row and append it to the table
-            console.log(data);
-            createTableRow1(data);
-        }
     })
     .catch(error => {
         // Handle errors when fetching game data

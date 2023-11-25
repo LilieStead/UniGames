@@ -55,8 +55,10 @@ function setTimeoutItself(){
 
         // Display the countdown message
         const timeRemain = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
-        if (fileName !== "resetuserpass.html" || fileName !== "resetuserpass(nologin).html"){
+        if (fileName === "resetuserpass.html" || fileName === "resetuserpass(nologin).html"){
             // Displays the reset password button
+            document.getElementById('crPRButton').style.display = 'none';
+        } else{
             document.getElementById('crPRButton').style.display = 'block';
         }
         document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
@@ -84,7 +86,7 @@ function passwordTimeout(){
             // Update the countdown in the HTML
             document.getElementById('timeout-countdown').textContent = `Time Left Until You Can Use The Form: ${timeRemain} seconds`;
             // If the current file is the reset user password page then
-            if (fileName === "resetuserpass.html" || fileName !== "resetuserpass(nologin).html"){
+            if (fileName === "resetuserpass.html" || fileName === "resetuserpass(nologin).html"){
                 // Do not mention the reset password button as it is not present on this page
                 // This prevents errors with the timer not working
                 interval = setInterval(passwordTimeout, 1000);
