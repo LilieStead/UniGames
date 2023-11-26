@@ -81,7 +81,7 @@ namespace UniGames.Api.Controllers
                 var reviewDM = mapper.Map<Review>(createReviewDTO);
 
                 var reviewExists = reviewRepository.GetReviewByUser(reviewDM.UserID);
-                if (reviewExists != null)
+                if (reviewExists.Count > 1)
                 {
                     return Conflict();
                 }
