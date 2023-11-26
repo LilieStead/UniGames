@@ -13,7 +13,7 @@ namespace UniGames.Api.Repositories
 
         List<Review> GetReviewByUser(int userId);
 
-        public List<Review> GetReviewByuserIDgameID(int UserID, int GameID);
+        public List<Review> GetReviewByUserIDGameID(int UserId, int GameID);
     }
 }
 

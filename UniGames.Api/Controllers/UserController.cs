@@ -65,6 +65,24 @@ namespace UniGames.Api.Controllers
 
         }
 
+        //Find User based on Username
+        [HttpGet]
+        [Route("{username}")]
+        public IActionResult GetUserIdByUsername([FromRoute] string username)
+        {
+            var userDM = userRepository.GetUserIDByUsername(username);
+
+            if (userDM == null)
+            {
+                return NotFound();
+            }
+
+            var userDTO = mapper.Map<UserDTO>(userDM);
+
+            return Ok(userDTO);
+
+        }
+
         //Create New User
         [HttpPost]
         public IActionResult CreateUsers([FromBody] CreateUsersDTO CreateUserDTO)

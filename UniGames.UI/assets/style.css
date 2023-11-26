@@ -298,7 +298,6 @@ input[type=password] {
     min-height: 50%;
     font-family:Unidays-Book, sans-serif;
     font-size: 1rem;
-    size: 1rem;
     background-color: #1DD577;
   }
 
@@ -371,7 +370,6 @@ input::-webkit-inner-spin-button {
     min-height: 7%;
     font-family:Unidays-Book, sans-serif;
     font-size: 1rem;
-    size: 1rem;
     background-color: #1DD577;
   }
 
@@ -410,7 +408,7 @@ input::-webkit-inner-spin-button {
 
 
 
-/* MAKE USER */
+/* Create User */
 
 #SignUp input[type=submit]{
     min-width: 30% !important;
@@ -432,18 +430,20 @@ input[type=reset] {
     background-color: #bd0000;
 }
 
-
-input[type=reset]:hover {
-    padding: 1rem;
-    transition: 0.3s;
-    color: #FF0000;
-    font-family:Unidays-Book, sans-serif;
-}
-
 form .formerror{
     color: #FF0000;
     font-family:Unidays-Book, sans-serif;
 
+}
+
+#SignUp input[type=email] {
+    min-width: 100%;
+    min-height: 45px;
+}
+
+#SignUp input[type=tel] {
+    min-width: 100%;
+    min-height: 45px;
 }
 
 #SignUp input[type=text] {
@@ -457,7 +457,7 @@ form .formerror{
 
 
 
-/* END OF MAKE USER */
+/* End of Create User */
 
 
 /* Delete User */
@@ -499,6 +499,13 @@ form .formerror{
     text-align: center;
 }
 
+input[type=reset] {
+    max-width: 40% !important;
+    min-width: 40% !important;
+    min-height: 10%;
+    text-align: center;
+}
+
 #editreview input[type=text] {
     min-width: 100%;
 }
@@ -515,6 +522,7 @@ form .formerror{
     margin: 8px 0;
     padding: 12px 20px;
 }
+
 
 /* End of Edit User Review */
 

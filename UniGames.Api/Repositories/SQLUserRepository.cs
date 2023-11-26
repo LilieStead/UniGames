@@ -23,6 +23,10 @@ namespace UniGames.Api.Repositories
             return dbContext.User.FirstOrDefault(u => u.Username == username);
         }
 
+        public User GetUserIDByUsername(string username)
+        {
+            return dbContext.User.FirstOrDefault(u => u.Username == username);
+        }
 
         public User DeleteUser(User user)
         {

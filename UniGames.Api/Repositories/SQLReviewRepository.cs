@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
@@ -59,11 +60,10 @@ namespace UniGames.Api.Repositories
             return dbContext.Review.Where(review =>  review.UserName.Username == username).Include(x => x.UserName).ToList();
         }
 
-        public List<Review> GetReviewByuserIDgameID(int UserID, int GameID)
+        public List<Review> GetReviewByUserIDGameID(int UserId, int GameID)
         {
-            return dbContext.Review.Where(review => review.UserID.UserID == UserID, review => review.GameID.GameID == GameID);
+            return dbContext.Review.Where(review => review.UserID == UserId && review.GameID == GameID).ToList();
         }
-
     }
 }
 

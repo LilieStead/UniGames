@@ -100,10 +100,10 @@ namespace UniGames.Api.Controllers
 
         //Find review based on userId and gameId
         [HttpGet]
-        [Route("{UserId}/{GameId}")]
-        public IActionResult GetReviewByuserIDgameID([FromRoute] int UserID, int GameID)
+        [Route("{UserId}/{GameID}")]
+        public IActionResult GetReviewByuserIDgameID([FromRoute] int UserId, int GameID)
         {
-            var reviewDM = reviewRepository.GetReviewByuserIDgameID(UserID, GameID);
+            var reviewDM = reviewRepository.GetReviewByUserIDGameID(UserId, GameID);
             if (reviewDM == null)
             {
                 return NotFound();
@@ -125,7 +125,9 @@ namespace UniGames.Api.Controllers
                 return NotFound();
             }
 
-            var UpdateReviewDTO = mapper.Map<Review>(updateReviewDTO);
+            reviewDM.ReviewTitle = updateReviewDTO.ReviewTitle;
+            reviewDM.ReviewDescription = updateReviewDTO.ReviewDescription;
+            reviewDM.Score = updateReviewDTO.Score;
 
             dbContext.SaveChanges();
 

@@ -1,50 +1,69 @@
-function searchReview(event){
+let UserId; 
+let GameID;
+let reviewID;
+
+function searchReview(event) {
     event.preventDefault();
+
+    const formData = new FormData(document.getElementById("searchreview"));
+    const username = formData.get("username");
+    const title = formData.get("title");
 
     // Get UserID by Username
     fetch(`http://localhost:5116/user/${username}`)
         .then(response => {
             if (response.status === 200) {
-                console.log("User authenticated");
-
                 return response.json();
-            } else if (response.status === 404) {
-                // User is not found
-                window.location.href = "error.html?error=2";
             } else {
-                console.error("error", response.status);
+                console.error("Error fetching user:", response.status);
+                throw new Error("User not found");
             }
         })
         .then(data => {
-            const UserID = data.UserId;
-        }
-    
-     // Get GameID by Game Title
-    ,fetch(`http://localhost:5116/game/${title}`)
-        .then(response => {
-             if (response.status === 200) {
-                 console.log("Game authenticated");
+            UserId = data.userId;
+            console.log(UserId);
 
-                 return response.json();
-             } else if (response.status === 404) {
-                 // Game is not found
-                 window.location.href = "error.html?error=2";
-             } else {
-                 console.error("error", response.status);
-             }
+            // Get GameID by Game Title
+            fetch(`http://localhost:5116/game/${title}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        console.error("Error fetching game:", response.status);
+                        throw new Error("Game not found");
+                    }
+                })
+                .then(data => {
+                    GameID = data[0].gameID;
+                    console.log(GameID);
+
+                    // Find the review by GameID and UserID to get the ReviewID
+                    fetch(`http://localhost:5116/review/${UserId}/${GameID}`)
+                        .then(response => {
+                            if (response.status === 200) {
+                                console.log("Review Found");
+                                return response.json();
+                            } else {
+                                console.error("Error fetching review:", response.status);
+                                throw new Error("Failed to fetch review");
+                            }
+                        })
+                        .then(data => {
+                            // Populate form fields with review data
+                            document.getElementById("rtitle").value = data[0].reviewTitle;
+                            document.getElementById("rdesc").value = data[0].reviewDescription;
+                            document.getElementById("score").value = data[0].score;
+                            reviewID = data[0].reviewID;
+                        })
+                })   
         })
-        .then(data => {
-             const GameID = data.GameId;
-        }
 
-    // Find the review by GameID and UserID to get the ReviewID
+}
 
-   ,fetch('http://localhost:5116/review/')
 
-}    
 
 // The JS for updateing the review
-function editReview(event){
+function editReview(event) {
     event.preventDefault();
 
     const formData = new FormData(document.getElementById("editreview"));
@@ -53,32 +72,30 @@ function editReview(event){
     const reviewDesc = formData.get("ReviewDescription");
     const score = formData.get("Score");
 
-    
+    // Assuming data is an empty object
+    const data = {};
+
     data.ReviewTitle = reviewTitle;
     data.ReviewDescription = reviewDesc;
     data.Score = score;
-    data.UserID = UserID;
-    data.GameID = GameID;
 
-
-            fetch('http://localhost:5116/review/', {
-                method: "",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("API Response: ", data)
-                window.location.href = "assets/inc/success.html?success=1";
-            })
-
-            .catch(error => {
-                console.error("Error:", error);
-            });
-            
+    fetch(`http://localhost:5116/review/${reviewID}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(responseData => {
+            console.log("API Response: ", responseData);
+            alert("Review was updated successfully!");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 }
+
 
 
 document.getElementById("searchreview").addEventListener("submit", searchReview);
