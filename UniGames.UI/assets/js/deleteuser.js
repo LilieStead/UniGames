@@ -184,6 +184,8 @@ function deleteUser(){
                     noRetDiv.innerHTML = orignalContent;
                     customPopup("Please delete the games you have made before deleting your account");
                     
+                } else{
+                    modifyError("An unknown error occurred :(");
                 }
             })
         .catch(error => {

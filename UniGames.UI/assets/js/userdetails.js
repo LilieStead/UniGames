@@ -120,7 +120,20 @@ function validateUser(){
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data); 
+            console.log(data);
+            const updatedToken = data.token;
+            if (idType === "session"){
+                sessionStorage.setItem('authToken', updatedToken);
+            } else{
+                const expirationDays = 7;
+                const expirationTime = new Date().getTime() + expirationDays * 24 * 60 * 60 * 1000;
+
+                const tokenData = {
+                    token: updatedToken,
+                    expiry: expirationTime,
+                };
+                localStorage.setItem('authToken', JSON.stringify(tokenData));
+            }
             modifySuccess("You have successfully updated your details!");
         })
         .catch(error => {

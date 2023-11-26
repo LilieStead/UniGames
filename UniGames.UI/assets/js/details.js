@@ -55,19 +55,19 @@ fetch(`http://localhost:5116/gamedetail/${gameid}`)
     .then(data => {
         // Select the table body element where game data will be displayed
         document.getElementById('loadingcontainer').style.display = 'none';
-        const gameTableBody = document.querySelector('#gameTable tbody');
+        const gamedetailTableBody = document.querySelector('#gamedetailTable tbody');
 
         // Check if the 'data' is an array 
         if (Array.isArray(data)) {
             // If it's an array, loop through the games and append them to the table
             data.forEach(game => {
                 const row = createTableRow1(game);
-                gameTableBody.appendChild(row);
+                gamedetailTableBody.appendChild(row);
             });
         } else {
             // If it's not an array, create a row and append it to the table
             const row = createTableRow1(data);
-            gameTableBody.appendChild(row);
+            gamedetailTableBody.appendChild(row);
 
         }
 
@@ -89,9 +89,9 @@ function createTableRow1(data) {
     titleLink.className = "rtitlebutton";
 
     titleLink.href = 'details.html?id=' + data.detailID;
-    titleLink.textContent = data.gameID;
-    titleCell.appendChild(titleLink);
-    row.appendChild(titleCell);
+    //titleLink.textContent = data.gameID;
+    //titleCell.appendChild(titleLink);
+    //row.appendChild(titleCell);
 
     // Description for the game
     const descriptionCell = document.createElement('td');

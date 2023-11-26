@@ -83,7 +83,7 @@ function deleteReview() {
         })
         .then(data => {
             const userID = data.userID;
-            fetch(`http://localhost:5116/deletereview/${userID}/${reviewID}`, {
+            fetch(`http://localhost:5116/deletereview/${userID}/${reviewID}/${password}`, {
                 // Chooses the method used
                 method: "DELETE",
                 // Chooses the format of the content
@@ -93,14 +93,26 @@ function deleteReview() {
                 // Converts the data to a string
                 body: JSON.stringify(data),
             })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 200){
+                    return response.json();
+                }
+                else if(response.status === 401){
+                    return Promise.reject("Error: 401");
+                }
+            })
             .then(data => {
                 console.log("api response: ", data)
-                modifySuccess("You have successfully deleted your review!");
+                return modifySuccess("You have successfully deleted your review!");
             })
             .catch(error => {
                 console.error(error);
-                modifyError("Something went wrong, please try again :(");
+                if (error.includes("Error: 401")){
+                    customPopup("You are not authorised to delete this review.");
+                } else{
+                    modifyError("Something went wrong, please try again :(");
+                }
+                
             });
         })
         //Error handling for incorrect username and password
@@ -108,9 +120,6 @@ function deleteReview() {
             console.error("Error:", error);
             if (error.includes("Error: 404")) {
                 customPopup("Username does not exist");
-
-            } else if (error.includes("Error: 401")) {
-                customPopup("Password is incorrect");
             }
         });
 }

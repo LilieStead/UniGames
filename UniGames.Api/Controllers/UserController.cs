@@ -307,8 +307,12 @@ namespace UniGames.Api.Controllers
                 }
                 this.mapper.Map(updateUserDTO, UserDM);
                 dbContext.SaveChanges();
+
+                var jwtConfig = new JwtConfig();
+                var userSessionGenerator = new UserSessionGenerator(jwtConfig);
+                var updatedToken = userSessionGenerator.GenerateJwtToken(UserDM.UserId.ToString(), UserDM.Username.ToString());
                 var UserDTO = mapper.Map<UserDTO>(UserDM);
-                return Ok(UserDTO);
+                return Ok(new { Token = updatedToken, User = UserDTO });
             }
             else
             {
