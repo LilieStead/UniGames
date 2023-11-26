@@ -79,6 +79,7 @@ namespace UniGames.Api.Controllers
             {
                 // Map DTO to DM
                 var reviewDM = mapper.Map<Review>(createReviewDTO);
+
                 // Execute the Create Review Method
                 var crreview = reviewRepository.CreateReview(reviewDM);
 
@@ -90,6 +91,7 @@ namespace UniGames.Api.Controllers
             else
             {
                 return StatusCode(422, ModelState);
+                
             }
             
 
