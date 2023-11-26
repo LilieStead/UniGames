@@ -6,7 +6,7 @@ using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
-
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace UniGames.Api.Controllers
 {
@@ -80,9 +80,8 @@ namespace UniGames.Api.Controllers
                 // Map DTO to DM
                 var reviewDM = mapper.Map<Review>(createReviewDTO);
 
-
                 var reviewExists = reviewRepository.GetReviewByUser(reviewDM.UserID);
-                if (reviewExists != null)
+                if (reviewExists.Count > 1)
                 {
                     return Conflict();
                 }
@@ -98,6 +97,7 @@ namespace UniGames.Api.Controllers
             else
             {
                 return StatusCode(422, ModelState);
+                
             }
             
 
@@ -160,9 +160,9 @@ namespace UniGames.Api.Controllers
         }
 
         [HttpDelete]
-        [Route ("/deletereview/{userID:int}/{id:int}")]
+        [Route ("/deletereview/{userID:int}/{id:int}/{password}")]
         //[Authorize]
-        public IActionResult DeleteReview([FromRoute] int userID, int id) {
+        public IActionResult DeleteReview([FromRoute] int userID, int id, string password) {
             
             var reviewdm = reviewRepository.GetReviewByID(id);
             if (reviewdm == null)
@@ -173,6 +173,15 @@ namespace UniGames.Api.Controllers
             {
                 return BadRequest();
             }
+
+            bool matchingPass = BCryptNet.Verify(password, reviewdm.UserName.Userpassword);
+            // If the password for the username does not match the database records then
+            if (!matchingPass)
+            {
+                // Return that the user is unauthorised
+                return Unauthorized();
+            }
+
 
             var delreview = reviewRepository.DeleteReview(reviewdm);
             var reviewdto = mapper.Map<ReviewDTO>(delreview);

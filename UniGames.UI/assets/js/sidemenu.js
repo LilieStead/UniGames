@@ -26,7 +26,6 @@ function getUsername(){
   })
   .then(data => {
     const username = data.username;
-
     const findUserElement = document.getElementById('userNameSide');
 
     findUserElement.innerHTML = username;
