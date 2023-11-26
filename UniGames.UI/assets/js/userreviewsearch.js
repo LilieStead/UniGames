@@ -3,6 +3,35 @@ const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('Username'); // Assuming 'Title' is the parameter name in the URL
 
 // Construct the URL with the Title parameter
+
+const userIDSess = sessionStorage.getItem('authToken');
+const userIDLocal = localStorage.getItem('authTokenLocal');
+const authToken = JSON.parse(userIDLocal);
+var idType;
+
+if (userIDSess){
+    idType = "session";
+} else{
+    idType = "local";
+}
+
+const apiTokenURL = idType === 'session'
+? `http://localhost:5116/user/decodeToken?jwtToken=${userIDSess}`
+: `http://localhost:5116/user/decodeToken?jwtToken=${authToken.value}`;
+
+var UserTokenID;
+fetch(apiTokenURL)
+.then(response => response.json())
+.then(data => {
+  UserTokenID = data.userID;
+})
+
+.catch(error => {
+  console.error(error);
+})
+
+
+
 const apiUrl = `http://localhost:5116/userreview/${username}`;
 
 fetch(apiUrl)
@@ -18,9 +47,14 @@ fetch(apiUrl)
     const reviewbody = document.querySelector('#reviewbody');
 
     // Loop through the array of games and append them to the table
-    data.forEach(review => {
-      createReview(review);
-    });
+    if(Array.isArray(data)){
+      data.forEach(review => {
+          createReview(review);
+
+      });}
+      else{
+          createReview(data)
+      }
   })
   .catch(error => {
     console.error('Error fetching review data:', error);
@@ -30,6 +64,7 @@ function createReview(review) {
 
   const starnumber = review.score
   var star = null 
+  var useriddata = review.userID
   if (starnumber <= 10){
     // half a star
     star = '<i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>';
@@ -69,9 +104,13 @@ function createReview(review) {
     </div>\
     <div>\
     <h1>${review.reviewTitle}</h1>
-    <p class="options"><a href="#">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a> </p>
+    ${useriddata == UserTokenID
+    ?`<p class="options"><a href="editreview.html?id=${review.reviewID}">Edit review <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> || <a href="deletereview.html?id=${review.reviewID}">Delete review <i class="fa fa-trash" aria-hidden="true"></i></a> </p>`
+    : `<p class="options"><a href="#"></a> <a href="#"></a></p>`}
   </div>\
   <p> ${review.reviewDescription}\
   </div>`;
 
 }
+
+loginStatus();

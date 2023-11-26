@@ -1,16 +1,13 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
-using System.Numerics;
-using System;
 using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
 using UniGames.Api.Models.Domain;
 using UniGames.Api.Models.DTOs;
 using UniGames.Api.Repositories;
-using System.Net;
+using UniGames.Api.Models.Sessions;
+using Microsoft.Extensions.Options;
+using UniGames.Data.Repositories;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace UniGames.Api.Controllers
 {
@@ -21,14 +18,39 @@ namespace UniGames.Api.Controllers
         private readonly GameDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
-        private readonly IReviewRepository reviewRepository;
+        private readonly IGameRepository gameRepository;
+        private readonly JwtService jwtService;
 
-        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IReviewRepository reviewRepository)
+        public UserController(GameDbContext dbContext, IMapper mapper, IUserRepository userRepository, IGameRepository gameRepository, JwtService jwtService)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.userRepository = userRepository;
-            this.reviewRepository = reviewRepository;
+            this.gameRepository = gameRepository;
+            this.jwtService = jwtService;
+        }
+
+        [HttpGet("decodeToken")]
+        public IActionResult DecodeToken([FromQuery] string jwtToken)
+        {
+            try
+            {
+                var decodedToken = jwtService.DecodeJwtAndGetUserId(jwtToken);
+                
+
+                if (decodedToken.UserId != null && decodedToken.UserName != null)
+                {
+                    return Ok(new { UserID = decodedToken.UserId, Username = decodedToken.UserName});
+                }
+                else
+                {
+                    return BadRequest(new { Message = "Failed to decode token" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while decoding the token", Error = ex.Message });
+            }
         }
 
 
@@ -50,8 +72,8 @@ namespace UniGames.Api.Controllers
         [HttpGet]
         // Decides the route, using a username and password
         [Route("{username}/{password}")]
-        // Creates a new Method
-        public IActionResult GetUserIdByName([FromRoute] string password, string username)
+        // Creates a new Method -- Previosuly called GetUserIDByName
+        public IActionResult UserLogin([FromRoute] string password, string username)
         {
             // Selects the GetUserIDByName from the userRepository and uses the username
             var userDM = userRepository.GetUserIDByName(username);
@@ -62,16 +84,41 @@ namespace UniGames.Api.Controllers
                 // Return that no user has been found
                 return NotFound();
             }
+            // Verify the plain text password to the value of the hashed password
+            bool matchingPass = BCryptNet.Verify(password, userDM.Userpassword);
             // If the password for the username does not match the database records then
-            if (userDM.Userpassword != password)
+            if (!matchingPass)
             {
                 // Return that the user is unauthorised
                 return Unauthorized();
             }
+
+            var jwtConfig = new JwtConfig();
+            var userSessionGenerator = new UserSessionGenerator(jwtConfig);
+            // Generates a user token for the login system
+            string jwtToken = userSessionGenerator.GenerateJwtToken(userDM.UserId.ToString(), userDM.Username.ToString());
+
+            HttpContext.Session.SetString("UserAuthenticated", "true");
+
             // Maps the DM to the DTO
             var userDTO = mapper.Map<UserDTO>(userDM);
             // Returns the correct user details
-            return Ok(userDTO);
+            return Ok(new { Token = jwtToken, User = userDTO});
+
+        }
+
+        [HttpGet]
+        [Route("logout")]
+        //[Authorize]
+        public IActionResult Logout()
+        {
+            // Removes all authentication, session-related variables
+            HttpContext.Session.Clear();
+            
+
+
+            return Ok(new { Message = "Logout was successful" });
+
 
         }
 
@@ -92,14 +139,18 @@ namespace UniGames.Api.Controllers
                     Userdob = CreateUserDTO.Userdob,
                     Userpassword = CreateUserDTO.Userpassword,
                 };
+
+                string passHash = BCryptNet.HashPassword(UsersDM.Userpassword);
+                UsersDM.Userpassword = passHash;
                 //used to look for username
                 var userExists = userRepository.GetUserIDByName(UsersDM.Username);
                 var userEmail = userRepository.GetAllUsers().Where(x => x.Useremail == UsersDM.Useremail);
-    
+
                 // if statment looks for if the username exites in the databse
                 if (userExists != null)
                 {
                     //if it is then return bad request and error code to the front end and do not allow the methord to continue
+
                     return BadRequest("Username is taken");
                 }
     
@@ -133,11 +184,7 @@ namespace UniGames.Api.Controllers
             { 
                 return StatusCode(422, ModelState);
             }
-            
 
-
-                
-            
         }
 
 
@@ -145,6 +192,7 @@ namespace UniGames.Api.Controllers
         [HttpPut]
         // Defines the Route
         [Route("/reset-password/{username}/{email}/{phone?}")]
+        //[Authorize]
         // Public method -- also can be used to generally update a user password rather than saying 'reset'
         public IActionResult ResetUserPassword([FromRoute] string username, string email, string? phone, [FromBody] UpdatePasswordDTO updatePasswordDTO)
         {
@@ -156,20 +204,36 @@ namespace UniGames.Api.Controllers
                 if (userDM == null)
                 {
                     // Return a not found error message
-                    return BadRequest("No User Found");
+                    return NotFound("No User Found");
                 }
+
+                var validationObj = new List<ValidationDTO>();
 
                 if (userDM.Useremail != email)
                 {
-
-                    return Unauthorized("Email address does not match database records");
-                }
-                if (userDM.Username == username && userDM.Useremail == email && userDM.Userphone != phone && phone != null)
+                    validationObj.Add(new ValidationDTO
+                    {
+                        ErrorText = "Email Does Not Match User Records",
+                        Type = "Email",
+                    });
+                }              
+                if (userDM.Userphone != phone && phone != null)
                 {
-                    // StatusCode 409 typically means a Conflict has occurred
-                    return StatusCode(409, "Conflict With Incorrect User Phone Number");
+
+                    validationObj.Add(new ValidationDTO
+                    {
+                        ErrorText = "Phone Number Does Not Match Records",
+                        Type = "Phone",
+                    });
 
                 }
+
+                if (validationObj.Any())
+                {
+                    return BadRequest(validationObj);
+                }
+                string passHash = BCryptNet.HashPassword(updatePasswordDTO.Userpassword);
+                updatePasswordDTO.Userpassword = passHash;
 
                 // Map the userDM to the updatePasswordDTO
                 mapper.Map(updatePasswordDTO, userDM);
@@ -191,9 +255,10 @@ namespace UniGames.Api.Controllers
         // Uses the HttpDelete method
         [HttpDelete]
         // Defines the Route
-        [Route("/delete/{username}")]
+        [Route("/delete/{username}/{password}")]
+        //[Authorize]
         // Public method
-        public IActionResult DeleteUser([FromRoute] string username)
+        public IActionResult DeleteUser([FromRoute] string username, string password)
         {
             // Uses the GetUserById() method in userRepository and uses the id
             var userDM = userRepository.GetUserIDByName(username);
@@ -203,21 +268,56 @@ namespace UniGames.Api.Controllers
                 // Return that no ID is found
                 return NotFound("No User ID is found, please choose a valid ID");
             }
-            // Gets the Review based on the User ID -- It only does this if a User ID is found
-            var userReviews = reviewRepository.GetReviewByUser(userDM.UserId);
-            // If there are any reviews present in the database then
-            if (userReviews.Count > 0)
+
+            bool matchingPass = BCryptNet.Verify(password, userDM.Userpassword);
+            if (!matchingPass)
+            {
+                return Unauthorized();
+            }
+
+            var gamesDM = gameRepository.GetGameByUserID(userDM.UserId);
+            if (gamesDM.Count > 0)
             {
                 // Return a bad request and tell the user they cannot delete their account because they have previously created reviews for games
-                return BadRequest("Cannot delete this user because they have created reviews for games, please delete these reviews first.");
+                return BadRequest("Cannot delete this user because they have created games, please delete the games first.");
 
             }
+
+            HttpContext.Session.Remove("UserAuthenticated");
+            // Gets the Review based on the User ID -- It only does this if a User ID is found
+            //var userReviews = reviewRepository.GetReviewByUser(userDM.UserId);
+            
             // If the user does not have a review, delete their account using the method in the userRepository
             var delUser = userRepository.DeleteUser(userDM);
             // Map the delete action to the DTO
             var userDTO = mapper.Map<UserDTO>(delUser);
             // Returns the results
             return Ok(userDTO);
+        }
+        [HttpPut]
+        [Route("/EditUser/{username}")]
+        public IActionResult EditUser([FromRoute] string username, [FromBody] UpdateUserDTO updateUserDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var UserDM = userRepository.GetUserIDByName(username);
+                if (UserDM == null)
+                {
+                    return NotFound();
+                }
+                this.mapper.Map(updateUserDTO, UserDM);
+                dbContext.SaveChanges();
+
+                var jwtConfig = new JwtConfig();
+                var userSessionGenerator = new UserSessionGenerator(jwtConfig);
+                var updatedToken = userSessionGenerator.GenerateJwtToken(UserDM.UserId.ToString(), UserDM.Username.ToString());
+                var UserDTO = mapper.Map<UserDTO>(UserDM);
+                return Ok(new { Token = updatedToken, User = UserDTO });
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }   

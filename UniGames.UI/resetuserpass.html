@@ -4,26 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniGames - Reset Pasword</title>
+    <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
 </head>
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
-</header>
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="userdetails.html">Edit Details</a>
+  <a href="mygames.html">My games</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
 <!-- END OF HEADER -->
-<body>
-    <!-- NAV -->
-    <nav class="centercontents">
-        <a href="index.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a href="createuser.html"><p>Sign Up</p></a>
-        <a href="deleteuser.html"><p>Delete Your Account</p></a>
-        <a href="searchuserreviews.html"><p>Search User Reviews</p></a>
-    </nav>
-    <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
     <div id="container">
         <div id="main">
@@ -34,13 +45,8 @@
                 <div class=" flexcontainer">
                 <form id="resetpassform" action="">
                     <div>
-                        <label for="username">Username: *</label>
-                        <input type="text" name="Username" id="user" placeholder="Enter your username here...">
-                        <p class="formerror" id="usernameerror"></p>
-                    </div>
-                    <div>
                         <label for="email">Email: *</label>
-                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
+                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your email here...">
                         <p class="formerror" id="useremailerror"></p>
                     </div>
                     <div>
@@ -50,16 +56,19 @@
                     </div>
                     <div>
                         <label for="password">New Password: *</label>
-                        <input type="password" name="Userpassword" id="password" placeholder="Enter your new password here...">
+                        <input type="password" name="Userpassword" id="password">
                         <p class="formerror" id="passworderror"></p>
+                        <input type="checkbox" onclick="showPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                     </div>
                     <div>
                         <label for="passwordnew2">Confirm New Password: *</label>
-                        <input type="password" name="UserPasswordAgain" id="password2" placeholder="Enter your new password again...">
+                        <input type="password" name="UserPasswordAgain" id="password2">
                         <p class="formerror" id="passworderror2"></p>
+                        <input type="checkbox" onclick="showSecondPassword();" id="show-password"><span class="show-password-span">Show Password</span>
                     </div>
                     <div class="flexcontainer">
-                        <input id="reviewbtn"type="submit" value="submit">
+                        <input onclick="resetPassword();" class="centersubmit" id="subbutton" type="button" value="submit">
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
                     </div>
                     <p id="timeout-countdown"></p>
                     <h2 id="error-handling"></h1>
@@ -79,13 +88,18 @@
     </div>
 
 
-    <!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
-    <script src="assets/js/deluserpassfield.js"></script>
-    <script src="assets/js/popup.js"></script>
-    <script src="assets/js/passtimeout.js"></script>
-    <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
-    <script src="assets/js/timeoutStatus.js"></script>
+    
 </body>
+<!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/passtimeout.js"></script>
+<script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
+<script src="assets/js/timeoutStatus.js"></script>
+<script src="assets/js/logout.js"></script>
+<script src="assets/js/passwordvisibility.js"></script>
+<script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
+
 
 
 <!-- FOOTER -->

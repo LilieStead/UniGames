@@ -1,37 +1,19 @@
-function successPages(){
-    console.log("Success");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const successType = urlParams.get("success");
-
-    let successMessage;
-    switch (successType){
-        case "1":
-            successMessage = "Your Review has now been added!";
-            break;
-        case "2":
-            successMessage = "Success! Your account has been deleted.";
-            break;
-
-        case "3":
-            successMessage = "Success! Your review has been deleted";
-            break;
-
-        case "7":
-            successMessage = "You now have an account!";
-
-        case "4":
-            successMessage = "Game Has Been Updated!"
-            break;
-        case "5":
-            successMessage = "You have successfully reset your password!";
-
-            break;
-        default:
-            successMessage = "An unknown success occurred?";
-    }
-
-    const successMessageP = document.getElementById("success-message");
-    successMessageP.innerHTML = successMessage;
+function modifySuccess(message){
+    // Gets the ID of a specific div (contains all main content in this case)
+    const replaceDiv = document.getElementById('mainsize');
+    // Replaces the HTML code within to nothing/blank
+    replaceDiv.innerHTML = '';
+    // Gets the success message from the function invoke
+    const successMessage = message;
+    // Defines the success content (grabbed from success.html)
+    const successContent = 
+    `<div id="contenttitle" class="Successmsg success">
+        <h1>Success!</h1>
+        <p id="success-message">${successMessage}</p>
+        <div class="flex-container">
+            <a class="Successmsglink" href="index.html"><p id="retsucc">Return to home page</p></a>
+        </div>
+    </div>`;
+    // Adds the success content into the div
+    replaceDiv.innerHTML = successContent;
 }
-document.addEventListener("DOMContentLoaded", successPages);
