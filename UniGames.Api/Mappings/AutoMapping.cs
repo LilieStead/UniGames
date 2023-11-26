@@ -25,7 +25,13 @@ namespace UniGames.Api.Mappings
             CreateMap<Game, CreateGameDTO>().ReverseMap();
             CreateMap<User, UpdatePasswordDTO>().ReverseMap();
             CreateMap<Game, UpdateGameDTO>().ReverseMap();
+            CreateMap<GameDetail,  CreateGameDetailDTO>().ReverseMap();
+            CreateMap<GameDetail,  UpdateGameDetailDTO>().ReverseMap();
+            CreateMap<User, UpdateUserDTO>().ReverseMap();
 
+            // Created by Kieron -- Original team member did not finish
+            CreateMap<Review, UpdateReviewDTO>().ReverseMap();
+            
         }
     }
 }

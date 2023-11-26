@@ -25,6 +25,7 @@ namespace UniGames.Api.Data
             // Calls the 'OnModelCreating' method of the base class (DbContext)
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasKey(gd => gd.UserId); // Defines the UserID as the primary key
+            modelBuilder.Entity<User>().Property(u => u.Userpassword).IsRequired();
 
             modelBuilder.Entity<GameDetail>().HasKey(gd => gd.DetailID); // Defines the GameDetailID as the primary key
         }      

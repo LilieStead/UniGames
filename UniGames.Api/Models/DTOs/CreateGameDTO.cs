@@ -11,5 +11,9 @@ namespace UniGames.Api.Models.DTOs
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime ReleaseDate { get; set; }
+
+        public int UserID {  get; set; }
+
+
     }
 }

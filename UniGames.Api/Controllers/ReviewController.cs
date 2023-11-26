@@ -1,5 +1,5 @@
 using AutoMapper;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniGames.Api.Data;
@@ -71,6 +71,7 @@ namespace UniGames.Api.Controllers
 
         // Uses the HttpPost method
         [HttpPost]
+        //[Authorize]
         // Public Method
         public IActionResult CreateReview([FromBody] CreateReviewDTO createReviewDTO)
         {
@@ -78,6 +79,14 @@ namespace UniGames.Api.Controllers
             {
                 // Map DTO to DM
                 var reviewDM = mapper.Map<Review>(createReviewDTO);
+
+
+                var reviewExists = reviewRepository.GetReviewByUser(reviewDM.UserID);
+                if (reviewExists != null)
+                {
+                    return Conflict();
+                }
+
                 // Execute the Create Review Method
                 var crreview = reviewRepository.CreateReview(reviewDM);
 
@@ -94,6 +103,51 @@ namespace UniGames.Api.Controllers
 
         }
 
+        [HttpPut]
+        [Route("/editreview/{id:int}")]
+        public IActionResult EditReview([FromRoute] int id, [FromBody] UpdateReviewDTO updateReviewDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var reviewDM = reviewRepository.GetReviewByID(id);
+                if (reviewDM == null)
+                {
+                    return NotFound();
+                }
+                if (reviewDM.UserID != updateReviewDTO.UserID)
+                {
+                    return Unauthorized("User is editing the wrong review");
+                }
+                /*if (reviewDM.GameID != updateReviewDTO.GameID)
+                {
+                    return BadRequest("User is attempting to update the game ID for this review");
+                }*/
+
+                this.mapper.Map(updateReviewDTO, reviewDM);
+                dbContext.SaveChanges();
+
+                var reviewDTO = mapper.Map<ReviewDTO>(reviewDM);
+                return Ok(reviewDTO);
+            }
+            else
+            {
+                return StatusCode(500, new { Message = "Illegal method of editing a review attempted"});
+            }   
+        }
+
+        [HttpGet]
+        [Route("/userreview/{id:int}")]
+        public IActionResult GetReviewByUserID([FromRoute] int id)
+        {
+            var reviewDM = reviewRepository.GetReviewByUser(id);
+            if (reviewDM == null)
+            {
+                return NotFound();
+            }
+            var reviewDTO = mapper.Map<List<ReviewDTO>>(reviewDM);
+            return Ok(reviewDTO);
+        }
+
         [HttpGet]
         [Route("/userreview/{username}")]
         public IActionResult GetReviewByUsername([FromRoute] string username) {
@@ -107,6 +161,7 @@ namespace UniGames.Api.Controllers
 
         [HttpDelete]
         [Route ("/deletereview/{userID:int}/{id:int}")]
+        //[Authorize]
         public IActionResult DeleteReview([FromRoute] int userID, int id) {
             
             var reviewdm = reviewRepository.GetReviewByID(id);

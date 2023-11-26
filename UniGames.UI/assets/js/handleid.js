@@ -13,5 +13,5 @@ const cReviewHandle = () => {
 
 const editGameHandle = () => {
     var link = document.getElementById('editGame');
-    link.href = 'updateGame.html?id=' + dynamicID
+    link.href = 'updateGame.html?id=' + dynamicID;
 }

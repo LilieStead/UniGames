@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Update Game</title>
+    <script src="assets/js/login/loginstatus.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/js/sidemenu.js"></script>
 </head>
 <!-- HEADER -->
-<header class="centercontents">
-    <h1>UNiGames</h1>
-</header>
+<header>
+    <div id="logo">
+      <h1>UNiGames</h1>
+    </div>
+    <div id="navbar">
+        <div id="usernameToggle" onclick="toggleMenu()"><i class="fa fa-user-circle" aria-hidden="true"></i> <span id="userNameSide"></span> <span id="menuarrow"><i class="fa fa-caret-down" aria-hidden="true"></i></span></div>
+      <nav id="mainLinks"class="flexcontainer">
+          <a href="home.html">Home</a>
+          <a href="search.html">Search Games</a>
+          <a href="create.html">Create Game</a>
+          <a href="searchuserreviews.html">Search Reviews</a>
+        </nav>
+      </div>
+    </header>
+<nav id="hamburgerMenu">
+  <!-- Your menu items go here -->
+  <a href="userdetails.html">Edit Details</a>
+  <a href="mygames.html">My games</a>
+  <a href="userreviews.html">My Reviews</a>
+  <a href="settings.html">Settings</a>
+  <a onclick="logout();">Logout</a>
+  <!-- Add more menu items as needed -->
+</nav>
+
 <!-- END OF HEADER -->
-<body>
-    <!-- NAV -->
-    <nav class="centercontents">
-        <a href="index.html"><p>Home</p></a>
-        <a href="search.html"><p>Search Games</p></a>
-        <a href="create.html"><p>Create Game</p></a>
-        <a href="updateGame.html"><p>Update Game Details</p></a>
-    </nav>
-    <!-- END OF NAV -->
     <!-- MAIN CONTENT -->
     <div id="container">
         <div id="main">
@@ -34,6 +48,7 @@
                     <form id="updategame">
                         <label for="gname">Game Name: </label><br>
                         <input type="text" id="gname" name="Title"><br>
+                        <p class = "formerror" id="titleerror"></p>
                         <label for="Platform">Platform: </label><br>
                             <select name="Platform" id="platform">
                                 <option value="1">Xbox</option>
@@ -43,25 +58,58 @@
                                 <option value="5">PS5</option>
                                 <option value="6">Nintendo Switch</option>
                             </select>
-                        <div id="Releasedate">
-                            <label for="Release">Release Date: </label>
+                            <p class="formerror" id ="platformerror"></p> 
+                        <div>
+                            <label for="desc">Description: </label>
+                            <textarea name="Description" id="rdesc" cols="30" rows="10"></textarea>
+                            <p class="formerror" id="descerror"></p>
                         </div>
                         <div>
-                            <input type="datetime-local" name="ReleaseDate" id="date">     
+                            <label for="agerating">Age Rating: </label>
+                            <select name="AgeRating" id="agrate">
+                                <option value="PEGI-3">PEGI-3</option>
+                                <option value="PEGI-7">PEGI-7</option>
+                                <option value="PEGI-12">PEGI-12</option>
+                                <option value="PG">PG</option>
+                                <option value="PEGI-16">PEGI-16</option>
+                                <option value="PEGI-18">PEGI-18</option>
+                                <option value="Mature">Mature</option>
+                            </select>
+                            <p class="formerror" id="ageerrors"></p>
+                        </div>
+                        <div>
+                            <label for="dev">Developer: </label>
+                            <input type="text" name="Developer" id="gamedev" placeholder="Enter the game developer here">
+                            <p class="formerror" id="deverror"></p>
+                        </div>
+                        <div>
+                            <label for="genre">Genre</label>
+                            <input type="text" name="Genre" id="genre" placeholder="Enter the game genre here">
+                            <p class="formerror" id="genreerror"></p>
                         </div>
                         
                         <div>
-                            <input onclick="updateGame();" class="centersubmit" type="button" value="submit">
+                            <input onclick="updateGame();" class="centersubmit" id="subbutton" type="button" value="submit">
                         </div>  
                     </form>
+                </div>
+            </div>
+            <div class="popup" id="custom-popup">
+                <div class="popup-content">
+                    <span id="popup-message"></span>
+                    <button id="close-popup">Close</button>
                 </div>
             </div>
         </div>
     <!-- END OF MAIN CONTENT -->
     </div>
 </body>
+<script src="assets/js/popup.js"></script>
 <script async defer type="text/javascript" src="assets/js/updategame.js"></script>
+<script src="assets/js/logout.js"></script>
 <script src="assets/js/success.js"></script>
+<script src="assets/js/error.js"></script>
+
 <!-- FOOTER -->
 <footer>
     <div id="topfooter" class="centercontents">

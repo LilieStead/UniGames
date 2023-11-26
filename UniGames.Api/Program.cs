@@ -5,7 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using UniGames.Data.Repositories;
 using System.Diagnostics;
 using UniGames.Api.Repositories;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
+using UniGames.Api.Models.Sessions;
+using UniGames.Api.Models.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +21,36 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddDistributedMemoryCache();
+// Adds session options
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+var jwtConfig = new JwtConfig();
+builder.Services.AddSingleton(jwtConfig);
+builder.Configuration.Bind("JwtConfig", new JwtConfig());
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        Console.WriteLine("Setting up JWT authentication");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey)),
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
+
+
 builder.Services.AddDbContext<GameDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("UniGamesConnectionString")));
 // Connects the SQL repository to the I repository -- For Each
@@ -23,6 +58,8 @@ builder.Services.AddScoped<IGameRepository, SQLGameRepository>();
 builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IGameDetailRepository, SQLGameDetailRepository>();
+builder.Services.AddScoped<JwtService>();
+
 
 
 
@@ -41,6 +78,19 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
+// Uses sessions
+app.UseSession();
+// Configures the last time the user accesses an API endpoint and prevents session timeout
+// Not the best to use for a high volume of requests but this is a small project so it can
+//be used for now
+/*app.Use((context, next) =>
+{
+    context.Session.SetString("LastAccessTime", DateTime.UtcNow.ToString("o"));
+    return next();
+});*/
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
