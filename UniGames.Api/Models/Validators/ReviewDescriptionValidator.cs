@@ -9,10 +9,16 @@ namespace UniGames.Api.Models.Validators
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            string[] profanities = { "shit", "fuck", "cunt", "fag", "faggot", "ass", "arse", "bullshit" };
+
             var description = value.ToString().ToLower();
-            if (description.StartsWith("shit"))
+            if (profanities.Any(word => description.Contains(word)))
             {
                 return new ValidationResult("Please do not use bad language for a review");
+            }
+            if (description.Length < 20)
+            {
+                return new ValidationResult("Please make sure your reviews are over 20 characters");
             }
            
             

@@ -94,7 +94,10 @@ function createReview(){
                 return response.json()
             } else if (response.status === 400){
                 return Promise.resolve(response.json());
-            } else{
+            } else if (response.status === 409){
+                return Promise.reject("Error: 409");
+            }
+             else{
                 console.error("Error:", response.status);
             }
         })
@@ -118,6 +121,9 @@ function createReview(){
 
         .catch(error => {
             console.error("Error:", error);
+            if (error.includes("Error: 409")){
+                customPopup ("You have already created a review for this game. Try edit your review instead");
+            }
         });
     })
     .catch(error => {
@@ -132,5 +138,4 @@ function createReview(){
 }
 
 loginStatus();
-document.getElementById("createreview").addEventListener("submit", createReview);
 

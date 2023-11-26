@@ -46,7 +46,7 @@
                 <form id="resetpassform" action="">
                     <div>
                         <label for="email">Email: *</label>
-                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your username here...">
+                        <input type="text" name="Useremail" id="useremail" placeholder="Enter your email here...">
                         <p class="formerror" id="useremailerror"></p>
                     </div>
                     <div>
@@ -68,6 +68,7 @@
                     </div>
                     <div class="flexcontainer">
                         <input onclick="resetPassword();" class="centersubmit" id="subbutton" type="button" value="submit">
+                        <a class="reset-fields" id="crPRButton" href="resetuserpass.html">Reset your password</a>
                     </div>
                     <p id="timeout-countdown"></p>
                     <h2 id="error-handling"></h1>
@@ -90,7 +91,6 @@
     
 </body>
 <!-- JavaScript files go here to ensure they load correctly with the rest of the content -->
-<script src="assets/js/deluserpassfield.js"></script>
 <script src="assets/js/popup.js"></script>
 <script src="assets/js/passtimeout.js"></script>
 <script async defer type="text/javascript" src="assets/js/resetuserpass.js"></script>
