@@ -20,7 +20,6 @@ fetch('http://localhost:5116/game')
     function createTableRow(game) {
 
     const starnumber = game.averageScore;
-    console.log(starnumber);
     var star = null;
     if (starnumber <= 10){
         // half a star
