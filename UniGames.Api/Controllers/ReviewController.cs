@@ -88,10 +88,6 @@ namespace UniGames.Api.Controllers
                         return Conflict();
                     }
                 }
-                //if (createReviewDTO.GameID )
-               // {
-                   // return Conflict();
-              //  }
 
                 // Execute the Create Review Method
                 var crreview = reviewRepository.CreateReview(reviewDM);
