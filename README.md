@@ -18,7 +18,7 @@ ALL GAMES ARE ON HERE
     securePass456
 
 
-johndoe123|
+johndoe123
 john.doe@example.com
 07123456789
 securePassword123
