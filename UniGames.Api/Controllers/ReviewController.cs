@@ -80,6 +80,12 @@ namespace UniGames.Api.Controllers
                 // Map DTO to DM
                 var reviewDM = mapper.Map<Review>(createReviewDTO);
 
+                var reviewExists = reviewRepository.GetReviewByUser(reviewDM.UserID);
+                if (reviewExists != null)
+                {
+                    return Conflict();
+                }
+
                 // Execute the Create Review Method
                 var crreview = reviewRepository.CreateReview(reviewDM);
 

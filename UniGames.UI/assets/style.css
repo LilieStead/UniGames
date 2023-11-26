@@ -977,6 +977,97 @@ form .formerror{
     border-radius: 2.5px;
 }
 
+/* END OF REVIEWS FOR DETAILS */
+
+
+/* START OF GAME DETAIL TABLE */
+#gamedetailTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: black;
+    padding: 2rem;
+    border-radius: 2.5px;
+    margin-bottom: 2rem;
+    font-family: Unidays-Heavy;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    #gamedetailTable td,
+    #gamedetailTable th {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    #gamedetailTable th {
+        background-color: #f1f1f1;
+        color: black;
+        font-family: Unidays-Heavy;
+    }
+
+    #gamedetailTable a:hover {
+        text-decoration: auto;
+        color: blue;
+        font-size: 1.4rem;
+    }
+
+    #gamedetailTable td:hover {
+        background-color: #f2f2f2;
+    }
+
+    #gamedetailTable td {
+        transition: background-color 0.5s, color 0.5s;
+    }
+
+    #gamedetailTable h1 {
+        font-family: Unidays-Book;
+        font-size: 1.3rem;
+        color: yellow;
+    }
+
+    #gamedetailTable .flex-container {
+        flex-direction: row;
+        display: flex;
+        padding: 2rem;
+    }
+
+
+/* Center the table when the resolution goes below 1050 pixels */
+@media screen and (max-width: 1050px) {
+    #gamedetailTable {
+
+        margin-top: 20px;
+        margin-right: 10px;
+        margin-left: 50px;
+    }
+}
+
+
+/* END OF GAME DETAIL TABLE */
+
+
+
+/* Login Page */
+#loginpage a{
+    background-color: #20c871;
+    font-family: Unidays-Book;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    min-height: 4rem;
+    font-size: 2.2em;
+    margin-top: 5rem;
+    padding: 14px 0;
+    margin: 0 5rem;
+    margin-bottom: 2rem;
+    min-width: 70%;
+    max-width: 70%;
+    margin-top: 2rem;
+    border-radius: 2.5px;
+}
+
+
 #loginpage h3{
     font-family: Unidays-Heavy;
     color: #000000;
@@ -1082,3 +1173,4 @@ form .formerror{
 }
 
 /* End of Update Game Button */
+
